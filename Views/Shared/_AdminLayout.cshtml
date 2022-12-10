@@ -55,17 +55,11 @@
                             <span class="pcoded-mtext">Staff</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="@Url.Action("Index","customers")" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-users"></i></span>
-                            <span class="pcoded-mtext">Khách hàng</span>
-                        </a>
-                    </li>
-                   
+                    
                     <li class="nav-item ">
                         <a href="#" class="nav-link">
                             <span class="pcoded-micon"><i class="feather icon-layout"></i></span>
-                            <span class="pcoded-mtext">Category</span>
+                            <span class="pcoded-mtext">Categogy</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -124,7 +118,7 @@
                     <div class="dropdown drp-user">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                             <img src="@Url.Content("~/assets/Admin/assets/images/default-avatar.png")" alt="User-Profile-Image" class="img-radius mr-2" style="width: 2.5vw;">
-                            <span class="mr-3">@Session["user_email"].ToString()</span>
+                            <span class="mr-3">Admin</span>
                         </a>
                         <a href="javascript:document.getElementById('logoutForm').submit()" title="Log out" class="dud-logout"> <i class="feather icon-log-out"></i></a>
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))

@@ -1,0 +1,204 @@
+﻿@model IEnumerable<GardenShopOnline.Models.Categogy>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int no = 0;
+}
+
+<input type="text" hidden id="URLFindGroupProduct" value="@Url.Action("FindCategory", "categories")/" />
+<input type="text" hidden id="URLUpdateGroupProduct" value="@Url.Action("UpdateCategory", "categories")" />
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Categogy</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="https://tancool.net">
+                                    <i class="feather icon-home">
+                                    </i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0)">Categogy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h4>CATEGOGY</h4>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn  btn-primary btn-block" data-toggle="modal" data-target="#AddCategory">Thêm mới</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body table-border-style">
+                            <div class="table-responsive">
+                                <table id="example" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            
+                                            <th>Tên danh mục</th>
+                                            @*<th width="15%">Trạng thái</th>*@
+                                            <th width="15%">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            string customswitch_DM = "customswitch" + item.ID;
+                                            no++;
+                                            <tr>
+                                                <td>@no <input hidden type="text" name="record" value="@item.ID"></td>
+
+                                                <td>@item.Name</td>
+                                               
+                                                @*<td>
+                                                    @if (item.status == 1)
+                                                    {
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" checked class="custom-control-input" id="@customswitch_DM">
+                                                            <label class="custom-control-label" for="@customswitch_DM"></label>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input" id="@customswitch_DM">
+                                                            <label class="custom-control-label" for="@customswitch_DM"></label>
+                                                        </div>
+                                                    }
+                                                    <input hidden type="text" id="URDEditStatus" value="@Url.Action("EditStatus_Category", "categories")">
+                                                    <script language="javascript">
+                                                        document.getElementById('@customswitch_DM').onclick = function (e) {
+                                                                EditStatus(@item.id);
+                                                        };
+                                                    </script>
+                                                </td>*@
+                                                <td>
+                                                    <button class="btn btn-success " onclick="GetGroupProduct(this, @item.ID)">
+                                                        <i class="feather icon-edit">
+                                                        </i>
+                                                    </button>
+                                                    <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Category", "categories")">
+                                                    <button class="btn btn-danger" @*onclick="deleteAlert('@item.id', '@item.code')"*@ id="Delete">
+                                                        <i class="feather icon-trash-2">
+                                                        </i>
+                                                    </button>
+
+                                                </td>
+                                            </tr>
+
+                                        }
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="AddCategory" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="AddCategoryLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="needs-validation" method="post" action="@Url.Action("Create_Categogy", "categogies")" novalidate>
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title" id="AddCategoryLabel">Thêm mới danh mục</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>
+                                    Tên danh mục<span class="text-danger">*</span>
+                                </label>
+                                <div class="position-relative">
+                                    <input type="text" placeholder="Nhập tên danh mục" id="first-name-icon" class="form-control" name="name_categogy" pattern="\S+.*" required>
+                                    <div class="invalid-feedback">
+                                        Vui lòng nhập tên danh mục !
+                                    </div>
+                                </div> <!---->
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Thêm mới</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="Edit_Modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Edit_ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="needs-validation" method="post" novalidate>
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title" id="Edit_ModalLabel">Chỉnh sửa danh mục</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>
+                                    Tên danh mục<span class="text-danger">*</span>
+                                </label>
+                                <div class="position-relative">
+                                    <input hidden id="edit_id" name="category_id" />
+                                    <input type="text" placeholder="Nhập tên danh mục" id="Edit_name" class="form-control" name="name_category" pattern="\S+.*" required>
+                                    <div class="invalid-feedback">
+                                        Vui lòng nhập tên danh mục !
+                                    </div>
+                                </div> <!---->
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="submit_edit" @*onclick="Update()"*@>Chỉnh sửa</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script>
+    var row;
+    $(document).ready(function () {
+        $('#example').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+</script>
