@@ -363,6 +363,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Customer\Data\" />
     <Folder Include="Areas\Customer\Views\Shared\" />
+    <Folder Include="assets\admin-staff\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Customer\Views\web.config" />
