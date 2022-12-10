@@ -8,5 +8,10 @@ namespace GardenShopOnline.Controllers
         {
             return View();
         }
+
+        public ActionResult AdminIndex()
+        {
+            return View();
+        }
     }
 }

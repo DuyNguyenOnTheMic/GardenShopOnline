@@ -698,6 +698,7 @@
     <Content Include="assets\admin-staff\vendors\css\raty\fonts\raty.woff" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_CustomerLayout.cshtml" />
+    <Content Include="Views\Home\AdminIndex.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
