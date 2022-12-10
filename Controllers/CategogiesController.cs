@@ -23,14 +23,29 @@ namespace GardenShopOnline.Controllers
         {           
             Categogy Categogy = new Categogy();
             Categogy.Name = name_Categogy;
-           
+            Categogy.Status = 1;
             db.Categogies.Add(Categogy);
             db.SaveChanges();
             Session["notification"] = "Thêm mới thành công!";
             return RedirectToAction("Index");
         }
+        public ActionResult EditStatus_Category(Categogy categogys)
+        {
+            Categogy categories = db.Categogies.Find(categogys.ID);
+            if (categories.Status == 1)
+            {
+                categories.Status = 2;
+            }
+            else
+            {
+                categories.Status = 1;
+            }
+            db.Entry(categories).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json("EditStatus_Category", JsonRequestBehavior.AllowGet);
+        }
 
-        // GET: Categogies/Details/5
+       /* // GET: Categogies/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -123,7 +138,7 @@ namespace GardenShopOnline.Controllers
             db.Categogies.Remove(categogy);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {

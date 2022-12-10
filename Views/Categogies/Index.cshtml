@@ -53,8 +53,8 @@
                                         <tr>
                                             <th>#</th>
                                             
-                                            <th>Tên danh mục</th>
-                                            @*<th width="15%">Trạng thái</th>*@
+                                            <th class="text-center">Name</th>
+                                            <th width="15%">Status</th>
                                             <th width="15%">
                                             </th>
                                         </tr>
@@ -67,10 +67,10 @@
                                             <tr>
                                                 <td>@no <input hidden type="text" name="record" value="@item.ID"></td>
 
-                                                <td>@item.Name</td>
+                                                <td class="text-center">@item.Name</td>
                                                
-                                                @*<td>
-                                                    @if (item.status == 1)
+                                                <td>
+                                                    @if (item.Status == 1)
                                                     {
                                                         <div class="custom-control custom-switch">
                                                             <input type="checkbox" checked class="custom-control-input" id="@customswitch_DM">
@@ -84,13 +84,13 @@
                                                             <label class="custom-control-label" for="@customswitch_DM"></label>
                                                         </div>
                                                     }
-                                                    <input hidden type="text" id="URDEditStatus" value="@Url.Action("EditStatus_Category", "categories")">
+                                                    <input hidden type="text" id="URDEditStatus" value="@Url.Action("EditStatus_Category", "categogies")">
                                                     <script language="javascript">
                                                         document.getElementById('@customswitch_DM').onclick = function (e) {
-                                                                EditStatus(@item.id);
+                                                                EditStatus(@item.ID);
                                                         };
                                                     </script>
-                                                </td>*@
+                                                </td>
                                                 <td>
                                                     <button class="btn btn-success " onclick="GetGroupProduct(this, @item.ID)">
                                                         <i class="feather icon-edit">
