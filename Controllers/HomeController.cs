@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace GardenShopOnline.Areas.Customer.Controllers
+namespace GardenShopOnline.Controllers
 {
     public class HomeController : Controller
     {
