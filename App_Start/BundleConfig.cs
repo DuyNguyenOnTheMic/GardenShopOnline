@@ -23,7 +23,7 @@ namespace GardenShopOnline
                 "~/assets/customer/js/plugins/mailchimp-ajax.js",
                 "~/assets/customer/js/plugins/jquery.counterup.js"));
 
-            bundles.Add(new MyScriptBundle("~/bundles/vendorJs").Include(
+            bundles.Add(new MyScriptBundle("~/bundles/adminJs").Include(
                 "~/assets/admin-staff/vendors/js/core/popper.min.js",
                 "~/assets/admin-staff/vendors/js/core/bootstrap.min.js",
                 "~/assets/admin-staff/vendors/js/perfect-scrollbar.jquery.min.js",
@@ -39,7 +39,7 @@ namespace GardenShopOnline
             bundles.Add(new MyScriptBundle("~/bundles/jquery").Include(
                  "~/assets/admin-staff/vendors/js/core/jquery-{version}.min.js"));
 
-            bundles.Add(new MyScriptBundle("~/bundles/sidebarJs").Include(
+            bundles.Add(new MyScriptBundle("~/bundles/adminSidebarJs").Include(
                "~/assets/admin-staff/js/app-sidebar.min.js",
                "~/assets/admin-staff/js/notification-sidebar.min.js"));
 
@@ -51,7 +51,7 @@ namespace GardenShopOnline
                 "~/assets/customer/css/magnific-popup.min.css",
                 "~/assets/customer/css/ion.rangeSlider.min.css"));
 
-            bundles.Add(new MyStyleBundle("~/Content/css").Include(
+            bundles.Add(new MyStyleBundle("~/Content/adminCss").Include(
                 "~/assets/admin-staff/vendors/css/perfect-scrollbar.min.css",
                 "~/assets/admin-staff/vendors/css/prism.min.css",
                 "~/assets/admin-staff/vendors/css/toastr.min.css",

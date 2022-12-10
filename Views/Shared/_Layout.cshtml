@@ -14,7 +14,7 @@
     <link href="@Url.Content("~/assets/admin-staff/fonts/feather/style.min.css")" rel="stylesheet">
     <link href="@Url.Content("~/assets/admin-staff/fonts/simple-line-icons/style.min.css")" rel="stylesheet">
     <link href="@Url.Content("~/assets/admin-staff/fonts/font-awesome/css/font-awesome.min.css")" rel="stylesheet">
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/adminCss")
 </head>
 <body data-col="2-columns" class=" 2-columns ">
     <!-- ////////////////////////////////////////////////////////////////////////////-->
@@ -94,8 +94,8 @@
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/sidebarJs")
-    @Scripts.Render("~/bundles/vendorJs")
+    @Scripts.Render("~/bundles/adminSidebarJs")
+    @Scripts.Render("~/bundles/adminJs")
     @RenderSection("scripts", required: false)
 </body>
 </html>
