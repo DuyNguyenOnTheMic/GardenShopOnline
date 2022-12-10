@@ -24,24 +24,24 @@ namespace GardenShopOnline
                 "~/assets/customer/js/plugins/jquery.counterup.js"));
 
             bundles.Add(new MyScriptBundle("~/bundles/vendorJs").Include(
-                "~/app-assets/admin-staff/vendors/js/core/popper.min.js",
-                "~/app-assets/admin-staff/vendors/js/core/bootstrap.min.js",
-                "~/app-assets/admin-staff/vendors/js/perfect-scrollbar.jquery.min.js",
-                "~/app-assets/admin-staff/vendors/js/prism.min.js",
-                "~/app-assets/admin-staff/vendors/js/jquery.matchHeight-min.js",
-                "~/app-assets/admin-staff/vendors/js/jquery.validate.min.js",
-                "~/app-assets/admin-staff/vendors/js/jquery.validate.unobtrusive.min.js",
-                "~/app-assets/admin-staff/vendors/js/screenfull.min.js",
-                "~/app-assets/admin-staff/vendors/js/pace/pace.min.js",
-                "~/app-assets/admin-staff/vendors/js/toastr.min.js",
-                "~/app-assets/admin-staff/vendors/js/sweetalert2.min.js"));
+                "~/assets/admin-staff/vendors/js/core/popper.min.js",
+                "~/assets/admin-staff/vendors/js/core/bootstrap.min.js",
+                "~/assets/admin-staff/vendors/js/perfect-scrollbar.jquery.min.js",
+                "~/assets/admin-staff/vendors/js/prism.min.js",
+                "~/assets/admin-staff/vendors/js/jquery.matchHeight-min.js",
+                "~/assets/admin-staff/vendors/js/jquery.validate.min.js",
+                "~/assets/admin-staff/vendors/js/jquery.validate.unobtrusive.min.js",
+                "~/assets/admin-staff/vendors/js/screenfull.min.js",
+                "~/assets/admin-staff/vendors/js/pace/pace.min.js",
+                "~/assets/admin-staff/vendors/js/toastr.min.js",
+                "~/assets/admin-staff/vendors/js/sweetalert2.min.js"));
 
             bundles.Add(new MyScriptBundle("~/bundles/jquery").Include(
-                 "~/app-assets/admin-staff/vendors/js/core/jquery-{version}.min.js"));
+                 "~/assets/admin-staff/vendors/js/core/jquery-{version}.min.js"));
 
             bundles.Add(new MyScriptBundle("~/bundles/sidebarJs").Include(
-               "~/app-assets/admin-staff/js/app-sidebar.min.js",
-               "~/app-assets/admin-staff/js/notification-sidebar.min.js"));
+               "~/assets/admin-staff/js/app-sidebar.min.js",
+               "~/assets/admin-staff/js/notification-sidebar.min.js"));
 
             bundles.Add(new MyStyleBundle("~/Content/customerCss").Include(
                 "~/assets/customer/css/bootstrap.min.css",
@@ -52,11 +52,11 @@ namespace GardenShopOnline
                 "~/assets/customer/css/ion.rangeSlider.min.css"));
 
             bundles.Add(new MyStyleBundle("~/Content/css").Include(
-                "~/app-assets/admin-staff/vendors/css/perfect-scrollbar.min.css",
-                "~/app-assets/admin-staff/vendors/css/prism.min.css",
-                "~/app-assets/admin-staff/vendors/css/toastr.min.css",
-                "~/app-assets/admin-staff/vendors/css/sweetalert2.min.css",
-                "~/app-assets/admin-staff/css/app.min.css"));
+                "~/assets/admin-staff/vendors/css/perfect-scrollbar.min.css",
+                "~/assets/admin-staff/vendors/css/prism.min.css",
+                "~/assets/admin-staff/vendors/css/toastr.min.css",
+                "~/assets/admin-staff/vendors/css/sweetalert2.min.css",
+                "~/assets/admin-staff/css/app.min.css"));
 
             BundleTable.EnableOptimizations= true;
         }
