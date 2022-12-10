@@ -30,25 +30,7 @@ $(document).ready(function () {
         }
         form.classList.add('was-validated');
     })
-        $('#submit_edit_product').on('click', function () {
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-            } else {
-                Update_Product();
-            }
-            form.classList.add('was-validated');
-        })
-        $('#submit_edit_customer').on('click', function () {
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-            } else {
-                Update_Customer();
-            }
-            form.classList.add('was-validated');
-        })
-
+       
     }, false);
 })
 
@@ -75,7 +57,7 @@ function deleteAlert(id, code) {
     },
         function () {
             var categorys = {};
-            categorys.id = id;
+            categorys.ID = id;
             
             $.ajax({
                 url: URLDelete,
@@ -461,20 +443,20 @@ function Update_Product() {
 
 //-------------------------Get Group Product -------------------------------
 
-$('#URLFindGroupProduct')
+$('#URLFindCategory')
     .keypress(function () {
-        URLFindGroupProduct = $(this).val();
+        URLFindCategory = $(this).val();
     })
     .keypress();
-function GetGroupProduct(ele, id) {
+function GetCategogy(ele, id) {
     row = $(ele).closest('tr');
     $.ajax({
         type: 'POST',
-        url: URLFindGroupProduct,
-        data: { "GroupProduct_id": id },
+        url: URLFindCategory,
+        data: { "categogy_id": id },
         success: function (response) {
-            $('#edit_id').val(response.id);
-            $('#Edit_name').val(response.name);
+            $('#edit_id').val(response.ID);
+            $('#Edit_name').val(response.Name);
 
             $('#Edit_Modal .close').css('display', 'none');
             $('#Edit_Modal').modal('show');
@@ -483,9 +465,9 @@ function GetGroupProduct(ele, id) {
 }
 
 //------------------------UPDATE GROUP PRODUCT-----------------------------
-$('#URLUpdateGroupProduct')
+$('#URLUpdateCategory')
     .keypress(function () {
-        URLUpdateGroupProduct = $(this).val();
+        URLUpdateCategory = $(this).val();
     })
     .keypress();
 
@@ -496,7 +478,7 @@ function Update() {
     group.name = $('#Edit_name').val();
 
     $.ajax({
-        url: URLUpdateGroupProduct,
+        url: URLUpdateCategory,
         type: "Post",
         data: JSON.stringify(group),
         contentType: "application/json; charset=UTF-8",
@@ -504,7 +486,7 @@ function Update() {
         success: function (response) {
             $('#Edit_Modal .close').css('display', 'none');
             $('#Edit_Modal').modal('hide');
-            table.cell(row, 2).data($('#Edit_name').val());
+            table.cell(row, 1).data($('#Edit_name').val());
             table.draw();
             sweetAlert
                 ({

@@ -17,7 +17,9 @@ namespace GardenShopOnline.Controllers
         // GET: Categogies
         public ActionResult Index()
         {
-            return View(db.Categogies.ToList());
+            var Categogies = db.Categogies.Where(c => c.Status != 3).OrderByDescending(c => c.ID);
+
+            return View(Categogies.ToList());
         }
         public ActionResult Create_Categogy(string name_Categogy)
         {           
@@ -44,102 +46,34 @@ namespace GardenShopOnline.Controllers
             db.SaveChanges();
             return Json("EditStatus_Category", JsonRequestBehavior.AllowGet);
         }
-
-       /* // GET: Categogies/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Categogy categogy = db.Categogies.Find(id);
-            if (categogy == null)
-            {
-                return HttpNotFound();
-            }
-            return View(categogy);
-        }
-
-        // GET: Categogies/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Categogies/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name")] Categogy categogy)
+        public JsonResult FindCategogy(int categogy_id)
         {
-            if (ModelState.IsValid)
-            {
-                db.Categogies.Add(categogy);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(categogy);
+            Categogy categories = db.Categogies.Find(categogy_id);
+            var emp = new Categogy();
+            emp.ID = categogy_id;
+            emp.Name = categories.Name;
+            return Json(emp);
         }
-
-        // GET: Categogies/Edit/5
-        public ActionResult Edit(int? id)
+        public JsonResult UpdateCategory(Categogy categorys)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Categogy categogy = db.Categogies.Find(id);
-            if (categogy == null)
-            {
-                return HttpNotFound();
-            }
-            return View(categogy);
-        }
-
-        // POST: Categogies/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name")] Categogy categogy)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(categogy).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(categogy);
-        }
-
-        // GET: Categogies/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Categogy categogy = db.Categogies.Find(id);
-            if (categogy == null)
-            {
-                return HttpNotFound();
-            }
-            return View(categogy);
-        }
-
-        // POST: Categogies/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Categogy categogy = db.Categogies.Find(id);
-            db.Categogies.Remove(categogy);
+            Categogy categories = db.Categogies.Find(categorys.ID);
+            categories.Name = categorys.Name;
+            db.Entry(categories).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Index");
-        }*/
-
+            string message = "Record Saved Successfully ";
+            bool status = true;
+            return Json(new { status = status, message = message }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Delete_Categogy(Categogy categorys)
+        {
+            Categogy categories = db.Categogies.Find(categorys.ID);
+            categories.Status = 3;
+            db.Entry(categories).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json("Delete_Categogy", JsonRequestBehavior.AllowGet);
+        }
+      
         protected override void Dispose(bool disposing)
         {
             if (disposing)

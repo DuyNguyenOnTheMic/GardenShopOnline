@@ -6,8 +6,8 @@
     int no = 0;
 }
 
-<input type="text" hidden id="URLFindGroupProduct" value="@Url.Action("FindCategory", "categories")/" />
-<input type="text" hidden id="URLUpdateGroupProduct" value="@Url.Action("UpdateCategory", "categories")" />
+<input type="text" hidden id="URLFindCategory" value="@Url.Action("FindCategogy", "categogies")/" />
+<input type="text" hidden id="URLUpdateCategory" value="@Url.Action("UpdateCategory", "categogies")" />
 <section class="pcoded-main-container">
     <div class="pcoded-content">
         <div class="page-header">
@@ -92,12 +92,12 @@
                                                     </script>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-success " onclick="GetGroupProduct(this, @item.ID)">
+                                                    <button class="btn btn-success " onclick="GetCategogy(this, @item.ID)">
                                                         <i class="feather icon-edit">
                                                         </i>
                                                     </button>
-                                                    <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Category", "categories")">
-                                                    <button class="btn btn-danger" @*onclick="deleteAlert('@item.id', '@item.code')"*@ id="Delete">
+                                                    <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Categogy", "categogies")">
+                                                    <button class="btn btn-danger" onclick="deleteAlert('@item.ID', '@item.ID')" id="Delete">
                                                         <i class="feather icon-trash-2">
                                                         </i>
                                                     </button>
