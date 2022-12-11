@@ -25,6 +25,22 @@ namespace GardenShopOnline.Controllers
         }
 
         //
+        // GET: /ShoppingCart/GetMiniCart
+        public ActionResult GetMiniCart()
+        {
+            var cart = ShoppingCart.GetCart(HttpContext);
+
+            // Set up our ViewModel
+            var viewModel = new ShoppingCartViewModels
+            {
+                CartItems = cart.GetCartItems(),
+                CartTotal = cart.GetTotal()
+            };
+            // Return the view
+            return PartialView("_MiniCart", viewModel);
+        }
+
+        //
         // GET: /Store/AddToCart/5
         public ActionResult AddToCart(int id)
         {
