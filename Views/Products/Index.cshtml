@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<input type="text" hidden id="URLgetCategory" value="@Url.Action("getCategory", "Categories")" />
 
 <section class="pcoded-main-container">
     <div class="pcoded-content">
@@ -114,38 +115,12 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>
-                                                Tên sản phẩm<span class="text-danger">*</span>
+                                                Name <span class="text-danger">*</span>
                                             </label>
                                             <div class="position-relative">
-                                                <input type="text" placeholder="Nhập tên sản phẩm" id="add_name" class="form-control" name="name_product" pattern="\S+.*" required>
+                                                <input type="text" placeholder="Enter product name..." id="add_name" class="form-control" name="name_product" pattern="\S+.*" required>
                                                 <div class="invalid-feedback">
-                                                    Vui lòng nhập tên sản phẩm !
-                                                </div>
-                                            </div> <!---->
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>
-                                                Đơn vị tính<span class="text-danger">*</span>
-                                            </label>
-                                            <div class="position-relative">
-                                                <input type="text" placeholder="Nhập đơn vị tính " id="add_unit" class="form-control" name="unit" pattern="\S+.*" required>
-                                                <div class="invalid-feedback">
-                                                    Vui lòng nhập tên đơn vị tính !
-                                                </div>
-                                            </div> <!---->
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>
-                                                Số lượng sản phẩm<span class="text-danger">*</span>
-                                            </label>
-                                            <div class="position-relative">
-                                                <input type="number" placeholder="Nhập số lượng sản phẩm" min="0" id="add_quantity" class="form-control" name="quantity" required>
-                                                <div class="invalid-feedback">
-                                                    Vui lòng nhập số lượng sản phẩm và lớn hơn 0 !
+                                                    Please enter product name !
                                                 </div>
                                             </div> <!---->
                                         </div>
@@ -153,25 +128,12 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>
-                                                Nhóm hàng<span class="text-danger">*</span>
-                                            </label>
-                                            <div class="position-relative">
-                                                <select class="custom-select" id="GroupProductDropdown" name="GroupProductDropdown" required>
-                                                </select>
-                                                <div class="invalid-feedback">Vui lòng chọn nhóm hàng</div>
-                                            </div> <!---->
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>
-                                                Danh mục sản phẩm<span class="text-danger">*</span>
+                                                Category <span class="text-danger">*</span>
                                             </label>
                                             <div class="position-relative">
                                                 <select class="custom-select" id="CategoryDropdown" name="CategoryDropdown" required>
                                                 </select>
-                                                <div class="invalid-feedback">Vui lòng chọn danh mục</div>
+                                                <div class="invalid-feedback">Please select product category !</div>
                                             </div> <!---->
 
                                         </div>
@@ -179,33 +141,42 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>
-                                                Đơn giá bán<span class="text-danger">*</span>
+                                                Quantity <span class="text-danger">*</span>
                                             </label>
                                             <div class="position-relative">
-                                                <input type="text" placeholder="Nhập giá tiền" id="product-price-sold" max="999999999999" class="form-control "
+                                                <input type="text" placeholder="Enter product quantity... " id="add_quantity" class="form-control" name="quantity" pattern="\S+.*" required>
+                                                <div class="invalid-feedback">
+                                                    Please enter product quantity !
+                                                </div>
+                                            </div> <!---->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>
+                                                Price <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="position-relative">
+                                                <input type="text" placeholder="Enter product price..." id="product-price-sold" max="999999999999" class="form-control "
                                                        pattern="[0-9.,]+" data-type="number" name="sell_price" required>
                                                 <div class="invalid-feedback">
-                                                    Giá tiền bán không được để trống !
+                                                    Product price cannot be blank !
                                                 </div>
                                             </div> <!---->
 
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="product-price-import">
-                                                Đơn giá nhập<span class="text-danger">*</span>
-                                            </label>
+                                            <label>Description</label>
                                             <div class="position-relative">
-                                                <input type="text" placeholder="Nhập giá tiền" id="product-price-buy" max="999999999999" class="form-control"
-                                                       pattern="[0-9.,]+" data-type="number" name="purchase_price" required>
-                                                <div class="invalid-feedback">
-                                                    Giá tiền nhập không được để trống !
-                                                </div>
+                                                <textarea id="customer_note" name="customer_note" placeholder="Enter product description..." rows="4" class="form-control"></textarea>
                                             </div>
                                             <!---->
                                         </div>
                                     </div>
+
+
                                 </div>
 
 

@@ -73,6 +73,15 @@ namespace GardenShopOnline.Controllers
             db.SaveChanges();
             return Json("Delete_Category", JsonRequestBehavior.AllowGet);
         }
+        public ActionResult getCategory()
+        {
+
+            return Json(db.Categories.Where(c => c.Status == 1).OrderByDescending(c => c.ID).Select(x => new
+            {
+                categoryID = x.ID,
+                categoryName = x.Name
+            }).ToList(), JsonRequestBehavior.AllowGet);
+        }
 
         protected override void Dispose(bool disposing)
         {

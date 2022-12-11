@@ -224,3 +224,23 @@ function Update() {
         }
     });
 }
+//------------ Load dropdown form add product----------------------------------
+
+var URLgetCategory = "";
+$('#URLgetCategory')
+    .keypress(function () {
+        URLgetCategory = $(this).val();
+    })
+    .keypress();
+$.ajax({
+    type: "GET",
+    url: URLgetCategory,
+    data: "{}",
+    success: function (data) {
+        var s = '<option value="" disabled="disabled" selected="selected">Select product category</option>';
+        for (var i = 0; i < data.length; i++) {
+            s += '<option value="' + data[i].categoryID + '">' + data[i].categoryName + '</option>';
+        }
+        $("#CategoryDropdown").html(s);
+    }
+});
