@@ -69,6 +69,33 @@ namespace GardenShopOnline.Controllers
         }
 
         //
+        // AJAX: /ShoppingCart/RemoveProduct/5
+        [HttpPost]
+        public ActionResult RemoveProduct(int id)
+        {
+            // Remove the item from the cart
+            var cart = ShoppingCart.GetCart(HttpContext);
+
+            // Get the name of the product to display confirmation
+            string productName = db.Carts
+                .Single(item => item.RecordID == id).Product.Name;
+
+            // Remove from cart
+            int itemCount = cart.RemoveProduct(id);
+
+            // Display the confirmation message
+            var results = new ShoppingCartRemoveViewModels
+            {
+                Message = productName + " đã được xoá khỏi giỏ hàng.",
+                CartTotal = cart.GetTotal(),
+                CartCount = cart.GetCount(),
+                ItemCount = itemCount,
+                DeleteId = id
+            };
+            return Json(results);
+        }
+
+        //
         // GET: /ShoppingCart/CartSummary
         [ChildActionOnly]
         public ActionResult CartSummary()

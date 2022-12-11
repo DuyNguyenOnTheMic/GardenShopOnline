@@ -120,7 +120,7 @@
                 var recordToDelete = $(this).attr('data-id');
                 if (recordToDelete != '') {
                     // Perform the ajax post
-                    $.post('/ShoppingCart/RemoveFromCart', { 'id': recordToDelete },
+                    $.post('/ShoppingCart/RemoveProduct', { 'id': recordToDelete },
                         function (data) {
                             // Successful requests get here
                             // Update the page elements

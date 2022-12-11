@@ -78,6 +78,24 @@ namespace GardenShopOnline.Models
             return itemCount;
         }
 
+        public int RemoveProduct(int id)
+        {
+            // Get the cart
+            var cartItem = db.Carts.Where(
+                cart => cart.ID == ShoppingCartId
+                && cart.RecordID == id);
+
+            int itemCount = 0;
+
+            if (cartItem != null)
+            {
+                db.Carts.RemoveRange(cartItem);
+                // Save changes
+                db.SaveChanges();
+            }
+            return itemCount;
+        }
+
         public void EmptyCart()
         {
             var cartItems = db.Carts.Where(
