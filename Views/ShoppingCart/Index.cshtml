@@ -3,64 +3,6 @@
     ViewBag.Title = "Shopping Cart";
 }
 
-<h3>
-    <em>Review</em> your cart:
-</h3>
-<p class="button">
-    @Html.ActionLink("Checkout>> ", "AddressAndPayment", "Checkout")
-</p>
-<div id="update-message">
-</div>
-<table>
-    <tr>
-        <th>
-            Album Name
-        </th>
-        <th>
-            Price (each)
-        </th>
-        <th>
-            Quantity
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in
-Model.CartItems)
-    {
-        <tr id="row-@item.RecordID">
-            <td>
-                @Html.ActionLink(item.Product.Name,
-"Details", "Store", new { id = item.ProductID }, null)
-            </td>
-            <td>
-                @item.Product.Price
-            </td>
-            <td id="item-count-@item.RecordID">
-                @item.Count
-            </td>
-            <td>
-                <a href="#" class="RemoveLink"
-                   data-id="@item.RecordID">
-                    Remove
-                    from cart
-                </a>
-            </td>
-        </tr>
-    }
-    <tr>
-        <td>
-            Total
-        </td>
-        <td>
-        </td>
-        <td>
-        </td>
-        <td id="cart-total">
-            @Model.CartTotal
-        </td>
-    </tr>
-</table>
-
 <!-- Begin Main Content Area -->
 <main class="main-content">
     <div class="breadcrumb-area breadcrumb-height" data-bg-image="../../assets/customer/images/breadcrumb/bg/1-1-1919x388.jpg">
@@ -98,34 +40,37 @@ Model.CartItems)
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="product_remove">
-                                            <a href="#">
-                                                <i class="pe-7s-close" data-tippy="Remove" data-tippy-inertia="true"
-                                                   data-tippy-animation="shift-away" data-tippy-delay="50"
-                                                   data-tippy-arrow="true" data-tippy-theme="sharpborder"></i>
-                                            </a>
-                                        </td>
-                                        <td class="product-thumbnail">
-                                            <a href="#">
-                                                <img src="~/assets/customer/images/product/small-size/1-1-112x124.png" alt="Cart Thumbnail">
-                                            </a>
-                                        </td>
-                                        <td class="product-name"><a href="#">American Marigold</a></td>
-                                        <td class="product-price"><span class="amount">$23.45</span></td>
-                                        <td class="quantity">
-                                            <div class="cart-plus-minus">
-                                                <input class="cart-plus-minus-box" value="1" type="text">
-                                                <div class="dec qtybutton">
-                                                    <i class="fa fa-minus"></i>
+                                    @foreach (var item in Model.CartItems)
+                                    {
+                                        <tr id="row-@item.RecordID">
+                                            <td class="product_remove" data-id="@item.RecordID">
+                                                <a href="#">
+                                                    <i class="pe-7s-close" data-tippy="Remove" data-tippy-inertia="true"
+                                                       data-tippy-animation="shift-away" data-tippy-delay="50"
+                                                       data-tippy-arrow="true" data-tippy-theme="sharpborder"></i>
+                                                </a>
+                                            </td>
+                                            <td class="product-thumbnail">
+                                                <a href="#">
+                                                    <img src="~/assets/customer/images/product/small-size/1-1-112x124.png" alt="Cart Thumbnail">
+                                                </a>
+                                            </td>
+                                            <td class="product-name"><a href="#">@item.Product.Name</a></td>
+                                            <td class="product-price"><span class="amount">@item.Product.Price</span></td>
+                                            <td class="quantity" id="item-count-@item.RecordID">
+                                                <div class="cart-plus-minus">
+                                                    <input class="cart-plus-minus-box" value="@item.Count" type="text">
+                                                    <div class="dec qtybutton">
+                                                        <i class="fa fa-minus"></i>
+                                                    </div>
+                                                    <div class="inc qtybutton">
+                                                        <i class="fa fa-plus"></i>
+                                                    </div>
                                                 </div>
-                                                <div class="inc qtybutton">
-                                                    <i class="fa fa-plus"></i>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal"><span class="amount">$23.45</span></td>
-                                    </tr>
+                                            </td>
+                                            <td class="product-subtotal"><span class="amount">@Model.CartTotal</span></td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -166,7 +111,7 @@ Model.CartItems)
     <script type="text/javascript">
         $(function () {
             // Document.ready -> link up remove event handler
-            $(".RemoveLink").click(function () {
+            $(".product_remove").click(function () {
                 // Get the id from the link
                 var recordToDelete = $(this).attr("data-id");
                 if (recordToDelete != '') {
