@@ -27,6 +27,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                    <div id="update-message"></div>
                     <form action="javascript:void(0)">
                         <div class="table-content table-responsive">
                             <table class="table">
@@ -62,7 +63,7 @@
                                             <td class="quantity" id="item-count-@item.RecordID">
                                                 <div class="cart-plus-minus" data-id="@item.RecordID">
                                                     <input class="cart-plus-minus-box" value="@item.Count" type="text">
-                                                    <div class="dec qtybutton" >
+                                                    <div class="dec qtybutton">
                                                         <i class="fa fa-minus"></i>
                                                     </div>
                                                     <div class="inc qtybutton">
@@ -129,6 +130,7 @@
                                 $('#item-count-' + data.DeleteId).find('input').val(data.ItemCount);
                             }
                             $('.cart-total').text(data.CartTotal);
+                            $('#update-message').text(data.Message);
                         });
                 }
             });
