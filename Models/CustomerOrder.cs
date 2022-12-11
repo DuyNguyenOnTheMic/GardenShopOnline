@@ -25,6 +25,10 @@ namespace GardenShopOnline.Models
         public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<System.DateTime> DateUpdated { get; set; }
         public Nullable<System.DateTime> DateDeleted { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public Nullable<decimal> Total { get; set; }
     
         public virtual AccCustomer AccCustomer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

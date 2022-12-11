@@ -15,10 +15,11 @@ namespace GardenShopOnline.Models
     public partial class OrderDetail
     {
         public int ID { get; set; }
-        public int CustomerOrderID { get; set; }
-        public Nullable<int> Amount { get; set; }
+        public int OrderID { get; set; }
+        public Nullable<int> Quantity { get; set; }
         public Nullable<int> ProductID { get; set; }
         public string Note { get; set; }
+        public Nullable<decimal> UnitPrice { get; set; }
     
         public virtual CustomerOrder CustomerOrder { get; set; }
         public virtual Product Product { get; set; }

@@ -30261,12 +30261,14 @@ margin: 0 6px;
 
 .second-col {
     left: 100px;
+    width: 400px;
+    max-width: 400px;
     box-shadow: inset -8px 0 8px -8px rgb(0 0 0 / 30%);
 }
 
 .first-col{
-    width: 150px;
-    max-width: 150px;
+    width: 100px;
+    max-width: 100px;
     left: 0px;
 }
 .sticky-col {

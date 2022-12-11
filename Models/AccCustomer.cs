@@ -17,7 +17,6 @@ namespace GardenShopOnline.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AccCustomer()
         {
-            this.Carts = new HashSet<Cart>();
             this.CommentProducts = new HashSet<CommentProduct>();
             this.CustomerOrders = new HashSet<CustomerOrder>();
             this.Feedbacks = new HashSet<Feedback>();
@@ -31,8 +30,6 @@ namespace GardenShopOnline.Models
         public string Address { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cart> Carts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CommentProduct> CommentProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

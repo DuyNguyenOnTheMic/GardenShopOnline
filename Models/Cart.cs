@@ -14,12 +14,11 @@ namespace GardenShopOnline.Models
     
     public partial class Cart
     {
-        public int ID { get; set; }
+        public int RecordID { get; set; }
+        public string ID { get; set; }
         public Nullable<int> ProductID { get; set; }
-        public Nullable<int> Amount { get; set; }
-        public int AccCustomerID { get; set; }
+        public Nullable<int> Count { get; set; }
     
-        public virtual AccCustomer AccCustomer { get; set; }
         public virtual Product Product { get; set; }
     }
 }

@@ -20,18 +20,18 @@ namespace GardenShopOnline.Models
             this.Carts = new HashSet<Cart>();
             this.CommentProducts = new HashSet<CommentProduct>();
             this.OrderDetails = new HashSet<OrderDetail>();
-            this.Pictures = new HashSet<Picture>();
         }
     
         public int ID { get; set; }
-        public string Name { get; set; }
-        public string Info { get; set; }
-        public string Place { get; set; }
-        public string Address { get; set; }
-        public int TypeID { get; set; }
         public int CategoryID { get; set; }
-        public Nullable<byte> Amount { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
+        public string Image { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
+        public Nullable<System.DateTime> DateUpdate { get; set; }
+        public Nullable<int> Status { get; set; }
+        public int Quantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
@@ -40,8 +40,5 @@ namespace GardenShopOnline.Models
         public virtual ICollection<CommentProduct> CommentProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Picture> Pictures { get; set; }
-        public virtual Type Type { get; set; }
     }
 }
