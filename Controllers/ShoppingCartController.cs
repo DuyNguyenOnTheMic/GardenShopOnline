@@ -56,8 +56,7 @@ namespace GardenShopOnline.Controllers
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModels
             {
-                Message = Server.HtmlEncode(albumName) +
-                    " has been removed from your shopping cart.",
+                Message = albumName + " đã được xoá khỏi giỏ hàng.",
                 CartTotal = cart.GetTotal(),
                 CartCount = cart.GetCount(),
                 ItemCount = itemCount,
