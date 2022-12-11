@@ -49,7 +49,7 @@ namespace GardenShopOnline.Controllers
             product.Description = description;
             product.Status = 1;
             string filename = Path.GetFileName(file.FileName);
-            string _filename = filename + DateTime.Now.ToString("yymmssfff");
+            string _filename = DateTime.Now.ToString("yymmssfff") + filename;
 
             string extension = Path.GetExtension(file.FileName);
 
