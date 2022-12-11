@@ -4,32 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7dd85ed3eebc4573b94a387d752ad6b3" Name="Diagram1">
-        <EntityTypeShape EntityType="BonsalGardentModel.AccCustomer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsalGardentModel.AccManager" Width="1.5" PointX="6" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsalGardentModel.Cart" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsalGardentModel.Categogy" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsalGardentModel.CommentProduct" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsalGardentModel.CustomerOrder" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsalGardentModel.Feedback" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsalGardentModel.OrderDetail" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsalGardentModel.Picture" Width="1.5" PointX="5.25" PointY="17.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsalGardentModel.Product" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsalGardentModel.sysdiagram" Width="1.5" PointX="8.75" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsalGardentModel.Type" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <AssociationConnector Association="BonsalGardentModel.FK__Cart__AccCustome__33D4B598" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsalGardentModel.FK__CommentPr__AccCu__3F466844" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsalGardentModel.FK__CustomerO__AccCu__36B12243" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsalGardentModel.FK__Feedback__AccCus__4316F928" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsalGardentModel.FK__CommentPr__AccMa__3E52440B" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsalGardentModel.FK__Feedback__AccMan__4222D4EF" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsalGardentModel.FK__Cart__ProductID__32E0915F" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsalGardentModel.FK__Product__Categor__2C3393D0" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsalGardentModel.FK__CommentPr__Produ__3D5E1FD2" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsalGardentModel.FK__OrderDeta__Custo__3A81B327" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsalGardentModel.FK__OrderDeta__Produ__398D8EEE" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsalGardentModel.FK__Picture__Product__300424B4" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsalGardentModel.FK__Product__TypeID__2D27B809" ManuallyRouted="false" />
+      <Diagram DiagramId="53b8ae0971f1490a9707c90345b0088f" Name="Diagram1">
+        <EntityTypeShape EntityType="BonsaiGardenModel.AccCustomer" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.AccManager" Width="1.5" PointX="6" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.Cart" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.Category" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.CommentProduct" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.CustomerOrder" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.Feedback" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.OrderDetail" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.Picture" Width="1.5" PointX="5.25" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.Product" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.Type" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__Cart__AccCustome__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__CommentPr__AccCu__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__CustomerO__AccCu__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__Feedback__AccCus__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__CommentPr__AccMa__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__Feedback__AccMan__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__Cart__ProductID__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__Product__Categor__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__CommentPr__Produ__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__OrderDeta__Custo__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__OrderDeta__Produ__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__Picture__Product__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__Product__TypeID__3F466844" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

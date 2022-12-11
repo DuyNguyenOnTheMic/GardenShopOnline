@@ -13,10 +13,10 @@ namespace GardenShopOnline.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BonsalGardentEntities : DbContext
+    public partial class BonsaiGardenEntities : DbContext
     {
-        public BonsalGardentEntities()
-            : base("name=BonsalGardentEntities")
+        public BonsaiGardenEntities()
+            : base("name=BonsaiGardenEntities")
         {
         }
     
@@ -28,14 +28,13 @@ namespace GardenShopOnline.Models
         public virtual DbSet<AccCustomer> AccCustomers { get; set; }
         public virtual DbSet<AccManager> AccManagers { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
-        public virtual DbSet<Categogy> Categogies { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CommentProduct> CommentProducts { get; set; }
         public virtual DbSet<CustomerOrder> CustomerOrders { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Type> Types { get; set; }
     }
 }
