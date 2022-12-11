@@ -30336,3 +30336,13 @@ body {
 .cus-multi {
     background-color: #f79ddf;
 }
+.img-item {
+    display: flex;
+    justify-content: center;
+
+}
+.img-item-link {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
