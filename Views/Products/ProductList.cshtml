@@ -26,7 +26,7 @@
             no++;
         <tr>
             <td>@no  <input hidden type="text" name="record" value="@item.ID"></td>
-            <td class="text-center"><img width="150px" src="@Url.Content(item.Image)" /></td>
+            <td class="text-center"><img class="img-item-product" src="@Url.Content(item.Image)" /></td>
             <td class="text-center">@item.Name</td>
             <td class=" text-center">@item.Category.Name</td>
             <td class="text-center">@item.Price.ToString("N0")</td>

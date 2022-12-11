@@ -30346,3 +30346,8 @@ body {
     height: 150px;
     object-fit: cover;
 }
+.img-item-product {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
