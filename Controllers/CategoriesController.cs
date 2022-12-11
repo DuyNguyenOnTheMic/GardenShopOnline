@@ -6,16 +6,16 @@ using System.Web.Mvc;
 
 namespace GardenShopOnline.Controllers
 {
-    public class CategogiesController : Controller
+    public class CategoriesController : Controller
     {
         private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
         // GET: Categories
         public ActionResult Index()
         {
-            var Categogies = db.Categories.Where(c => c.Status != 3).OrderByDescending(c => c.ID);
+            var categories = db.Categories.Where(c => c.Status != 3).OrderByDescending(c => c.ID);
 
-            return View(Categogies.ToList());
+            return View(categories.ToList());
         }
         public ActionResult Create_Category(string name_Category)
         {
