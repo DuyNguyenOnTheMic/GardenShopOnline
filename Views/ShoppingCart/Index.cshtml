@@ -60,9 +60,9 @@
                                             <td class="product-name"><a href="#">@item.Product.Name</a></td>
                                             <td class="product-price"><span class="amount">@item.Product.Price</span></td>
                                             <td class="quantity" id="item-count-@item.RecordID">
-                                                <div class="cart-plus-minus">
+                                                <div class="cart-plus-minus" data-id="@item.RecordID">
                                                     <input class="cart-plus-minus-box" value="@item.Count" type="text">
-                                                    <div class="dec qtybutton">
+                                                    <div class="dec qtybutton" >
                                                         <i class="fa fa-minus"></i>
                                                     </div>
                                                     <div class="inc qtybutton">
@@ -113,20 +113,40 @@
     <script type="text/javascript">
         $(function () {
             // Document.ready -> link up remove event handler
-            $(".product_remove").click(function (e) {
+            $('.product_remove').click(function (e) {
                 e.preventDefault();
                 // Get the id from the link
-                var recordToDelete = $(this).attr("data-id");
+                var recordToDelete = $(this).attr('data-id');
                 if (recordToDelete != '') {
                     // Perform the ajax post
-                    $.post("/ShoppingCart/RemoveFromCart", { "id": recordToDelete },
+                    $.post('/ShoppingCart/RemoveFromCart', { 'id': recordToDelete },
                         function (data) {
                             // Successful requests get here
                             // Update the page elements
                             if (data.ItemCount == 0) {
                                 $('#row-' + data.DeleteId).fadeOut('slow');
                             } else {
-                                $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                                $('#item-count-' + data.DeleteId).find('input').val(data.ItemCount);
+                            }
+                            $('.cart-total').text(data.CartTotal);
+                            $('#cart-status').text('Cart (' + data.CartCount + ')');
+                        });
+                }
+            });
+
+            $('.quantity .dec').click(function () {
+                // Get the id from the link
+                var recordToDelete = $(this).parent().attr('data-id');
+                if (recordToDelete != '') {
+                    // Perform the ajax post
+                    $.post('/ShoppingCart/RemoveFromCart', { 'id': recordToDelete },
+                        function (data) {
+                            // Successful requests get here
+                            // Update the page elements
+                            if (data.ItemCount == 0) {
+                                $('#row-' + data.DeleteId).fadeOut('slow');
+                            } else {
+                                $('#item-count-' + data.DeleteId).find('input').val(data.ItemCount);
                             }
                             $('.cart-total').text(data.CartTotal);
                             $('#cart-status').text('Cart (' + data.CartCount + ')');
