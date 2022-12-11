@@ -94,8 +94,8 @@
                                 <div class="cart-page-total">
                                     <h2>Cart totals</h2>
                                     <ul>
-                                        <li>Subtotal <span>@Model.CartTotal</span></li>
-                                        <li>Total <span>@Model.CartTotal</span></li>
+                                        <li>Subtotal <span class="cart-total">@Model.CartTotal</span></li>
+                                        <li>Total <span class="cart-total">@Model.CartTotal</span></li>
                                     </ul>
                                     <a href="#">Proceed to checkout</a>
                                 </div>
@@ -128,8 +128,7 @@
                             } else {
                                 $('#item-count-' + data.DeleteId).text(data.ItemCount);
                             }
-                            $('#cart-total').text(data.CartTotal);
-                            $('#update-message').text(data.Message);
+                            $('.cart-total').text(data.CartTotal);
                             $('#cart-status').text('Cart (' + data.CartCount + ')');
                         });
                 }
