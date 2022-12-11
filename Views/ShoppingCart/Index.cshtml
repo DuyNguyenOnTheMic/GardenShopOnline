@@ -137,17 +137,17 @@
 
             $('.quantity .dec').click(function () {
                 // Get the id from the link
-                var recordToDelete = $(this).parent().attr('data-id');
-                if (recordToDelete != '') {
+                var recordToDecrease = $(this).parent().attr('data-id');
+                if (recordToDecrease != '') {
                     // Perform the ajax post
-                    $.post('/ShoppingCart/RemoveFromCart', { 'id': recordToDelete },
+                    $.post('/ShoppingCart/DecreaseQuantity', { 'id': recordToDecrease },
                         function (data) {
                             // Successful requests get here
                             // Update the page elements
                             if (data.ItemCount == 0) {
-                                $('#row-' + data.DeleteId).fadeOut('slow');
+                                $('#row-' + data.DecreaseId).fadeOut('slow');
                             } else {
-                                $('#item-count-' + data.DeleteId).find('input').val(data.ItemCount);
+                                $('#item-count-' + data.DecreaseId).find('input').val(data.ItemCount);
                             }
                             $('.cart-total').text(data.CartTotal);
                         });

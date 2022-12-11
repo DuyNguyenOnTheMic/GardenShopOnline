@@ -42,9 +42,9 @@ namespace GardenShopOnline.Controllers
         }
 
         //
-        // AJAX: /ShoppingCart/RemoveFromCart/5
+        // AJAX: /ShoppingCart/DecreaseQuantity/5
         [HttpPost]
-        public ActionResult RemoveFromCart(int id)
+        public ActionResult DecreaseQuantity(int id)
         {
             // Remove the item from the cart
             var cart = ShoppingCart.GetCart(HttpContext);
@@ -54,7 +54,7 @@ namespace GardenShopOnline.Controllers
                 .Single(item => item.RecordID == id).Product.Name;
 
             // Remove from cart
-            int itemCount = cart.RemoveFromCart(id);
+            int itemCount = cart.DecreaseQuantity(id);
 
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModels

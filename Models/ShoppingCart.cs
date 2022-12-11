@@ -52,7 +52,7 @@ namespace GardenShopOnline.Models
             db.SaveChanges();
         }
 
-        public int RemoveFromCart(int id)
+        public int DecreaseQuantity(int id)
         {
             // Get the cart
             var cartItem = db.Carts.Single(
