@@ -52,7 +52,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            
+
                                             <th class="text-center">Name</th>
                                             <th width="15%">Status</th>
                                             <th width="15%">
@@ -68,7 +68,7 @@
                                                 <td>@no <input hidden type="text" name="record" value="@item.ID"></td>
 
                                                 <td class="text-center">@item.Name</td>
-                                               
+
                                                 <td>
                                                     @if (item.Status == 1)
                                                     {
@@ -192,13 +192,14 @@
         </form>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-<script>
-    var row;
-    $(document).ready(function () {
-        $('#example').DataTable({
-            pagingType: 'full_numbers',
+@section scripts {
+    <script type="text/javascript">
+        var row;
+        $(document).ready(function () {
+            $('#example').DataTable({
+                pagingType: 'full_numbers',
+            });
         });
-    });
-</script>
+    </script>
+}
