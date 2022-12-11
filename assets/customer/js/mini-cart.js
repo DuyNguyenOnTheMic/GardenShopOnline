@@ -1,5 +1,5 @@
-﻿var url = '/ShoppingCart/GetMiniCart'
-    miniCart = $('#miniCart');
+﻿var url = '/ShoppingCart/GetMiniCart',
+    miniCartList = $('#miniCartList');
 
 $(function () {
     getMiniCart();
@@ -8,6 +8,6 @@ $(function () {
 function getMiniCart() {
     // Get Partial View cart data
     $.get(url, function (data) {
-        miniCart.html(data);
+        miniCartList.html(data);
     });
 }
