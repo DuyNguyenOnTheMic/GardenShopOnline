@@ -81,6 +81,14 @@ namespace GardenShopOnline.Controllers
             Session["notification"] = "Thêm mới thành công!";
             return RedirectToAction("Index");
         }
+        public ActionResult Delete_Product(Product product)
+        {
+            Product product1 = db.Products.Find(product.ID);
+            product1.Status = 3;
+            db.Entry(product1).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json("Delete_Product", JsonRequestBehavior.AllowGet);
+        }
 
         protected override void Dispose(bool disposing)
         {
