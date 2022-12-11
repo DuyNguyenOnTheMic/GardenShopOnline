@@ -32,10 +32,10 @@
     </div>
     <div class="minicart-item_total">
         <span>Subtotal</span>
-        <span class="ammount">$79.35</span>
+        <span class="ammount">@Model.CartTotal</span>
     </div>
     <div class="group-btn_wrap d-grid gap-2">
-        <a href="cart.html" class="btn btn-dark">View Cart</a>
-        <a href="checkout.html" class="btn btn-dark">Checkout</a>
+        <a href="@Url.Action("Index", "ShoppingCart")" class="btn btn-dark">View Cart</a>
+        <a href="#" class="btn btn-dark">Checkout</a>
     </div>
 </div>
