@@ -26,7 +26,7 @@ namespace GardenShopOnline.Models
 
         public void AddToCart(Product product)
         {
-            // Get the matching cart and album instances
+            // Get the matching cart and product instances
             var cartItem = db.Carts.SingleOrDefault(
                 c => c.ID == ShoppingCartId
                 && c.ProductID == product.ID);
@@ -108,9 +108,9 @@ namespace GardenShopOnline.Models
 
         public decimal GetTotal()
         {
-            // Multiply album price by count of that album to get 
-            // the current price for each of those albums in the cart
-            // sum all album price totals to get the cart total
+            // Multiply product price by count of that product to get 
+            // the current price for each of those products in the cart
+            // sum all product price totals to get the cart total
             decimal? total = (from cartItems in db.Carts
                               where cartItems.ID == ShoppingCartId
                               select cartItems.Count *

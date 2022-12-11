@@ -28,14 +28,14 @@ namespace GardenShopOnline.Controllers
         // GET: /Store/AddToCart/5
         public ActionResult AddToCart(int id)
         {
-            // Retrieve the album from the database
-            var addedAlbum = db.Products
-                .Single(album => album.ID == id);
+            // Retrieve the product from the database
+            var addedproduct = db.Products
+                .Single(product => product.ID == id);
 
             // Add it to the shopping cart
             var cart = ShoppingCart.GetCart(HttpContext);
 
-            cart.AddToCart(addedAlbum);
+            cart.AddToCart(addedproduct);
 
             // Go back to the main store page for more shopping
             return RedirectToAction("Index");
@@ -49,8 +49,8 @@ namespace GardenShopOnline.Controllers
             // Remove the item from the cart
             var cart = ShoppingCart.GetCart(HttpContext);
 
-            // Get the name of the album to display confirmation
-            string albumName = db.Carts
+            // Get the name of the product to display confirmation
+            string productName = db.Carts
                 .Single(item => item.RecordID == id).Product.Name;
 
             // Remove from cart
@@ -59,7 +59,7 @@ namespace GardenShopOnline.Controllers
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModels
             {
-                Message = albumName + " đã được xoá khỏi giỏ hàng.",
+                Message = productName + " đã được xoá khỏi giỏ hàng.",
                 CartTotal = cart.GetTotal(),
                 CartCount = cart.GetCount(),
                 ItemCount = itemCount,
