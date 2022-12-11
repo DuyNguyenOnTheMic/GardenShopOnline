@@ -17,11 +17,13 @@ namespace GardenShopOnline.Models
             cart.ShoppingCartId = cart.GetCartId(context);
             return cart;
         }
+
         // Helper method to simplify shopping cart calls
         public static ShoppingCart GetCart(Controller controller)
         {
             return GetCart(controller.HttpContext);
         }
+
         public void AddToCart(Product product)
         {
             // Get the matching cart and album instances
@@ -49,6 +51,7 @@ namespace GardenShopOnline.Models
             // Save changes
             db.SaveChanges();
         }
+
         public int RemoveFromCart(int id)
         {
             // Get the cart
@@ -74,6 +77,7 @@ namespace GardenShopOnline.Models
             }
             return itemCount;
         }
+
         public void EmptyCart()
         {
             var cartItems = db.Carts.Where(
@@ -86,6 +90,7 @@ namespace GardenShopOnline.Models
             // Save changes
             db.SaveChanges();
         }
+
         public List<Cart> GetCartItems()
         {
             return db.Carts.Where(
@@ -100,6 +105,7 @@ namespace GardenShopOnline.Models
             // Return 0 if all entries are null
             return count ?? 0;
         }
+
         public decimal GetTotal()
         {
             // Multiply album price by count of that album to get 
@@ -112,6 +118,7 @@ namespace GardenShopOnline.Models
 
             return total ?? decimal.Zero;
         }
+
         public int CreateOrder(CustomerOrder order)
         {
             decimal? orderTotal = 0;
@@ -144,6 +151,7 @@ namespace GardenShopOnline.Models
             // Return the OrderId as the confirmation number
             return order.ID;
         }
+
         // We're using HttpContextBase to allow access to cookies.
         public string GetCartId(HttpContextBase context)
         {
@@ -164,6 +172,7 @@ namespace GardenShopOnline.Models
             }
             return context.Session[CartSessionKey].ToString();
         }
+
         // When a user has logged in, migrate their shopping cart to
         // be associated with their username
         public void MigrateCart(string userName)
