@@ -1,39 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GardenShopOnline.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using GardenShopOnline.Models;
 
 namespace GardenShopOnline.Controllers
 {
     public class CategogiesController : Controller
     {
-        private BonsalGardentEntities db = new BonsalGardentEntities();
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
-        // GET: Categogies
+        // GET: Categories
         public ActionResult Index()
         {
-            var Categogies = db.Categogies.Where(c => c.Status != 3).OrderByDescending(c => c.ID);
+            var Categogies = db.Categories.Where(c => c.Status != 3).OrderByDescending(c => c.ID);
 
             return View(Categogies.ToList());
         }
-        public ActionResult Create_Categogy(string name_Categogy)
-        {           
-            Categogy Categogy = new Categogy();
-            Categogy.Name = name_Categogy;
-            Categogy.Status = 1;
-            db.Categogies.Add(Categogy);
+        public ActionResult Create_Category(string name_Category)
+        {
+            Category Category = new Category
+            {
+                Name = name_Category,
+                Status = 1
+            };
+            db.Categories.Add(Category);
             db.SaveChanges();
             Session["notification"] = "Thêm mới thành công!";
             return RedirectToAction("Index");
         }
-        public ActionResult EditStatus_Category(Categogy categogys)
+        public ActionResult EditStatus_Category(Category Categorys)
         {
-            Categogy categories = db.Categogies.Find(categogys.ID);
+            Category categories = db.Categories.Find(Categorys.ID);
             if (categories.Status == 1)
             {
                 categories.Status = 2;
@@ -47,33 +45,35 @@ namespace GardenShopOnline.Controllers
             return Json("EditStatus_Category", JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult FindCategogy(int categogy_id)
+        public JsonResult FindCategory(int Category_id)
         {
-            Categogy categories = db.Categogies.Find(categogy_id);
-            var emp = new Categogy();
-            emp.ID = categogy_id;
-            emp.Name = categories.Name;
+            Category categories = db.Categories.Find(Category_id);
+            var emp = new Category
+            {
+                ID = Category_id,
+                Name = categories.Name
+            };
             return Json(emp);
         }
-        public JsonResult UpdateCategory(Categogy categorys)
+        public JsonResult UpdateCategory(Category categorys)
         {
-            Categogy categories = db.Categogies.Find(categorys.ID);
+            Category categories = db.Categories.Find(categorys.ID);
             categories.Name = categorys.Name;
             db.Entry(categories).State = EntityState.Modified;
             db.SaveChanges();
             string message = "Record Saved Successfully ";
             bool status = true;
-            return Json(new { status = status, message = message }, JsonRequestBehavior.AllowGet);
+            return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Delete_Categogy(Categogy categorys)
+        public ActionResult Delete_Category(Category categorys)
         {
-            Categogy categories = db.Categogies.Find(categorys.ID);
+            Category categories = db.Categories.Find(categorys.ID);
             categories.Status = 3;
             db.Entry(categories).State = EntityState.Modified;
             db.SaveChanges();
-            return Json("Delete_Categogy", JsonRequestBehavior.AllowGet);
+            return Json("Delete_Category", JsonRequestBehavior.AllowGet);
         }
-      
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
