@@ -7,6 +7,7 @@ namespace GardenShopOnline.Controllers
     public class ShoppingCartController : Controller
     {
         readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
+
         //
         // GET: /ShoppingCart/
         public ActionResult Index()
@@ -22,6 +23,7 @@ namespace GardenShopOnline.Controllers
             // Return the view
             return View(viewModel);
         }
+
         //
         // GET: /Store/AddToCart/5
         public ActionResult AddToCart(int id)
@@ -38,6 +40,7 @@ namespace GardenShopOnline.Controllers
             // Go back to the main store page for more shopping
             return RedirectToAction("Index");
         }
+
         //
         // AJAX: /ShoppingCart/RemoveFromCart/5
         [HttpPost]
@@ -64,6 +67,7 @@ namespace GardenShopOnline.Controllers
             };
             return Json(results);
         }
+
         //
         // GET: /ShoppingCart/CartSummary
         [ChildActionOnly]
