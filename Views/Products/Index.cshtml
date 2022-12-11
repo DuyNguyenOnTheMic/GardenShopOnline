@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <input type="text" hidden id="URLgetCategory" value="@Url.Action("getCategory", "Categories")" />
+<input type="text" hidden id="URLProductList" value="@Url.Action("ProductList", "Products")" />
 
 <section class="pcoded-main-container">
     <div class="pcoded-content">
@@ -45,17 +46,10 @@
                                     <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("ExportTemplateExcel","Excel")';">Mẫu tệp Excel</button>
                                 </div>
 
-                                <div class="col-md-3">
-                                    <input type="text" hidden id="URLgetCategory" value="@Url.Action("getCategory", "categories")" />
-                                    <select class="custom-select" id="filter_GroupProduct" name="filter_GroupProduct" required>
-                                        <option value="" disabled="disabled" selected="selected">Xem tất cả nhóm hàng</option>
 
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <input type="text" hidden id="URLgetGroupProduct" value="@Url.Action("getGroupProduct", "groups")" />
+                                <div class="col-md-6">
                                     <select class="custom-select" id="filter_Category" name="filter_Category" required>
-                                        <option value="" disabled="disabled" selected="selected">Xem tất cả danh mục</option>
+                                        <option value="" disabled="disabled" selected="selected">Select product category</option>
 
                                     </select>
                                 </div>
@@ -102,7 +96,7 @@
             </div>
             <div id="AddProduct" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="AddProductLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
-                    <form class="needs-validation" method="post" action="@Url.Action("Create_Product", "products")" enctype="multipart/form-data"  novalidate>
+                    <form class="needs-validation" method="post" action="@Url.Action("Create_Product", "products")" enctype="multipart/form-data" novalidate>
                         <div class="modal-content">
                             <div class="modal-header bg-primary">
                                 <h5 class="modal-title" id="AddProductLabel">Add new products</h5>

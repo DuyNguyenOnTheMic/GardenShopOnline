@@ -244,3 +244,46 @@ $.ajax({
         $("#CategoryDropdown").html(s);
     }
 });
+$.ajax({
+    type: "GET",
+    url: URLgetCategory,
+    data: "{}",
+    success: function (data) {
+        var s = '<option value="-1" >Select product category</option>';
+        for (var i = 0; i < data.length; i++) {
+            s += '<option value="' + data[i].categoryID + '">' + data[i].categoryName + '</option>';
+        }
+        $("#filter_Category").html(s);
+    }
+});
+
+//----------------------FILTER PRODUCT------------------------------------------------
+$('#URLProductList')
+    .keypress(function () {
+        URLProductList = $(this).val();
+    })
+    .keypress();
+
+
+$("#filter_Category").change(function () {
+    var group_id = $("#filter_GroupProduct").val();
+    var category_id = $("#filter_Category").val();
+    GetList(group_id, category_id)
+});
+
+function GetList(group_id, category_id) {
+    $.ajax({
+        url: URLProductList,
+        data: {
+            category_id: category_id,
+        }
+    }).done(function (result) {
+        $('#dataContainer').html(result);
+        $('#example').DataTable()
+
+    }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        console.log(textStatus)
+        console.log(errorThrown)
+        alert("Something Went Wrong, Try Later");
+    });
+}
