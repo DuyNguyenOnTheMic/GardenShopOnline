@@ -448,7 +448,7 @@ $('#URLFindCategory')
         URLFindCategory = $(this).val();
     })
     .keypress();
-function GetCategogy(ele, id) {
+function GetCategory(ele, id) {
     row = $(ele).closest('tr');
     $.ajax({
         type: 'POST',

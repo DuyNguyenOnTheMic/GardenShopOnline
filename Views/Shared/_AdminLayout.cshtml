@@ -1,11 +1,6 @@
-﻿
-@{
-    ViewBag.Title = "_Layout_QuyThanh";
-}
-
-<html lang="en" class="">
+﻿<html lang="vi" class="">
 <head>
-    <title>Garden Shop</title>
+    <title>@ViewBag.Title</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,15 +8,11 @@
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded">
     <!-- Favicon icon -->
-    <link rel="icon" href="~/assets/Admin/assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/assets/admin/assets/images/favicon.ico" type="image/x-icon">
     <!-- vendor css -->
     <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
-    <link href="~/assets/Admin/assets/css/style.css" rel="stylesheet" />
-    <link href="~/assets/Admin/assets/css/plugins/animate.min.css" rel="stylesheet" />
-   
-
-@*    @Scripts.Render("~/bundles/jquery")
-*@
+    <link href="~/assets/admin/assets/css/style.css" rel="stylesheet" />
+    <link href="~/assets/admin/assets/css/plugins/animate.min.css" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -36,7 +27,7 @@
             <div class="navbar-content scroll-div ">
                 <div class="">
                     <div class="main-menu-header">
-                        <img src="@Url.Content("~/assets/Admin/assets/images/default-avatar.png")" alt="User-Profile-Image" class="img-radius">
+                        <img src="@Url.Content("~/assets/admin/assets/images/default-avatar.png")" alt="User-Profile-Image" class="img-radius">
                         <div class="user-details">
                             <span>Admin</span>
                             <div id="more-details">
@@ -55,7 +46,7 @@
                             <span class="pcoded-mtext">Staff</span>
                         </a>
                     </li>
-                    
+
                     <li class="nav-item ">
                         <a href="#" class="nav-link">
                             <span class="pcoded-micon"><i class="feather icon-layout"></i></span>
@@ -68,7 +59,7 @@
                             <span class="pcoded-mtext">Product</span>
                         </a>
                     </li>
-                    
+
                     <li class="nav-item pcoded-menu-caption">
                         <label>Hàng hoá</label>
                     </li>
@@ -77,24 +68,33 @@
                             <span class="pcoded-micon"><i class="feather icon-target"></i></span> <span class="pcoded-mtext">Bán hàng</span>
                         </a>
                     </li>
-                    <li class="nav-item"><a href="https://tancool.net/doanh-thu" class="nav-link">
-                        <span class="pcoded-micon"><i class="feather icon-clipboard"></i></span> 
-                        <span class="pcoded-mtext">Doanh thu</span></a></li>
+                    <li class="nav-item">
+                        <a href="https://tancool.net/doanh-thu" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-clipboard"></i></span>
+                            <span class="pcoded-mtext">Doanh thu</span>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="@Url.Action("Index","import_inventory")" class="nav-link">
                             <span class="pcoded-micon"><i class="feather icon-package"></i></span>
                             <span class="pcoded-mtext">Tồn kho</span>
                         </a>
-                    </li>                    
-                    <li class="nav-item"><a href="https://tancool.net/don-hang" class="nav-link">
-                        <span class="pcoded-micon"><i class="feather icon-inbox"></i></span> <span class="pcoded-mtext">Đơn hàng</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://tancool.net/don-hang" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-inbox"></i></span> <span class="pcoded-mtext">Đơn hàng</span>
+                        </a>
                     </li>
                     <li class="nav-item pcoded-menu-caption"><label>Tín năng</label></li>
-                    <li class="nav-item"><a href="https://tancool.net/doi-tra" class="nav-link">
-                        <span class="pcoded-micon"><i class="feather icon-repeat"></i></span> <span class="pcoded-mtext">Đổi trả</span></a>
+                    <li class="nav-item">
+                        <a href="https://tancool.net/doi-tra" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-repeat"></i></span> <span class="pcoded-mtext">Đổi trả</span>
+                        </a>
                     </li>
-                    <li class="nav-item"><a href="https://tancool.net/thu-chi" class="nav-link">
-                        <span class="pcoded-micon"><i class="feather icon-percent"></i></span> <span class="pcoded-mtext">Thu chi</span></a>
+                    <li class="nav-item">
+                        <a href="https://tancool.net/thu-chi" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-percent"></i></span> <span class="pcoded-mtext">Thu chi</span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -105,8 +105,8 @@
             <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
             <a href="#!" class="b-brand">
                 <!-- ========   change your logo hear   ============ -->
-                <img src="~/assets/Admin/assets/images/logo.png" alt="" class="logo">
-                <img src="~/assets/Admin/assets/images/logo-icon.png" alt="" class="logo-thumb">
+                <img src="~/assets/admin/assets/images/logo.png" alt="" class="logo">
+                <img src="~/assets/admin/assets/images/logo-icon.png" alt="" class="logo-thumb">
             </a>
             <a href="#!" class="mob-toggler">
                 <i class="feather icon-more-vertical"></i>
@@ -117,7 +117,7 @@
                 <li>
                     <div class="dropdown drp-user">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                            <img src="@Url.Content("~/assets/Admin/assets/images/default-avatar.png")" alt="User-Profile-Image" class="img-radius mr-2" style="width: 2.5vw;">
+                            <img src="@Url.Content("~/assets/admin/assets/images/default-avatar.png")" alt="User-Profile-Image" class="img-radius mr-2" style="width: 2.5vw;">
                             <span class="mr-3">Admin</span>
                         </a>
                         <a href="javascript:document.getElementById('logoutForm').submit()" title="Log out" class="dud-logout"> <i class="feather icon-log-out"></i></a>
@@ -166,19 +166,19 @@
     @RenderBody()
 
     <!-- Required Js -->
-    <!-- Apex Chart -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <!-- custom-chart js -->
-    <script src="~/assets/Admin/assets/js/vendor-all.min.js"></script>
-    <script src="~/assets/Admin/assets/js/plugins/bootstrap.min.js"></script>
-    <script src="~/assets/Admin/assets/js/pcoded.min.js"></script>
-
+    <script src="~/assets/admin/assets/js/vendor-all.min.js"></script>
+    <script src="~/assets/admin/assets/js/plugins/bootstrap.min.js"></script>
+    <script src="~/assets/admin/assets/js/pcoded.min.js"></script>
 
     <!-- Sweet Alert -->
-    <script src="~/assets/Admin/assets/js/SweetAlert/sweetalert.js"></script>
+    <script src="~/assets/admin/assets/js/SweetAlert/sweetalert.js"></script>
     <!-- Data Table -->
-    <script src="~/assets/Admin/assets/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/admin/assets/js/jquery.dataTables.min.js"></script>
     <!--My script function-->
-    <script src="~/assets/Admin/assets/js/Function.js"></script>
+    <script src="~/assets/admin/assets/js/Function.js"></script>
 
+    @RenderSection("scripts", required: false)
 </body>
 </html>
