@@ -1,0 +1,184 @@
+﻿
+@{
+    ViewBag.Title = "_Layout_QuyThanh";
+}
+
+<html lang="en" class="">
+<head>
+    <title>Garden Shop</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded">
+    <!-- Favicon icon -->
+    <link rel="icon" href="~/assets/Admin/assets/images/favicon.ico" type="image/x-icon">
+    <!-- vendor css -->
+    <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <link href="~/assets/Admin/assets/css/style.css" rel="stylesheet" />
+    <link href="~/assets/Admin/assets/css/plugins/animate.min.css" rel="stylesheet" />
+   
+
+@*    @Scripts.Render("~/bundles/jquery")
+*@
+</head>
+
+<body class="">
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
+        </div>
+    </div>
+    <nav class="pcoded-navbar">
+        <div class="navbar-wrapper  ">
+            <div class="navbar-content scroll-div ">
+                <div class="">
+                    <div class="main-menu-header">
+                        <img src="@Url.Content("~/assets/Admin/assets/images/default-avatar.png")" alt="User-Profile-Image" class="img-radius">
+                        <div class="user-details">
+                            <span>Admin</span>
+                            <div id="more-details">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="nav pcoded-inner-navbar">
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Quản lý</label>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-user"></i></span>
+                            <span class="pcoded-mtext">Staff</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item ">
+                        <a href="#" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-layout"></i></span>
+                            <span class="pcoded-mtext">Categogy</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-wind"></i></span>
+                            <span class="pcoded-mtext">Product</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Hàng hoá</label>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://tancool.net/quan-ly-ban-hang" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-target"></i></span> <span class="pcoded-mtext">Bán hàng</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a href="https://tancool.net/doanh-thu" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-clipboard"></i></span> 
+                        <span class="pcoded-mtext">Doanh thu</span></a></li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index","import_inventory")" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-package"></i></span>
+                            <span class="pcoded-mtext">Tồn kho</span>
+                        </a>
+                    </li>                    
+                    <li class="nav-item"><a href="https://tancool.net/don-hang" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-inbox"></i></span> <span class="pcoded-mtext">Đơn hàng</span></a>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption"><label>Tín năng</label></li>
+                    <li class="nav-item"><a href="https://tancool.net/doi-tra" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-repeat"></i></span> <span class="pcoded-mtext">Đổi trả</span></a>
+                    </li>
+                    <li class="nav-item"><a href="https://tancool.net/thu-chi" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-percent"></i></span> <span class="pcoded-mtext">Thu chi</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="navbar pcoded-header navbar-expand-lg navbar-light header-dark">
+        <div class="m-header">
+            <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+            <a href="#!" class="b-brand">
+                <!-- ========   change your logo hear   ============ -->
+                <img src="~/assets/Admin/assets/images/logo.png" alt="" class="logo">
+                <img src="~/assets/Admin/assets/images/logo-icon.png" alt="" class="logo-thumb">
+            </a>
+            <a href="#!" class="mob-toggler">
+                <i class="feather icon-more-vertical"></i>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <div class="dropdown drp-user">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                            <img src="@Url.Content("~/assets/Admin/assets/images/default-avatar.png")" alt="User-Profile-Image" class="img-radius mr-2" style="width: 2.5vw;">
+                            <span class="mr-3">Admin</span>
+                        </a>
+                        <a href="javascript:document.getElementById('logoutForm').submit()" title="Log out" class="dud-logout"> <i class="feather icon-log-out"></i></a>
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                        }
+                        <div class="dropdown-menu dropdown-menu-right profile-notification">
+                            <ul class="pro-body">
+                                <li>
+                                    <a href="https://tancool.net/thong-tin-ca-nhan" class="dropdown-item">
+                                        <i class="feather icon-user"></i>
+                                        Thông tin cá nhân
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://tancool.net/thay-doi-mat-khau" class="dropdown-item">
+                                        <i class="feather icon-lock"></i>
+                                        Đổi mật khẩu
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    @if (Session["notification"] != null)
+    {
+        <button type="button" hidden class="btn btn-lg btn-block btn-outline-success mb-2" id="type-success" onclick="test()">Success</button>
+        <script>
+            function test() {
+                sweetAlert
+                    ({
+                        title: "Thêm mới thành công !",
+                        type: "success"
+                    })
+            }
+            window.onload = function () {
+                document.getElementById('type-success').click();
+            }
+        </script>
+        Session["notification"] = null;
+    }
+    @RenderBody()
+
+    <!-- Required Js -->
+    <!-- Apex Chart -->
+    <!-- custom-chart js -->
+    <script src="~/assets/Admin/assets/js/vendor-all.min.js"></script>
+    <script src="~/assets/Admin/assets/js/plugins/bootstrap.min.js"></script>
+    <script src="~/assets/Admin/assets/js/pcoded.min.js"></script>
+
+
+    <!-- Sweet Alert -->
+    <script src="~/assets/Admin/assets/js/SweetAlert/sweetalert.js"></script>
+    <!-- Data Table -->
+    <script src="~/assets/Admin/assets/js/jquery.dataTables.min.js"></script>
+    <!--My script function-->
+    <script src="~/assets/Admin/assets/js/Function.js"></script>
+
+</body>
+</html>
