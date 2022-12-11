@@ -1,5 +1,4 @@
 ﻿using GardenShopOnline.Models;
-using GardenShopOnline.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
 
