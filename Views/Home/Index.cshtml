@@ -1422,8 +1422,14 @@
         $.ajax({
             url: $(this).attr('href'),
         }).done(function () {
-            // Reload page after adding product
-            location.reload();
+
+            // Update mini cart quantity
+            $('.minicart-wrap .quantity').text(function (i, t) {
+                return Number(t) + 1;
+            });
+
+            // Refresh mini cart
+            getMiniCart();
         });
     });
 </script>
