@@ -544,7 +544,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ShoppingCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\admin\assets\fonts\fa-brands-400.eot" />
@@ -611,6 +610,7 @@
     <Content Include="Views\Sweet\Alert.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\ProductList.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

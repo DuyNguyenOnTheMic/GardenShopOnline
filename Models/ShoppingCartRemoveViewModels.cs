@@ -1,4 +1,4 @@
-﻿namespace GardenShopOnline.ViewModels
+﻿namespace GardenShopOnline.Models
 {
     public class ShoppingCartRemoveViewModels
     {

@@ -1,7 +1,6 @@
-﻿using GardenShopOnline.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace GardenShopOnline.ViewModels
+namespace GardenShopOnline.Models
 {
     public class ShoppingCartViewModels
     {
