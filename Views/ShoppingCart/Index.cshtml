@@ -27,7 +27,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="alert alert-primary" id="update-message" role="alert"></div>
+                    <div class="alert alert-success d-none" id="update-message" role="alert"></div>
                     <form action="javascript:void(0)">
                         <div class="table-content table-responsive">
                             <table class="table">
@@ -130,7 +130,7 @@
                                 $('#item-count-' + data.DeleteId).find('input').val(data.ItemCount);
                             }
                             $('.cart-total').text(data.CartTotal);
-                            $('#update-message').text(data.Message);
+                            $('#update-message').removeClass('d-none').text(data.Message);
                         });
                 }
             });
