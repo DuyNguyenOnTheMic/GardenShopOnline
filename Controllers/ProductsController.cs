@@ -89,6 +89,20 @@ namespace GardenShopOnline.Controllers
             db.SaveChanges();
             return Json("Delete_Product", JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult FindProduct(int Product_id)
+        {
+            Product product = db.Products.Find(Product_id);
+            var emp = new Product();
+            emp.ID = Product_id;
+            emp.Name = product.Name;
+            emp.Quantity = product.Quantity;
+            emp.Price = product.Price;
+            emp.CategoryID = product.CategoryID;
+            emp.Image = product.Image;
+            emp.Description = product.Description;
+            return Json(emp);
+        }
 
         protected override void Dispose(bool disposing)
         {

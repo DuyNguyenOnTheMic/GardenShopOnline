@@ -30,6 +30,15 @@ $(document).ready(function () {
         }
         form.classList.add('was-validated');
     })
+        $('#submit_edit_product').on('click', function () {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            } else {
+                Update_Product();
+            }
+            form.classList.add('was-validated');
+        })
        
     }, false);
 })
@@ -114,7 +123,7 @@ function EditStatus(id) {
 }
 
 //-----------------------Định dạng giá-------------------------------------
-$('#product-price-sold').keydown(function (e) {
+$('#product-price').keydown(function (e) {
     setTimeout(() => {
         let parts = $(this).val().split(".");
         let v = parts[0].replace(/\D/g, ""),
@@ -127,7 +136,8 @@ $('#product-price-sold').keydown(function (e) {
         $(this).val(n);
     })
 })
-$('#product-price-buy').keydown(function (e) {
+
+$('#edit_product_price').keydown(function (e) {
     setTimeout(() => {
         let parts = $(this).val().split(".");
         let v = parts[0].replace(/\D/g, ""),
@@ -140,32 +150,7 @@ $('#product-price-buy').keydown(function (e) {
         $(this).val(n);
     })
 })
-$('#edit_sell_price').keydown(function (e) {
-    setTimeout(() => {
-        let parts = $(this).val().split(".");
-        let v = parts[0].replace(/\D/g, ""),
-            dec = parts[1]
-        let calc_num = Number((dec !== undefined ? v + "." + dec : v));
-        // use this for numeric calculations
-        // console.log('number for calculations: ', calc_num);
-        let n = new Intl.NumberFormat('en-EN').format(v);
-        n = dec !== undefined ? n + "." + dec : n;
-        $(this).val(n);
-    })
-})
-$('#edit_purchase_price').keydown(function (e) {
-    setTimeout(() => {
-        let parts = $(this).val().split(".");
-        let v = parts[0].replace(/\D/g, ""),
-            dec = parts[1]
-        let calc_num = Number((dec !== undefined ? v + "." + dec : v));
-        // use this for numeric calculations
-        // console.log('number for calculations: ', calc_num);
-        let n = new Intl.NumberFormat('en-EN').format(v);
-        n = dec !== undefined ? n + "." + dec : n;
-        $(this).val(n);
-    })
-})
+
 
 
 
@@ -286,4 +271,49 @@ function GetList(group_id, category_id) {
         console.log(errorThrown)
         alert("Something Went Wrong, Try Later");
     });
+}
+//----------------------LOAD FORM EDIT PRODUCT---------------------------------------
+
+$('#URLFindProduct')
+    .keypress(function () {
+        URLFindProduct = $(this).val();
+    })
+    .keypress();
+
+function GetProduct(ele, id) {
+    row = $(ele).closest('tr');
+    $.ajax({
+        type: 'POST',
+        url: URLFindProduct,
+        data: { "Product_id": id },
+        success: function (response) {
+            $('#edit_id').val(response.ID);
+            $('#edit_name').val(response.Name);
+            $('#edit_quantity').val(response.Quantity);
+            $('#edit_product_price').val(response.Price);
+            $('textarea#edit_description').html(response.Description);
+            document.images['edit_output'].src = response.Image.replace(/~/g, '');
+            var category_id = response.CategoryID;
+           
+            $.ajax({
+                type: "GET",
+                url: URLgetCategory,
+                data: "{}",
+                success: function (data) {
+                    var s = '<option value="" disabled="disabled">Chọn danh mục</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        if (category_id == data[i].categoryID) {
+                            s += '<option value="' + data[i].categoryID + '"  selected="selected">' + data[i].categoryName + '</option>';
+                        } else {
+                            s += '<option value="' + data[i].categoryID + '" >' + data[i].categoryName + '</option>';
+
+                        }
+                    }
+                    $("#edit_Category").html(s);
+                }
+            });
+            $('#EditProduct .close').css('display', 'none');
+            $('#EditProduct').modal('show');
+        }
+    })
 }
