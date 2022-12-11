@@ -105,7 +105,7 @@
                     <form class="needs-validation" method="post" action="@Url.Action("Create_Product", "products")" novalidate>
                         <div class="modal-content">
                             <div class="modal-header bg-primary">
-                                <h5 class="modal-title" id="AddProductLabel">Thêm mới sản phẩm</h5>
+                                <h5 class="modal-title" id="AddProductLabel">Add new products</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             </div>
 
@@ -144,7 +144,7 @@
                                                 Quantity <span class="text-danger">*</span>
                                             </label>
                                             <div class="position-relative">
-                                                <input type="text" placeholder="Enter product quantity... " id="add_quantity" class="form-control" name="quantity" pattern="\S+.*" required>
+                                                <input type="text" placeholder="Enter product quantity... " id="add_quantity" class="form-control " name="quantity" pattern="\S+.*" required>
                                                 <div class="invalid-feedback">
                                                     Please enter product quantity !
                                                 </div>
@@ -176,8 +176,27 @@
                                         </div>
                                     </div>
 
-
-                                </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>
+                                                Image <span class="text-danger">(*)</span>
+                                            </label>
+                                            <div class="position-relative">
+                                                <img width="100" height="100" id="output" class="text-center" />
+                                                <input type="file" required="required" name="file" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile(event)" />
+                                                <div class="invalid-feedback">
+                                                    Please choose an image for the product!
+                                                </div>
+                                            </div>
+                                            <script>
+                                                var loadFile = function (event) {
+                                                    var image = document.getElementById('output');
+                                                    image.src = URL.createObjectURL(event.target.files[0]);
+                                                };
+                                            </script>
+                                        </div>
+                                        </div>
+                                    </div>
 
 
                             </div>
