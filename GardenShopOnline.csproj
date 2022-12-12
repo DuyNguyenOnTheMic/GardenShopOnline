@@ -396,6 +396,7 @@
     <Content Include="assets\customer\css\Pe-icon-7-stroke.css" />
     <Content Include="assets\customer\css\style.css" />
     <Content Include="assets\customer\css\swiper-bundle.min.css" />
+    <Content Include="assets\customer\css\toastr.min.css" />
     <Content Include="assets\customer\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\customer\fonts\Pe-icon-7-stroke.svg" />
     <Content Include="assets\customer\images\about\icon\1.png" />
@@ -503,6 +504,7 @@
     <Content Include="assets\customer\js\vendor\jquery-migrate-3.3.2.min.js" />
     <Content Include="assets\customer\js\vendor\jquery.waypoints.js" />
     <Content Include="assets\customer\js\vendor\modernizr-3.11.2.min.js" />
+    <Content Include="assets\customer\js\vendor\toastr.min.js" />
     <Content Include="assets\images\sen-da-kim-cuong.jpg" />
     <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
     <Content Include="Content\sweetalert\docs.css" />
