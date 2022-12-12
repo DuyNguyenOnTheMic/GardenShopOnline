@@ -139,7 +139,7 @@ namespace GardenShopOnline.Models
 
         public int CreateOrder(CustomerOrder order)
         {
-            decimal? orderTotal = 0;
+            decimal orderTotal = 0;
 
             var cartItems = GetCartItems();
             // Iterate over the items in the cart, 
