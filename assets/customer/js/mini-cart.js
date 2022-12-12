@@ -19,7 +19,7 @@ $(function () {
 
                 console.log($('#tblCart tbody tr').length);
                 if ($('#tblCart tbody tr').length) {
-
+                    $('.cart-area').load(location.href + ' .cart-area > *');
                 }
             });
         }
