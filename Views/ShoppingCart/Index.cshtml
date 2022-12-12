@@ -61,12 +61,12 @@
                                             <td class="product-name"><a href="#">@item.Product.Name</a></td>
                                             <td class="product-price"><span class="amount">@item.Product.Price.ToString("N0") ₫</span></td>
                                             <td class="quantity" id="item-count-@item.RecordID">
-                                                <div class="cart-plus-minus" data-id="@item.RecordID">
+                                                <div class="cart-plus-minus" data-id="@item.RecordID" data-productid="@item.ProductID">
                                                     <input class="cart-plus-minus-box" value="@item.Count" type="text">
                                                     <div class="dec qtybutton">
                                                         <i class="fa fa-minus"></i>
                                                     </div>
-                                                    <div class="inc qtybutton" data-id="@item.Product.ID">
+                                                    <div class="inc qtybutton">
                                                         <i class="fa fa-plus"></i>
                                                     </div>
                                                 </div>
@@ -136,11 +136,10 @@
 
             $('.quantity .inc').click(function () {
                 // Get the id from the link
-                var recordToAdd = $(this).data('id');
-                alert(recordToAdd);
+                var recordToAdd = $(this).parent().attr('data-productid');
                 if (recordToAdd != '') {
                     // Perform the ajax post
-                    $.post('/ShoppingCart/AddToCart', { 'id': recordToAdd }, function (data) {
+                    $.get('/ShoppingCart/AddToCart', { 'id': recordToAdd }, function (data) {
                         // Successful requests get here
                         // Update the page elements
                         $('.cart-total').text(numberWithDots(data.CartTotal) + ' ₫');
