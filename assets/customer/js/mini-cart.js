@@ -17,11 +17,10 @@ function getMiniCart() {
         var recordToDelete = $(this).attr('data-id');
         if (recordToDelete != '') {
             // Perform the ajax post
-            $.post('/ShoppingCart/RemoveProduct', { 'id': recordToDelete },
-                function (data) {
-                    $('#miniRow-' + data.DeleteId).fadeOut('slow');
-                    $('.minicart-item_total .ammount').text(data.CartTotal);
-                });
+            $.post('/ShoppingCart/RemoveProduct', { 'id': recordToDelete }, function (data) {
+                $('#miniRow-' + data.DeleteId).fadeOut('slow');
+                $('.minicart-item_total .ammount').text(data.CartTotal);
+            });
         }
     });
 }
