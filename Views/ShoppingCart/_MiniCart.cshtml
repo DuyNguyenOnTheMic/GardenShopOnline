@@ -3,8 +3,8 @@
 <ul class="minicart-list">
     @foreach (var item in Model.CartItems)
     {
-        <li class="minicart-product">
-            <a class="product-item_remove" href="#">
+        <li class="minicart-product" id="miniRow-@item.RecordID">
+            <a class="product-item_remove" href="#" data-id="@item.RecordID">
                 <i class="pe-7s-close" data-tippy="Remove"
                    data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50"
                    data-tippy-arrow="true" data-tippy-theme="sharpborder"></i>
