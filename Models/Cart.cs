@@ -16,8 +16,8 @@ namespace GardenShopOnline.Models
     {
         public int RecordID { get; set; }
         public string ID { get; set; }
-        public Nullable<int> ProductID { get; set; }
-        public Nullable<int> Count { get; set; }
+        public int ProductID { get; set; }
+        public int Count { get; set; }
     
         public virtual Product Product { get; set; }
     }
