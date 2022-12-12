@@ -147,7 +147,7 @@
                         } else {
                             $('#item-count-' + data.DecreaseId).find('input').val(data.ItemCount);
                         }
-                        $('.cart-total').text(data.CartTotal);
+                        $('.cart-total').text(numberWithDots(data.CartTotal) + ' ₫');
                         refreshCount();
                     });
                 }
