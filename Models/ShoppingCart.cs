@@ -119,7 +119,7 @@ namespace GardenShopOnline.Models
             // Get the count of each item in the cart and sum them up
             int? count = (from cartItems in db.Carts
                           where cartItems.ID == ShoppingCartId
-                          select cartItems.Count).Sum();
+                          select (int?)cartItems.Count).Sum();
             // Return 0 if all entries are null
             return count ?? 0;
         }
