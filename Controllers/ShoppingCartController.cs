@@ -53,6 +53,9 @@ namespace GardenShopOnline.Controllers
 
             cart.AddToCart(addedproduct);
 
+            // update session cart Count
+            Session["CartCount"] = (int)Session["CartCount"] + 1;
+
             // Go back to the main store page for more shopping
             return RedirectToAction("Index");
         }
@@ -71,6 +74,9 @@ namespace GardenShopOnline.Controllers
 
             // Remove from cart
             int itemCount = cart.DecreaseQuantity(id);
+
+            // update session cart Count
+            Session["CartCount"] = (int)Session["CartCount"] - 1;
 
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModels
@@ -98,6 +104,8 @@ namespace GardenShopOnline.Controllers
 
             // Remove from cart
             int itemCount = cart.RemoveProduct(id);
+
+            Session["CartCount"] = cart.GetCount();
 
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModels

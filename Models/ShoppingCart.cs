@@ -89,6 +89,7 @@ namespace GardenShopOnline.Models
 
             if (cartItem != null)
             {
+                itemCount = cartItem.Count();
                 db.Carts.RemoveRange(cartItem);
                 // Save changes
                 db.SaveChanges();
@@ -187,6 +188,7 @@ namespace GardenShopOnline.Models
                     // Send tempCartId back to client as a cookie
                     context.Session[CartSessionKey] = tempCartId.ToString();
                 }
+                context.Session["CartCount"] = 0;
             }
             return context.Session[CartSessionKey].ToString();
         }
