@@ -131,7 +131,7 @@ namespace GardenShopOnline.Models
             // sum all product price totals to get the cart total
             decimal? total = (from cartItems in db.Carts
                               where cartItems.ID == ShoppingCartId
-                              select cartItems.Count *
+                              select (int?)cartItems.Count *
                               cartItems.Product.Price).Sum();
 
             return total ?? decimal.Zero;
