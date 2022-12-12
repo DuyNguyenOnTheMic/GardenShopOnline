@@ -9,6 +9,7 @@ namespace GardenShopOnline.Controllers
         readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
         public ActionResult Index()
         {
+            ShoppingCart.GetCart(HttpContext);
             return View(db.Products.ToList());
         }
     }
