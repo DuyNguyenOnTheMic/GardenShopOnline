@@ -19,8 +19,12 @@ function getMiniCart() {
             // Perform the ajax post
             $.post('/ShoppingCart/RemoveProduct', { 'id': recordToDelete }, function (data) {
                 $('#miniRow-' + data.DeleteId).fadeOut('slow');
-                $('.minicart-item_total .ammount').text(data.CartTotal);
+                $('.minicart-item_total .ammount').text(numberWithDots(data.CartTotal) + ' ₫');
             });
         }
     });
+}
+
+function numberWithDots(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
