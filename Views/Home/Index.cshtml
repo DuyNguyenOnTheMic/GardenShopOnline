@@ -1421,12 +1421,6 @@
         $.ajax({
             url: $(this).attr('href'),
         }).done(function () {
-
-            // Update mini cart quantity
-            $('.minicart-wrap .quantity').text(function (i, t) {
-                return Number(t) + 1;
-            });
-
             // Refresh mini cart
             getMiniCart();
         });

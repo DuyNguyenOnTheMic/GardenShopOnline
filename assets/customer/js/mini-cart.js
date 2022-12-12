@@ -10,6 +10,9 @@ function getMiniCart() {
     $.get(url, function (data) {
         miniCartList.html(data);
     });
+    alert('hehe');
+    // refresh cart count
+    $(".cart-count").load(location.href + " .cart-count > *");
 
     $(document).off('click', '.product-item_remove').on('click', '.product-item_remove', function (e) {
         e.preventDefault();
