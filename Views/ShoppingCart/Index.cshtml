@@ -129,7 +129,7 @@
                             } else {
                                 $('#item-count-' + data.DeleteId).find('input').val(data.ItemCount);
                             }
-                            $('.cart-total').text(data.CartTotal);
+                            $('.cart-total').text(numberWithDots(data.CartTotal) + ' ₫');
                             $('#update-message').removeClass('d-none').text(data.Message);
                         });
                 }
