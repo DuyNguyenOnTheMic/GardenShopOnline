@@ -30,6 +30,15 @@ $(document).ready(function () {
         }
         form.classList.add('was-validated');
     })
+        $('#submit_edit_product').on('click', function () {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            } else {
+                Update_Product();
+            }
+            form.classList.add('was-validated');
+        })
        
     }, false);
 })
@@ -114,7 +123,7 @@ function EditStatus(id) {
 }
 
 //-----------------------Định dạng giá-------------------------------------
-$('#product-price-sold').keydown(function (e) {
+$('#product-price').keydown(function (e) {
     setTimeout(() => {
         let parts = $(this).val().split(".");
         let v = parts[0].replace(/\D/g, ""),
@@ -127,7 +136,8 @@ $('#product-price-sold').keydown(function (e) {
         $(this).val(n);
     })
 })
-$('#product-price-buy').keydown(function (e) {
+
+$('#edit_product_price').keydown(function (e) {
     setTimeout(() => {
         let parts = $(this).val().split(".");
         let v = parts[0].replace(/\D/g, ""),
@@ -140,32 +150,7 @@ $('#product-price-buy').keydown(function (e) {
         $(this).val(n);
     })
 })
-$('#edit_sell_price').keydown(function (e) {
-    setTimeout(() => {
-        let parts = $(this).val().split(".");
-        let v = parts[0].replace(/\D/g, ""),
-            dec = parts[1]
-        let calc_num = Number((dec !== undefined ? v + "." + dec : v));
-        // use this for numeric calculations
-        // console.log('number for calculations: ', calc_num);
-        let n = new Intl.NumberFormat('en-EN').format(v);
-        n = dec !== undefined ? n + "." + dec : n;
-        $(this).val(n);
-    })
-})
-$('#edit_purchase_price').keydown(function (e) {
-    setTimeout(() => {
-        let parts = $(this).val().split(".");
-        let v = parts[0].replace(/\D/g, ""),
-            dec = parts[1]
-        let calc_num = Number((dec !== undefined ? v + "." + dec : v));
-        // use this for numeric calculations
-        // console.log('number for calculations: ', calc_num);
-        let n = new Intl.NumberFormat('en-EN').format(v);
-        n = dec !== undefined ? n + "." + dec : n;
-        $(this).val(n);
-    })
-})
+
 
 
 
@@ -224,3 +209,168 @@ function Update() {
         }
     });
 }
+//------------ Load dropdown form add product----------------------------------
+
+var URLgetCategory = "";
+$('#URLgetCategory')
+    .keypress(function () {
+        URLgetCategory = $(this).val();
+    })
+    .keypress();
+$.ajax({
+    type: "GET",
+    url: URLgetCategory,
+    data: "{}",
+    success: function (data) {
+        var s = '<option value="" disabled="disabled" selected="selected">Select product category</option>';
+        for (var i = 0; i < data.length; i++) {
+            s += '<option value="' + data[i].categoryID + '">' + data[i].categoryName + '</option>';
+        }
+        $("#CategoryDropdown").html(s);
+    }
+});
+$.ajax({
+    type: "GET",
+    url: URLgetCategory,
+    data: "{}",
+    success: function (data) {
+        var s = '<option value="-1" >Select product category</option>';
+        for (var i = 0; i < data.length; i++) {
+            s += '<option value="' + data[i].categoryID + '">' + data[i].categoryName + '</option>';
+        }
+        $("#filter_Category").html(s);
+    }
+});
+
+//----------------------FILTER PRODUCT------------------------------------------------
+$('#URLProductList')
+    .keypress(function () {
+        URLProductList = $(this).val();
+    })
+    .keypress();
+
+
+$("#filter_Category").change(function () {
+    var group_id = $("#filter_GroupProduct").val();
+    var category_id = $("#filter_Category").val();
+    GetList(group_id, category_id)
+});
+
+function GetList(group_id, category_id) {
+    $.ajax({
+        url: URLProductList,
+        data: {
+            category_id: category_id,
+        }
+    }).done(function (result) {
+        $('#dataContainer').html(result);
+        $('#example').DataTable()
+
+    }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        console.log(textStatus)
+        console.log(errorThrown)
+        alert("Something Went Wrong, Try Later");
+    });
+}
+//----------------------LOAD FORM EDIT PRODUCT---------------------------------------
+
+$('#URLFindProduct')
+    .keypress(function () {
+        URLFindProduct = $(this).val();
+    })
+    .keypress();
+
+function GetProduct(ele, id) {
+    row = $(ele).closest('tr');
+    $.ajax({
+        type: 'POST',
+        url: URLFindProduct,
+        data: { "Product_id": id },
+        success: function (response) {
+            $('#edit_id').val(response.ID);
+            $('#edit_name').val(response.Name);
+            $('#edit_quantity').val(response.Quantity);
+            $('#edit_product_price').val(response.Price);
+            $('textarea#edit_description').html(response.Description);
+            document.images['edit_output'].src = response.Image.replace(/~/g, '');
+            var category_id = response.CategoryID;
+           
+            $.ajax({
+                type: "GET",
+                url: URLgetCategory,
+                data: "{}",
+                success: function (data) {
+                    var s = '<option value="" disabled="disabled">Chọn danh mục</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        if (category_id == data[i].categoryID) {
+                            s += '<option value="' + data[i].categoryID + '"  selected="selected">' + data[i].categoryName + '</option>';
+                        } else {
+                            s += '<option value="' + data[i].categoryID + '" >' + data[i].categoryName + '</option>';
+
+                        }
+                    }
+                    $("#edit_Category").html(s);
+                }
+            });
+            $('#EditProduct .close').css('display', 'none');
+            $('#EditProduct').modal('show');
+        }
+    })
+}
+//-------------------------------UPDATE PRODUCT--------------------------------
+/*
+$('#URLUpdateProduct')
+    .keypress(function () {
+        URLUpdateProduct = $(this).val();
+    })
+    .keypress();
+
+function Update_Product() {
+    var table = $('#example').DataTable();
+    var product = {};
+    product.ID = $('#edit_id').val();
+    product.name = $('#edit_name').val();
+    product.Quantity = $('#edit_quantity').val();
+    product.Description = $('#edit_description').val();
+    product.Price = Number($('#edit_product_price').val().replace(/,/g, ''));
+    product.CategoryID = $('#edit_Category').val();
+
+    var file = $('#edit_file').val();
+    console.log(file);
+    $.ajax({
+        url: URLUpdateProduct,
+        type: "Post",
+        data: {
+            Products : JSON.stringify(product),
+            file : file,
+        },
+        contentType: "application/json; charset=UTF-8",
+        dataType: "json",
+        success: function (response) {
+            var group_id = $("#filter_GroupProduct").val();
+            var category_id = $("#filter_Category").val();
+            $.ajax({
+                url: URLProductList,
+                data: {
+                    group_id: group_id,
+                    category_id: category_id,
+                }
+            }).done(function (result) {
+                $('#dataContainer').html(result);
+                $('#example').DataTable()
+                $('#EditProduct .close').css('display', 'none');
+                $('#EditProduct').modal('hide');
+
+                sweetAlert
+                    ({
+                        title: "Cập nhật thành công !",
+                        type: "success"
+                    })
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(textStatus)
+                console.log(errorThrown)
+                alert("Something Went Wrong, Try Later");
+            });
+        }
+    });
+}*/

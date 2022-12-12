@@ -502,6 +502,7 @@
     <Content Include="assets\customer\js\vendor\jquery-migrate-3.3.2.min.js" />
     <Content Include="assets\customer\js\vendor\jquery.waypoints.js" />
     <Content Include="assets\customer\js\vendor\modernizr-3.11.2.min.js" />
+    <Content Include="assets\images\sen-da-kim-cuong.jpg" />
     <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
     <Content Include="Content\sweetalert\docs.css" />
     <Content Include="Content\sweetalert\sweet-alert.css" />
