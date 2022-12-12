@@ -56,8 +56,11 @@ namespace GardenShopOnline.Controllers
             // update session cart Count
             Session["CartCount"] = cart.GetCount();
 
-            // Go back to the main store page for more shopping
-            return RedirectToAction("Index");
+            var results = new ShoppingCartRemoveViewModels
+            {
+                CartTotal = cart.GetTotal()
+            };
+            return Json(results, JsonRequestBehavior.AllowGet);
         }
 
         //

@@ -66,7 +66,7 @@
                                                     <div class="dec qtybutton">
                                                         <i class="fa fa-minus"></i>
                                                     </div>
-                                                    <div class="inc qtybutton">
+                                                    <div class="inc qtybutton" data-id="@item.Product.ID">
                                                         <i class="fa fa-plus"></i>
                                                     </div>
                                                 </div>
@@ -130,6 +130,21 @@
                         }
                         $('.cart-total').text(numberWithDots(data.CartTotal) + ' ₫');
                         $('#update-message').removeClass('d-none').text(data.Message);
+                    });
+                }
+            });
+
+            $('.quantity .inc').click(function () {
+                // Get the id from the link
+                var recordToAdd = $(this).data('id');
+                alert(recordToAdd);
+                if (recordToAdd != '') {
+                    // Perform the ajax post
+                    $.post('/ShoppingCart/AddToCart', { 'id': recordToAdd }, function (data) {
+                        // Successful requests get here
+                        // Update the page elements
+                        $('.cart-total').text(numberWithDots(data.CartTotal) + ' ₫');
+                        refreshCount();
                     });
                 }
             });

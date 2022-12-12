@@ -1420,6 +1420,7 @@
         // Call action to add product to cart
         $.ajax({
             url: $(this).attr('href'),
+            type: 'GET'
         }).done(function () {
             // Refresh mini cart
             getMiniCart();
