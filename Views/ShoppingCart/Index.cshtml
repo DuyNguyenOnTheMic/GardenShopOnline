@@ -120,18 +120,17 @@
                 var recordToDelete = $(this).attr('data-id');
                 if (recordToDelete != '') {
                     // Perform the ajax post
-                    $.post('/ShoppingCart/RemoveProduct', { 'id': recordToDelete },
-                        function (data) {
-                            // Successful requests get here
-                            // Update the page elements
-                            if (data.ItemCount == 0) {
-                                $('#row-' + data.DeleteId).fadeOut('slow');
-                            } else {
-                                $('#item-count-' + data.DeleteId).find('input').val(data.ItemCount);
-                            }
-                            $('.cart-total').text(numberWithDots(data.CartTotal) + ' ₫');
-                            $('#update-message').removeClass('d-none').text(data.Message);
-                        });
+                    $.post('/ShoppingCart/RemoveProduct', { 'id': recordToDelete }, function (data) {
+                        // Successful requests get here
+                        // Update the page elements
+                        if (data.ItemCount == 0) {
+                            $('#row-' + data.DeleteId).fadeOut('slow');
+                        } else {
+                            $('#item-count-' + data.DeleteId).find('input').val(data.ItemCount);
+                        }
+                        $('.cart-total').text(numberWithDots(data.CartTotal) + ' ₫');
+                        $('#update-message').removeClass('d-none').text(data.Message);
+                    });
                 }
             });
 
@@ -140,17 +139,16 @@
                 var recordToDecrease = $(this).parent().attr('data-id');
                 if (recordToDecrease != '') {
                     // Perform the ajax post
-                    $.post('/ShoppingCart/DecreaseQuantity', { 'id': recordToDecrease },
-                        function (data) {
-                            // Successful requests get here
-                            // Update the page elements
-                            if (data.ItemCount == 0) {
-                                $('#row-' + data.DecreaseId).fadeOut('slow');
-                            } else {
-                                $('#item-count-' + data.DecreaseId).find('input').val(data.ItemCount);
-                            }
-                            $('.cart-total').text(data.CartTotal);
-                        });
+                    $.post('/ShoppingCart/DecreaseQuantity', { 'id': recordToDecrease }, function (data) {
+                        // Successful requests get here
+                        // Update the page elements
+                        if (data.ItemCount == 0) {
+                            $('#row-' + data.DecreaseId).fadeOut('slow');
+                        } else {
+                            $('#item-count-' + data.DecreaseId).find('input').val(data.ItemCount);
+                        }
+                        $('.cart-total').text(data.CartTotal);
+                    });
                 }
             });
         });
