@@ -26,11 +26,12 @@ namespace GardenShopOnline.Models
         public int CategoryID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public decimal Price { get; set; }
         public string Image { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<System.DateTime> DateUpdate { get; set; }
         public Nullable<int> Status { get; set; }
+        public int Quantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }

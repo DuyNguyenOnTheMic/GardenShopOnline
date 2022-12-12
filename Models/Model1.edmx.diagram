@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="63805cad890947afadac44af8c034e6e" Name="Diagram1">
+      <Diagram DiagramId="be632fe425024d989cd35341b2de8a3d" Name="Diagram1">
         <EntityTypeShape EntityType="BonsaiGardenModel.AccCustomer" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.AccManager" Width="1.5" PointX="6" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.Cart" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
@@ -19,11 +19,11 @@
         <AssociationConnector Association="BonsaiGardenModel.FK__Feedback__AccCus__4AB81AF0" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK__CommentPr__AccMa__47DBAE45" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK__Feedback__AccMan__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsaiGardenModel.FK__Cart__ProductID__45F365D3" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsaiGardenModel.FK__Product__Categor__4E88ABD4" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsaiGardenModel.FK__CommentPr__Produ__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__Cart__ProductID__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__Product__Categor__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__CommentPr__Produ__49C3F6B7" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK__OrderDeta__Order__4CA06362" ManuallyRouted="false" />
-        <AssociationConnector Association="BonsaiGardenModel.FK__OrderDeta__Produ__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK__OrderDeta__Produ__45F365D3" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
