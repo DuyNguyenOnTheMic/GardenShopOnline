@@ -62,7 +62,7 @@
                                             <td class="product-price"><span class="amount">@item.Product.Price.ToString("N0") ₫</span></td>
                                             <td class="quantity" id="item-count-@item.RecordID">
                                                 <div class="cart-plus-minus" data-id="@item.RecordID" data-productid="@item.ProductID">
-                                                    <input class="cart-plus-minus-box" value="@item.Count" type="text">
+                                                    <input class="cart-plus-minus-box" readonly value="@item.Count" type="text">
                                                     <div class="dec qtybutton">
                                                         <i class="fa fa-minus"></i>
                                                     </div>
