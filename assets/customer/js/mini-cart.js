@@ -10,9 +10,10 @@ function getMiniCart() {
     $.get(url, function (data) {
         miniCartList.html(data);
     });
-    alert('hehe');
-    // refresh cart count
-    $(".cart-count").load(location.href + " .cart-count > *");
+
+    // Refresh cart count
+    $("#cartCountHead").load(location.href + " #cartCountHead");
+    $("#cartCountStick").load(location.href + " #cartCountStick");
 
     $(document).off('click', '.product-item_remove').on('click', '.product-item_remove', function (e) {
         e.preventDefault();
