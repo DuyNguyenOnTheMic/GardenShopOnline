@@ -16,6 +16,11 @@ $(function () {
 
                 // Refresh cart count
                 refreshCount();
+
+                console.log($('#tblCart tbody tr').length);
+                if ($('#tblCart tbody tr').length) {
+
+                }
             });
         }
     });
