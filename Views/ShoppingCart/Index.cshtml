@@ -55,7 +55,7 @@
                                             </td>
                                             <td class="product-thumbnail">
                                                 <a href="#">
-                                                    <img src="~/assets/customer/images/product/small-size/1-1-112x124.png" alt="Cart Thumbnail">
+                                                    <img src="@Url.Content(item.Product.Image)" alt="Cart Thumbnail">
                                                 </a>
                                             </td>
                                             <td class="product-name"><a href="#">@item.Product.Name</a></td>
@@ -95,8 +95,8 @@
                                 <div class="cart-page-total">
                                     <h2>Cart totals</h2>
                                     <ul>
-                                        <li>Subtotal <span class="cart-total">@Model.CartTotal</span></li>
-                                        <li>Total <span class="cart-total">@Model.CartTotal</span></li>
+                                        <li>Subtotal <span class="cart-total">@Model.CartTotal.ToString("N0") ₫</span></li>
+                                        <li>Total <span class="cart-total">@Model.CartTotal.ToString("N0") ₫</span></li>
                                     </ul>
                                     <a href="#">Proceed to checkout</a>
                                 </div>
