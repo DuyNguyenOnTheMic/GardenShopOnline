@@ -12,8 +12,8 @@ function getMiniCart() {
     });
 
     // Refresh cart count
-    $("#cartCountHead").load(location.href + " #cartCountHead");
-    $("#cartCountStick").load(location.href + " #cartCountStick");
+    $("#cartCountHead").load(location.href + " #cartCountHead > *");
+    $("#cartCountStick").load(location.href + " #cartCountStick > *");
 
     $(document).off('click', '.product-item_remove').on('click', '.product-item_remove', function (e) {
         e.preventDefault();
