@@ -21,7 +21,8 @@ namespace GardenShopOnline
                 "~/assets/customer/js/plugins/tippy.min.js",
                 "~/assets/customer/js/plugins/ion.rangeSlider.min.js",
                 "~/assets/customer/js/plugins/mailchimp-ajax.js",
-                "~/assets/customer/js/plugins/jquery.counterup.js"));
+                "~/assets/customer/js/plugins/jquery.counterup.js",
+                "~/assets/customer/js/vendor/toastr.min.js"));
 
             bundles.Add(new MyStyleBundle("~/Content/customerCss").Include(
                 "~/assets/customer/css/bootstrap.min.css",
@@ -29,7 +30,8 @@ namespace GardenShopOnline
                 "~/assets/customer/css/swiper-bundle.min.css",
                 "~/assets/customer/css/nice-select.css",
                 "~/assets/customer/css/magnific-popup.min.css",
-                "~/assets/customer/css/ion.rangeSlider.min.css"));
+                "~/assets/customer/css/ion.rangeSlider.min.css",
+                "~/assets/customer/css/toastr.min.css"));
 
             BundleTable.EnableOptimizations = true;
         }
