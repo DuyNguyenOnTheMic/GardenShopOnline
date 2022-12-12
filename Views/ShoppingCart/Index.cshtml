@@ -59,7 +59,7 @@
                                                 </a>
                                             </td>
                                             <td class="product-name"><a href="#">@item.Product.Name</a></td>
-                                            <td class="product-price"><span class="amount">@item.Product.Price</span></td>
+                                            <td class="product-price"><span class="amount">@item.Product.Price.ToString("N0") ₫</span></td>
                                             <td class="quantity" id="item-count-@item.RecordID">
                                                 <div class="cart-plus-minus" data-id="@item.RecordID">
                                                     <input class="cart-plus-minus-box" value="@item.Count" type="text">

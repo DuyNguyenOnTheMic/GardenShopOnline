@@ -14,7 +14,7 @@
             </a>
             <div class="product-item_content">
                 <a class="product-item_title" href="single-product-variable.html">@item.Product.Name</a>
-                <span class="product-item_quantity">@item.Count x @item.Product.Price</span>
+                <span class="product-item_quantity">@item.Count x @item.Product.Price.ToString("N0") ₫</span>
             </div>
         </li>
     }
@@ -22,7 +22,7 @@
 
 <div class="minicart-item_total">
     <span>Subtotal</span>
-    <span class="ammount">@Model.CartTotal</span>
+    <span class="ammount">@Model.CartTotal.ToString("N0") ₫</span>
 </div>
 <div class="group-btn_wrap d-grid gap-2">
     <a href="@Url.Action("Index", "ShoppingCart")" class="btn btn-dark">View Cart</a>
