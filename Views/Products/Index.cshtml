@@ -7,8 +7,8 @@
 <input type="text" hidden id="URLgetCategory" value="@Url.Action("getCategory", "Categories")" />
 <input type="text" hidden id="URLProductList" value="@Url.Action("ProductList", "Products")" />
 <input type="text" hidden id="URLFindProduct" value="@Url.Action("FindProduct", "Products")/" />
-
-
+@*<input type="text" hidden id="URLUpdateProduct" value="@Url.Action("UpdateProduct", "Products")" />
+*@
 <section class="pcoded-main-container">
     <div class="pcoded-content">
         <div class="page-header">
@@ -209,10 +209,10 @@
 </div>
 <div id="EditProduct" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditProductLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <form class="needs-validation" method="post" action="@Url.Action("Create_Product", "products")" enctype="multipart/form-data" novalidate>
+        <form class="needs-validation" method="post" action="@Url.Action("UpdateProduct", "Products")" enctype="multipart/form-data" novalidate>
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <h5 class="modal-title" id="EditProductLabel">Add new products</h5>
+                    <h5 class="modal-title" id="EditProductLabel">Edit products</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
 
@@ -248,19 +248,6 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>
-                                    Quantity <span class="text-danger">*</span>
-                                </label>
-                                <div class="position-relative">
-                                    <input type="text" placeholder="Enter product quantity... " id="edit_quantity" class="form-control " name="quantity" pattern="\S+.*" required>
-                                    <div class="invalid-feedback">
-                                        Please enter product quantity !
-                                    </div>
-                                </div> <!---->
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>
                                     Price <span class="text-danger">*</span>
                                 </label>
                                 <div class="position-relative">
@@ -273,6 +260,20 @@
 
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Quantity <span class="text-danger">*</span>
+                                </label>
+                                <div class="position-relative">
+                                    <input type="text" placeholder="Enter product quantity... " id="edit_quantity" class="form-control " name="quantity" pattern="\S+.*" required>
+                                    <div class="invalid-feedback">
+                                        Please enter product quantity !
+                                    </div>
+                                </div> <!---->
+                            </div>
+                        </div>
+
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Description</label>
@@ -288,13 +289,13 @@
                                 <label>
                                     Image <span class="text-danger">(*)</span>
                                 </label>
-                                <div >
+                                <div>
                                     <div class="img-item">
                                         <img id="edit_output" class="img-item-link" />
 
                                     </div>
-                                    <input type="file" name="file" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile(event)" />
-                                    
+                                    <input type="file" name="file" id="edit_file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile(event)" />
+
                                 </div>
                                 <script>
                                     var loadFile = function (event) {
@@ -310,7 +311,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn  btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary" id="submit_edit_product">Save</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </form>

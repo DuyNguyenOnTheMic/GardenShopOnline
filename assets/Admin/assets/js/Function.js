@@ -317,3 +317,60 @@ function GetProduct(ele, id) {
         }
     })
 }
+//-------------------------------UPDATE PRODUCT--------------------------------
+/*
+$('#URLUpdateProduct')
+    .keypress(function () {
+        URLUpdateProduct = $(this).val();
+    })
+    .keypress();
+
+function Update_Product() {
+    var table = $('#example').DataTable();
+    var product = {};
+    product.ID = $('#edit_id').val();
+    product.name = $('#edit_name').val();
+    product.Quantity = $('#edit_quantity').val();
+    product.Description = $('#edit_description').val();
+    product.Price = Number($('#edit_product_price').val().replace(/,/g, ''));
+    product.CategoryID = $('#edit_Category').val();
+
+    var file = $('#edit_file').val();
+    console.log(file);
+    $.ajax({
+        url: URLUpdateProduct,
+        type: "Post",
+        data: {
+            Products : JSON.stringify(product),
+            file : file,
+        },
+        contentType: "application/json; charset=UTF-8",
+        dataType: "json",
+        success: function (response) {
+            var group_id = $("#filter_GroupProduct").val();
+            var category_id = $("#filter_Category").val();
+            $.ajax({
+                url: URLProductList,
+                data: {
+                    group_id: group_id,
+                    category_id: category_id,
+                }
+            }).done(function (result) {
+                $('#dataContainer').html(result);
+                $('#example').DataTable()
+                $('#EditProduct .close').css('display', 'none');
+                $('#EditProduct').modal('hide');
+
+                sweetAlert
+                    ({
+                        title: "Cập nhật thành công !",
+                        type: "success"
+                    })
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(textStatus)
+                console.log(errorThrown)
+                alert("Something Went Wrong, Try Later");
+            });
+        }
+    });
+}*/

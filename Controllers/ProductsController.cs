@@ -103,6 +103,68 @@ namespace GardenShopOnline.Controllers
             emp.Description = product.Description;
             return Json(emp);
         }
+        
+        public ActionResult UpdateProduct(int Product_id, string name_product,
+           int quantity, int CategoryDropdown,
+           string price, string description, HttpPostedFileBase file)
+        {
+            Product product = db.Products.Find(Product_id);
+            Session["imgPath"] = product.Image;
+            product.Name = name_product;
+            product.CategoryID = CategoryDropdown;
+            product.Price = int.Parse(price.Replace(",", ""));
+            product.Quantity = quantity;
+            product.Description = description;
+            product.DateUpdate = DateTime.Now;
+
+            if (file != null)
+            {
+                string filename = Path.GetFileName(file.FileName);
+                string _filename = DateTime.Now.ToString("yymmssfff") + filename;
+
+                string extension = Path.GetExtension(file.FileName);
+
+                string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
+
+                product.Image = "~/assets/images/" + _filename;
+
+                if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
+                {
+                    if (file.ContentLength <= 4000000)
+                    {
+                        db.Entry(product).State = EntityState.Modified;
+                        string oldImgPath = Request.MapPath(Session["imgPath"].ToString());
+
+                        if (db.SaveChanges() > 0)
+                        {
+                            file.SaveAs(path);
+                            if (System.IO.File.Exists(oldImgPath))
+                            {
+                                System.IO.File.Delete(oldImgPath);
+                            }
+                            return RedirectToAction("Index");
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.msg = "Hình ảnh phải lớn hơn hoặc bằng 4MB!";
+                    }
+                }
+                else
+                {
+                    ViewBag.msg = "Định dạng file không hợp lệ!";
+                }
+            }
+            else
+            {
+                product.Image = Session["imgPath"].ToString();            
+            }
+
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+            Session["notification"] = "Cập nhật thành công!";
+            return RedirectToAction("Index");
+        }
 
         protected override void Dispose(bool disposing)
         {
