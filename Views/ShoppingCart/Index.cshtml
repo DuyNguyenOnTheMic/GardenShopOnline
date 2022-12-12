@@ -123,13 +123,10 @@
                     $.post('/ShoppingCart/RemoveProduct', { 'id': recordToDelete }, function (data) {
                         // Successful requests get here
                         // Update the page elements
-                        if (data.ItemCount == 0) {
-                            $('#row-' + data.DeleteId).fadeOut('slow');
-                        } else {
-                            $('#item-count-' + data.DeleteId).find('input').val(data.ItemCount);
-                        }
+                        $('#row-' + data.DeleteId).fadeOut('slow');
                         $('.cart-total').text(numberWithDots(data.CartTotal) + ' ₫');
                         $('#update-message').removeClass('d-none').text(data.Message);
+                        refreshCount();
                     });
                 }
             });
