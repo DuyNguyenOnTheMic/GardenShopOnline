@@ -6,6 +6,7 @@
         public decimal CartTotal { get; set; }
         public int CartCount { get; set; }
         public int ItemCount { get; set; }
+        public int DecreaseId { get; set; }
         public int DeleteId { get; set; }
     }
 }

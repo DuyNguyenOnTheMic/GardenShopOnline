@@ -89,7 +89,7 @@ namespace GardenShopOnline.Models
 
             if (cartItem != null)
             {
-                itemCount = cartItem.Count();
+                itemCount = GetCount();
                 db.Carts.RemoveRange(cartItem);
                 // Save changes
                 db.SaveChanges();

@@ -85,7 +85,7 @@ namespace GardenShopOnline.Controllers
                 CartTotal = cart.GetTotal(),
                 CartCount = cart.GetCount(),
                 ItemCount = itemCount,
-                DeleteId = id
+                DecreaseId = id
             };
             return Json(results);
         }
