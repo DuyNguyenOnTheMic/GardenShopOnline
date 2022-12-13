@@ -34,8 +34,8 @@ namespace GardenShopOnline.Controllers
                 }
                 else
                 {
-                    order.Username = User.Identity.Name;
-                    order.OrderDate = DateTime.Now;
+                    //order.Username = User.Identity.Name;
+                    //order.OrderDate = DateTime.Now;
 
                     //Save Order
                     db.CustomerOrders.Add(order);
