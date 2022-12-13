@@ -292,7 +292,7 @@ function GetProduct(ele, id) {
             $('#edit_quantity').val(response.Quantity);
             $('#edit_product_price').val(response.Price);
             $('textarea#edit_description').html(response.Description);
-            document.images['edit_output'].src = response.Image.replace(/~/g, '');
+            document.images['edit_output'].src = "/assets/images/" + response.Image;
             var category_id = response.CategoryID;
            
             $.ajax({

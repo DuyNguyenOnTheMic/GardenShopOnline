@@ -55,7 +55,7 @@ namespace GardenShopOnline.Controllers
 
             string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
 
-            product.Image = "~/assets/images/" + _filename;
+            product.Image =  _filename;
             if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
             {
                 if (file.ContentLength <= 4000000)
@@ -126,7 +126,7 @@ namespace GardenShopOnline.Controllers
 
                 string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
 
-                product.Image = "~/assets/images/" + _filename;
+                product.Image =  _filename;
 
                 if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
                 {
