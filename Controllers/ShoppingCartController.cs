@@ -130,7 +130,7 @@ namespace GardenShopOnline.Controllers
             var cart = ShoppingCart.GetCart(HttpContext);
 
             ViewData["CartCount"] = cart.GetCount();
-            return PartialView("CartSummary");
+            return PartialView("_CartSummary");
         }
     }
 }
