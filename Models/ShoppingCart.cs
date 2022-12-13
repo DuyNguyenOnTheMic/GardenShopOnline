@@ -15,7 +15,6 @@ namespace GardenShopOnline.Models
         {
             var cart = new ShoppingCart();
             cart.ShoppingCartId = cart.GetCartId(context);
-            context.Session["CartCount"] = cart.GetCount();
             return cart;
         }
 

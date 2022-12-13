@@ -53,9 +53,6 @@ namespace GardenShopOnline.Controllers
 
             cart.AddToCart(addedproduct);
 
-            // update session cart Count
-            Session["CartCount"] = cart.GetCount();
-
             var results = new ShoppingCartRemoveViewModels
             {
                 CartTotal = cart.GetTotal()
@@ -77,9 +74,6 @@ namespace GardenShopOnline.Controllers
 
             // Remove from cart
             int itemCount = cart.DecreaseQuantity(id);
-
-            // update session cart Count
-            Session["CartCount"] = cart.GetCount();
 
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModels
@@ -107,8 +101,6 @@ namespace GardenShopOnline.Controllers
 
             // Remove from cart
             int itemCount = cart.RemoveProduct(id);
-
-            Session["CartCount"] = cart.GetCount();
 
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModels
