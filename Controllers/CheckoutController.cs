@@ -1,6 +1,7 @@
 ﻿using GardenShopOnline.Models;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace GardenShopOnline.Controllers
@@ -53,6 +54,25 @@ namespace GardenShopOnline.Controllers
             {
                 //Invalid - redisplay with errors
                 return View(order);
+            }
+        }
+
+        //
+        // GET: /Checkout/Complete
+        public ActionResult Complete(int id)
+        {
+            // Validate customer owns this order
+            bool isValid = db.CustomerOrders.Any(
+                o => o.ID == id &&
+                o.AccCustomerID == User.Identity.GetUserId());
+
+            if (isValid)
+            {
+                return View(id);
+            }
+            else
+            {
+                return View("Error");
             }
         }
     }
