@@ -12,16 +12,12 @@ namespace GardenShopOnline.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Feedback
+    public partial class sysdiagram
     {
-        public int ID { get; set; }
-        public string Content { get; set; }
-        public string AccManagerID { get; set; }
-        public string Answer { get; set; }
-        public int AccCustomerID { get; set; }
-        public Nullable<System.DateTime> DateCreated { get; set; }
-        public Nullable<bool> Approval { get; set; }
-    
-        public virtual AspNetUser AspNetUser { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

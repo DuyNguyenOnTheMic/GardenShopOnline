@@ -5,29 +5,66 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="BonsaiGardenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="AccCustomer">
+        <EntityType Name="__MigrationHistory">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="200" />
-          <Property Name="Phone" Type="varchar" MaxLength="12" />
-          <Property Name="Address" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
-        <EntityType Name="AccManager">
+        <EntityType Name="AspNetRoles">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="200" />
-          <Property Name="Phone" Type="varchar" MaxLength="12" />
-          <Property Name="Address" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="Type" Type="int" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="Cart">
           <Key>
@@ -65,7 +102,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AccCustomerID" Type="int" Nullable="false" />
+          <Property Name="AccCustomerID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" />
           <Property Name="DateUpdated" Type="datetime" />
           <Property Name="DateDeleted" Type="datetime" />
@@ -80,7 +117,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="AccManagerID" Type="int" />
+          <Property Name="AccManagerID" Type="nvarchar" MaxLength="128" />
           <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
           <Property Name="AccCustomerID" Type="int" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" />
@@ -112,6 +149,16 @@
           <Property Name="Status" Type="int" />
           <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <Association Name="FK__Cart__ProductID__5CD6CB2B">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
@@ -124,30 +171,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CommentPr__AccCu__46E78A0C">
-          <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="1" />
-          <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccCustomer">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CommentProduct">
-              <PropertyRef Name="AccCustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CommentPr__AccMa__47DBAE45">
-          <End Role="AccManager" Type="Self.AccManager" Multiplicity="0..1" />
-          <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccManager">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CommentProduct">
-              <PropertyRef Name="AccManagerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__CommentPr__Produ__49C3F6B7">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="*" />
@@ -157,42 +180,6 @@
             </Principal>
             <Dependent Role="CommentProduct">
               <PropertyRef Name="ProductID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CustomerO__AccCu__49C3F6B7">
-          <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="1" />
-          <End Role="CustomerOrder" Type="Self.CustomerOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccCustomer">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CustomerOrder">
-              <PropertyRef Name="AccCustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Feedback__AccCus__4AB81AF0">
-          <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="1" />
-          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccCustomer">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Feedback">
-              <PropertyRef Name="AccCustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Feedback__AccMan__4BAC3F29">
-          <End Role="AccManager" Type="Self.AccManager" Multiplicity="0..1" />
-          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccManager">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Feedback">
-              <PropertyRef Name="AccManagerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -232,9 +219,93 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CustomerOrder_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="CustomerOrder" Type="Self.CustomerOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomerOrder">
+              <PropertyRef Name="AccCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="AccManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BonsaiGardenModelStoreContainer">
-          <EntitySet Name="AccCustomer" EntityType="Self.AccCustomer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AccManager" EntityType="Self.AccManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CommentProduct" EntityType="Self.CommentProduct" Schema="dbo" store:Type="Tables" />
@@ -242,33 +313,14 @@
           <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Cart__ProductID__5CD6CB2B" Association="Self.FK__Cart__ProductID__5CD6CB2B">
             <End Role="Product" EntitySet="Product" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
-          <AssociationSet Name="FK__CommentPr__AccCu__46E78A0C" Association="Self.FK__CommentPr__AccCu__46E78A0C">
-            <End Role="AccCustomer" EntitySet="AccCustomer" />
-            <End Role="CommentProduct" EntitySet="CommentProduct" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CommentPr__AccMa__47DBAE45" Association="Self.FK__CommentPr__AccMa__47DBAE45">
-            <End Role="AccManager" EntitySet="AccManager" />
-            <End Role="CommentProduct" EntitySet="CommentProduct" />
-          </AssociationSet>
           <AssociationSet Name="FK__CommentPr__Produ__49C3F6B7" Association="Self.FK__CommentPr__Produ__49C3F6B7">
             <End Role="Product" EntitySet="Product" />
             <End Role="CommentProduct" EntitySet="CommentProduct" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CustomerO__AccCu__49C3F6B7" Association="Self.FK__CustomerO__AccCu__49C3F6B7">
-            <End Role="AccCustomer" EntitySet="AccCustomer" />
-            <End Role="CustomerOrder" EntitySet="CustomerOrder" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Feedback__AccCus__4AB81AF0" Association="Self.FK__Feedback__AccCus__4AB81AF0">
-            <End Role="AccCustomer" EntitySet="AccCustomer" />
-            <End Role="Feedback" EntitySet="Feedback" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Feedback__AccMan__4BAC3F29" Association="Self.FK__Feedback__AccMan__4BAC3F29">
-            <End Role="AccManager" EntitySet="AccManager" />
-            <End Role="Feedback" EntitySet="Feedback" />
           </AssociationSet>
           <AssociationSet Name="FK__OrderDeta__Order__4CA06362" Association="Self.FK__OrderDeta__Order__4CA06362">
             <End Role="CustomerOrder" EntitySet="CustomerOrder" />
@@ -282,40 +334,96 @@
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
+          <AssociationSet Name="FK_CustomerOrder_AspNetUsers" Association="Self.FK_CustomerOrder_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="CustomerOrder" EntitySet="CustomerOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_AspNetUsers" Association="Self.FK_Feedback_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BonsaiGardenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AccCustomer">
+        <EntityType Name="C__MigrationHistory">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CommentProducts" Relationship="Self.FK__CommentPr__AccCu__46E78A0C" FromRole="AccCustomer" ToRole="CommentProduct" />
-          <NavigationProperty Name="CustomerOrders" Relationship="Self.FK__CustomerO__AccCu__49C3F6B7" FromRole="AccCustomer" ToRole="CustomerOrder" />
-          <NavigationProperty Name="Feedbacks" Relationship="Self.FK__Feedback__AccCus__4AB81AF0" FromRole="AccCustomer" ToRole="Feedback" />
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="AccManager">
+        <EntityType Name="AspNetRole">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Type" Type="Int32" />
-          <NavigationProperty Name="CommentProducts" Relationship="Self.FK__CommentPr__AccMa__47DBAE45" FromRole="AccManager" ToRole="CommentProduct" />
-          <NavigationProperty Name="Feedbacks" Relationship="Self.FK__Feedback__AccMan__4BAC3F29" FromRole="AccManager" ToRole="Feedback" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="CustomerOrders" Relationship="Self.FK_CustomerOrder_AspNetUsers" FromRole="AspNetUsers" ToRole="CustomerOrder" />
+          <NavigationProperty Name="Feedbacks" Relationship="Self.FK_Feedback_AspNetUsers" FromRole="AspNetUsers" ToRole="Feedback" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="Cart">
           <Key>
@@ -349,8 +457,6 @@
           <Property Name="AccCustomerID" Type="Int32" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Precision="3" />
           <Property Name="Approval" Type="Boolean" />
-          <NavigationProperty Name="AccCustomer" Relationship="Self.FK__CommentPr__AccCu__46E78A0C" FromRole="CommentProduct" ToRole="AccCustomer" />
-          <NavigationProperty Name="AccManager" Relationship="Self.FK__CommentPr__AccMa__47DBAE45" FromRole="CommentProduct" ToRole="AccManager" />
           <NavigationProperty Name="Product" Relationship="Self.FK__CommentPr__Produ__49C3F6B7" FromRole="CommentProduct" ToRole="Product" />
         </EntityType>
         <EntityType Name="CustomerOrder">
@@ -358,7 +464,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AccCustomerID" Type="Int32" Nullable="false" />
+          <Property Name="AccCustomerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Precision="3" />
           <Property Name="DateDeleted" Type="DateTime" Precision="3" />
@@ -366,7 +472,7 @@
           <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="AccCustomer" Relationship="Self.FK__CustomerO__AccCu__49C3F6B7" FromRole="CustomerOrder" ToRole="AccCustomer" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_CustomerOrder_AspNetUsers" FromRole="CustomerOrder" ToRole="AspNetUsers" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Order__4CA06362" FromRole="CustomerOrder" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="Feedback">
@@ -375,13 +481,12 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="AccManagerID" Type="Int32" />
+          <Property Name="AccManagerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AccCustomerID" Type="Int32" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Precision="3" />
           <Property Name="Approval" Type="Boolean" />
-          <NavigationProperty Name="AccCustomer" Relationship="Self.FK__Feedback__AccCus__4AB81AF0" FromRole="Feedback" ToRole="AccCustomer" />
-          <NavigationProperty Name="AccManager" Relationship="Self.FK__Feedback__AccMan__4BAC3F29" FromRole="Feedback" ToRole="AccManager" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Feedback_AspNetUsers" FromRole="Feedback" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -415,60 +520,62 @@
           <NavigationProperty Name="CommentProducts" Relationship="Self.FK__CommentPr__Produ__49C3F6B7" FromRole="Product" ToRole="CommentProduct" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__45F365D3" FromRole="Product" ToRole="OrderDetail" />
         </EntityType>
-        <Association Name="FK__CommentPr__AccCu__46E78A0C">
-          <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="1" />
-          <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="*" />
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AccCustomer">
-              <PropertyRef Name="ID" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="CommentProduct">
-              <PropertyRef Name="AccCustomerID" />
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CustomerO__AccCu__49C3F6B7">
-          <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="1" />
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerOrder_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
           <End Role="CustomerOrder" Type="Self.CustomerOrder" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AccCustomer">
-              <PropertyRef Name="ID" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CustomerOrder">
               <PropertyRef Name="AccCustomerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Feedback__AccCus__4AB81AF0">
-          <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="1" />
+        <Association Name="FK_Feedback_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
           <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AccCustomer">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Feedback">
-              <PropertyRef Name="AccCustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CommentPr__AccMa__47DBAE45">
-          <End Role="AccManager" Type="Self.AccManager" Multiplicity="0..1" />
-          <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccManager">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CommentProduct">
-              <PropertyRef Name="AccManagerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Feedback__AccMan__4BAC3F29">
-          <End Role="AccManager" Type="Self.AccManager" Multiplicity="0..1" />
-          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccManager">
-              <PropertyRef Name="ID" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Feedback">
               <PropertyRef Name="AccManagerID" />
@@ -535,9 +642,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
         <EntityContainer Name="BonsaiGardenEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AccCustomers" EntityType="Self.AccCustomer" />
-          <EntitySet Name="AccManagers" EntityType="Self.AccManager" />
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
           <EntitySet Name="Carts" EntityType="Self.Cart" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="CommentProducts" EntityType="Self.CommentProduct" />
@@ -545,24 +659,21 @@
           <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
           <EntitySet Name="Products" EntityType="Self.Product" />
-          <AssociationSet Name="FK__CommentPr__AccCu__46E78A0C" Association="Self.FK__CommentPr__AccCu__46E78A0C">
-            <End Role="AccCustomer" EntitySet="AccCustomers" />
-            <End Role="CommentProduct" EntitySet="CommentProducts" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
           </AssociationSet>
-          <AssociationSet Name="FK__CustomerO__AccCu__49C3F6B7" Association="Self.FK__CustomerO__AccCu__49C3F6B7">
-            <End Role="AccCustomer" EntitySet="AccCustomers" />
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerOrder_AspNetUsers" Association="Self.FK_CustomerOrder_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="CustomerOrder" EntitySet="CustomerOrders" />
           </AssociationSet>
-          <AssociationSet Name="FK__Feedback__AccCus__4AB81AF0" Association="Self.FK__Feedback__AccCus__4AB81AF0">
-            <End Role="AccCustomer" EntitySet="AccCustomers" />
-            <End Role="Feedback" EntitySet="Feedbacks" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CommentPr__AccMa__47DBAE45" Association="Self.FK__CommentPr__AccMa__47DBAE45">
-            <End Role="AccManager" EntitySet="AccManagers" />
-            <End Role="CommentProduct" EntitySet="CommentProducts" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Feedback__AccMan__4BAC3F29" Association="Self.FK__Feedback__AccMan__4BAC3F29">
-            <End Role="AccManager" EntitySet="AccManagers" />
+          <AssociationSet Name="FK_Feedback_AspNetUsers" Association="Self.FK_Feedback_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Feedback" EntitySet="Feedbacks" />
           </AssociationSet>
           <AssociationSet Name="FK__Cart__ProductID__5CD6CB2B" Association="Self.FK__Cart__ProductID__5CD6CB2B">
@@ -585,6 +696,10 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -592,29 +707,58 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BonsaiGardenModelStoreContainer" CdmEntityContainer="BonsaiGardenEntities">
-          <EntitySetMapping Name="AccCustomers">
-            <EntityTypeMapping TypeName="BonsaiGardenModel.AccCustomer">
-              <MappingFragment StoreEntitySet="AccCustomer">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="BonsaiGardenModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AccManagers">
-            <EntityTypeMapping TypeName="BonsaiGardenModel.AccManager">
-              <MappingFragment StoreEntitySet="AccManager">
-                <ScalarProperty Name="ID" ColumnName="ID" />
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="BonsaiGardenModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="BonsaiGardenModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="BonsaiGardenModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="BonsaiGardenModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -707,6 +851,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BonsaiGardenModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="BonsaiGardenModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

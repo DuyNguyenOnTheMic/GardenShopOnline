@@ -23,8 +23,6 @@ namespace GardenShopOnline.Models
         public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<bool> Approval { get; set; }
     
-        public virtual AccCustomer AccCustomer { get; set; }
-        public virtual AccManager AccManager { get; set; }
         public virtual Product Product { get; set; }
     }
 }

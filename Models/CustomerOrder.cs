@@ -21,7 +21,7 @@ namespace GardenShopOnline.Models
         }
     
         public int ID { get; set; }
-        public int AccCustomerID { get; set; }
+        public string AccCustomerID { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<System.DateTime> DateUpdated { get; set; }
         public Nullable<System.DateTime> DateDeleted { get; set; }
@@ -30,7 +30,7 @@ namespace GardenShopOnline.Models
         public string Email { get; set; }
         public Nullable<decimal> Total { get; set; }
     
-        public virtual AccCustomer AccCustomer { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
