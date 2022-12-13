@@ -1,4 +1,5 @@
 ﻿using GardenShopOnline.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Web.Mvc;
 
@@ -34,14 +35,14 @@ namespace GardenShopOnline.Controllers
                 }
                 else
                 {
-                    //order.Username = User.Identity.Name;
-                    //order.OrderDate = DateTime.Now;
+                    order.AccCustomerID = User.Identity.GetUserId();
+                    order.DateCreated = DateTime.Now;
 
                     //Save Order
                     db.CustomerOrders.Add(order);
                     db.SaveChanges();
                     //Process the order
-                    var cart = ShoppingCart.GetCart(this.HttpContext);
+                    var cart = ShoppingCart.GetCart(HttpContext);
                     cart.CreateOrder(order);
 
                     return RedirectToAction("Complete",
