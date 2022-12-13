@@ -219,6 +219,15 @@ namespace GardenShopOnline.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        private void MigrateShoppingCart(string UserName)
+        {
+            // Associate shopping cart items with logged-in user
+            var cart = ShoppingCart.GetCart(HttpContext);
+
+            cart.MigrateCart(UserName);
+            Session[ShoppingCart.CartSessionKey] = UserName;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
