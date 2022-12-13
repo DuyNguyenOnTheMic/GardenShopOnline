@@ -108,7 +108,7 @@
                                                 <a href="#miniCart" class="minicart-btn toolbar-btn">
                                                     <i class="pe-7s-shopbag"></i>
                                                     <div id="cartCountHead">
-                                                        <span class="quantity number-count">@Session["CartCount"]</span>
+                                                        <span class="quantity number-count">@Html.Action("CartSummary", "ShoppingCart")</span>
                                                     </div>
                                                 </a>
                                             </li>
@@ -423,7 +423,7 @@
                                                 <a href="#miniCart" class="minicart-btn toolbar-btn">
                                                     <i class="pe-7s-shopbag"></i>
                                                     <div id="cartCountStick">
-                                                        <span class="quantity number-count">@Session["CartCount"]</span>
+                                                        <span class="quantity number-count">@Html.Action("CartSummary", "ShoppingCart")</span>
                                                     </div>
                                                 </a>
                                             </li>
