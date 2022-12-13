@@ -76,6 +76,8 @@ namespace GardenShopOnline.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var cart = ShoppingCart.GetCart(HttpContext);
+                    Session["CartCount"] = cart.GetCount();
                     MigrateShoppingCart(user.Id);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:

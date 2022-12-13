@@ -15,6 +15,7 @@ namespace GardenShopOnline.Models
         {
             var cart = new ShoppingCart();
             cart.ShoppingCartId = cart.GetCartId(context);
+            context.Session["CartCount"] = cart.GetCount();
             return cart;
         }
 
@@ -188,7 +189,6 @@ namespace GardenShopOnline.Models
                     // Send tempCartId back to client as a cookie
                     context.Session[CartSessionKey] = tempCartId.ToString();
                 }
-                context.Session["CartCount"] = 0;
             }
             return context.Session[CartSessionKey].ToString();
         }
