@@ -23,7 +23,7 @@ namespace GardenShopOnline
 
         private async Task ConfigSendGridasync(IdentityMessage message)
         {
-            var apiKey = Environment.GetEnvironmentVariable("NAME_OF_THE_ENVIRONMENT_VARIABLE_FOR_YOUR_SENDGRID_KEY");
+            var apiKey = Environment.GetEnvironmentVariable("BonsaiGarden");
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress("test@example.com", "Example User");
             var subject = "Sending with SendGrid is Fun";
