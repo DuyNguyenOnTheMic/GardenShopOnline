@@ -50,11 +50,13 @@ namespace GardenShopOnline.Controllers
 
             // Add it to the shopping cart
             var cart = ShoppingCart.GetCart(HttpContext);
+            var itemTotal = cart.GetItemTotal(addedproduct.ID);
 
             cart.AddToCart(addedproduct);
 
             var results = new ShoppingCartRemoveViewModels
             {
+                ItemTotal = itemTotal,
                 CartTotal = cart.GetTotal()
             };
             return Json(results, JsonRequestBehavior.AllowGet);
@@ -78,7 +80,7 @@ namespace GardenShopOnline.Controllers
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModels
             {
-                Message = productName + " đã được xoá khỏi giỏ hàng.",
+                Message = productName + " has been removed from cart.",
                 CartTotal = cart.GetTotal(),
                 CartCount = cart.GetCount(),
                 ItemCount = itemCount,
@@ -105,7 +107,7 @@ namespace GardenShopOnline.Controllers
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModels
             {
-                Message = productName + " đã được xoá khỏi giỏ hàng.",
+                Message = productName + " has been removed from cart.",
                 CartTotal = cart.GetTotal(),
                 CartCount = cart.GetCount(),
                 ItemCount = itemCount,

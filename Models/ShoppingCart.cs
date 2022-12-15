@@ -128,6 +128,12 @@ namespace GardenShopOnline.Models
             return count ?? 0;
         }
 
+        public decimal GetItemTotal(int id)
+        {
+            decimal? total = db.Carts.Single(c => c.ID == ShoppingCartId && c.ProductID == id).Subtotal;
+            return total ?? decimal.Zero;
+        }
+
         public decimal GetTotal()
         {
             // Multiply product price by count of that product to get 
