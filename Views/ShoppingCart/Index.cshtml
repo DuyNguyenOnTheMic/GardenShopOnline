@@ -70,7 +70,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="product-subtotal"><span class="amount" id="product-subtotal">@item.Subtotal.ToString("N0") ₫</span></td>
+                                            <td class="product-subtotal"><span class="amount" id="product-subtotal-@item.ProductID">@item.Subtotal.ToString("N0") ₫</span></td>
                                         </tr>
                                     }
                                 </tbody>
@@ -138,7 +138,7 @@
                     $.get('/ShoppingCart/AddToCart', { 'id': recordToAdd }, function (data) {
                         // Successful requests get here
                         // Update the page elements
-                        updateTotal(data);
+                        updateTotal(data, recordToAdd);
                         refreshCount();
                     });
                 }
@@ -157,15 +157,15 @@
                         } else {
                             $('#item-count-' + data.DecreaseId).find('input').val(data.ItemCount);
                         }
-                        updateTotal(data);
+                        updateTotal(data, data.DecreaseId);
                         refreshCount();
                     });
                 }
             });
 
-            function updateTotal(data) {
+            function updateTotal(data, productId) {
                 $('.cart-total').text(numberWithDots(data.CartTotal) + ' ₫');
-                $('#product-subtotal').text(numberWithDots(data.ItemTotal) + ' ₫');
+                $('#product-subtotal-' + productId).text(numberWithDots(data.ItemTotal) + ' ₫');
             }
         });
     </script>
