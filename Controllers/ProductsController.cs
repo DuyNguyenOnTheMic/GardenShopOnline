@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GardenShopOnline.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using GardenShopOnline.Models;
 
 namespace GardenShopOnline.Controllers
 {
@@ -22,12 +20,12 @@ namespace GardenShopOnline.Controllers
         }
 
         // sử dụng PartialView để có thể lọc sản phẩm mà không load lại toàn trang
-        public ActionResult ProductList( int category_id)
+        public ActionResult ProductList(int category_id)
         {
             var links = from l in db.Products
-                        where  l.Category.Status != 3
+                        where l.Category.Status != 3
                         select l;
-           
+
             if (category_id != -1)
             {
                 links = links.Where(p => p.CategoryID == category_id);
@@ -36,8 +34,8 @@ namespace GardenShopOnline.Controllers
 
         }
         [HttpPost]
-        public ActionResult Create_Product(string name_product, 
-           int quantity,  int CategoryDropdown,
+        public ActionResult Create_Product(string name_product,
+           int quantity, int CategoryDropdown,
            string price, string description, HttpPostedFileBase file)
         {
             Product product = new Product();
@@ -55,7 +53,7 @@ namespace GardenShopOnline.Controllers
 
             string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
 
-            product.Image =  _filename;
+            product.Image = _filename;
             if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
             {
                 if (file.ContentLength <= 4000000)
@@ -65,7 +63,7 @@ namespace GardenShopOnline.Controllers
                     if (db.SaveChanges() > 0)
                     {
                         file.SaveAs(path);
-                       
+
                     }
                 }
                 else
@@ -103,7 +101,7 @@ namespace GardenShopOnline.Controllers
             emp.Description = product.Description;
             return Json(emp);
         }
-        
+
         public ActionResult UpdateProduct(int Product_id, string name_product,
            int quantity, int CategoryDropdown,
            string price, string description, HttpPostedFileBase file)
@@ -126,7 +124,7 @@ namespace GardenShopOnline.Controllers
 
                 string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
 
-                product.Image =  _filename;
+                product.Image = _filename;
 
                 if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
                 {
@@ -157,7 +155,7 @@ namespace GardenShopOnline.Controllers
             }
             else
             {
-                product.Image = Session["imgPath"].ToString();            
+                product.Image = Session["imgPath"].ToString();
             }
 
             db.Entry(product).State = EntityState.Modified;
