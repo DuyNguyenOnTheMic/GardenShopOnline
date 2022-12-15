@@ -22,7 +22,7 @@ namespace GardenShopOnline
 
         private async Task ConfigSendGridasync(IdentityMessage message)
         {
-            var senderEmail = new MailAddress("bonsaigardenshop6@gmail.com", "Jamil");
+            var senderEmail = new MailAddress("bonsaigardenshop6@gmail.com", "Bonsai Garden");
             var receiverEmail = new MailAddress(message.Destination, "Receiver");
             var password = "gsgusenjmphwqrcu";
             var sub = "blabla";
