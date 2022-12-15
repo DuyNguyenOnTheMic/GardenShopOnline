@@ -4,10 +4,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using SendGrid;
-using SendGrid.Helpers.Mail;
 using System;
-using System.Diagnostics;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -23,24 +22,28 @@ namespace GardenShopOnline
 
         private async Task ConfigSendGridasync(IdentityMessage message)
         {
-            var apiKey = Environment.GetEnvironmentVariable("BonsaiGarden");
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("bonsaigardenshop6@gmail.com");
-            var subject = "Sending with SendGrid is Fun";
-            var to = new EmailAddress(message.Destination);
-            var plainTextContent = "and easy to do anywhere, even with C#";
-            var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var senderEmail = new MailAddress("bonsaigardenshop6@gmail.com", "Jamil");
+            var receiverEmail = new MailAddress(message.Destination, "Receiver");
+            var password = "gsgusenjmphwqrcu";
+            var sub = "blabla";
+            var body = message.Body;
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(senderEmail.Address, password)
+            };
+            using (var mess = new MailMessage(senderEmail, receiverEmail)
+            {
+                Subject = sub,
+                Body = body
+            })
 
-            // Send the email.
-            if (client != null)
             {
-                await client.SendEmailAsync(msg);
-            }
-            else
-            {
-                Trace.TraceError("Failed to create Web transport.");
-                await Task.FromResult(0);
+                await smtp.SendMailAsync(mess);
             }
         }
     }
