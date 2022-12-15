@@ -74,6 +74,7 @@
           <Property Name="ID" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Subtotal" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -432,6 +433,7 @@
           <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Subtotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK__Cart__ProductID__5CD6CB2B" FromRole="Cart" ToRole="Product" />
         </EntityType>
         <EntityType Name="Category">
@@ -767,6 +769,7 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
