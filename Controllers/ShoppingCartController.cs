@@ -71,16 +71,17 @@ namespace GardenShopOnline.Controllers
             var cart = ShoppingCart.GetCart(HttpContext);
 
             // Get the name of the product to display confirmation
-            string productName = db.Carts
-                .Single(item => item.RecordID == id).Product.Name;
+            var product = db.Carts
+                .Single(item => item.RecordID == id).Product;
 
             // Remove from cart
             int itemCount = cart.DecreaseQuantity(id);
+            var itemTotal = cart.GetItemTotal(product.ID);
 
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModels
             {
-                Message = productName + " has been removed from cart.",
+                Message = product.Name + " has been removed from cart.",
                 CartTotal = cart.GetTotal(),
                 CartCount = cart.GetCount(),
                 ItemCount = itemCount,
@@ -98,16 +99,17 @@ namespace GardenShopOnline.Controllers
             var cart = ShoppingCart.GetCart(HttpContext);
 
             // Get the name of the product to display confirmation
-            string productName = db.Carts
-                .Single(item => item.RecordID == id).Product.Name;
+            var product = db.Carts
+                .Single(item => item.RecordID == id).Product;
 
             // Remove from cart
             int itemCount = cart.RemoveProduct(id);
+            var itemTotal = cart.GetItemTotal(product.ID);
 
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModels
             {
-                Message = productName + " has been removed from cart.",
+                Message = product.Name + " has been removed from cart.",
                 CartTotal = cart.GetTotal(),
                 CartCount = cart.GetCount(),
                 ItemCount = itemCount,
