@@ -138,8 +138,7 @@
                     $.get('/ShoppingCart/AddToCart', { 'id': recordToAdd }, function (data) {
                         // Successful requests get here
                         // Update the page elements
-                        $('.cart-total').text(numberWithDots(data.CartTotal) + ' ₫');
-                        $('#product-subtotal').text(numberWithDots(data.ItemTotal) + ' ₫');
+                        updateTotal(data);
                         refreshCount();
                     });
                 }
@@ -158,11 +157,16 @@
                         } else {
                             $('#item-count-' + data.DecreaseId).find('input').val(data.ItemCount);
                         }
-                        $('.cart-total').text(numberWithDots(data.CartTotal) + ' ₫');
+                        updateTotal(data);
                         refreshCount();
                     });
                 }
             });
+
+            function updateTotal(data) {
+                $('.cart-total').text(numberWithDots(data.CartTotal) + ' ₫');
+                $('#product-subtotal').text(numberWithDots(data.ItemTotal) + ' ₫');
+            }
         });
     </script>
 }
