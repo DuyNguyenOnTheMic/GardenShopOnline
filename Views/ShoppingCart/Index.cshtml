@@ -44,7 +44,6 @@
                                 <tbody>
                                     @foreach (var item in Model.CartItems)
                                     {
-                                        decimal subTotal = item.Count * item.Product.Price;
                                         <tr id="row-@item.RecordID">
                                             <td class="product_remove" data-id="@item.RecordID">
                                                 <a href="#">
@@ -71,7 +70,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="product-subtotal"><span class="amount">@subTotal.ToString("N0") ₫</span></td>
+                                            <td class="product-subtotal"><span class="amount">@item.Subtotal.ToString("N0") ₫</span></td>
                                         </tr>
                                     }
                                 </tbody>
