@@ -130,8 +130,14 @@ namespace GardenShopOnline.Models
 
         public decimal GetItemTotal(int id)
         {
-            decimal? total = db.Carts.Single(c => c.ID == ShoppingCartId && c.ProductID == id).Subtotal;
-            return total ?? decimal.Zero;
+            // Get item total
+            var cartItem = db.Carts.Single(c => c.ID == ShoppingCartId && c.ProductID == id);
+            var total = decimal.Zero;
+            if (cartItem != null)
+            {
+                total = cartItem.Product.Price + cartItem.Subtotal;
+            }
+            return total;
         }
 
         public decimal GetTotal()
@@ -141,8 +147,7 @@ namespace GardenShopOnline.Models
             // sum all product price totals to get the cart total
             decimal? total = (from cartItems in db.Carts
                               where cartItems.ID == ShoppingCartId
-                              select (int?)cartItems.Count *
-                              cartItems.Product.Price).Sum();
+                              select (int?)cartItems.Subtotal).Sum();
 
             return total ?? decimal.Zero;
         }
