@@ -105,7 +105,6 @@ namespace GardenShopOnline.Controllers
 
             // Remove from cart
             int itemCount = cart.RemoveProduct(id);
-            var itemTotal = cart.GetItemTotal(product.ID);
 
             // Display the confirmation message
             var results = new ShoppingCartRemoveViewModels
