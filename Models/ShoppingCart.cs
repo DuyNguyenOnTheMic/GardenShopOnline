@@ -139,7 +139,7 @@ namespace GardenShopOnline.Models
             var total = decimal.Zero;
             if (cartItem != null)
             {
-                total = cartItem.Product.Price + cartItem.Subtotal;
+                total = cartItem.Subtotal;
             }
             return total;
         }

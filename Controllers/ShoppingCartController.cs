@@ -50,9 +50,10 @@ namespace GardenShopOnline.Controllers
 
             // Add it to the shopping cart
             var cart = ShoppingCart.GetCart(HttpContext);
-            var itemTotal = cart.GetItemTotal(addedproduct.ID);
-
             cart.AddToCart(addedproduct);
+
+            // Get item subtotal
+            var itemTotal = cart.GetItemTotal(addedproduct.ID);
 
             var results = new ShoppingCartRemoveViewModels
             {
