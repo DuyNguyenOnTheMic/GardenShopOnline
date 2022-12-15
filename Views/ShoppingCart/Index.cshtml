@@ -70,7 +70,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="product-subtotal"><span class="amount">@item.Subtotal.ToString("N0") ₫</span></td>
+                                            <td class="product-subtotal"><span class="amount" id="product-subtotal">@item.Subtotal.ToString("N0") ₫</span></td>
                                         </tr>
                                     }
                                 </tbody>
@@ -139,6 +139,7 @@
                         // Successful requests get here
                         // Update the page elements
                         $('.cart-total').text(numberWithDots(data.CartTotal) + ' ₫');
+                        $('#product-subtotal').text(numberWithDots(data.ItemTotal) + ' ₫');
                         refreshCount();
                     });
                 }
