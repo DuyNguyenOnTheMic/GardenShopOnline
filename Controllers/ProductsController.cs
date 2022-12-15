@@ -34,6 +34,8 @@ namespace GardenShopOnline.Controllers
 
         }
         [HttpPost]
+        [ValidateInput(false)]
+
         public ActionResult Create_Product(string name_product,
            int quantity, int CategoryDropdown,
            string price, string description, HttpPostedFileBase file)
