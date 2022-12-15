@@ -130,8 +130,12 @@ namespace GardenShopOnline.Models
 
         public decimal GetItemTotal(int id)
         {
+            // Get the matching cart and product instances
+            var cartItem = db.Carts.SingleOrDefault(
+                c => c.ID == ShoppingCartId
+                && c.ProductID == id);
+
             // Get item total
-            var cartItem = db.Carts.Single(c => c.ID == ShoppingCartId && c.ProductID == id);
             var total = decimal.Zero;
             if (cartItem != null)
             {
