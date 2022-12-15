@@ -132,13 +132,13 @@
 
             $('.quantity .inc').click(function () {
                 // Get the id from the link
-                var recordToAdd = $(this).parent().attr('data-productid');
-                if (recordToAdd != '') {
+                var productId = $(this).parent().attr('data-productid');
+                if (productId != '') {
                     // Perform the ajax post
-                    $.get('/ShoppingCart/AddToCart', { 'id': recordToAdd }, function (data) {
+                    $.get('/ShoppingCart/AddToCart', { 'id': productId }, function (data) {
                         // Successful requests get here
                         // Update the page elements
-                        updateTotal(data, recordToAdd);
+                        updateTotal(data, productId);
                         refreshCount();
                     });
                 }
@@ -147,6 +147,7 @@
             $('.quantity .dec').click(function () {
                 // Get the id from the link
                 var recordToDecrease = $(this).parent().attr('data-id');
+                var productId = $(this).parent().attr('data-productid');
                 if (recordToDecrease != '') {
                     // Perform the ajax post
                     $.post('/ShoppingCart/DecreaseQuantity', { 'id': recordToDecrease }, function (data) {
@@ -157,7 +158,8 @@
                         } else {
                             $('#item-count-' + data.DecreaseId).find('input').val(data.ItemCount);
                         }
-                        updateTotal(data, data.DecreaseId);
+                        console.log(recordToDecrease);
+                        updateTotal(data, productId);
                         refreshCount();
                     });
                 }
