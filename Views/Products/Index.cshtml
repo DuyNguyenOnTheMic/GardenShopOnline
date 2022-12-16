@@ -16,18 +16,11 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Quản lý sản phảm</h5>
+                            <h5 class="m-b-10">Product Management</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="https://tancool.net">
-                                    <i class="feather icon-home">
-                                    </i>
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a href="javascript:void(0)">Quản lý sản phảm</a>
-                            </li>
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">Products</a></li>
                         </ul>
                     </div>
                 </div>
@@ -55,7 +48,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <button type="button" class="btn btn-primary float-right ml-2" data-toggle="modal" data-target="#AddProduct">Tạo mới</button>
+                                    <button type="button" class="btn btn-primary float-right ml-2" onclick="location.href='@Url.Action("Create","Products")';">Add new</button>
 
                                 </div>
                             </div>
@@ -97,116 +90,7 @@
         </div>
     </div>
 </div>
-<div id="AddProduct" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="AddProductLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <form class="needs-validation" method="post" action="@Url.Action("Create_Product", "products")" enctype="multipart/form-data" novalidate>
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h5 class="modal-title" id="AddProductLabel">Add new products</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
 
-                <div class="modal-body ">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>
-                                    Name <span class="text-danger">*</span>
-                                </label>
-                                <div class="position-relative">
-                                    <input type="text" placeholder="Enter product name..." id="add_name" class="form-control" name="name_product" pattern="\S+.*" required>
-                                    <div class="invalid-feedback">
-                                        Please enter product name !
-                                    </div>
-                                </div> <!---->
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>
-                                    Category <span class="text-danger">*</span>
-                                </label>
-                                <div class="position-relative">
-                                    <select class="custom-select" id="CategoryDropdown" name="CategoryDropdown" required>
-                                    </select>
-                                    <div class="invalid-feedback">Please select product category !</div>
-                                </div> <!---->
-
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>
-                                    Quantity <span class="text-danger">*</span>
-                                </label>
-                                <div class="position-relative">
-                                    <input type="text" placeholder="Enter product quantity... " id="add_quantity" class="form-control " name="quantity" pattern="\S+.*" required>
-                                    <div class="invalid-feedback">
-                                        Please enter product quantity !
-                                    </div>
-                                </div> <!---->
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>
-                                    Price <span class="text-danger">*</span>
-                                </label>
-                                <div class="position-relative">
-                                    <input type="text" placeholder="Enter product price..." id="product-price" max="999999999999" class="form-control "
-                                           pattern="[0-9.,]+" data-type="number" name="price" required>
-                                    <div class="invalid-feedback">
-                                        Product price cannot be blank !
-                                    </div>
-                                </div> <!---->
-
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Description</label>
-                                <div class="position-relative">
-                                    <textarea id="description" name="description" placeholder="Enter product description..." rows="4" class="form-control"></textarea>
-                                </div>
-                                <!---->
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>
-                                    Image <span class="text-danger">(*)</span>
-                                </label>
-                                <div class="position-relative">
-                                    <div class="img-item">
-                                        <img id="output" class="img-item-link" />
-
-                                    </div>
-                                    <input type="file" required="required" name="file" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
-                                    <div class="invalid-feedback">
-                                        Please choose an image for the product!
-                                    </div>
-                                </div>
-                                <script>
-                                    var loadFile_edit = function (event) {
-                                        var image = document.getElementById('output');
-                                        image.src = URL.createObjectURL(event.target.files[0]);
-                                    };
-                                </script>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
 <div id="EditProduct" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditProductLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <form class="needs-validation" method="post" action="@Url.Action("UpdateProduct", "Products")" enctype="multipart/form-data" novalidate>
@@ -317,6 +201,7 @@
         </form>
     </div>
 </div>
+  
 
 @section scripts {
     <script type="text/javascript">

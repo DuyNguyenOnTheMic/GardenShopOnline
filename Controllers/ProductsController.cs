@@ -166,6 +166,31 @@ namespace GardenShopOnline.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: Products1/Create
+        public ActionResult Create()
+        {
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name");
+            return View();
+        }
+
+        // POST: Products1/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ID,CategoryID,Name,Description,Price,Image,DateCreated,DateUpdate,Status,Quantity")] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Products.Add(product);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
+            return View(product);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

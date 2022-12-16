@@ -30351,3 +30351,6 @@ body {
     height: 100px;
     object-fit: cover;
 }
+.ck {
+    z-index: 9999 !important;
+}
