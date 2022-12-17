@@ -3,28 +3,59 @@
     ViewBag.Title = "Register";
 }
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <div class="login-form">
-        <h4 class="login-title">Register</h4>
-        <div class="row">
-            @Html.ValidationSummary("", new { @class = "text-danger" })
-            <div class="col-md-12">
-                <label>Email Address*</label>
-                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email addresss" })
-            </div>
-            <div class="col-md-6">
-                <label>Password</label>
-                @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
-            </div>
-            <div class="col-md-6">
-                <label>Confirm Password</label>
-                @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Confirm Password" })
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-custom-size lg-size btn-pronia-primary">Register</button>
+<main class="main-content">
+    <div class="breadcrumb-area breadcrumb-height" data-bg-image="../../assets/customer/images/breadcrumb/bg/1-1-1919x388.jpg">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-item">
+                        <h2 class="breadcrumb-heading">Login & Register Page</h2>
+                        <ul>
+                            <li>
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li>Login | Register</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <div class="login-register-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="login-form">
+                            <h4 class="login-title">Register</h4>
+                            <div class="row">
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                <div class="col-md-12">
+                                    <label>Email Address*</label>
+                                    @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email addresss" })
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Password</label>
+                                    @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Confirm Password</label>
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Confirm Password" })
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-custom-size lg-size btn-pronia-primary">Register</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
 }
