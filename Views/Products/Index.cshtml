@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <input type="text" hidden id="URLgetCategory" value="@Url.Action("getCategory", "Categories")" />
+<input type="text" hidden id="URLgetType" value="@Url.Action("getType", "Types")" />
+
 <input type="text" hidden id="URLProductList" value="@Url.Action("ProductList", "Products")" />
 <input type="text" hidden id="URLFindProduct" value="@Url.Action("FindProduct", "Products")/" />
 @*<input type="text" hidden id="URLUpdateProduct" value="@Url.Action("UpdateProduct", "Products")" />
@@ -40,9 +42,15 @@
                                 </div>
 
 
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <select class="custom-select" id="filter_Category" name="filter_Category" required>
                                         <option value="" disabled="disabled" selected="selected">Select product category</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="custom-select" id="filter_Type" name="filter_Type" required>
+                                        <option value="" disabled="disabled" selected="selected">Select product type</option>
 
                                     </select>
                                 </div>
@@ -55,7 +63,7 @@
                         </div>
                         <div class="card-body table-border-style">
                             <div class="table-responsive" id="dataContainer">
-                                @{ Html.RenderAction("ProductList", "products", new { category_id = -1 });}
+                                @{ Html.RenderAction("ProductList", "products", new { category_id = -1, type_id = -1 });}
 
                             </div>
                         </div>
@@ -201,7 +209,7 @@
         </form>
     </div>
 </div>
-  
+
 
 @section scripts {
     <script type="text/javascript">
@@ -211,6 +219,6 @@
                 pagingType: 'full_numbers',
             });
         });
-        
+
     </script>
 }

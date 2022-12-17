@@ -20,15 +20,19 @@ namespace GardenShopOnline.Controllers
         }
 
         // sử dụng PartialView để có thể lọc sản phẩm mà không load lại toàn trang
-        public ActionResult ProductList(int category_id)
+        public ActionResult ProductList(int category_id, int type_id)
         {
             var links = from l in db.Products
-                        where l.Category.Status != 3
+                        where l.Category.Status != 3 && l.Type.Status != 3
                         select l;
 
             if (category_id != -1)
             {
                 links = links.Where(p => p.CategoryID == category_id);
+            }
+            if (type_id != -1)
+            {
+                links = links.Where(p => p.TypeID == type_id);
             }
             return PartialView(links.Where(c => c.Status != 3).OrderByDescending(c => c.ID));
 

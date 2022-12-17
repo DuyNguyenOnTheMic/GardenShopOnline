@@ -211,9 +211,16 @@ function Update() {
 //------------ Load dropdown form add product----------------------------------
 
 var URLgetCategory = "";
+var URLgetType = "";
+
 $('#URLgetCategory')
     .keypress(function () {
         URLgetCategory = $(this).val();
+    })
+    .keypress();
+$('#URLgetType')
+    .keypress(function () {
+        URLgetType = $(this).val();
     })
     .keypress();
 $.ajax({
@@ -240,6 +247,18 @@ $.ajax({
         $("#filter_Category").html(s);
     }
 });
+$.ajax({
+    type: "GET",
+    url: URLgetType,
+    data: "{}",
+    success: function (data) {
+        var s = '<option value="-1" >Select product type</option>';
+        for (var i = 0; i < data.length; i++) {
+            s += '<option value="' + data[i].TypeID + '">' + data[i].TypeName + '</option>';
+        }
+        $("#filter_Type").html(s);
+    }
+});
 
 //----------------------FILTER PRODUCT------------------------------------------------
 $('#URLProductList')
@@ -250,16 +269,22 @@ $('#URLProductList')
 
 
 $("#filter_Category").change(function () {
-    var group_id = $("#filter_GroupProduct").val();
+    var type_id = $("#filter_Type").val();
     var category_id = $("#filter_Category").val();
-    GetList(group_id, category_id)
+    GetList(type_id, category_id)
+});
+$("#filter_Type").change(function () {
+    var type_id = $("#filter_Type").val();
+    var category_id = $("#filter_Category").val();
+    GetList(type_id, category_id)
 });
 
-function GetList(group_id, category_id) {
+function GetList(type_id, category_id) {
     $.ajax({
         url: URLProductList,
         data: {
             category_id: category_id,
+            type_id: type_id,
         }
     }).done(function (result) {
         $('#dataContainer').html(result);
