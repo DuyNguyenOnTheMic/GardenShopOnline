@@ -50,7 +50,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-12">
-                    <form action="javascript:void(0)">
+                    @using (Html.BeginForm())
+                    {
                         <div class="checkbox-form">
                             <h3>Billing Details</h3>
                             <div class="row">
@@ -74,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    }
                 </div>
                 <div class="col-lg-6 col-12">
                     <div class="your-order">
