@@ -21,9 +21,8 @@ namespace GardenShopOnline.Controllers
         //
         // POST: /Checkout/AddressAndPayment
         [HttpPost]
-        public ActionResult AddressAndPayment(FormCollection values)
+        public ActionResult AddressAndPayment(CustomerOrder order)
         {
-            var order = new CustomerOrder();
             TryUpdateModel(order);
 
             try
