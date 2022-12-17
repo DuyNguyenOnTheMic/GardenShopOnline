@@ -52,10 +52,11 @@ namespace GardenShopOnline.Controllers
         // GET: /Checkout/Complete
         public ActionResult Complete(int id)
         {
+            var userId = User.Identity.GetUserId();
             // Validate customer owns this order
             bool isValid = db.CustomerOrders.Any(
                 o => o.ID == id &&
-                o.AccCustomerID == User.Identity.GetUserId());
+                o.AccCustomerID == userId);
 
             if (isValid)
             {
