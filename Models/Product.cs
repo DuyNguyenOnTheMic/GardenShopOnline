@@ -32,6 +32,7 @@ namespace GardenShopOnline.Models
         public Nullable<System.DateTime> DateUpdate { get; set; }
         public Nullable<int> Status { get; set; }
         public int Quantity { get; set; }
+        public int TypeID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
@@ -40,5 +41,6 @@ namespace GardenShopOnline.Models
         public virtual ICollection<CommentProduct> CommentProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual Type Type { get; set; }
     }
 }

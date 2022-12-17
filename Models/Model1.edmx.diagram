@@ -28,6 +28,8 @@
         <AssociationConnector Association="BonsaiGardenModel.FK__OrderDeta__Order__4CA06362" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK__OrderDeta__Produ__45F365D3" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.Type" Width="1.5" PointX="3" PointY="12.5" />
+        <AssociationConnector Association="BonsaiGardenModel.FK_Product_Type" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
