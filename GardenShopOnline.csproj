@@ -634,7 +634,6 @@
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\_MiniCart.cshtml" />
     <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
-    <Content Include="Views\ShoppingCart\_CartSummary.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
   </ItemGroup>

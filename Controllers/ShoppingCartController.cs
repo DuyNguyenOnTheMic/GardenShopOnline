@@ -122,12 +122,10 @@ namespace GardenShopOnline.Controllers
         //
         // GET: /ShoppingCart/CartSummary
         [ChildActionOnly]
-        public ActionResult CartSummary()
+        public int CartSummary()
         {
             var cart = ShoppingCart.GetCart(HttpContext);
-
-            ViewData["CartCount"] = cart.GetCount();
-            return PartialView("_CartSummary");
+            return cart.GetCount();
         }
     }
 }
