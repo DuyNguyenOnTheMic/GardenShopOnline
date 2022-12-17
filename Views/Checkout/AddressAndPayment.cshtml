@@ -58,19 +58,22 @@
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Full Name <span class="required">*</span></label>
-                                        <input placeholder="Your full name" type="text">
+                                        @Html.TextBoxFor(m => m.FullName, new { @placeholder = "Your full name" })
+                                        @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Address <span class="required">*</span></label>
-                                        <input placeholder="Street address" type="text">
+                                        @Html.TextBoxFor(m => m.Address, new { @placeholder = "Street address" })
+                                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Phone <span class="required">*</span></label>
-                                        <input type="text" placeholder="Your phone number">
+                                        @Html.TextBoxFor(m => m.Phone, new { @placeholder = "Your phone number" })
+                                        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
