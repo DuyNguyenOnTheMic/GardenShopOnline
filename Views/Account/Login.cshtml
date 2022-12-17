@@ -35,12 +35,12 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <label>Email Address*</label>
-                                    <input type="email" id="Email" name="Email" placeholder="Email Address">
+                                    @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email addresss" })
                                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-lg-12">
                                     <label>Password</label>
-                                    <input type="password" id="Password" name="Password" placeholder="Email Address">
+                                    @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
                                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="col-md-8">
@@ -101,10 +101,4 @@
 @section scripts{
     <script src="~/assets/customer/js/vendor/jquery.validate.min.js"></script>
     <script src="~/assets/customer/js/vendor/jquery.validate.unobtrusive.min.js"></script>
-    <script>
-        var form = $(".login-register-area").closest("form");
-        form.removeData('validator');
-        form.removeData('unobtrusiveValidation');
-        $.validator.unobtrusive.parse(form);
-    </script>
 }
