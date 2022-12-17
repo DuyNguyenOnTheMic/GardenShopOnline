@@ -27,6 +27,7 @@ namespace GardenShopOnline.Models
         public Nullable<System.DateTime> DateUpdated { get; set; }
         public Nullable<System.DateTime> DateDeleted { get; set; }
         [Required]
+        [Display(Name = "Full Name")]
         public string FullName { get; set; }
         [Required]
         public string Address { get; set; }
