@@ -41,7 +41,7 @@ namespace GardenShopOnline.Controllers
         [ValidateInput(false)]
 
         public ActionResult Create_Product(string name_product,
-           int quantity, int CategoryDropdown,
+           int quantity, int CategoryDropdown, int TypeDropdown,
            string price, string description, HttpPostedFileBase file)
         {
             Product product = new Product();
@@ -49,6 +49,7 @@ namespace GardenShopOnline.Controllers
             product.Name = name_product;
             product.Quantity = quantity;
             product.CategoryID = CategoryDropdown;
+            product.TypeID = TypeDropdown;
             product.Price = int.Parse(price.Replace(",", ""));
             product.Description = description;
             product.Status = 1;
@@ -110,13 +111,14 @@ namespace GardenShopOnline.Controllers
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult UpdateProduct(int Product_id, string name_product,
-           int quantity, int CategoryDropdown,
+           int quantity, int CategoryDropdown, int TypeDropdown,
            string price, string description, HttpPostedFileBase file)
         {
             Product product = db.Products.Find(Product_id);
             Session["imgPath"] = product.Image;
             product.Name = name_product;
             product.CategoryID = CategoryDropdown;
+            product.TypeID = TypeDropdown;
             product.Price = int.Parse(price.Replace(",", ""));
             product.Quantity = quantity;
             product.Description = description;

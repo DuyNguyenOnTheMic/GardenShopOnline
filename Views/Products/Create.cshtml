@@ -31,12 +31,12 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Ccreate product</h5>
+                        <h5>Create product</h5>
                     </div>
                     <div class="card-body">
                         <form class="needs-validation" method="post" action="@Url.Action("Create_Product", "products")" enctype="multipart/form-data" novalidate>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label>
                                             Name <span class="text-danger">*</span>
@@ -58,6 +58,19 @@
                                             <select class="custom-select" id="CategoryDropdown" name="CategoryDropdown" required>
                                             </select>
                                             <div class="invalid-feedback">Please select product category !</div>
+                                        </div> <!---->
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>
+                                            Type <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="position-relative">
+                                            <select class="custom-select" id="TypeDropdown" name="TypeDropdown" required>
+                                            </select>
+                                            <div class="invalid-feedback">Please select product type !</div>
                                         </div> <!---->
 
                                     </div>
@@ -124,7 +137,7 @@
                                     </div>
                                 </div>
 
-                               
+
                                 <div class="col-md-12 ">
                                     <button type="submit" class="btn btn-primary float-right">Save</button>
 

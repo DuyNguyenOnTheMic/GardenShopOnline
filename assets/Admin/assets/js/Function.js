@@ -237,6 +237,18 @@ $.ajax({
 });
 $.ajax({
     type: "GET",
+    url: URLgetType,
+    data: "{}",
+    success: function (data) {
+        var s = '<option value="" disabled="disabled" selected="selected">Select product type</option>';
+        for (var i = 0; i < data.length; i++) {
+            s += '<option value="' + data[i].TypeID + '">' + data[i].TypeName + '</option>';
+        }
+        $("#TypeDropdown").html(s);
+    }
+});
+$.ajax({
+    type: "GET",
     url: URLgetCategory,
     data: "{}",
     success: function (data) {
