@@ -12,6 +12,7 @@
             <th class=" text-center">Category</th>
             <th class="text-center">Price</th>
             <th class="text-center">Quantity</th>
+            <th class="text-center">Description</th>
             <th class="text-center">Status</th>
             <th>
             </th>
@@ -31,6 +32,7 @@
             <td class=" text-center">@item.Category.Name</td>
             <td class="text-center">@item.Price.ToString("N0")</td>
             <td class="text-center">@item.Quantity.ToString("N0")</td>
+            <td class="text-center">@Html.Raw(item.Description)</td>
             <td class="text-center">
                 @if (item.Status == 1)
                 {
@@ -54,7 +56,7 @@
                 </script>
             </td>
             <td class="text-center">
-                <button title="Cập nhật" class="btn btn-success" onclick="GetProduct(this, @item.ID)">
+                <button title="Cập nhật" class="btn btn-success" onclick="location.href='@Url.Action("Edit","Products", new {id = item.ID })';">
                     <i class="feather icon-edit">
                     </i>
                 </button>

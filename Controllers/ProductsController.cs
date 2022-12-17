@@ -103,7 +103,8 @@ namespace GardenShopOnline.Controllers
             emp.Description = product.Description;
             return Json(emp);
         }
-
+        [HttpPost]
+        [ValidateInput(false)]
         public ActionResult UpdateProduct(int Product_id, string name_product,
            int quantity, int CategoryDropdown,
            string price, string description, HttpPostedFileBase file)
@@ -173,24 +174,17 @@ namespace GardenShopOnline.Controllers
             return View();
         }
 
-        // POST: Products1/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CategoryID,Name,Description,Price,Image,DateCreated,DateUpdate,Status,Quantity")] Product product)
+        // GET: Products1/Edit/5
+        public ActionResult Edit(int id)
         {
-            if (ModelState.IsValid)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return HttpNotFound();
             }
-
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
             return View(product);
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

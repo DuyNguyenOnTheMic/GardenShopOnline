@@ -378,8 +378,16 @@ CKEDITOR.replace("description", {
     cloudServices_tokenUrl: 'https://example.com/cs-token-endpoint',
     cloudServices_uploadUrl: 'https://your-organization-id.cke-cs.com/easyimage/upload/'
 });  
-CKEDITOR.replace("edit_description", {
+/*CKEDITOR.replace("edit_description", {
     extraPlugins: 'easyimage',
     cloudServices_tokenUrl: 'https://example.com/cs-token-endpoint',
     cloudServices_uploadUrl: 'https://your-organization-id.cke-cs.com/easyimage/upload/'
-});  
+});  */
+
+var PEdit_Description = "";
+$('#PEdit_Description')
+    .keypress(function () {
+        PEdit_Description = $(this).val();
+    })
+    .keypress();
+CKEDITOR.instances['description'].setData(PEdit_Description);
