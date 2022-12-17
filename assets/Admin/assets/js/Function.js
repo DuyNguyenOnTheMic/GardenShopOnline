@@ -186,8 +186,8 @@ $('#URLUpdateCategory')
 function Update() {
     var table = $('#example').DataTable();
     var group = {};
-    group.id = $('#edit_id').val();
-    group.name = $('#Edit_name').val();
+    group.ID = $('#edit_id').val();
+    group.Name = $('#Edit_name').val();
 
     $.ajax({
         url: URLUpdateCategory,
