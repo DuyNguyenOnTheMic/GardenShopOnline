@@ -1,30 +1,35 @@
 ﻿@model GardenShopOnline.Models.ShoppingCartViewModels
 
-<ul class="minicart-list">
-    @foreach (var item in Model.CartItems)
-    {
-        <li class="minicart-product" id="miniRow-@item.RecordID">
-            <a class="product-item_remove" href="#" data-id="@item.RecordID">
-                <i class="pe-7s-close" data-tippy="Remove"
-                   data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50"
-                   data-tippy-arrow="true" data-tippy-theme="sharpborder"></i>
-            </a>
-            <a href="single-product-variable.html" class="product-item_img">
-                <img class="img-full" src="~/assets/images/@item.Product.Image" alt="Product Image">
-            </a>
-            <div class="product-item_content">
-                <a class="product-item_title" href="single-product-variable.html">@item.Product.Name</a>
-                <span class="product-item_quantity">@item.Count x @item.Product.Price.ToString("N0") ₫</span>
-            </div>
-        </li>
-    }
-</ul>
-
-<div class="minicart-item_total">
-    <span>Subtotal</span>
-    <span class="ammount">@Model.CartTotal.ToString("N0") ₫</span>
-</div>
-<div class="group-btn_wrap d-grid gap-2">
-    <a href="@Url.Action("Index", "ShoppingCart")" class="btn btn-dark">View Cart</a>
-    <a href="#" class="btn btn-dark">Checkout</a>
+<div class="your-order-table table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="cart-product-name">Product</th>
+                <th class="cart-product-total">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                <tr class="cart_item">
+                    <td class="cart-product-name">
+                        @item.Product.Name<strong class="product-quantity">
+                            × @item.Count
+                        </strong>
+                    </td>
+                    <td class="cart-product-total"><span class="amount">$165.00</span></td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr class="cart-subtotal">
+                <th>Cart Subtotal</th>
+                <td><span class="amount">@Model.CartTotal.ToString("N0") ₫</span></td>
+            </tr>
+            <tr class="order-total">
+                <th>Order Total</th>
+                <td><strong><span class="amount">@Model.CartTotal.ToString("N0") ₫</span></strong></td>
+            </tr>
+        </tfoot>
+    </table>
 </div>
