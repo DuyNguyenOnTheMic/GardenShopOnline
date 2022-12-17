@@ -24,8 +24,8 @@
     </div>
     <div class="login-register-area section-space-y-axis-100">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
+            <div class="row justify-content-md-center">
+                <div class="col-lg-8">
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
