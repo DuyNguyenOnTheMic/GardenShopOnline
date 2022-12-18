@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="Controllers\TypesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -997,6 +998,7 @@
     <Content Include="Views\CustomerOrders\Edit.cshtml" />
     <Content Include="Views\CustomerOrders\Index.cshtml" />
     <Content Include="Views\CustomerOrders\OrrderList.cshtml" />
+    <Content Include="Views\Statistics\Order.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
