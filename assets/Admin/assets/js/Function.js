@@ -212,6 +212,8 @@ function Update() {
 
 var URLgetCategory = "";
 var URLgetType = "";
+var edit_Category_id = "";
+var edit_Type_id = "";
 
 $('#URLgetCategory')
     .keypress(function () {
@@ -223,14 +225,30 @@ $('#URLgetType')
         URLgetType = $(this).val();
     })
     .keypress();
+$('#edit_Type_id')
+    .keypress(function () {
+        edit_Type_id = $(this).val();
+    })
+    .keypress();
+
 $.ajax({
     type: "GET",
     url: URLgetCategory,
     data: "{}",
     success: function (data) {
-        var s = '<option value="" disabled="disabled" selected="selected">Select product category</option>';
+        if (edit_Category_id != undefined) {
+            var s = '<option value="" disabled="disabled">Select product category</option>';
+        } else {
+            var s = '<option value="" disabled="disabled" selected="selected">Select product category</option>';
+
+        }
         for (var i = 0; i < data.length; i++) {
-            s += '<option value="' + data[i].categoryID + '">' + data[i].categoryName + '</option>';
+            if (edit_Category_id == data[i].categoryID) {
+                s += '<option value="' + data[i].categoryID + '" selected="selected">' + data[i].categoryName + '</option>';
+
+            } else {
+                s += '<option value="' + data[i].categoryID + '">' + data[i].categoryName + '</option>';
+            }
         }
         $("#CategoryDropdown").html(s);
     }
@@ -240,9 +258,18 @@ $.ajax({
     url: URLgetType,
     data: "{}",
     success: function (data) {
-        var s = '<option value="" disabled="disabled" selected="selected">Select product type</option>';
+        if (edit_Type_id != undefined) {
+            var s = '<option value="" disabled="disabled">Select product type</option>';
+        } else {
+            var s = '<option value="" disabled="disabled" selected="selected">Select product type</option>';
+
+        }
         for (var i = 0; i < data.length; i++) {
-            s += '<option value="' + data[i].TypeID + '">' + data[i].TypeName + '</option>';
+            if (edit_Type_id == data[i].TypeID) {
+                s += '<option value="' + data[i].TypeID + '" selected="selected">' + data[i].TypeName + '</option>';
+            } else {
+                s += '<option value="' + data[i].TypeID + '">' + data[i].TypeName + '</option>';
+            }
         }
         $("#TypeDropdown").html(s);
     }

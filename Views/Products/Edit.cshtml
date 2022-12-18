@@ -6,6 +6,7 @@
 }
 <input type="text" hidden id="URLgetCategory" value="@Url.Action("getCategory", "Categories")" />
 <input type="text" hidden id="PEdit_Description" value="@Model.Description" />
+<input type="text" hidden id="URLgetType" value="@Url.Action("getType", "Types")" />
 
 <section class="pcoded-main-container">
     <div class="pcoded-content">
@@ -37,8 +38,11 @@
                     <div class="card-body">
                         <form class="needs-validation" method="post" action="@Url.Action("UpdateProduct", "products")" enctype="multipart/form-data" novalidate>
                             <input hidden id="edit_id" name="Product_id" value="@Model.ID" />
+                            <input hidden id="edit_Cartegory_id" value="@Model.CategoryID" />
+                            <input hidden id="edit_Type_id" value="@Model.TypeID" />
+
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label>
                                             Name <span class="text-danger">*</span>
@@ -58,6 +62,19 @@
                                         </label>
                                         <div class="position-relative">
                                             <select class="custom-select" id="CategoryDropdown" name="CategoryDropdown" required>
+                                            </select>
+                                            <div class="invalid-feedback">Please select product category !</div>
+                                        </div> <!---->
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>
+                                            Category <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="position-relative">
+                                            <select class="custom-select" id="TypeDropdown" name="TypeDropdown" required>
                                             </select>
                                             <div class="invalid-feedback">Please select product category !</div>
                                         </div> <!---->
