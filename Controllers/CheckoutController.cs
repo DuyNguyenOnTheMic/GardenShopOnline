@@ -27,7 +27,7 @@ namespace GardenShopOnline.Controllers
 
             try
             {
-                order.ID = "#" + DateTime.Now.ToString("yyMMddHHmmssff");
+                order.ID = DateTime.Now.ToString("yyMMddHHmmssff");
                 order.AccCustomerID = User.Identity.GetUserId();
                 order.DateCreated = DateTime.Now;
                 order.Status = 1;
@@ -61,7 +61,8 @@ namespace GardenShopOnline.Controllers
 
             if (isValid)
             {
-                return View(id);
+                ViewData["OrderId"] = id;
+                return View();
             }
             else
             {
