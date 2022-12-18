@@ -1,5 +1,6 @@
 ﻿using GardenShopOnline.Models;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
@@ -19,7 +20,13 @@ namespace GardenShopOnline.Controllers
 
         public JsonResult GetOrderData()
         {
-            return Json(db.CustomerOrders.Count(o => DbFunctions.TruncateTime(o.DateCreated) == DateTime.Today), JsonRequestBehavior.AllowGet);
+            var lastWeekDay = DateTime.Today.AddDays(-6);
+            var countList = new List<int>();
+            for (DateTime date = lastWeekDay; date <= DateTime.Today; date = date.AddDays(1))
+            {
+                countList.Add(db.CustomerOrders.Count(o => DbFunctions.TruncateTime(o.DateCreated) == date));
+            }
+            return Json(countList, JsonRequestBehavior.AllowGet);
         }
     }
 }

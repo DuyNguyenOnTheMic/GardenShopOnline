@@ -49,14 +49,16 @@
 </section>
 
 @section scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.1.1/luxon.min.js" integrity="sha512-hZKz8wkgOcWeZanRioE6H6AC3OJspzJQyDBB5jLoZ1jIKbYDt5MwVIvU703WwE4sjvKZw9uNmmYlt29xKS27RA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="~/assets/Admin/assets/js/plugins/chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
     <script type="text/javascript">
         //Get the context of the Chart canvas element we want to select
         var ctx = $("#statistics-chart"),
             chartWrapper = $('.chartjs');
-        const DateTime = luxon.DateTime;
+        const dates = [...Array(7)].map((_, i) => {
+            const d = new Date()
+            d.setDate(i - d.getDate())
+            return d.toDateString();
+        })
 
         const chartOptions = {
             plugins: {
@@ -67,7 +69,6 @@
             },
             scales: {
                 x: {
-                    type: 'time',
                     time: {
                         unit: 'day',
                         // Luxon format string
@@ -91,39 +92,26 @@
             type: 'POST',
             url: '@Url.Action("GetOrderData", "Statistics")',
             success: function (response) {
-                console.log(response);
+                console.log(dates);
+
+                const chartData = {
+                    labels: dates,
+                    datasets: [{
+                        label: 'My First dataset',
+                        backgroundColor: 'red',
+                        borderColor: 'red',
+                        fill: false,
+                        data: response,
+                    }]
+                }
+
+                // Create the chart
+                var chart = new Chart(ctx, {
+                    type: 'line',
+                    data: chartData,
+                    options: chartOptions
+                });
             }
         });
-
-        const chartData = {
-            labels: [ // Date Objects
-                newDate(0),
-                newDate(1),
-                newDate(2),
-                newDate(3),
-                newDate(4),
-                newDate(5),
-                newDate(6)
-            ],
-            datasets: [{
-                label: 'My First dataset',
-                backgroundColor: 'red',
-                borderColor: 'red',
-                fill: false,
-                data: [0, 5, 9, 18, 27, 18, 15, 10],
-            }]
-        };
-
-        // Create the chart
-        var chart = new Chart(ctx, {
-            type: 'line',
-            data: chartData,
-            options: chartOptions
-        });
-
-        function newDate(days) {
-            return DateTime.now().plus({ days }).toJSDate();
-        }
-
     </script>
 }
