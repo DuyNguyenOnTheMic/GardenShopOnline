@@ -29,6 +29,7 @@ namespace GardenShopOnline.Controllers
             {
                 order.AccCustomerID = User.Identity.GetUserId();
                 order.DateCreated = DateTime.Now;
+                order.Status = 1;
 
                 //Save Order
                 db.CustomerOrders.Add(order);
