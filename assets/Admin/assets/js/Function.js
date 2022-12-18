@@ -212,8 +212,6 @@ function Update() {
 
 var URLgetCategory = "";
 var URLgetType = "";
-var edit_Category_id = "";
-var edit_Type_id = "";
 
 $('#URLgetCategory')
     .keypress(function () {
@@ -225,17 +223,16 @@ $('#URLgetType')
         URLgetType = $(this).val();
     })
     .keypress();
-$('#edit_Type_id')
-    .keypress(function () {
-        edit_Type_id = $(this).val();
-    })
-    .keypress();
+
 
 $.ajax({
     type: "GET",
     url: URLgetCategory,
     data: "{}",
     success: function (data) {
+        var edit_Category_id = $('#edit_Category_id').val();
+        console.log(edit_Category_id);
+
         if (edit_Category_id != undefined) {
             var s = '<option value="" disabled="disabled">Select product category</option>';
         } else {
@@ -258,6 +255,8 @@ $.ajax({
     url: URLgetType,
     data: "{}",
     success: function (data) {
+        var edit_Type_id = $('#edit_Type_id').val();
+        console.log(edit_Type_id);
         if (edit_Type_id != undefined) {
             var s = '<option value="" disabled="disabled">Select product type</option>';
         } else {
