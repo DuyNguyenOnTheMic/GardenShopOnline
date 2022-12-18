@@ -33,6 +33,9 @@ namespace GardenShopOnline
                 "~/assets/customer/css/ion.rangeSlider.min.css",
                 "~/assets/customer/css/toastr.min.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                "~/assets/customer/js/vendor/jquery.validate*"));
+
             BundleTable.EnableOptimizations = true;
         }
     }

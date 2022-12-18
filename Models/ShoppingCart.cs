@@ -158,8 +158,6 @@ namespace GardenShopOnline.Models
 
         public int CreateOrder(CustomerOrder order)
         {
-            decimal orderTotal = 0;
-
             var cartItems = GetCartItems();
             // Iterate over the items in the cart, 
             // adding the order details for each
@@ -172,14 +170,8 @@ namespace GardenShopOnline.Models
                     UnitPrice = item.Product.Price,
                     Quantity = item.Count
                 };
-                // Set the order total of the shopping cart
-                orderTotal += (item.Count * item.Product.Price);
-
                 db.OrderDetails.Add(orderDetail);
-
             }
-            // Set the order's total to the orderTotal count
-            order.Total = orderTotal;
 
             // Save the order
             db.SaveChanges();

@@ -21,6 +21,10 @@ $(function () {
                 if ($('#tblCart tbody tr').length) {
                     $('.cart-area').load(location.href + ' .cart-area > *');
                 }
+
+                if ($('.your-order').length) {
+                    $('.your-order').load(location.href + ' .your-order > *');
+                } 
             });
         }
     });
