@@ -238,7 +238,7 @@
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\ShoppingCartRemoveViewModels.cs" />
     <Compile Include="Models\ShoppingCartViewModels.cs" />
-    <Compile Include="Models\Type.cs">
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Type.cs">
@@ -947,13 +947,6 @@
     <Content Include="assets\customer\fonts\Pe-icon-7-stroke.eot" />
     <Content Include="assets\customer\fonts\Pe-icon-7-stroke.ttf" />
     <Content Include="assets\customer\fonts\Pe-icon-7-stroke.woff" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="assets\admin\assets\ckeditor\bender-runner.config.json" />
     <Content Include="assets\admin\assets\ckeditor\CHANGES.md" />
     <Content Include="assets\admin\assets\ckeditor\LICENSE.md" />
@@ -970,6 +963,13 @@
     <Content Include="assets\admin\assets\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="assets\admin\assets\ckeditor\SECURITY.md" />
     <Content Include="assets\admin\assets\ckeditor\skins\moono-lisa\readme.md" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Shared\_CustomerLayout.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />

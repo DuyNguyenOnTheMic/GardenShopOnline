@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d5d4aab15bfe4e249b0ea0f13afea984" Name="Diagram1">
+      <Diagram DiagramId="539ac5a14b74453c887c6985c0ac4362" Name="Diagram1">
         <EntityTypeShape EntityType="BonsaiGardenModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.AspNetRole" Width="1.5" PointX="1.5" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.AspNetUserClaim" Width="1.5" PointX="6" PointY="15.875" IsExpanded="true" />
@@ -17,6 +17,7 @@
         <EntityTypeShape EntityType="BonsaiGardenModel.Feedback" Width="1.5" PointX="6" PointY="21.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.OrderDetail" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.Product" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.Type" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <AssociationConnector Association="BonsaiGardenModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
@@ -29,8 +30,6 @@
         <AssociationConnector Association="BonsaiGardenModel.FK__OrderDeta__Produ__45F365D3" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK_Product_Type" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="BonsaiGardenModel.Type" Width="1.5" PointX="3" PointY="12.5" />
-        <AssociationConnector Association="BonsaiGardenModel.FK_Product_Type" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
