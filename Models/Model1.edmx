@@ -101,7 +101,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AccCustomerID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" />
           <Property Name="DateUpdated" Type="datetime" />
@@ -129,7 +129,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="OrderID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Quantity" Type="int" />
           <Property Name="ProductID" Type="int" />
           <Property Name="Note" Type="nvarchar(max)" />
@@ -490,7 +490,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AccCustomerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Precision="3" />
           <Property Name="DateUpdated" Type="DateTime" Precision="3" />
@@ -521,7 +521,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="OrderID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="ProductID" Type="Int32" />
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />

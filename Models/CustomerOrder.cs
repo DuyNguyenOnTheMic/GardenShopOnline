@@ -21,7 +21,7 @@ namespace GardenShopOnline.Models
             this.OrderDetails = new HashSet<OrderDetail>();
         }
     
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string AccCustomerID { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<System.DateTime> DateUpdated { get; set; }
