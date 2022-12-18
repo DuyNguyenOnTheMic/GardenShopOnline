@@ -32,10 +32,12 @@ namespace GardenShopOnline.Models
         [Required]
         public string Address { get; set; }
         [Required(ErrorMessage = "You must provide a phone number")]
-        [Display(Name = "Home Phone")]
+        [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")] public string Phone { get; set; }
-        public Nullable<decimal> Total { get; set; }
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+        public string Phone { get; set; }
+        public decimal Total { get; set; }
+        public int Status { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

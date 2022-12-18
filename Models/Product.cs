@@ -24,6 +24,7 @@ namespace GardenShopOnline.Models
     
         public int ID { get; set; }
         public int CategoryID { get; set; }
+        public int TypeID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
@@ -40,5 +41,6 @@ namespace GardenShopOnline.Models
         public virtual ICollection<CommentProduct> CommentProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual Type Type { get; set; }
     }
 }
