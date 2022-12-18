@@ -238,7 +238,7 @@
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\ShoppingCartRemoveViewModels.cs" />
     <Compile Include="Models\ShoppingCartViewModels.cs" />
-    <Compile Include="Models\sysdiagram.cs">
+    <Compile Include="Models\Type.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Type.cs">
@@ -848,9 +848,12 @@
     <Content Include="assets\customer\js\vendor\bootstrap.bundle.min.js" />
     <Content Include="assets\customer\js\vendor\jquery-3.6.0.min.js" />
     <Content Include="assets\customer\js\vendor\jquery-migrate-3.3.2.min.js" />
+    <Content Include="assets\customer\js\vendor\jquery.validate.min.js" />
+    <Content Include="assets\customer\js\vendor\jquery.validate.unobtrusive.min.js" />
     <Content Include="assets\customer\js\vendor\jquery.waypoints.js" />
     <Content Include="assets\customer\js\vendor\modernizr-3.11.2.min.js" />
     <Content Include="assets\customer\js\vendor\toastr.min.js" />
+    <Content Include="assets\email-templates\confirm-email.html" />
     <Content Include="assets\images\sen-da-kim-cuong.jpg" />
     <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
     <Content Include="Content\sweetalert\docs.css" />
@@ -892,7 +895,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Email\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\admin\assets\fonts\fa-brands-400.eot" />
@@ -978,9 +980,10 @@
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\_MiniCart.cshtml" />
     <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
-    <Content Include="Views\ShoppingCart\_CartSummary.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\ShoppingCart\_Checkout.cshtml" />
+    <Content Include="Views\Checkout\Complete.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Types\Create.cshtml" />

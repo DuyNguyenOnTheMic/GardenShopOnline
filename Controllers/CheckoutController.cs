@@ -10,7 +10,6 @@ namespace GardenShopOnline.Controllers
     public class CheckoutController : Controller
     {
         readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
-        const string PromoCode = "FREE";
 
         //
         // GET: /Checkout/AddressAndPayment
@@ -22,33 +21,24 @@ namespace GardenShopOnline.Controllers
         //
         // POST: /Checkout/AddressAndPayment
         [HttpPost]
-        public ActionResult AddressAndPayment(FormCollection values)
+        public ActionResult AddressAndPayment(CustomerOrder order)
         {
-            var order = new CustomerOrder();
             TryUpdateModel(order);
 
             try
             {
-                if (string.Equals(values["PromoCode"], PromoCode,
-                    StringComparison.OrdinalIgnoreCase) == false)
-                {
-                    return View(order);
-                }
-                else
-                {
-                    order.AccCustomerID = User.Identity.GetUserId();
-                    order.DateCreated = DateTime.Now;
+                order.AccCustomerID = User.Identity.GetUserId();
+                order.DateCreated = DateTime.Now;
 
-                    //Save Order
-                    db.CustomerOrders.Add(order);
-                    db.SaveChanges();
-                    //Process the order
-                    var cart = ShoppingCart.GetCart(HttpContext);
-                    cart.CreateOrder(order);
+                //Save Order
+                db.CustomerOrders.Add(order);
+                db.SaveChanges();
+                //Process the order
+                var cart = ShoppingCart.GetCart(HttpContext);
+                cart.CreateOrder(order);
 
-                    return RedirectToAction("Complete",
-                        new { id = order.ID });
-                }
+                return RedirectToAction("Complete",
+                    new { id = order.ID });
             }
             catch
             {
@@ -61,10 +51,11 @@ namespace GardenShopOnline.Controllers
         // GET: /Checkout/Complete
         public ActionResult Complete(int id)
         {
+            var userId = User.Identity.GetUserId();
             // Validate customer owns this order
             bool isValid = db.CustomerOrders.Any(
                 o => o.ID == id &&
-                o.AccCustomerID == User.Identity.GetUserId());
+                o.AccCustomerID == userId);
 
             if (isValid)
             {

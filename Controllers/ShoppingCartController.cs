@@ -41,6 +41,22 @@ namespace GardenShopOnline.Controllers
         }
 
         //
+        // GET: /ShoppingCart/GetCheckoutCart
+        public ActionResult GetCheckoutCart()
+        {
+            var cart = ShoppingCart.GetCart(HttpContext);
+
+            // Set up our ViewModel
+            var viewModel = new ShoppingCartViewModels
+            {
+                CartItems = cart.GetCartItems(),
+                CartTotal = cart.GetTotal()
+            };
+            // Return the view
+            return PartialView("_Checkout", viewModel);
+        }
+
+        //
         // GET: /Store/AddToCart/5
         public ActionResult AddToCart(int id)
         {
@@ -122,12 +138,10 @@ namespace GardenShopOnline.Controllers
         //
         // GET: /ShoppingCart/CartSummary
         [ChildActionOnly]
-        public ActionResult CartSummary()
+        public int CartSummary()
         {
             var cart = ShoppingCart.GetCart(HttpContext);
-
-            ViewData["CartCount"] = cart.GetCount();
-            return PartialView("_CartSummary");
+            return cart.GetCount();
         }
     }
 }

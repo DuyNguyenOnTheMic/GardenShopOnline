@@ -4,66 +4,18 @@
     ViewBag.Title = "Log in";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>
-            }
-        </section>
-    </div>
-</div>
-
 <main class="main-content">
-    <div class="breadcrumb-area breadcrumb-height" data-bg-image="assets/images/breadcrumb/bg/1-1-1919x388.jpg">
+    <div class="breadcrumb-area breadcrumb-height" data-bg-image="../../assets/customer/images/breadcrumb/bg/1-1-1919x388.jpg">
         <div class="container h-100">
             <div class="row h-100">
                 <div class="col-lg-12">
                     <div class="breadcrumb-item">
-                        <h2 class="breadcrumb-heading">Login & Register Page</h2>
+                        <h2 class="breadcrumb-heading">Login Page</h2>
                         <ul>
                             <li>
                                 <a href="index.html">Home</a>
                             </li>
-                            <li>Login | Register</li>
+                            <li>Login</li>
                         </ul>
                     </div>
                 </div>
@@ -72,75 +24,49 @@
     </div>
     <div class="login-register-area section-space-y-axis-100">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <form action="#">
+            <div class="row justify-content-md-center">
+                <div class="col-lg-8">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
                         <div class="login-form">
                             <h4 class="login-title">Login</h4>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <label>Email Address*</label>
-                                    <input type="email" placeholder="Email Address">
-                                </div>
-                                <div class="col-lg-12">
-                                    <label>Password</label>
-                                    <input type="password" placeholder="Password">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="check-box">
-                                        <input type="checkbox" id="remember_me">
-                                        <label for="remember_me">Remember me</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 pt-1 mt-md-0">
-                                    <div class="forgotton-password_info">
-                                        <a href="#"> Forgotten pasward?</a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 pt-5">
-                                    <button class="btn btn-custom-size lg-size btn-pronia-primary">Login</button>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label>Email Address*</label>
+                                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email addresss" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-12">
+                                <label class="mt-1">Password</label>
+                                @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-8">
+                                <div class="check-box">
+                                    <input data-val="" data-val-required="The Remember me? field is required." id="RememberMe" name="RememberMe" type="checkbox" value="true">
+                                    <label class="mt-1" for="RememberMe">Remember me</label>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-lg-6 pt-5 pt-lg-0">
-                    <form action="#">
-                        <div class="login-form">
-                            <h4 class="login-title">Register</h4>
-                            <div class="row">
-                                <div class="col-md-6 col-12">
-                                    <label>First Name</label>
-                                    <input type="text" placeholder="First Name">
-                                </div>
-                                <div class="col-md-6 col-12">
-                                    <label>Last Name</label>
-                                    <input type="text" placeholder="Last Name">
-                                </div>
-                                <div class="col-md-12">
-                                    <label>Email Address*</label>
-                                    <input type="email" placeholder="Email Address">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Password</label>
-                                    <input type="password" placeholder="Password">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Confirm Password</label>
-                                    <input type="password" placeholder="Confirm Password">
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-custom-size lg-size btn-pronia-primary">Register</button>
+                            <div class="col-md-4 pt-1 mt-md-0">
+                                <div class="forgotton-password_info">
+                                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
                                 </div>
                             </div>
+                            <div class="col-lg-12 pt-3">
+                                <button type="submit" class="btn btn-custom-size lg-size btn-pronia-primary">Login</button>
+                                <span class="ms-2">or @Html.ActionLink("Register as a new user", "Register")</span>
+                            </div>
                         </div>
-                    </form>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
     </div>
 </main>
 
-@section Scripts {
+@section scripts{
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -11,7 +11,8 @@ namespace GardenShopOnline.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CustomerOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,8 +26,15 @@ namespace GardenShopOnline.Models
         public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<System.DateTime> DateUpdated { get; set; }
         public Nullable<System.DateTime> DateDeleted { get; set; }
+        [Required]
+        [Display(Name = "Full Name")]
         public string FullName { get; set; }
+        [Required]
         public string Address { get; set; }
+        [Required(ErrorMessage = "You must provide a phone number")]
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         public string Phone { get; set; }
         public decimal Total { get; set; }
         public int Status { get; set; }
