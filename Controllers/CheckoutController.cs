@@ -27,7 +27,7 @@ namespace GardenShopOnline.Controllers
 
             try
             {
-                order.ID == "Order-" + DateTime.Now.ToString("yyMMddHHmmssff");
+                order.ID = "Order-" + DateTime.Now.ToString("yyMMddHHmmssff");
                 order.AccCustomerID = User.Identity.GetUserId();
                 order.DateCreated = DateTime.Now;
                 order.Status = 1;
@@ -51,7 +51,7 @@ namespace GardenShopOnline.Controllers
 
         //
         // GET: /Checkout/Complete
-        public ActionResult Complete(int id)
+        public ActionResult Complete(string id)
         {
             var userId = User.Identity.GetUserId();
             // Validate customer owns this order

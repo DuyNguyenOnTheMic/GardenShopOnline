@@ -156,7 +156,7 @@ namespace GardenShopOnline.Models
             return total ?? decimal.Zero;
         }
 
-        public int CreateOrder(CustomerOrder order)
+        public string CreateOrder(CustomerOrder order)
         {
             var cartItems = GetCartItems();
             // Iterate over the items in the cart, 
