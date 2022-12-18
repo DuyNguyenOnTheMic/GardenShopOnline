@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\CustomerOrdersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -987,6 +988,12 @@
     <Content Include="Views\Types\Details.cshtml" />
     <Content Include="Views\Types\Edit.cshtml" />
     <Content Include="Views\Types\Index.cshtml" />
+    <Content Include="Views\CustomerOrders\Create.cshtml" />
+    <Content Include="Views\CustomerOrders\Delete.cshtml" />
+    <Content Include="Views\CustomerOrders\Details.cshtml" />
+    <Content Include="Views\CustomerOrders\Edit.cshtml" />
+    <Content Include="Views\CustomerOrders\Index.cshtml" />
+    <Content Include="Views\CustomerOrders\OrrderList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

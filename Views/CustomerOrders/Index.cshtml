@@ -1,0 +1,70 @@
+﻿@model IEnumerable<GardenShopOnline.Models.CustomerOrder>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Tồn kho</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="https://tancool.net">
+                                    <i class="feather icon-home">
+                                    </i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0)">Tồn kho</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <div class="mx-datepicker">
+                                        <div class="mx-input-wrapper">
+                                            <input name="date_start" id="filter_DateStart" type="date" placeholder="" class="form-control custom-width" value="@String.Format("{0:yyyy-MM-dd}",DateTime.Now.AddDays((-DateTime.Now.Day)+1))">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mx-datepicker">
+                                        <div class="mx-input-wrapper">
+                                            <input name="date_end" id="filter_DateEnd" type="date" class="form-control custom-width" value="@String.Format("{0:yyyy-MM-dd}",DateTime.Now.AddMonths(1).AddDays(-(DateTime.Now.Day)))">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <input type="text" hidden id="URLExportExcel" value="@Url.Action("ExportExcel_Inventory", "Excel")" />
+                                    <button class="btn btn-secondary float-right ml-2" id="btnExportExcel_Inventory">
+                                        Xuất tệp
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" id="dataContainer">
+                        @{ Html.RenderAction("OrrderList", "CustomerOrders");}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
