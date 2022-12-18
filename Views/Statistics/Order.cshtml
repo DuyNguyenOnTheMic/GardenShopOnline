@@ -87,6 +87,14 @@
             },
         };
 
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetOrderData", "Statistics")',
+            success: function (response) {
+                console.log(response);
+            }
+        });
+
         const chartData = {
             labels: [ // Date Objects
                 newDate(0),
