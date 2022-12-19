@@ -7,13 +7,13 @@
 <div class="card-body">
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="pills-create-tab" data-toggle="pill" href="#pills-create" role="tab" aria-controls="pills-create" aria-selected="true">Đơn mới tạo</a>
+            <a class="nav-link @Session["pills-create"].ToString()" id="pills-create-tab" data-toggle="pill" href="#pills-create" role="tab" aria-controls="pills-create" aria-selected="true">Đơn mới tạo</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="pills-confirm-tab" data-toggle="pill" href="#pills-confirm" role="tab" aria-controls="pills-confirm" aria-selected="false">Đơn xác nhận</a>
+            <a class="nav-link @Session["pills-confirm"].ToString()" id="pills-confirm-tab" data-toggle="pill" href="#pills-confirm" role="tab" aria-controls="pills-confirm" aria-selected="false">Đơn xác nhận</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="pills-sent-tab" data-toggle="pill" href="#pills-sent" role="tab" aria-controls="pills-sent" aria-selected="false">Đang giao</a>
+            <a class="nav-link @Session["pills-sent"].ToString()" id="pills-sent-tab" data-toggle="pill" href="#pills-sent" role="tab" aria-controls="pills-sent" aria-selected="false">Đang giao</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="pills-success-tab" data-toggle="pill" href="#pills-success" role="tab" aria-controls="pills-success" aria-selected="false">Hoàn tất</a>
@@ -24,7 +24,7 @@
     </ul>
 
     <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-create" role="tabpanel" aria-labelledby="pills-create-tab">
+        <div class="tab-pane fade @Session["pills-create-show"].ToString()" id="pills-create" role="tabpanel" aria-labelledby="pills-create-tab">
             <div class="card">
                 <div class="card-body table-border-style">
 
@@ -61,7 +61,7 @@
                                         <td class="text-center">
                                             <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
                                                 <i class="feather icon-edit">
-                                                </i>
+                                                </i> Xác nhận
                                             </button>
 
                                             <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Product", "Products")">
@@ -82,7 +82,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="pills-confirm" role="tabpanel" aria-labelledby="pills-confirm-tab">
+        <div class="tab-pane fade @Session["pills-confirm-show"].ToString() " id="pills-confirm" role="tabpanel" aria-labelledby="pills-confirm-tab">
             <div class="card">
                 <div class="card-body table-border-style">
                     <div class="table-responsive">
@@ -116,7 +116,7 @@
                                         <td class="text-center">
                                             <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
                                                 <i class="feather icon-edit">
-                                                </i>
+                                                </i> Giao hàng
                                             </button>
 
                                             <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Product", "Products")">
@@ -138,7 +138,7 @@
             </div>
 
         </div>
-        <div class="tab-pane fade" id="pills-sent" role="tabpanel" aria-labelledby="pills-sent-tab">
+        <div class="tab-pane fade @Session["pills-sent-show"].ToString() " id="pills-sent" role="tabpanel" aria-labelledby="pills-sent-tab">
             <div class="card">
                 <div class="card-body table-border-style">
                     <div class="table-responsive">
@@ -172,7 +172,7 @@
                                         <td class="text-center">
                                             <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
                                                 <i class="feather icon-edit">
-                                                </i>
+                                                </i>  Hoàn tất
                                             </button>
                                             <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Product", "Products")">
                                             <button class="btn btn-danger" onclick="deleteAlert('@item.ID', '@item.ID')" id="Delete">
@@ -226,7 +226,7 @@
                                         <td class="text-center">
                                             <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
                                                 <i class="feather icon-edit">
-                                                </i>
+                                                </i> 
                                             </button>
 
                                             <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Product", "Products")">

@@ -17,11 +17,18 @@ namespace GardenShopOnline.Controllers
         // GET: CustomerOrders
         public ActionResult Index()
         {
+            Session["pills-create"] = "active";
+            Session["pills-confirm"] = "";
+            Session["pills-sent"] = "";
+            Session["pills-create-show"] = "active show";
+            Session["pills-confirm-show"] = "";
+            Session["pills-sent-show"] = "";
             var customerOrders = db.CustomerOrders.Include(c => c.AspNetUser);
             return View(customerOrders.ToList());
         }
         public ActionResult OrrderList(DateTime? date_start, DateTime? date_end)
         {
+            
             if (date_start == null)
             {
                 date_start = DateTime.Now.AddDays((-DateTime.Now.Day) + 1);
@@ -39,15 +46,37 @@ namespace GardenShopOnline.Controllers
             if (customerOrder.Status == 1)
             {
                 customerOrder.Status = 2;
+                Session["pills-create"] = "active";
+                Session["pills-confirm"] = "";
+                Session["pills-sent"] = "";
+
+                Session["pills-create-show"] = "active show";
+                Session["pills-confirm-show"] = "";
+                Session["pills-sent-show"] = "";
             }
             else if (customerOrder.Status == 2)
             {
                 customerOrder.Status = 3;
+                Session["pills-create"] = "";
+                Session["pills-confirm"] = "active";
+                Session["pills-sent"] = "";
+
+                Session["pills-create-show"] = "";
+                Session["pills-confirm-show"] = "active show";
+                Session["pills-sent-show"] = "";
             }
             else if (customerOrder.Status == 3)
             {
                 customerOrder.Status = 4;
+                Session["pills-create"] = "";
+                Session["pills-confirm"] = "";
+                Session["pills-sent"] = "active";
+
+                Session["pills-create-show"] = "";
+                Session["pills-confirm-show"] = "";
+                Session["pills-sent-show"] = "active show";
             }
+
 
             db.Entry(customerOrder).State = EntityState.Modified;
             db.SaveChanges();
