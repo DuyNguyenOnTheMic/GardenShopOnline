@@ -33,6 +33,26 @@ namespace GardenShopOnline.Controllers
             var OrrderList = db.CustomerOrders.Where(i => i.DateCreated >= date_start && i.DateCreated <= date_end);
             return PartialView(OrrderList.ToList());
         }
+        public ActionResult EditStatus_Order(CustomerOrder order)
+        {
+            CustomerOrder customerOrder = db.CustomerOrders.Find(order.ID);
+            if (customerOrder.Status == 1)
+            {
+                customerOrder.Status = 2;
+            }
+            else if (customerOrder.Status == 2)
+            {
+                customerOrder.Status = 3;
+            }
+            else if (customerOrder.Status == 3)
+            {
+                customerOrder.Status = 4;
+            }
+
+            db.Entry(customerOrder).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json("EditStatus_Order", JsonRequestBehavior.AllowGet);
+        }
         // GET: CustomerOrders/Details/5
         public ActionResult Details(int? id)
         {

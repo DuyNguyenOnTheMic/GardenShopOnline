@@ -102,7 +102,8 @@ $('#URDEditStatus')
     })
     .keypress();
 function EditStatus(id) {
-    sweetAlert
+    console.log(URDEditStatus);
+       sweetAlert
         ({
             title: "Cập nhật trạng thái thành công!",
             type: "success"
@@ -231,8 +232,6 @@ $.ajax({
     data: "{}",
     success: function (data) {
         var edit_Category_id = $('#edit_Category_id').val();
-        console.log(edit_Category_id);
-
         if (edit_Category_id != undefined) {
             var s = '<option value="" disabled="disabled">Select product category</option>';
         } else {
@@ -256,7 +255,6 @@ $.ajax({
     data: "{}",
     success: function (data) {
         var edit_Type_id = $('#edit_Type_id').val();
-        console.log(edit_Type_id);
         if (edit_Type_id != undefined) {
             var s = '<option value="" disabled="disabled">Select product type</option>';
         } else {
@@ -379,63 +377,7 @@ function GetProduct(ele, id) {
         }
     })
 }
-//-------------------------------UPDATE PRODUCT--------------------------------
-/*
-$('#URLUpdateProduct')
-    .keypress(function () {
-        URLUpdateProduct = $(this).val();
-    })
-    .keypress();
 
-function Update_Product() {
-    var table = $('#example').DataTable();
-    var product = {};
-    product.ID = $('#edit_id').val();
-    product.name = $('#edit_name').val();
-    product.Quantity = $('#edit_quantity').val();
-    product.Description = $('#edit_description').val();
-    product.Price = Number($('#edit_product_price').val().replace(/,/g, ''));
-    product.CategoryID = $('#edit_Category').val();
-
-    var file = $('#edit_file').val();
-    console.log(file);
-    $.ajax({
-        url: URLUpdateProduct,
-        type: "Post",
-        data: {
-            Products : JSON.stringify(product),
-            file : file,
-        },
-        contentType: "application/json; charset=UTF-8",
-        dataType: "json",
-        success: function (response) {
-            var group_id = $("#filter_GroupProduct").val();
-            var category_id = $("#filter_Category").val();
-            $.ajax({
-                url: URLProductList,
-                data: {
-                    group_id: group_id,
-                    category_id: category_id,
-                }
-            }).done(function (result) {
-                $('#dataContainer').html(result);
-                $('#example').DataTable()
-                $('#EditProduct .close').css('display', 'none');
-                $('#EditProduct').modal('hide');
-
-                sweetAlert
-                    ({
-                        title: "Cập nhật thành công !",
-                        type: "success"
-                    })
-            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(textStatus)
-                console.log(errorThrown)
-                alert("Something Went Wrong, Try Later");
-            });
-        }
-    });
-}*/
 CKEDITOR.replace("description", {
     cloudServices_tokenUrl: 'https://example.com/cs-token-endpoint',
     cloudServices_uploadUrl: 'https://your-organization-id.cke-cs.com/easyimage/upload/'
@@ -453,3 +395,35 @@ $('#PEdit_Description')
     })
     .keypress();
 CKEDITOR.instances['description'].setData(PEdit_Description);
+
+//-----------------------Edit status------------------------------------------
+
+function EditStatus_order(id) {
+    var URDEditStatus_Order = "";
+    $('#URDEditStatus_Order')
+        .keypress(function () {
+            URDEditStatus_Order = $(this).val();
+        })
+        .keypress();
+    console.log(URDEditStatus_Order);
+                var CustomerOrder = {};
+                CustomerOrder.id = id;
+                $.ajax({
+                    url: URDEditStatus_Order,
+                    data: JSON.stringify(CustomerOrder),
+                    type: "POST",
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (data) {
+                        sweetAlert
+                            ({
+                                title: "Cập nhật trạng thái thành công!",
+                                type: "success"
+                            })
+                        var date_start = $("#filter_DateStart").val();
+                        var date_end = $("#filter_DateEnd").val();
+                        GetList_order(date_start, date_end)
+                    },
+                });
+
+}

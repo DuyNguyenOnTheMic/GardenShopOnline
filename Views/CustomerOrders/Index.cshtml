@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
+<input type="text" hidden id="URLOrrderList" value="@Url.Action("OrrderList", "CustomerOrders")" />
 <section class="pcoded-main-container">
     <div class="pcoded-content">
         <div class="page-header">
@@ -68,3 +68,60 @@
         </div>
     </div>
 </section>
+@section scripts {
+    <script type="text/javascript">
+        var row;
+        $(document).ready(function () {
+            $('#example').DataTable({
+                pagingType: 'full_numbers',
+            });
+            $('#example1').DataTable({
+                pagingType: 'full_numbers',
+            });
+            $('#example2').DataTable({
+                pagingType: 'full_numbers',
+            });
+        });
+        //----------------------FILTER ORDER DATE TIME------------------------------------------------
+        $('#URLOrrderList')
+            .keypress(function () {
+                URLOrrderList = $(this).val();
+            })
+            .keypress();
+
+        $("#filter_DateStart").change(function () {
+            var date_start = $("#filter_DateStart").val();
+            var date_end = $("#filter_DateEnd").val();
+            GetList_order(date_start, date_end)
+        });
+        $("#filter_DateEnd").change(function () {
+            var date_start = $("#filter_DateStart").val();
+            var date_end = $("#filter_DateEnd").val();
+            GetList_order(date_start, date_end)
+        });
+
+        function GetList_order(date_start, date_end) {
+            console.log(date_start)
+            $.ajax({
+                url: URLOrrderList,
+                data: {
+                    date_start: date_start,
+                    date_end: date_end,
+                }
+            }).done(function (result) {
+                $('#dataContainer').html(result);
+                $('#example').DataTable();
+                $('#example1').DataTable();
+                $('#example2').DataTable();
+                $('#example3').DataTable();
+                $('#example4').DataTable();
+
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(textStatus)
+                console.log(errorThrown)
+                alert("Something Went Wrong, Try Later");
+            });
+        }
+      
+    </script>
+}
