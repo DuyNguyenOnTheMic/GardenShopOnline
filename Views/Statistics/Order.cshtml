@@ -43,7 +43,7 @@
                                 <div class="col-md-4">
                                     <div class="mx-datepicker">
                                         <div class="mx-input-wrapper">
-                                            <input name="date_start" id="filter_DateStart" type="date" placeholder="" class="form-control custom-width" value="@String.Format("{0:yyyy-MM-dd}", DateTime.Today.AddDays(-6))">
+                                            <input name="date_start" id="filter_DateStart" type="date" placeholder="" class="form-control custom-width date-filter" value="@String.Format("{0:yyyy-MM-dd}", DateTime.Today.AddDays(-6))">
 
                                         </div>
                                     </div>
@@ -51,7 +51,7 @@
                                 <div class="col-md-4">
                                     <div class="mx-datepicker">
                                         <div class="mx-input-wrapper">
-                                            <input name="date_end" id="filter_DateEnd" type="date" class="form-control custom-width" value="@String.Format("{0:yyyy-MM-dd}", DateTime.Today)">
+                                            <input name="date_end" id="filter_DateEnd" type="date" class="form-control custom-width date-filter" value="@String.Format("{0:yyyy-MM-dd}", DateTime.Today)">
                                         </div>
                                     </div>
                                 </div>
@@ -76,13 +76,7 @@
             startDateLabel = new Date(startDateFilter.val()),
             endDateLabel = new Date(endDateFilter.val()),
             startDate = startDateLabel.toUTCString(),
-            endDate = endDateLabel.toUTCString(),
-            dates = [];
-
-        // Loop to create date labels
-        for (var d = startDateLabel; d <= endDateLabel; d.setDate(d.getDate() + 1)) {
-            dates.push(new Date(d).toLocaleDateString('en-GB'));
-        }
+            endDate = endDateLabel.toUTCString();
 
         const chartOptions = {
             plugins: {
@@ -118,7 +112,7 @@
             data: { startDate, endDate },
             success: function (response) {
                 const chartData = {
-                    labels: dates,
+                    labels: getDateLabels(startDateLabel, endDateLabel),
                     datasets: [{
                         label: 'My First dataset',
                         backgroundColor: 'red',
@@ -134,7 +128,44 @@
                     data: chartData,
                     options: chartOptions
                 });
+
+                $('.date-filter').change(function () {
+                    var startDateLabel = new Date(startDateFilter.val()),
+                        endDateLabel = new Date(endDateFilter.val()),
+                        startDate = new Date(startDateFilter.val()).toUTCString(),
+                        endDate = new Date(endDateFilter.val()).toUTCString();
+                    $.ajax({
+                        type: 'GET',
+                        url: '@Url.Action("GetOrderData", "Statistics")',
+                        data: { startDate, endDate },
+                        success: function (response) {
+                            console.log(response);
+                            var chartData = {
+                                labels: getDateLabels(startDateLabel, endDateLabel),
+                                datasets: [{
+                                    label: 'My First dataset',
+                                    backgroundColor: 'red',
+                                    borderColor: 'red',
+                                    fill: false,
+                                    data: response,
+                                }]
+                            }
+
+                            chart.data = chartData;
+                            chart.update();
+                        }
+                    });
+                });
             }
         });
+
+        function getDateLabels(startDateLabel, endDateLabel) {
+            var dates = [];
+            // Loop to create date labels
+            for (var d = startDateLabel; d <= endDateLabel; d.setDate(d.getDate() + 1)) {
+                dates.push(new Date(d).toLocaleDateString('en-GB'));
+            }
+            return dates;
+        }
     </script>
 }
