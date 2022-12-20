@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="row mb-3">
+                            <div class="row">
                                 <div class="col-md-4">
                                     <div class="mx-datepicker">
                                         <div class="mx-input-wrapper">
@@ -82,8 +82,39 @@
         const chartOptions = {
             plugins: {
                 title: {
-                    text: 'Chart.js Time Scale',
-                    display: true
+                    text: 'Order Statistics',
+                    display: true,
+                    font: {
+                        size: 25
+                    }
+                },
+                datalabels: {
+                    backgroundColor: function (context) {
+                        return context.dataset.backgroundColor;
+                    },
+                    borderRadius: 4,
+                    color: 'white',
+                    font: {
+                        weight: 'bold'
+                    },
+                    formatter: Math.round,
+                    padding: 6
+                }
+            },
+            // Core options
+            aspectRatio: 5 / 3,
+            layout: {
+                padding: {
+                    top: 32,
+                    right: 16,
+                    bottom: 16,
+                    left: 8
+                }
+            },
+            elements: {
+                line: {
+                    fill: false,
+                    tension: 0.4
                 }
             },
             scales: {
@@ -116,10 +147,18 @@
                     labels: getDateLabels(startDateLabel, endDateLabel),
                     datasets: [{
                         label: 'My First dataset',
-                        backgroundColor: 'red',
-                        borderColor: 'red',
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                        borderColor: 'rgb(75, 192, 192)',
                         fill: false,
                         data: response,
+                        datalabels: {
+                            align: 'start',
+                            anchor: 'start',
+                            display: function (context) {
+                                // Only return positive values
+                                return context.dataset.data[context.dataIndex] !== 0;
+                            }
+                        }
                     }]
                 }
 
@@ -127,7 +166,8 @@
                 var chart = new Chart(ctx, {
                     type: 'line',
                     data: chartData,
-                    options: chartOptions
+                    options: chartOptions,
+                    plugins: [ChartDataLabels]
                 });
 
                 $('.date-filter').change(function () {
@@ -140,15 +180,22 @@
                         url: '@Url.Action("GetOrderData", "Statistics")',
                         data: { startDate, endDate },
                         success: function (response) {
-                            console.log(response);
                             var chartData = {
                                 labels: getDateLabels(startDateLabel, endDateLabel),
                                 datasets: [{
                                     label: 'My First dataset',
-                                    backgroundColor: 'red',
-                                    borderColor: 'red',
+                                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                                    borderColor: 'rgb(75, 192, 192)',
                                     fill: false,
                                     data: response,
+                                    datalabels: {
+                                        align: 'start',
+                                        anchor: 'start',
+                                        display: function (context) {
+                                            // Only return positive values
+                                            return context.dataset.data[context.dataIndex] !== 0;
+                                        }
+                                    }
                                 }]
                             }
 
