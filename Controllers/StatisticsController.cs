@@ -18,11 +18,13 @@ namespace GardenShopOnline.Controllers
             return View();
         }
 
-        public JsonResult GetOrderData()
+        [HttpGet]
+        public JsonResult GetOrderData(DateTime startDate, DateTime endDate)
         {
-            var lastWeekDay = DateTime.Today.AddDays(-6);
+            startDate = startDate.Date;
+            endDate = endDate.Date;
             var countList = new List<int>();
-            for (DateTime date = lastWeekDay; date <= DateTime.Today; date = date.AddDays(1))
+            for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
             {
                 countList.Add(db.CustomerOrders.Count(o => DbFunctions.TruncateTime(o.DateCreated) == date));
             }
