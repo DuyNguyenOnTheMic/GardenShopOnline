@@ -726,6 +726,7 @@
     <Content Include="assets\admin\assets\js\plugins\apexcharts.min.js" />
     <Content Include="assets\admin\assets\js\plugins\bootstrap.min.js" />
     <Content Include="assets\admin\assets\js\plugins\chart.min.js" />
+    <Content Include="assets\admin\assets\js\plugins\chartjs-plugin-datalabels%402.js" />
     <Content Include="assets\admin\assets\js\plugins\gmaps.min.js" />
     <Content Include="assets\admin\assets\js\plugins\jquery-ui.min.js" />
     <Content Include="assets\admin\assets\js\plugins\perfect-scrollbar.min.js" />
