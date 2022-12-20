@@ -43,7 +43,7 @@
                                 <div class="col-md-4">
                                     <div class="mx-datepicker">
                                         <div class="mx-input-wrapper">
-                                            <input name="date_start" id="filter_DateStart" type="date" placeholder="" class="form-control custom-width" value="@String.Format("{0:yyyy-MM-dd}", DateTime.Today.AddDays(-7))">
+                                            <input name="date_start" id="filter_DateStart" type="date" placeholder="" class="form-control custom-width" value="@String.Format("{0:yyyy-MM-dd}", DateTime.Today.AddDays(-6))">
 
                                         </div>
                                     </div>
@@ -70,12 +70,17 @@
     <script type="text/javascript">
         //Get the context of the Chart canvas element we want to select
         var ctx = $("#statistics-chart"),
-            chartWrapper = $('.chartjs');
-        const dates = [...Array(7)].map((_, i) => {
-            const d = new Date()
-            d.setDate(d.getDate() - i)
-            return d.toLocaleDateString('en-GB');
-        })
+            chartWrapper = $('.chartjs'),
+            startDateFilter = $('#filter_DateStart'),
+            endDateFilter = $('#filter_DateEnd'),
+            startDate = new Date(startDateFilter.val()),
+            endDate = new Date(endDateFilter.val()),
+            dates = [];
+
+        // Loop to create date labels
+        for (var d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
+            dates.push(new Date(d).toLocaleDateString('en-GB'));
+        }
 
         const chartOptions = {
             plugins: {
@@ -109,8 +114,6 @@
             type: 'POST',
             url: '@Url.Action("GetOrderData", "Statistics")',
             success: function (response) {
-                console.log(dates);
-
                 const chartData = {
                     labels: dates,
                     datasets: [{
