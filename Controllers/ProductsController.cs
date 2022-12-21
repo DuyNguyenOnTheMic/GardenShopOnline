@@ -191,6 +191,18 @@ namespace GardenShopOnline.Controllers
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
             return View(product);
         }
+
+        // GET: Products/Details
+        public ActionResult Details(int id)
+        {
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
