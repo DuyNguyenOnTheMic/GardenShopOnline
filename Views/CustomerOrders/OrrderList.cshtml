@@ -2,7 +2,7 @@
 @{
     int no5 = 0;
     int no1 = 0;
-    int no2= 0;
+    int no2 = 0;
     int no3 = 0;
     int no4 = 0;
 }
@@ -64,6 +64,13 @@
                                         <td>@item.Total.ToString("N0")</td>
                                         <td>@item.DateCreated</td>
                                         <td class="text-center">
+                                            <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
+                                                <span class="pcoded-micon">
+                                                    <i class="fas fa-info">
+                                                    </i>
+                                                </span>
+                                            </button>
+
                                             <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
                                                 <i class="feather icon-edit">
                                                 </i> Xác nhận
@@ -133,7 +140,7 @@
                                 }
                             </tbody>
                         </table>
-                       
+
                     </div>
                 </div>
             </div>
@@ -184,7 +191,7 @@
                                 }
                             </tbody>
                         </table>
-                       
+
                     </div>
                 </div>
             </div>
@@ -264,7 +271,7 @@
                                 }
                             </tbody>
                         </table>
-                      
+
                     </div>
                 </div>
             </div>
@@ -273,7 +280,7 @@
 </div>
 <div id="DeleteOrder" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DeleteOrderLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form class="needs-validation"  novalidate>
+        <form class="needs-validation" novalidate>
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <h5 class="modal-title" id="AddCategoryLabel">Cancel order</h5>
@@ -308,6 +315,8 @@
         </form>
     </div>
 </div>
+
+
 @section scripts {
     <script type="text/javascript">
         var row;

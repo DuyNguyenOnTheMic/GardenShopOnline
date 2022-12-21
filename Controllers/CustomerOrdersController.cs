@@ -40,6 +40,11 @@ namespace GardenShopOnline.Controllers
             var OrrderList = db.CustomerOrders.Where(i => i.DateCreated >= date_start && i.DateCreated <= date_end);
             return PartialView(OrrderList.ToList());
         }
+        public ActionResult OrrderDetailsList(string order_id)
+        {   
+            var OrrderDetailsList = db.OrderDetails.Where(o => o.OrderID == order_id);
+            return PartialView(OrrderDetailsList.ToList());
+        }
         public ActionResult EditStatus_Order(CustomerOrder order)
         {
             CustomerOrder customerOrder = db.CustomerOrders.Find(order.ID);

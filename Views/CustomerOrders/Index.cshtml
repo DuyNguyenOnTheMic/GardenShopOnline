@@ -6,6 +6,8 @@
 }
 <input type="text" hidden id="URLOrrderList" value="@Url.Action("OrrderList", "CustomerOrders")" />
 <input type="text" hidden id="URLFindOrder" value="@Url.Action("FindOrder", "CustomerOrders")/" />
+<input type="text" hidden id="URLOrrderDetailsList" value="@Url.Action("OrrderDetailsList", "CustomerOrders")" />
+
 
 <section class="pcoded-main-container">
     <div class="pcoded-content">
@@ -70,7 +72,9 @@
         </div>
     </div>
 </section>
-
+<div id="dataContainer2">
+    @{ Html.RenderAction("OrrderDetailsList", "CustomerOrders", new { order_id = "#" });}
+</div>
 
 @section scripts {
     <script type="text/javascript">
@@ -119,6 +123,28 @@
                 $('#example2').DataTable();
                 $('#example3').DataTable();
                 $('#example4').DataTable();
+
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(textStatus)
+                console.log(errorThrown)
+                alert("Something Went Wrong, Try Later");
+            });
+        }
+        $('#URLOrrderDetailsList')
+            .keypress(function () {
+                URLOrrderDetailsList = $(this).val();
+            })
+            .keypress();
+        function GetList_orderDetails(id) {
+            $.ajax({
+                url: URLOrrderDetailsList,
+                data: {
+                    order_id: id,
+                }
+            }).done(function (result) {
+                $('#dataContainer2').html(result);
+                $('#detailModal.close').css('display', 'none');
+                $('#detailModal').modal('show');
 
             }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
                 console.log(textStatus)
