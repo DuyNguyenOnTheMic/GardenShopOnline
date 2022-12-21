@@ -24,7 +24,7 @@ namespace GardenShopOnline.Models
             return GetCart(controller.HttpContext);
         }
 
-        public void AddToCart(Product product)
+        public void AddToCart(Product product, int? quantity)
         {
             // Get the matching cart and product instances
             var cartItem = db.Carts.SingleOrDefault(
@@ -38,7 +38,7 @@ namespace GardenShopOnline.Models
                 {
                     ProductID = product.ID,
                     ID = ShoppingCartId,
-                    Count = 1,
+                    Count = quantity == null ? 1 : (int)quantity,
                     Subtotal = product.Price
                 };
                 db.Carts.Add(cartItem);
@@ -47,7 +47,7 @@ namespace GardenShopOnline.Models
             {
                 // If the item does exist in the cart, 
                 // then add one to the quantity
-                cartItem.Count++;
+                cartItem.Count = quantity == null ? cartItem.Count + 1 : cartItem.Count + (int)quantity;
                 cartItem.Subtotal = product.Price * cartItem.Count;
             }
             // Save changes

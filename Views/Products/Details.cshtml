@@ -38,23 +38,13 @@
                         <ul class="quantity-with-btn">
                             <li class="quantity">
                                 <div class="cart-plus-minus">
-                                    <input class="cart-plus-minus-box" value="1" type="text">
+                                    <input class="cart-plus-minus-box" value="1" min="1" type="text" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
                                 </div>
                             </li>
                             <li class="add-to-cart">
-                                <a class="btn btn-custom-size lg-size btn-pronia-primary" href="cart.html">
+                                <a class="btn btn-custom-size lg-size btn-pronia-primary" href="@Url.Action("AddToCart", "ShoppingCart")" data-id="@Model.ID">
                                     Add to
                                     cart
-                                </a>
-                            </li>
-                            <li class="wishlist-btn-wrap">
-                                <a class="custom-circle-btn" href="wishlist.html">
-                                    <i class="pe-7s-like"></i>
-                                </a>
-                            </li>
-                            <li class="compare-btn-wrap">
-                                <a class="custom-circle-btn" href="compare.html">
-                                    <i class="pe-7s-refresh-2"></i>
                                 </a>
                             </li>
                         </ul>
@@ -481,3 +471,24 @@
     <!-- Product Area End Here -->
 
 </main>
+
+@section scripts {
+    <script type="text/javascript">
+        $('.add-to-cart .btn').click(function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var quantity = $(this).parents().find('input.cart-plus-minus-box').val();
+            // Call action to add product to cart
+            $.ajax({
+                url: $(this).attr('href'),
+                type: 'GET',
+                data: { id, quantity }
+            }).done(function () {
+                // Refresh mini cart
+                getMiniCart();
+                toastr.options.positionClass = 'toast-bottom-right';
+                toastr["success"]("Thêm thành công!");
+            });
+        });
+    </script>
+}

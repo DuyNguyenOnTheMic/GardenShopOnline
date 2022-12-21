@@ -755,6 +755,7 @@
     <Content Include="assets\customer\images\about\team\1-2-270x270.png" />
     <Content Include="assets\customer\images\about\team\1-3-270x270.png" />
     <Content Include="assets\customer\images\about\team\1-4-270x270.png" />
+    <Content Include="assets\customer\images\background\img_background_tree.jpg" />
     <Content Include="assets\customer\images\banner\1-1-770x300.jpg" />
     <Content Include="assets\customer\images\banner\1-2-370x300.jpg" />
     <Content Include="assets\customer\images\banner\1-3-370x300.jpg" />
@@ -1004,6 +1005,7 @@
     <Content Include="Views\Statistics\Order.cshtml" />
     <Content Include="Views\CustomerOrders\OrrderDetailsList.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Manage\_Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

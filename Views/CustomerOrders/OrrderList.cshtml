@@ -118,15 +118,18 @@
                                         <td>@item.FullName</td>
                                         <td>@item.Phone</td>
                                         <td>@item.Address</td>
-                                        <td>@item.Total</td>
+                                        <td>@item.Total.ToString("N0")</td>
                                         <td>@item.DateCreated</td>
                                         <td class="text-center">
+                                            <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
+                                                Details
+                                            </button>
                                             <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
                                                 Delivery confirmation
                                             </button>
 
                                             <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
-                                               Cancel
+                                                Cancel
                                             </button>
                                         </td>
                                     </tr>
@@ -168,14 +171,17 @@
                                         <td>@item.FullName</td>
                                         <td>@item.Phone</td>
                                         <td>@item.Address</td>
-                                        <td>@item.Total</td>
+                                        <td>@item.Total.ToString("N0")</td>
                                         <td>@item.DateCreated</td>
                                         <td class="text-center">
+                                            <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
+                                                Details
+                                            </button>
                                             <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
                                                 Completed
                                             </button>
                                             <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
-                                               Cancel
+                                                Cancel
                                             </button>
                                         </td>
                                     </tr>
@@ -214,7 +220,7 @@
                                         <td>@item.FullName</td>
                                         <td>@item.Phone</td>
                                         <td>@item.Address</td>
-                                        <td>@item.Total</td>
+                                        <td>@item.Total.ToString("N0")</td>
                                         <td>@item.DateCreated</td>
 
                                     </tr>
@@ -255,7 +261,7 @@
                                         <td>@item.FullName</td>
                                         <td>@item.Phone</td>
                                         <td>@item.Address</td>
-                                        <td>@item.Total</td>
+                                        <td>@item.Total.ToString("N0")</td>
                                         <td>@item.DateCreated</td>
                                         <td class="text-center">@item.Reason</td>
                                     </tr>
