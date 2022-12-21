@@ -65,20 +65,15 @@
                                         <td>@item.DateCreated</td>
                                         <td class="text-center">
                                             <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
-                                                <span class="pcoded-micon">
-                                                    <i class="fas fa-info">
-                                                    </i>
-                                                </span>
+                                              Details
                                             </button>
 
                                             <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
-                                                <i class="feather icon-edit">
-                                                </i> Xác nhận
+                                                Order confirmation
                                             </button>
 
                                             <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
-                                                <i class="feather icon-trash-2">
-                                                </i>
+                                                Cancel
                                             </button>
 
                                         </td>
@@ -127,13 +122,11 @@
                                         <td>@item.DateCreated</td>
                                         <td class="text-center">
                                             <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
-                                                <i class="feather icon-edit">
-                                                </i> Giao hàng
+                                                Delivery confirmation
                                             </button>
 
                                             <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
-                                                <i class="feather icon-trash-2">
-                                                </i>
+                                               Cancel
                                             </button>
                                         </td>
                                     </tr>
@@ -179,12 +172,10 @@
                                         <td>@item.DateCreated</td>
                                         <td class="text-center">
                                             <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
-                                                <i class="feather icon-edit">
-                                                </i>  Hoàn tất
+                                                Completed
                                             </button>
                                             <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
-                                                <i class="feather icon-trash-2">
-                                                </i>
+                                               Cancel
                                             </button>
                                         </td>
                                     </tr>

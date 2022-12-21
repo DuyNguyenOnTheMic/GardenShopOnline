@@ -424,6 +424,8 @@ function EditStatus_order(id) {
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (data) {
+                        $('#detailModal.close').css('display', 'none');
+                        $('#detailModal').modal('hide');
                         sweetAlert
                             ({
                                 title: "Cập nhật trạng thái thành công!",

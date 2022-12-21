@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<GardenShopOnline.Models.OrderDetail>
 @{ 
     int no = 0;
+    string order_id = TempData["order_id"].ToString();
 }
 <div id="detailModal" tabindex="-1" aria-labelledby="detailModalTitle" class="modal fade bd-example-modal-lg" style="display: none;" aria-hidden="true">
     <div role="document" class="modal-dialog modal-lg">
-        <form>
+       
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <h5 id="detailModalTitle" class="modal-title white">Chi tiết @TempData["order_id"].ToString()</h5>
+                    <h5 id="detailModalTitle" class="modal-title white">Chi tiết @order_id</h5>
                     <button type="button" data-dismiss="modal" aria-label="Close" class="close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -20,7 +21,6 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center">#</th>
-                                            <th class="text-center">Code Products</th>
                                             <th class="text-center">Product Name</th>
                                             <th class="text-center">Unit price</th>
                                             <th class="text-center">Quantity</th>
@@ -37,9 +37,7 @@
                                             <td class="text-center">
                                                 @no
                                             </td>
-                                            <td class="text-center">
-                                                @item.Product.ID
-                                            </td>
+                                           
                                             <td class="text-center">
                                                 @item.Product.Name
                                             </td>
@@ -63,13 +61,22 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="6" class="text-right">
+                                            <td colspan="5" class="text-right">
                                                 <h5>Total</h5>
                                             </td>
                                             <td class="text-left">
                                                 <h5>
                                                     @Model.Sum(s => s.UnitPrice)
                                                 </h5>
+                                            </td>
+                                            
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="text-right">
+                                                <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@order_id')">
+                                                    Order confirmation
+                                                </button>                                             
                                             </td>
                                         </tr>
 
@@ -81,6 +88,5 @@
                     </div>
                 </div>
             </div>
-        </form>
     </div>
 </div>
