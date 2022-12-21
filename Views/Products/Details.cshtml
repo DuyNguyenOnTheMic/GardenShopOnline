@@ -42,7 +42,7 @@
                                 </div>
                             </li>
                             <li class="add-to-cart">
-                                <a class="btn btn-custom-size lg-size btn-pronia-primary" href="cart.html">
+                                <a class="btn btn-custom-size lg-size btn-pronia-primary" href="@Url.Action("AddToCart", "ShoppingCart")" data-id="@Model.ID">
                                     Add to
                                     cart
                                 </a>
@@ -471,3 +471,24 @@
     <!-- Product Area End Here -->
 
 </main>
+
+@section scripts {
+    <script type="text/javascript">
+        $('.add-to-cart .btn').click(function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var quantity = $(this).parents().find('input.cart-plus-minus-box').val();
+            // Call action to add product to cart
+            $.ajax({
+                url: $(this).attr('href'),
+                type: 'GET',
+                data: { id, quantity }
+            }).done(function () {
+                // Refresh mini cart
+                getMiniCart();
+                toastr.options.positionClass = 'toast-bottom-right';
+                toastr["success"]("Thêm thành công!");
+            });
+        });
+    </script>
+}

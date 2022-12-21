@@ -58,7 +58,7 @@ namespace GardenShopOnline.Controllers
 
         //
         // GET: /Store/AddToCart/5
-        public ActionResult AddToCart(int id)
+        public ActionResult AddToCart(int id, int? quantity)
         {
             // Retrieve the product from the database
             var addedproduct = db.Products
@@ -66,7 +66,7 @@ namespace GardenShopOnline.Controllers
 
             // Add it to the shopping cart
             var cart = ShoppingCart.GetCart(HttpContext);
-            cart.AddToCart(addedproduct);
+            cart.AddToCart(addedproduct, quantity);
 
             // Get item subtotal
             var itemTotal = cart.GetItemTotal(addedproduct.ID);
