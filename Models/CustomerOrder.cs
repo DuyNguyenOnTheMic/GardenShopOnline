@@ -38,6 +38,7 @@ namespace GardenShopOnline.Models
         public string Phone { get; set; }
         public decimal Total { get; set; }
         public int Status { get; set; }
+        public string Reason { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

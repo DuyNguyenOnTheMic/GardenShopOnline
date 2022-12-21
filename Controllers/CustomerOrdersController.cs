@@ -17,11 +17,18 @@ namespace GardenShopOnline.Controllers
         // GET: CustomerOrders
         public ActionResult Index()
         {
+            Session["pills-create"] = "active";
+            Session["pills-confirm"] = "";
+            Session["pills-sent"] = "";
+            Session["pills-create-show"] = "active show";
+            Session["pills-confirm-show"] = "";
+            Session["pills-sent-show"] = "";
             var customerOrders = db.CustomerOrders.Include(c => c.AspNetUser);
             return View(customerOrders.ToList());
         }
         public ActionResult OrrderList(DateTime? date_start, DateTime? date_end)
         {
+            
             if (date_start == null)
             {
                 date_start = DateTime.Now.AddDays((-DateTime.Now.Day) + 1);
@@ -33,103 +40,107 @@ namespace GardenShopOnline.Controllers
             var OrrderList = db.CustomerOrders.Where(i => i.DateCreated >= date_start && i.DateCreated <= date_end);
             return PartialView(OrrderList.ToList());
         }
-        // GET: CustomerOrders/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult OrrderDetailsList(string order_id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CustomerOrder customerOrder = db.CustomerOrders.Find(id);
-            if (customerOrder == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customerOrder);
+            TempData["order_id"] = order_id;
+            var OrrderDetailsList = db.OrderDetails.Where(o => o.OrderID == order_id);
+            return PartialView(OrrderDetailsList.ToList());
         }
-
-        // GET: CustomerOrders/Create
-        public ActionResult Create()
+        public ActionResult EditStatus_Order(CustomerOrder order)
         {
-            ViewBag.AccCustomerID = new SelectList(db.AspNetUsers, "Id", "Email");
-            return View();
-        }
-
-        // POST: CustomerOrders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,AccCustomerID,DateCreated,DateUpdated,DateDeleted,FullName,Address,Phone,Total")] CustomerOrder customerOrder)
-        {
-            if (ModelState.IsValid)
+            CustomerOrder customerOrder = db.CustomerOrders.Find(order.ID);
+            if (customerOrder.Status == 1)
             {
-                db.CustomerOrders.Add(customerOrder);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                customerOrder.Status = 2;
+                Session["pills-create"] = "active";
+                Session["pills-confirm"] = "";
+                Session["pills-sent"] = "";
+
+                Session["pills-create-show"] = "active show";
+                Session["pills-confirm-show"] = "";
+                Session["pills-sent-show"] = "";
+            }
+            else if (customerOrder.Status == 2)
+            {
+                customerOrder.Status = 3;
+                Session["pills-create"] = "";
+                Session["pills-confirm"] = "active";
+                Session["pills-sent"] = "";
+
+                Session["pills-create-show"] = "";
+                Session["pills-confirm-show"] = "active show";
+                Session["pills-sent-show"] = "";
+            }
+            else if (customerOrder.Status == 3)
+            {
+                customerOrder.Status = 4;
+                Session["pills-create"] = "";
+                Session["pills-confirm"] = "";
+                Session["pills-sent"] = "active";
+
+                Session["pills-create-show"] = "";
+                Session["pills-confirm-show"] = "";
+                Session["pills-sent-show"] = "active show";
             }
 
-            ViewBag.AccCustomerID = new SelectList(db.AspNetUsers, "Id", "Email", customerOrder.AccCustomerID);
-            return View(customerOrder);
-        }
 
-        // GET: CustomerOrders/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CustomerOrder customerOrder = db.CustomerOrders.Find(id);
-            if (customerOrder == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.AccCustomerID = new SelectList(db.AspNetUsers, "Id", "Email", customerOrder.AccCustomerID);
-            return View(customerOrder);
-        }
-
-        // POST: CustomerOrders/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,AccCustomerID,DateCreated,DateUpdated,DateDeleted,FullName,Address,Phone,Total")] CustomerOrder customerOrder)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(customerOrder).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.AccCustomerID = new SelectList(db.AspNetUsers, "Id", "Email", customerOrder.AccCustomerID);
-            return View(customerOrder);
-        }
-
-        // GET: CustomerOrders/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CustomerOrder customerOrder = db.CustomerOrders.Find(id);
-            if (customerOrder == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customerOrder);
-        }
-
-        // POST: CustomerOrders/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            CustomerOrder customerOrder = db.CustomerOrders.Find(id);
-            db.CustomerOrders.Remove(customerOrder);
+            db.Entry(customerOrder).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json("EditStatus_Order", JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult FindOrder(string order_id)
+        {
+            var emp = new CustomerOrder
+            {
+                ID = order_id
+             
+            };
+            return Json(emp);
+        }
+        public ActionResult DeleteOrder(CustomerOrder order)
+        {
+            CustomerOrder customerOrder = db.CustomerOrders.Find(order.ID);
+
+            if (customerOrder.Status == 1)
+            {
+                
+                Session["pills-create"] = "active";
+                Session["pills-confirm"] = "";
+                Session["pills-sent"] = "";
+
+                Session["pills-create-show"] = "active show";
+                Session["pills-confirm-show"] = "";
+                Session["pills-sent-show"] = "";
+            }
+            else if (customerOrder.Status == 2)
+            {
+                
+                Session["pills-create"] = "";
+                Session["pills-confirm"] = "active";
+                Session["pills-sent"] = "";
+
+                Session["pills-create-show"] = "";
+                Session["pills-confirm-show"] = "active show";
+                Session["pills-sent-show"] = "";
+            }
+            else if (customerOrder.Status == 3)
+            {
+               
+                Session["pills-create"] = "";
+                Session["pills-confirm"] = "";
+                Session["pills-sent"] = "active";
+
+                Session["pills-create-show"] = "";
+                Session["pills-confirm-show"] = "";
+                Session["pills-sent-show"] = "active show";
+            }
+            customerOrder.Status = 5;
+            customerOrder.Reason = order.Reason;
+
+            db.Entry(customerOrder).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json("DeleteOrder", JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
