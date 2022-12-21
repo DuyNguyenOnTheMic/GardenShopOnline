@@ -119,7 +119,7 @@ namespace GardenShopOnline.Controllers
             product.Name = name_product;
             product.CategoryID = CategoryDropdown;
             product.TypeID = TypeDropdown;
-            product.Price = int.Parse(price.Replace(",", ""));
+            product.Price = int.Parse(price.Contains('.') ? price.Replace(".", "") : price.Replace(",", ""));
             product.Quantity = quantity;
             product.Description = description;
             product.DateUpdate = DateTime.Now;
