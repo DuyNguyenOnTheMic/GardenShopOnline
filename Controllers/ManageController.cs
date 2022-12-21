@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -78,6 +79,16 @@ namespace GardenShopOnline.Controllers
         {
             var user = db.AspNetUsers.Find(User.Identity.GetUserId());
             return PartialView("_Details", user);
+        }
+
+        public ActionResult UpdateDetails(AspNetUser aspNetUser)
+        {
+            AspNetUser user = db.AspNetUsers.Find(aspNetUser.Id);
+            user.FullName = aspNetUser.FullName;
+            user.Address = aspNetUser.Address;
+            user.PhoneNumber = aspNetUser.PhoneNumber;
+            db.SaveChanges();
+            return null;
         }
 
         //
