@@ -47,7 +47,7 @@ namespace GardenShopOnline.Models
             {
                 // If the item does exist in the cart, 
                 // then add one to the quantity
-                cartItem.Count++;
+                cartItem.Count = quantity == null ? cartItem.Count + 1 : cartItem.Count + (int)quantity;
                 cartItem.Subtotal = product.Price * cartItem.Count;
             }
             // Save changes
