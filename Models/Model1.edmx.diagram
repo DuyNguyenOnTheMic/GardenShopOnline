@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="330b61d1755947f78c003b84a94ccebb" Name="Diagram1">
+      <Diagram DiagramId="83c9fa837efe45e8977e4d45370ab157" Name="Diagram1">
         <EntityTypeShape EntityType="BonsaiGardenModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.AspNetRole" Width="1.5" PointX="1.5" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.AspNetUserClaim" Width="1.5" PointX="6" PointY="15.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.AspNetUserLogin" Width="1.5" PointX="6" PointY="18.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsaiGardenModel.AspNetUser" Width="1.5" PointX="3.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.AspNetUser" Width="1.5" PointX="3.75" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.Cart" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.Category" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.CommentProduct" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsaiGardenModel.CustomerOrder" Width="1.5" PointX="6" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.CustomerOrder" Width="1.5" PointX="6" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.Feedback" Width="1.5" PointX="6" PointY="21.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.OrderDetail" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.Product" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
