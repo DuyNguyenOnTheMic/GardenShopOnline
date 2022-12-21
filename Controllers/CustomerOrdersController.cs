@@ -41,7 +41,8 @@ namespace GardenShopOnline.Controllers
             return PartialView(OrrderList.ToList());
         }
         public ActionResult OrrderDetailsList(string order_id)
-        {   
+        {
+            TempData["order_id"] = order_id;
             var OrrderDetailsList = db.OrderDetails.Where(o => o.OrderID == order_id);
             return PartialView(OrrderDetailsList.ToList());
         }

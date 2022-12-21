@@ -7,7 +7,7 @@
         <form>
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <h5 id="detailModalTitle" class="modal-title white">Chi tiết (chưa lấy)</h5>
+                    <h5 id="detailModalTitle" class="modal-title white">Chi tiết @TempData["order_id"].ToString()</h5>
                     <button type="button" data-dismiss="modal" aria-label="Close" class="close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -19,36 +19,44 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">STT</th>
-                                            <th class="text-center">Mã sản phẩm</th>
-                                            <th class="text-center">Tên sản phẩm</th>
-                                            <th class="text-center">Đơn giá</th>
-                                            <th class="text-center">Số lượng</th>
-                                            <th class="text-center">Thành tiền</th>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">Code Products</th>
+                                            <th class="text-center">Product Name</th>
+                                            <th class="text-center">Unit price</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th class="text-center">Price</th>
+                                            <th class="text-center">Note</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach (var item in Model)
-                                                {
-                                                    no++;
-                                            <tr>
-                                                <td class="text-center">
-                                                    @no
-                                                </td>
-                                                <td class="text-center">
-                                                    @item.Product.ID
-                                                </td>
-                                                <td class="text-center">  @item.Product.Name</td>
-                                                <td class="text-center">
-                                                    @item.Quantity
-                                                </td>
-                                                <td class="text-center">
-                                                   @item.Product.Price
-                                                </td>    
-                                                <td class="text-center">
-                                                    @item.UnitPrice
-                                                </td>
-                                            </tr>
+                                        {
+                                            no++;
+                                            
+                                        <tr>
+                                            <td class="text-center">
+                                                @no
+                                            </td>
+                                            <td class="text-center">
+                                                @item.Product.ID
+                                            </td>
+                                            <td class="text-center">
+                                                @item.Product.Name
+                                            </td>
+                                            <td class="text-center">
+                                                @item.Quantity
+                                            </td>
+                                            <td class="text-center">
+                                                @item.Product.Price.ToString("N0")
+                                            </td>
+                                            <td class="text-center">
+                                                @item.UnitPrice
+                                            </td>
+                                            <td class="text-center">
+                                                @item.Note
+                                            </td>
+                                        </tr>
+
                                         }
 
 
@@ -56,38 +64,16 @@
                                     <tfoot>
                                         <tr>
                                             <td colspan="6" class="text-right">
-                                                <h5>Tạm tính</h5>
-                                            </td>
-                                            <td class="text-left">
-                                                <h5>1,100,000₫</h5>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="6" class="text-right">
-                                                <h5>VAT (%)</h5>
-                                            </td>
-                                            <td class="text-left">
-                                                <h5>0%</h5>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="6" class="text-right">
-                                                <h5>Chiết khấu (%)</h5>
-                                            </td>
-                                            <td class="text-left">
-                                                <h5>0%</h5>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="6" class="text-right">
-                                                <h5>Thành tiền</h5>
+                                                <h5>Total</h5>
                                             </td>
                                             <td class="text-left">
                                                 <h5>
-                                                    1,100,000₫
+                                                    @Model.Sum(s => s.UnitPrice)
                                                 </h5>
                                             </td>
                                         </tr>
+
+                                      
                                     </tfoot>
                                 </table>
                             </div>
