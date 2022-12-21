@@ -755,6 +755,7 @@
     <Content Include="assets\customer\images\about\team\1-2-270x270.png" />
     <Content Include="assets\customer\images\about\team\1-3-270x270.png" />
     <Content Include="assets\customer\images\about\team\1-4-270x270.png" />
+    <Content Include="assets\customer\images\background\img_background_tree.jpg" />
     <Content Include="assets\customer\images\banner\1-1-770x300.jpg" />
     <Content Include="assets\customer\images\banner\1-2-370x300.jpg" />
     <Content Include="assets\customer\images\banner\1-3-370x300.jpg" />
