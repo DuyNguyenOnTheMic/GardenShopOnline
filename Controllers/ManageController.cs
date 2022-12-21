@@ -11,6 +11,7 @@ namespace GardenShopOnline.Controllers
     [Authorize]
     public class ManageController : Controller
     {
+        readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -71,6 +72,12 @@ namespace GardenShopOnline.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+        }
+
+        public ActionResult GetDetails()
+        {
+            var user = db.AspNetUsers.Find(User.Identity.GetUserId());
+            return PartialView("_Details", user);
         }
 
         //
