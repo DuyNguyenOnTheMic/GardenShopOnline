@@ -1,4 +1,5 @@
 ﻿using GardenShopOnline.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Data;
 using System.Data.Entity;
@@ -201,6 +202,19 @@ namespace GardenShopOnline.Controllers
                 return HttpNotFound();
             }
             return View(product);
+        }
+        public ActionResult Comment_product(int product_id, string content)
+        {
+            CommentProduct comment = new CommentProduct();
+            comment.Content = content;
+            comment.ProductID = product_id;
+            comment.DateCreated = DateTime.Now;
+            comment.AccCustomerID = User.Identity.GetUserId();
+            comment.AccManagerID = User.Identity.GetUserId();
+            comment.Answer = content;
+            db.CommentProducts.Add(comment);
+            db.SaveChanges();
+            return Json("Comment_product", JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

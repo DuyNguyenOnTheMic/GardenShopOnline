@@ -16,10 +16,10 @@ namespace GardenShopOnline.Models
     {
         public int ID { get; set; }
         public string Content { get; set; }
-        public Nullable<int> AccManagerID { get; set; }
+        public string AccManagerID { get; set; }
         public string Answer { get; set; }
         public Nullable<int> ProductID { get; set; }
-        public int AccCustomerID { get; set; }
+        public string AccCustomerID { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<bool> Approval { get; set; }
     
