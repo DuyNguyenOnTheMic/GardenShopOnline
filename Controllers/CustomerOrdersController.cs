@@ -82,103 +82,59 @@ namespace GardenShopOnline.Controllers
             db.SaveChanges();
             return Json("EditStatus_Order", JsonRequestBehavior.AllowGet);
         }
-        // GET: CustomerOrders/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CustomerOrder customerOrder = db.CustomerOrders.Find(id);
-            if (customerOrder == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customerOrder);
-        }
-
-        // GET: CustomerOrders/Create
-        public ActionResult Create()
-        {
-            ViewBag.AccCustomerID = new SelectList(db.AspNetUsers, "Id", "Email");
-            return View();
-        }
-
-        // POST: CustomerOrders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,AccCustomerID,DateCreated,DateUpdated,DateDeleted,FullName,Address,Phone,Total")] CustomerOrder customerOrder)
+        public JsonResult FindOrder(string order_id)
         {
-            if (ModelState.IsValid)
+            var emp = new CustomerOrder
             {
-                db.CustomerOrders.Add(customerOrder);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.AccCustomerID = new SelectList(db.AspNetUsers, "Id", "Email", customerOrder.AccCustomerID);
-            return View(customerOrder);
+                ID = order_id
+             
+            };
+            return Json(emp);
         }
-
-        // GET: CustomerOrders/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult DeleteOrder(CustomerOrder order)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CustomerOrder customerOrder = db.CustomerOrders.Find(id);
-            if (customerOrder == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.AccCustomerID = new SelectList(db.AspNetUsers, "Id", "Email", customerOrder.AccCustomerID);
-            return View(customerOrder);
-        }
+            CustomerOrder customerOrder = db.CustomerOrders.Find(order.ID);
 
-        // POST: CustomerOrders/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,AccCustomerID,DateCreated,DateUpdated,DateDeleted,FullName,Address,Phone,Total")] CustomerOrder customerOrder)
-        {
-            if (ModelState.IsValid)
+            if (customerOrder.Status == 1)
             {
-                db.Entry(customerOrder).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.AccCustomerID = new SelectList(db.AspNetUsers, "Id", "Email", customerOrder.AccCustomerID);
-            return View(customerOrder);
-        }
+                
+                Session["pills-create"] = "active";
+                Session["pills-confirm"] = "";
+                Session["pills-sent"] = "";
 
-        // GET: CustomerOrders/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Session["pills-create-show"] = "active show";
+                Session["pills-confirm-show"] = "";
+                Session["pills-sent-show"] = "";
             }
-            CustomerOrder customerOrder = db.CustomerOrders.Find(id);
-            if (customerOrder == null)
+            else if (customerOrder.Status == 2)
             {
-                return HttpNotFound();
-            }
-            return View(customerOrder);
-        }
+                
+                Session["pills-create"] = "";
+                Session["pills-confirm"] = "active";
+                Session["pills-sent"] = "";
 
-        // POST: CustomerOrders/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            CustomerOrder customerOrder = db.CustomerOrders.Find(id);
-            db.CustomerOrders.Remove(customerOrder);
+                Session["pills-create-show"] = "";
+                Session["pills-confirm-show"] = "active show";
+                Session["pills-sent-show"] = "";
+            }
+            else if (customerOrder.Status == 3)
+            {
+               
+                Session["pills-create"] = "";
+                Session["pills-confirm"] = "";
+                Session["pills-sent"] = "active";
+
+                Session["pills-create-show"] = "";
+                Session["pills-confirm-show"] = "";
+                Session["pills-sent-show"] = "active show";
+            }
+            customerOrder.Status = 5;
+            customerOrder.Reason = order.Reason;
+
+            db.Entry(customerOrder).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json("DeleteOrder", JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

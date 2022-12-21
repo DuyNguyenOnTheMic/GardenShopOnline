@@ -1,8 +1,13 @@
 ﻿@model IEnumerable<GardenShopOnline.Models.CustomerOrder>
 @{
-    int no = 0;
+    int no5 = 0;
+    int no1 = 0;
+    int no2= 0;
+    int no3 = 0;
+    int no4 = 0;
 }
 <input hidden type="text" id="URDEditStatus_Order" value="@Url.Action("EditStatus_Order", "CustomerOrders")">
+<input hidden type="text" id="URDDeleteOrder" value="@Url.Action("DeleteOrder", "CustomerOrders")">
 
 <div class="card-body">
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -32,14 +37,14 @@
                         <table id="example" class="table table-hover ">
                             <thead>
                                 <tr>
-                                    <th class="text-center ">STT</th>
-                                    <th class="">Mã đơn hàng</th>
+                                    <th class="text-center ">#</th>
+                                    <th class="">Code orders</th>
                                     <th class="">Tài khoản</th>
-                                    <th class="">tên khách hàng</th>
-                                    <th class="text-center">Số điện thoại</th>
-                                    <th class="text-center">Địa chỉ</th>
-                                    <th class="text-center">Tổng tiền</th>
-                                    <th class="text-center">Ngày tạo đơn</th>
+                                    <th class="">Customer name</th>
+                                    <th class="text-center">Phone</th>
+                                    <th class="text-center">Address</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Date created</th>
                                     <th class="text-center"></th>
 
                                 </tr>
@@ -48,9 +53,9 @@
                             <tbody>
                                 @foreach (var item in Model.Where(m => m.Status == 1))
                                 {
-                                    no++;
+                                    no1++;
                                     <tr>
-                                        <td>@no</td>
+                                        <td>@no1</td>
                                         <td>@item.ID</td>
                                         <td>@item.AspNetUser.UserName</td>
                                         <td>@item.FullName</td>
@@ -64,11 +69,11 @@
                                                 </i> Xác nhận
                                             </button>
 
-                                            <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Product", "Products")">
-                                            <button class="btn btn-danger" onclick="deleteAlert('@item.ID', '@item.ID')" id="Delete">
+                                            <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
                                                 <i class="feather icon-trash-2">
                                                 </i>
                                             </button>
+
                                         </td>
                                     </tr>
                                 }
@@ -89,13 +94,13 @@
                         <table id="example1" class="table table-hover ">
                             <thead>
                                 <tr>
-                                    <th class="text-center ">STT</th>
-                                    <th class="">Mã đơn hàng</th>
-                                    <th class="">tên khách hàng</th>
-                                    <th class="text-center">Số điện thoại</th>
-                                    <th class="text-center">Địa chỉ</th>
-                                    <th class="text-center">Tổng tiền</th>
-                                    <th class="text-center">Ngày tạo đơn</th>
+                                    <th class="text-center ">#</th>
+                                    <th class="">Code orders</th>
+                                    <th class="">Customer name</th>
+                                    <th class="text-center">Phone</th>
+                                    <th class="text-center">Address</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Date created</th>
                                     <th class="text-center"></th>
 
                                 </tr>
@@ -104,9 +109,9 @@
                             <tbody>
                                 @foreach (var item in Model.Where(m => m.Status == 2))
                                 {
-                                    no++;
+                                    no2++;
                                     <tr>
-                                        <td>@no</td>
+                                        <td>@no2</td>
                                         <td>@item.ID</td>
                                         <td>@item.FullName</td>
                                         <td>@item.Phone</td>
@@ -119,8 +124,7 @@
                                                 </i> Giao hàng
                                             </button>
 
-                                            <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Product", "Products")">
-                                            <button class="btn btn-danger" onclick="deleteAlert('@item.ID', '@item.ID')" id="Delete">
+                                            <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
                                                 <i class="feather icon-trash-2">
                                                 </i>
                                             </button>
@@ -129,10 +133,7 @@
                                 }
                             </tbody>
                         </table>
-                        <div class="total-price-btn">
-                            <h5 class="total-price-name">Tổng</h5>
-                            <h5 class="total-price">ss@total_sell.ToString("N0")</h5>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -145,13 +146,13 @@
                         <table id="example2" class="table table-hover ">
                             <thead>
                                 <tr>
-                                    <th class="text-center ">STT</th>
-                                    <th class="">Mã đơn hàng</th>
-                                    <th class="">tên khách hàng</th>
-                                    <th class="text-center">Số điện thoại</th>
-                                    <th class="text-center">Địa chỉ</th>
-                                    <th class="text-center">Tổng tiền</th>
-                                    <th class="text-center">Ngày tạo đơn</th>
+                                    <th class="text-center ">#</th>
+                                    <th class="">Code orders</th>
+                                    <th class="">Customer name</th>
+                                    <th class="text-center">Phone</th>
+                                    <th class="text-center">Address</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Date created</th>
                                     <th class="text-center"></th>
 
                                 </tr>
@@ -160,9 +161,9 @@
                             <tbody>
                                 @foreach (var item in Model.Where(m => m.Status == 3))
                                 {
-                                    no++;
+                                    no3++;
                                     <tr>
-                                        <td>@no</td>
+                                        <td>@no3</td>
                                         <td>@item.ID</td>
                                         <td>@item.FullName</td>
                                         <td>@item.Phone</td>
@@ -174,8 +175,7 @@
                                                 <i class="feather icon-edit">
                                                 </i>  Hoàn tất
                                             </button>
-                                            <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Product", "Products")">
-                                            <button class="btn btn-danger" onclick="deleteAlert('@item.ID', '@item.ID')" id="Delete">
+                                            <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
                                                 <i class="feather icon-trash-2">
                                                 </i>
                                             </button>
@@ -184,10 +184,7 @@
                                 }
                             </tbody>
                         </table>
-                        <div class="total-price-btn">
-                            <h5 class="total-price-name">Tổng</h5>
-                            <h5 class="total-price">ss@total_import.ToString("N0")</h5>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -199,50 +196,34 @@
                         <table id="example3" class="table table-hover ">
                             <thead>
                                 <tr>
-                                    <th class="text-center ">STT</th>
-                                    <th class="">Mã đơn hàng</th>
-                                    <th class="">tên khách hàng</th>
-                                    <th class="text-center">Số điện thoại</th>
-                                    <th class="text-center">Địa chỉ</th>
-                                    <th class="text-center">Tổng tiền</th>
-                                    <th class="text-center">Ngày tạo đơn</th>
-                                    <th class="text-center"></th>
-
+                                    <th class="text-center ">#</th>
+                                    <th class="">Code orders</th>
+                                    <th class="">Customer name</th>
+                                    <th class="text-center">Phone</th>
+                                    <th class="text-center">Address</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Date created</th>
                                 </tr>
 
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.Where(m => m.Status == 4))
                                 {
-                                    no++;
+                                    no4++;
                                     <tr>
-                                        <td>@no</td>
+                                        <td>@no4</td>
                                         <td>@item.ID</td>
                                         <td>@item.FullName</td>
                                         <td>@item.Phone</td>
                                         <td>@item.Address</td>
                                         <td>@item.Total</td>
                                         <td>@item.DateCreated</td>
-                                        <td class="text-center">
-                                            <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
-                                                <i class="feather icon-edit">
-                                                </i> 
-                                            </button>
 
-                                            <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Product", "Products")">
-                                            <button class="btn btn-danger" onclick="deleteAlert('@item.ID', '@item.ID')" id="Delete">
-                                                <i class="feather icon-trash-2">
-                                                </i>
-                                            </button>
-                                        </td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
-                        <div class="total-price-btn">
-                            <h5 class="total-price-name">Tổng</h5>
-                            <h5 class="total-price">ss@total_import.ToString("N0")</h5>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -254,14 +235,14 @@
                         <table id="example4" class="table table-hover ">
                             <thead>
                                 <tr>
-                                    <th class="text-center ">STT</th>
-                                    <th class="">Mã đơn hàng</th>
-                                    <th class="">tên khách hàng</th>
-                                    <th class="text-center">Số điện thoại</th>
-                                    <th class="text-center">Địa chỉ</th>
-                                    <th class="text-center">Tổng tiền</th>
-                                    <th class="text-center">Ngày tạo đơn</th>
-                                    <th class="text-center"></th>
+                                    <th class="text-center ">#</th>
+                                    <th class="">Code orders</th>
+                                    <th class="">Customer name</th>
+                                    <th class="text-center">Phone</th>
+                                    <th class="text-center">Address</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Date created</th>
+                                    <th class="text-center">Reason</th>
 
                                 </tr>
 
@@ -269,39 +250,62 @@
                             <tbody>
                                 @foreach (var item in Model.Where(m => m.Status == 5))
                                 {
-                                    no++;
+                                    no5++;
                                     <tr>
-                                        <td>@no</td>
+                                        <td>@no5</td>
                                         <td>@item.ID</td>
                                         <td>@item.FullName</td>
                                         <td>@item.Phone</td>
                                         <td>@item.Address</td>
                                         <td>@item.Total</td>
                                         <td>@item.DateCreated</td>
-                                        <td class="text-center">
-                                            @*<button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
-                                                <i class="feather icon-edit">
-                                                </i>
-                                            </button>*@
-
-                                            <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Product", "Products")">
-                                            <button class="btn btn-danger" onclick="deleteAlert('@item.ID', '@item.ID')" id="Delete">
-                                                <i class="feather icon-trash-2">
-                                                </i>
-                                            </button>
-                                        </td>
+                                        <td class="text-center">@item.Reason</td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
-                        <div class="total-price-btn">
-                            <h5 class="total-price-name">Tổng</h5>
-                            <h5 class="total-price">ss@total_import.ToString("N0")</h5>
-                        </div>
+                      
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div id="DeleteOrder" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="DeleteOrderLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="needs-validation"  novalidate>
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title" id="AddCategoryLabel">Cancel order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>
+                                    Reason<span class="text-danger">*</span>
+                                </label>
+                                <input hidden id="edit_idOrder" name="Order_id" />
+                                <div class="position-relative">
+                                    <textarea placeholder="Enter reason for order cancellation!" id="reason" class="form-control" name="reason" rows="4" required></textarea>
+                                    <div class="invalid-feedback">
+                                        The reason for cancellation cannot be left blank !
+                                    </div>
+                                </div> <!---->
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="submit_reason">lưu</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 @section scripts {
@@ -323,5 +327,6 @@
             $('#example4').DataTable({
                 pagingType: 'full_numbers',
             });
+
     </script>
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BonsaiGardenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BonsaiGardenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -111,6 +111,7 @@
           <Property Name="Phone" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="Total" Type="money" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -386,8 +387,7 @@
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BonsaiGardenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -502,6 +502,7 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_CustomerOrder_AspNetUsers" FromRole="CustomerOrder" ToRole="AspNetUsers" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Order__4CA06362" FromRole="CustomerOrder" ToRole="OrderDetail" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -855,6 +856,7 @@
           <EntitySetMapping Name="CustomerOrders">
             <EntityTypeMapping TypeName="BonsaiGardenModel.CustomerOrder">
               <MappingFragment StoreEntitySet="CustomerOrder">
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="AccCustomerID" ColumnName="AccCustomerID" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />

@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <input type="text" hidden id="URLOrrderList" value="@Url.Action("OrrderList", "CustomerOrders")" />
+<input type="text" hidden id="URLFindOrder" value="@Url.Action("FindOrder", "CustomerOrders")/" />
+
 <section class="pcoded-main-container">
     <div class="pcoded-content">
         <div class="page-header">
@@ -68,6 +70,8 @@
         </div>
     </div>
 </section>
+
+
 @section scripts {
     <script type="text/javascript">
         var row;
@@ -122,6 +126,6 @@
                 alert("Something Went Wrong, Try Later");
             });
         }
-      
+
     </script>
 }

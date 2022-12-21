@@ -38,6 +38,15 @@ $(document).ready(function () {
             }
             form.classList.add('was-validated');
         })
+        $('#submit_reason').on('click', function () {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            } else {
+                DeleteOrder();
+            }
+            form.classList.add('was-validated');
+        })
        
     }, false);
 })
@@ -425,5 +434,49 @@ function EditStatus_order(id) {
                         GetList_order(date_start, date_end)
                     },
                 });
+
+}
+//-------------------------Get Delete Order -------------------------------
+function GetOrder(id) {
+    console.log(id);
+    $('#edit_idOrder').val(id);
+    $('#DeleteOrder.close').css('display', 'none');
+    $('#DeleteOrder').modal('show');
+
+}
+//-----------------------Delete order------------------------------------------
+
+function DeleteOrder() {
+    var URDDeleteOrder = "";
+    $('#URDDeleteOrder')
+        .keypress(function () {
+            URDDeleteOrder = $(this).val();
+        })
+        .keypress();
+   
+    var CustomerOrder = {};
+    CustomerOrder.id = $('#edit_idOrder').val();
+    CustomerOrder.Reason = $('#reason').val();
+    
+    $.ajax({
+        url: URDDeleteOrder,
+        data: JSON.stringify(CustomerOrder),
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            $('#DeleteOrder.close').css('display', 'none');
+            $('#DeleteOrder').modal('hide');
+            $('.modal ').insertAfter($('body'));
+            sweetAlert
+                ({
+                    title: "Hủy đơn hàng thành công!",
+                    type: "success"
+                })
+            var date_start = $("#filter_DateStart").val();
+            var date_end = $("#filter_DateEnd").val();
+            GetList_order(date_start, date_end)
+        },
+    });
 
 }
