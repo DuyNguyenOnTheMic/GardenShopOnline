@@ -38,7 +38,7 @@
                         <ul class="quantity-with-btn">
                             <li class="quantity">
                                 <div class="cart-plus-minus">
-                                    <input class="cart-plus-minus-box" value="1" type="text">
+                                    <input class="cart-plus-minus-box" value="1" min="1" type="text" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
                                 </div>
                             </li>
                             <li class="add-to-cart">
