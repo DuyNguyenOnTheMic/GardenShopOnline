@@ -1,4 +1,5 @@
-﻿@{
+﻿@model GardenShopOnline.Models.AspNetUser
+@{
     ViewBag.Title = "My account";
 }
 
@@ -123,15 +124,18 @@
                                     <div class="myaccount-form-inner">
                                         <div class="single-input">
                                             <label>Full Name*</label>
-                                            <input type="text" placeholder="Your full name">
+                                            @Html.TextBoxFor(m => m.FullName, new { @placeholder = "Your full name" })
+                                            @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
                                         </div>
                                         <div class="single-input">
                                             <label>Address *</label>
-                                            <input type="text" placeholder="Street address">
+                                            @Html.TextBoxFor(m => m.Address, new { @placeholder = "Street address" })
+                                            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
                                         </div>
                                         <div class="single-input">
                                             <label>Phone *</label>
-                                            <input type="text" placeholder="Your phone number">
+                                            @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "Your phone number" })
+                                            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
                                         </div>
                                         <div class="single-input">
                                             <button class="btn btn-custom-size lg-size btn-pronia-primary" type="submit">
