@@ -1,32 +1,30 @@
 ﻿@model IEnumerable<GardenShopOnline.Models.CustomerOrder>
 
-<div class="tab-pane fade" id="account-orders" role="tabpanel" aria-labelledby="account-orders-tab">
-    <div class="myaccount-orders">
-        <h4 class="small-title">MY ORDERS</h4>
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <tbody>
+<div class="myaccount-orders">
+    <h4 class="small-title">MY ORDERS</h4>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <th>ORDER</th>
+                    <th>DATE</th>
+                    <th>STATUS</th>
+                    <th>TOTAL</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model)
+                {
                     <tr>
-                        <th>ORDER</th>
-                        <th>DATE</th>
-                        <th>STATUS</th>
-                        <th>TOTAL</th>
-                        <th></th>
+                        <td><a class="account-order-id" href="#">@item.ID</a></td>
+                        <td>@item.DateCreated</td>
+                        <td>@item.Status</td>
+                        <td>@item.Total.ToString("N0") ₫</td>
+                        <td>
+                            <a href="#" class="btn btn-dark"><span>View</span></a>
+                        </td>
                     </tr>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td><a class="account-order-id" href="#">@item.ID</a></td>
-                            <td>@item.DateCreated</td>
-                            <td>@item.Status</td>
-                            <td>@item.Total.ToString("N0") ₫</td>
-                            <td>
-                                <a href="#" class="btn btn-dark"><span>View</span></a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
