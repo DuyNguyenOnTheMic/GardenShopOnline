@@ -50,13 +50,14 @@ namespace GardenShopOnline.Controllers
         public ActionResult GetOrderData()
         {
             var userId = User.Identity.GetUserId();
-            var query_order = db.CustomerOrders.Where(o => o.AccCustomerID == userId).OrderByDescending(o => o.DateCreated);
+            var query_order = db.CustomerOrders.Where(o => o.AccCustomerID == userId).OrderByDescending(o => o.DateCreated).ToList();
             return PartialView("_Order", query_order);
         }
 
         public ActionResult GetOrderDetails(string order_id)
         {
-            var OrrderDetailsList = db.OrderDetails.Where(o => o.OrderID == order_id);
+            var OrrderDetailsList = db.OrderDetails.Where(o => o.OrderID == order_id).ToList();
+            ViewData["Total"] = OrrderDetailsList.First().CustomerOrder.Total;
             return PartialView("_OrderDetails", OrrderDetailsList);
         }
 
