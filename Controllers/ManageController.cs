@@ -90,7 +90,7 @@ namespace GardenShopOnline.Controllers
             user.Address = aspNetUser.Address;
             user.PhoneNumber = aspNetUser.PhoneNumber;
             db.SaveChanges();
-            return Json("Cập nhật thành công!", JsonRequestBehavior.AllowGet);
+            return Json("Cập nhật thông tin thành công!", JsonRequestBehavior.AllowGet);
         }
 
         //
