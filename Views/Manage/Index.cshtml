@@ -129,14 +129,14 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         // Handle submit of account form
-        $("#accountForm").submit(function (e) {
+        $('#accountForm').submit(function (e) {
 
             e.preventDefault(); // avoid to execute the actual submit of the form.
             var form = $(this);
             var actionUrl = form.attr('action');
 
             $.ajax({
-                type: "POST",
+                type: 'POST',
                 url: actionUrl,
                 data: form.serialize(), // serializes the form's elements.
                 success: function (data) {
