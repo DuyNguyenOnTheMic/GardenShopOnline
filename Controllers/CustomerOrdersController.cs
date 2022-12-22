@@ -54,6 +54,12 @@ namespace GardenShopOnline.Controllers
             return PartialView("_Order", query_order);
         }
 
+        public ActionResult GetOrderDetails(string order_id)
+        {
+            var OrrderDetailsList = db.OrderDetails.Where(o => o.OrderID == order_id);
+            return PartialView("_OrderDetails", OrrderDetailsList);
+        }
+
         public ActionResult EditStatus_Order(CustomerOrder order)
         {
             CustomerOrder customerOrder = db.CustomerOrders.Find(order.ID);

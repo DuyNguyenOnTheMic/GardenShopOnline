@@ -20,7 +20,7 @@
                         <td>@item.Status</td>
                         <td>@item.Total.ToString("N0") ₫</td>
                         <td>
-                            <a href="@Url.Action("OrrderDetailsList", "CustomerOrders", new { order_id = item.ID })" class="btn btn-dark order-details"><span>View</span></a>
+                            <a href="@Url.Action("GetOrderDetails", "CustomerOrders", new { order_id = item.ID })" class="btn btn-dark order-details"><span>View</span></a>
                         </td>
                     </tr>
                 }
