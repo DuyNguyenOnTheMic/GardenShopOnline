@@ -22,6 +22,7 @@ namespace GardenShopOnline.Models
             this.CustomerOrders = new HashSet<CustomerOrder>();
             this.Feedbacks = new HashSet<Feedback>();
             this.AspNetRoles = new HashSet<AspNetRole>();
+            this.CommentProducts = new HashSet<CommentProduct>();
         }
     
         public string Id { get; set; }
@@ -50,5 +51,7 @@ namespace GardenShopOnline.Models
         public virtual ICollection<Feedback> Feedbacks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CommentProduct> CommentProducts { get; set; }
     }
 }

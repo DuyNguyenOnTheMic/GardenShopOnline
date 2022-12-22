@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BonsaiGardenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BonsaiGardenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -93,12 +93,11 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="AccManagerID" Type="nvarchar" MaxLength="128" />
-          <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ProductID" Type="int" />
-          <Property Name="AccCustomerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="DateCreated" Type="datetime" />
-          <Property Name="Approval" Type="bit" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Reply_coment" Type="int" />
         </EntityType>
         <EntityType Name="CustomerOrder">
           <Key>
@@ -155,6 +154,16 @@
           <Property Name="Status" Type="int" />
           <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Type">
           <Key>
             <PropertyRef Name="ID" />
@@ -176,7 +185,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__CommentPr__Produ__49C3F6B7">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -220,6 +229,30 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommentProduct_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommentProduct">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommentProduct_CommentProduct">
+          <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="0..1" />
+          <End Role="CommentProduct1" Type="Self.CommentProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CommentProduct">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommentProduct1">
+              <PropertyRef Name="Reply_coment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -329,6 +362,7 @@
           <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Cart__ProductID__5CD6CB2B" Association="Self.FK__Cart__ProductID__5CD6CB2B">
             <End Role="Product" EntitySet="Product" />
@@ -349,6 +383,14 @@
           <AssociationSet Name="FK__Product__Categor__3C69FB99" Association="Self.FK__Product__Categor__3C69FB99">
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommentProduct_AspNetUsers" Association="Self.FK_CommentProduct_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="CommentProduct" EntitySet="CommentProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommentProduct_CommentProduct" Association="Self.FK_CommentProduct_CommentProduct">
+            <End Role="CommentProduct" EntitySet="CommentProduct" />
+            <End Role="CommentProduct1" EntitySet="CommentProduct" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerOrder_AspNetUsers" Association="Self.FK_CustomerOrder_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -379,8 +421,7 @@
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BonsaiGardenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -447,6 +488,7 @@
           <NavigationProperty Name="CustomerOrders" Relationship="Self.FK_CustomerOrder_AspNetUsers" FromRole="AspNetUsers" ToRole="CustomerOrder" />
           <NavigationProperty Name="Feedbacks" Relationship="Self.FK_Feedback_AspNetUsers" FromRole="AspNetUsers" ToRole="Feedback" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="CommentProducts" Relationship="BonsaiGardenModel.FK_CommentProduct_AspNetUsers" FromRole="AspNetUser" ToRole="CommentProduct" />
         </EntityType>
         <EntityType Name="Cart">
           <Key>
@@ -474,13 +516,15 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="AccManagerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProductID" Type="Int32" />
-          <Property Name="AccCustomerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Precision="3" />
-          <Property Name="Approval" Type="Boolean" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Reply_coment" Type="Int32" />
           <NavigationProperty Name="Product" Relationship="Self.FK__CommentPr__Produ__49C3F6B7" FromRole="CommentProduct" ToRole="Product" />
+          <NavigationProperty Name="CommentProduct1" Relationship="Self.FK_CommentProduct_CommentProduct" FromRole="CommentProduct" ToRole="CommentProduct1" />
+          <NavigationProperty Name="CommentProduct2" Relationship="Self.FK_CommentProduct_CommentProduct" FromRole="CommentProduct1" ToRole="CommentProduct" />
+          <NavigationProperty Name="AspNetUser" Relationship="BonsaiGardenModel.FK_CommentProduct_AspNetUsers" FromRole="CommentProduct" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="CustomerOrder">
           <Key>
@@ -546,6 +590,16 @@
           <NavigationProperty Name="CommentProducts" Relationship="Self.FK__CommentPr__Produ__49C3F6B7" FromRole="Product" ToRole="CommentProduct" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__45F365D3" FromRole="Product" ToRole="OrderDetail" />
           <NavigationProperty Name="Type" Relationship="Self.FK_Product_Type" FromRole="Product" ToRole="Type" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Type">
           <Key>
@@ -633,7 +687,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__CommentPr__Produ__49C3F6B7">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -641,6 +695,18 @@
             </Principal>
             <Dependent Role="CommentProduct">
               <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommentProduct_CommentProduct">
+          <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="0..1" />
+          <End Role="CommentProduct1" Type="Self.CommentProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CommentProduct">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommentProduct1">
+              <PropertyRef Name="Reply_coment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -697,6 +763,7 @@
           <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
           <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Types" EntityType="Self.Type" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -726,6 +793,10 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="CommentProduct" EntitySet="CommentProducts" />
           </AssociationSet>
+          <AssociationSet Name="FK_CommentProduct_CommentProduct" Association="Self.FK_CommentProduct_CommentProduct">
+            <End Role="CommentProduct" EntitySet="CommentProducts" />
+            <End Role="CommentProduct1" EntitySet="CommentProducts" />
+          </AssociationSet>
           <AssociationSet Name="FK__OrderDeta__Order__4CA06362" Association="Self.FK__OrderDeta__Order__4CA06362">
             <End Role="CustomerOrder" EntitySet="CustomerOrders" />
             <End Role="OrderDetail" EntitySet="OrderDetails" />
@@ -742,7 +813,23 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK_CommentProduct_AspNetUsers" Association="BonsaiGardenModel.FK_CommentProduct_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="CommentProduct" EntitySet="CommentProducts" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_CommentProduct_AspNetUsers">
+          <End Type="BonsaiGardenModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="BonsaiGardenModel.CommentProduct" Role="CommentProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CommentProduct">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -832,12 +919,11 @@
               <MappingFragment StoreEntitySet="CommentProduct">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="AccManagerID" ColumnName="AccManagerID" />
-                <ScalarProperty Name="Answer" ColumnName="Answer" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="AccCustomerID" ColumnName="AccCustomerID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Approval" ColumnName="Approval" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Reply_coment" ColumnName="Reply_coment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -897,6 +983,17 @@
                 <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BonsaiGardenModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

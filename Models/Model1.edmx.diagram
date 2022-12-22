@@ -4,20 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6e19eb1a7def4bf3a4af15aac5a25fa4" Name="Diagram1">
+      <Diagram DiagramId="765014e3648d4a02a474129296cd346e" Name="Diagram1">
         <EntityTypeShape EntityType="BonsaiGardenModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsaiGardenModel.AspNetRole" Width="1.5" PointX="1.5" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsaiGardenModel.AspNetUserClaim" Width="1.5" PointX="6" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.AspNetRole" Width="1.5" PointX="1.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.AspNetUserClaim" Width="1.5" PointX="6" PointY="16" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.AspNetUserLogin" Width="1.5" PointX="6" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.AspNetUser" Width="1.5" PointX="3.75" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.Cart" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsaiGardenModel.Category" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.Category" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="BonsaiGardenModel.CommentProduct" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsaiGardenModel.CustomerOrder" Width="1.5" PointX="6" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsaiGardenModel.Feedback" Width="1.5" PointX="6" PointY="21.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsaiGardenModel.OrderDetail" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsaiGardenModel.Product" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonsaiGardenModel.Type" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.CustomerOrder" Width="1.5" PointX="6" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.Feedback" Width="1.5" PointX="6" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.OrderDetail" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.Product" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.Type" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
         <AssociationConnector Association="BonsaiGardenModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK_CustomerOrder_AspNetUsers" ManuallyRouted="false" />
@@ -25,10 +26,12 @@
         <AssociationConnector Association="BonsaiGardenModel.FK__Cart__ProductID__5CD6CB2B" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK__Product__Categor__3C69FB99" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK__CommentPr__Produ__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK_CommentProduct_CommentProduct" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK__OrderDeta__Order__4CA06362" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK__OrderDeta__Produ__45F365D3" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK_Product_Type" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK_CommentProduct_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

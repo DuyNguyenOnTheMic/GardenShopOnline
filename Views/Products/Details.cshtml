@@ -183,73 +183,11 @@
                         </div>
                         <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                             <div class="product-review-body">
-                                <div class="blog-comment mt-0">
-                                    <h4 class="heading">Comments (03)</h4>
-                                    <div class="blog-comment-item">
-                                        <div class="blog-comment-img">
-                                            <img src="~/assets/customer/images/blog/avatar/1-1-120x120.png" alt="User Image">
-                                        </div>
-                                        <div class="blog-comment-content">
-                                            <div class="user-meta">
-                                                <h2 class="user-name">Donald Chavez</h2>
-                                                <span class="date">21 July 2021</span>
-                                            </div>
-                                            <p class="user-comment">
-                                                Lorem ipsum dolor sit amet, consectetur adipisi
-                                                elit, sed
-                                                do eiusmod tempor incidid ut labore etl dolore magna aliqua. Ut enim ad
-                                                minim
-                                                veniam, quis nostrud exercitati ullamco laboris nisi ut aliquiex ea
-                                                commodo
-                                                consequat.
-                                            </p>
-                                            <a class="btn btn-custom-size comment-btn" href="#">Reply</a>
-                                        </div>
-                                    </div>
-                                    <div class="blog-comment-item relpy-item">
-                                        <div class="blog-comment-img">
-                                            <img src="~/assets/customer/images/blog/avatar/1-2-120x120.png" alt="User Image">
-                                        </div>
-                                        <div class="blog-comment-content">
-                                            <div class="user-meta">
-                                                <h2 class="user-name">Marissa Swan</h2>
-                                                <span class="date">21 July 2021</span>
-                                            </div>
-                                            <p class="user-comment">
-                                                Lorem ipsum dolor sit amet, consectetur adipisi
-                                                elit, sed do
-                                                eiusmod tempr incidid ut labore etl dolore magna aliqua. Ut enim ad
-                                                minim veniam,
-                                                quisnos exercitati ullamco laboris nisi ut aliquiex.
-                                            </p>
-                                            <a class="btn btn-custom-size comment-btn style-2" href="#">Reply</a>
-                                        </div>
-                                    </div>
-                                    <div class="blog-comment-item">
-                                        <div class="blog-comment-img">
-                                            <img src="~/assets/customer/images/blog/avatar/1-3-120x120.png" alt="User Image">
-                                        </div>
-                                        <div class="blog-comment-content">
-                                            <div class="user-meta">
-                                                <h2 class="user-name">Donald Chavez</h2>
-                                                <span class="date">21 July 2021</span>
-                                            </div>
-                                            <p class="user-comment">
-                                                Lorem ipsum dolor sit amet, consectetur adipisi
-                                                elit, sed
-                                                do eiusmod tempor incidid ut labore etl dolore magna aliqua. Ut enim ad
-                                                minim
-                                                veniam, quis nostrud exercitati ullamco laboris nisi ut aliquiex ea
-                                                commodo
-                                                consequat.
-                                            </p>
-                                            <a class="btn btn-custom-size comment-btn" href="#">Reply</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                @{ Html.RenderAction("CommentProduct", "CommentProducts", new { product_id = Model.ID });}
+
                                 <div class="feedback-area">
                                     <h2 class="heading">Leave a comment</h2>
-                                    <form class="feedback-form" >
+                                    <form class="feedback-form">
                                         <input type="hidden" id="product_id" value="@Model.ID" />
                                         <div class="form-field mt-30">
                                             <textarea name="message" id="Message" placeholder="Message" class="textarea-field" required></textarea>
@@ -461,6 +399,27 @@
     <!-- Product Area End Here -->
 
 </main>
+<div class="modal quick-view-modal fade" id="quickModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="quickModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-pronia-primary">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Notification</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-tippy="Close" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-0">Your comment has been recorded, to avoid harassment, our website will check if there is no abnormality, it will be displayed publicly.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn  btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+  
+            
+           
+    
 
 @section scripts {
     <script type="text/javascript">
@@ -493,7 +452,8 @@
                 }
             }).done(function (result) {
                 $('#Message').val('');
-                alert("Cmt thành công");
+                $('#quickModal.close').css('display', 'none');
+                $('#quickModal').modal('show');
 
             }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
                 console.log(textStatus)

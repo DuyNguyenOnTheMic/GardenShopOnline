@@ -209,9 +209,8 @@ namespace GardenShopOnline.Controllers
             comment.Content = content;
             comment.ProductID = product_id;
             comment.DateCreated = DateTime.Now;
-            comment.AccCustomerID = User.Identity.GetUserId();
-            comment.AccManagerID = User.Identity.GetUserId();
-            comment.Answer = content;
+            comment.UserID = User.Identity.GetUserId();
+            comment.Status = 1;
             db.CommentProducts.Add(comment);
             db.SaveChanges();
             return Json("Comment_product", JsonRequestBehavior.AllowGet);
