@@ -57,6 +57,7 @@ namespace GardenShopOnline.Controllers
         public ActionResult GetOrderDetails(string order_id)
         {
             var OrrderDetailsList = db.OrderDetails.Where(o => o.OrderID == order_id).ToList();
+            ViewData["Id"] = order_id;
             ViewData["Total"] = OrrderDetailsList.First().CustomerOrder.Total;
             return PartialView("_OrderDetails", OrrderDetailsList);
         }
