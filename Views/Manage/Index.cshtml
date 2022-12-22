@@ -94,6 +94,23 @@
     </div>
 </main>
 
+<!-- Modal -->
+<div class="modal fade" id="empModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
@@ -113,7 +130,25 @@
                     Swal.fire('Good job!', data, 'success')
                 }
             });
+        });
 
+        $('.order-details').click(function (e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+
+            // AJAX request
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (response) {
+                    console.log(response);
+                    // Add response in Modal body
+                    $('.modal-body').html(response);
+
+                    // Display Modal
+                    $('#empModal').modal('show');
+                }
+            });
         });
     </script>
 }
