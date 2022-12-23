@@ -92,6 +92,13 @@ namespace GardenShopOnline.Controllers
             return Json("Update account details succeeded!", JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult GetAddress()
+        {
+            var address = db.AspNetUsers.Find(User.Identity.GetUserId()).Address;
+            return PartialView("_Address", address);
+        }
+
         //
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
