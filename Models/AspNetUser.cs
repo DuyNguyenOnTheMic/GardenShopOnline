@@ -11,7 +11,6 @@ namespace GardenShopOnline.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class AspNetUser
     {
@@ -24,7 +23,6 @@ namespace GardenShopOnline.Models
             this.CustomerOrders = new HashSet<CustomerOrder>();
             this.Feedbacks = new HashSet<Feedback>();
             this.AspNetRoles = new HashSet<AspNetRole>();
-            this.CommentProducts = new HashSet<CommentProduct>();
         }
     
         public string Id { get; set; }
@@ -33,9 +31,6 @@ namespace GardenShopOnline.Models
         public bool EmailConfirmed { get; set; }
         public string PasswordHash { get; set; }
         public string SecurityStamp { get; set; }
-        [Display(Name = "Phone Number")]
-        [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public bool TwoFactorEnabled { get; set; }
@@ -58,7 +53,5 @@ namespace GardenShopOnline.Models
         public virtual ICollection<Feedback> Feedbacks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CommentProduct> CommentProducts { get; set; }
     }
 }

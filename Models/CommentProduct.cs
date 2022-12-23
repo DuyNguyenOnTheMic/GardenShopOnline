@@ -33,6 +33,5 @@ namespace GardenShopOnline.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CommentProduct> CommentProduct1 { get; set; }
         public virtual CommentProduct CommentProduct2 { get; set; }
-        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

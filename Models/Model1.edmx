@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BonsaiGardenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BonsaiGardenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -410,7 +410,8 @@
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BonsaiGardenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -478,7 +479,6 @@
           <NavigationProperty Name="CustomerOrders" Relationship="Self.FK_CustomerOrder_AspNetUsers" FromRole="AspNetUsers" ToRole="CustomerOrder" />
           <NavigationProperty Name="Feedbacks" Relationship="Self.FK_Feedback_AspNetUsers" FromRole="AspNetUsers" ToRole="Feedback" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-          <NavigationProperty Name="CommentProducts" Relationship="BonsaiGardenModel.FK_CommentProduct_AspNetUsers" FromRole="AspNetUser" ToRole="CommentProduct" />
         </EntityType>
         <EntityType Name="Cart">
           <Key>
@@ -511,10 +511,10 @@
           <Property Name="DateCreated" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" />
           <Property Name="Reply_coment" Type="Int32" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_CommentProduct_AspNetUsers" FromRole="CommentProduct" ToRole="AspNetUsers" />
           <NavigationProperty Name="Product" Relationship="Self.FK__CommentPr__Produ__49C3F6B7" FromRole="CommentProduct" ToRole="Product" />
           <NavigationProperty Name="CommentProduct1" Relationship="Self.FK_CommentProduct_CommentProduct" FromRole="CommentProduct" ToRole="CommentProduct1" />
           <NavigationProperty Name="CommentProduct2" Relationship="Self.FK_CommentProduct_CommentProduct" FromRole="CommentProduct1" ToRole="CommentProduct" />
-          <NavigationProperty Name="AspNetUser" Relationship="BonsaiGardenModel.FK_CommentProduct_AspNetUsers" FromRole="CommentProduct" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="CustomerOrder">
           <Key>
@@ -808,23 +808,7 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_CommentProduct_AspNetUsers" Association="BonsaiGardenModel.FK_CommentProduct_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="CommentProduct" EntitySet="CommentProducts" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_CommentProduct_AspNetUsers">
-          <End Type="BonsaiGardenModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="BonsaiGardenModel.CommentProduct" Role="CommentProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CommentProduct">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
