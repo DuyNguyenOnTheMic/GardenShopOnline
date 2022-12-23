@@ -240,9 +240,6 @@
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\ShoppingCartRemoveViewModels.cs" />
     <Compile Include="Models\ShoppingCartViewModels.cs" />
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Type.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -857,6 +854,7 @@
     <Content Include="assets\customer\js\vendor\jquery.validate.unobtrusive.min.js" />
     <Content Include="assets\customer\js\vendor\jquery.waypoints.js" />
     <Content Include="assets\customer\js\vendor\modernizr-3.11.2.min.js" />
+    <Content Include="assets\customer\js\vendor\sweetalert2.all.min.js" />
     <Content Include="assets\customer\js\vendor\toastr.min.js" />
     <Content Include="assets\email-templates\confirm-email.html" />
     <Content Include="assets\images\sen-da-kim-cuong.jpg" />
@@ -1006,6 +1004,9 @@
     <Content Include="Views\CustomerOrders\OrrderDetailsList.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Manage\_Details.cshtml" />
+    <Content Include="Views\CustomerOrders\_Order.cshtml" />
+    <Content Include="Views\CustomerOrders\_OrderDetails.cshtml" />
+    <Content Include="Views\Manage\_Address.cshtml" />
     <Content Include="Views\CommentProducts\Create.cshtml" />
     <Content Include="Views\CommentProducts\Delete.cshtml" />
     <Content Include="Views\CommentProducts\Details.cshtml" />

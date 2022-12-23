@@ -22,6 +22,7 @@ namespace GardenShopOnline
                 "~/assets/customer/js/plugins/ion.rangeSlider.min.js",
                 "~/assets/customer/js/plugins/mailchimp-ajax.js",
                 "~/assets/customer/js/plugins/jquery.counterup.js",
+                "~/assets/customer/js/vendor/sweetalert2.all.min.js",
                 "~/assets/customer/js/vendor/toastr.min.js"));
 
             bundles.Add(new MyStyleBundle("~/Content/customerCss").Include(

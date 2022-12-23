@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GardenShopOnline.Models;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using GardenShopOnline.Models;
 
 namespace GardenShopOnline.Controllers
 {
@@ -26,9 +24,10 @@ namespace GardenShopOnline.Controllers
             var customerOrders = db.CustomerOrders.Include(c => c.AspNetUser);
             return View(customerOrders.ToList());
         }
+
         public ActionResult OrrderList(DateTime? date_start, DateTime? date_end)
         {
-            
+
             if (date_start == null)
             {
                 date_start = DateTime.Now.AddDays((-DateTime.Now.Day) + 1);
@@ -40,12 +39,33 @@ namespace GardenShopOnline.Controllers
             var OrrderList = db.CustomerOrders.Where(i => i.DateCreated >= date_start && i.DateCreated <= date_end);
             return PartialView(OrrderList.ToList());
         }
+
         public ActionResult OrrderDetailsList(string order_id)
         {
             TempData["order_id"] = order_id;
             var OrrderDetailsList = db.OrderDetails.Where(o => o.OrderID == order_id);
             return PartialView(OrrderDetailsList.ToList());
         }
+
+        public ActionResult GetOrderData()
+        {
+            var userId = User.Identity.GetUserId();
+            var query_order = db.CustomerOrders.Where(o => o.AccCustomerID == userId).OrderByDescending(o => o.DateCreated).ToList();
+            return PartialView("_Order", query_order);
+        }
+
+        public ActionResult GetOrderDetails(string order_id)
+        {
+            var order = db.CustomerOrders.Find(order_id);
+            var OrrderDetailsList = db.OrderDetails.Where(o => o.OrderID == order_id).ToList();
+            ViewData["Id"] = order_id;
+            ViewData["FullName"] = order.FullName;
+            ViewData["Address"] = order.Address;
+            ViewData["Phone"] = order.Phone;
+            ViewData["Total"] = OrrderDetailsList.First().CustomerOrder.Total;
+            return PartialView("_OrderDetails", OrrderDetailsList);
+        }
+
         public ActionResult EditStatus_Order(CustomerOrder order)
         {
             CustomerOrder customerOrder = db.CustomerOrders.Find(order.ID);
@@ -88,23 +108,25 @@ namespace GardenShopOnline.Controllers
             db.SaveChanges();
             return Json("EditStatus_Order", JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public JsonResult FindOrder(string order_id)
         {
             var emp = new CustomerOrder
             {
                 ID = order_id
-             
+
             };
             return Json(emp);
         }
+
         public ActionResult DeleteOrder(CustomerOrder order)
         {
             CustomerOrder customerOrder = db.CustomerOrders.Find(order.ID);
 
             if (customerOrder.Status == 1)
             {
-                
+
                 Session["pills-create"] = "active";
                 Session["pills-confirm"] = "";
                 Session["pills-sent"] = "";
@@ -115,7 +137,7 @@ namespace GardenShopOnline.Controllers
             }
             else if (customerOrder.Status == 2)
             {
-                
+
                 Session["pills-create"] = "";
                 Session["pills-confirm"] = "active";
                 Session["pills-sent"] = "";
@@ -126,7 +148,7 @@ namespace GardenShopOnline.Controllers
             }
             else if (customerOrder.Status == 3)
             {
-               
+
                 Session["pills-create"] = "";
                 Session["pills-confirm"] = "";
                 Session["pills-sent"] = "active";

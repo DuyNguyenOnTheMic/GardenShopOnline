@@ -21,6 +21,7 @@
         <EntityTypeShape EntityType="BonsaiGardenModel.Type" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
         <AssociationConnector Association="BonsaiGardenModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="BonsaiGardenModel.FK_CommentProduct_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK_CustomerOrder_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK_Feedback_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK__Cart__ProductID__5CD6CB2B" ManuallyRouted="false" />
