@@ -143,14 +143,37 @@
             url: '@Url.Action("GetOrderData", "Statistics")',
             data: { startDate, endDate },
             success: function (response) {
-                const chartData = {
+                // Get data
+                var orderCount = response.map(function (e) {
+                    return e.Item1;
+                });
+                var accountCount = response.map(function (e) {
+                    return e.Item2;
+                });
+
+                var chartData = {
                     labels: getDateLabels(startDateLabel, endDateLabel),
                     datasets: [{
-                        label: 'My First dataset',
+                        label: 'Order created',
                         backgroundColor: 'rgba(75, 192, 192, 0.8)',
                         borderColor: 'rgb(75, 192, 192)',
                         fill: false,
-                        data: response,
+                        data: orderCount,
+                        datalabels: {
+                            align: 'start',
+                            anchor: 'start',
+                            display: function (context) {
+                                // Only return positive values
+                                return context.dataset.data[context.dataIndex] !== 0;
+                            }
+                        }
+                    },
+                    {
+                        label: 'Account created',
+                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                        borderColor: 'rgb(75, 192, 192)',
+                        fill: false,
+                        data: accountCount,
                         datalabels: {
                             align: 'start',
                             anchor: 'start',
@@ -180,14 +203,37 @@
                         url: '@Url.Action("GetOrderData", "Statistics")',
                         data: { startDate, endDate },
                         success: function (response) {
+                            // Get data
+                            var orderCount = response.map(function (e) {
+                                return e.Item1;
+                            });
+                            var accountCount = response.map(function (e) {
+                                return e.Item2;
+                            });
+
                             var chartData = {
                                 labels: getDateLabels(startDateLabel, endDateLabel),
                                 datasets: [{
-                                    label: 'My First dataset',
+                                    label: 'Order created',
                                     backgroundColor: 'rgba(75, 192, 192, 0.8)',
                                     borderColor: 'rgb(75, 192, 192)',
                                     fill: false,
-                                    data: response,
+                                    data: orderCount,
+                                    datalabels: {
+                                        align: 'start',
+                                        anchor: 'start',
+                                        display: function (context) {
+                                            // Only return positive values
+                                            return context.dataset.data[context.dataIndex] !== 0;
+                                        }
+                                    }
+                                },
+                                {
+                                    label: 'Account created',
+                                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                                    borderColor: 'rgb(75, 192, 192)',
+                                    fill: false,
+                                    data: accountCount,
                                     datalabels: {
                                         align: 'start',
                                         anchor: 'start',
