@@ -440,6 +440,36 @@ function EditStatus_order(id) {
                 });
 
 }
+
+function EditStatus_comment(id, status) {
+    var URDEditStatus_Comment = "";
+    $('#URDEditStatus_Comment')
+        .keypress(function () {
+            URDEditStatus_Comment = $(this).val();
+        })
+        .keypress();
+    var cmt = {};
+    cmt.id = id;
+    cmt.Status = status;
+    $.ajax({
+        url: URDEditStatus_Comment,
+        data: JSON.stringify(cmt),
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+           
+            sweetAlert
+                ({
+                    title: "Cập nhật trạng thái thành công!",
+                    type: "success"
+                })
+          
+            GetList_comment()
+        },
+    });
+
+}
 //-------------------------Get Delete Order -------------------------------
 function GetOrder(id) {
     console.log(id);
@@ -480,6 +510,52 @@ function DeleteOrder() {
             var date_start = $("#filter_DateStart").val();
             var date_end = $("#filter_DateEnd").val();
             GetList_order(date_start, date_end)
+        },
+    });
+
+}
+//-------------------------Get Delete Order -------------------------------
+function GetCmt(id, productID) {
+    $('#edit_idComment').val(id);
+    $('#edit_idProduct').val(productID);
+
+    $('#ReplyComment.close').css('display', 'none');
+    $('#ReplyComment').modal('show');
+
+}
+
+//-----------------------Reply comment------------------------------------------
+
+function Reply_comment() {
+    var URDReplyComment = "";
+    $('#URDReplyComment')
+        .keypress(function () {
+            URDReplyComment = $(this).val();
+        })
+        .keypress();
+
+    var cmt = {};
+    cmt.Reply_coment = $('#edit_idComment').val();
+    cmt.Content = $('#replyComment').val();
+    cmt.ProductID = $('#edit_idProduct').val();
+
+    $.ajax({
+        url: URDReplyComment,
+        data: JSON.stringify(cmt),
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            $('#ReplyComment.close').css('display', 'none');
+            $('#ReplyComment').modal('hide');
+            $('.modal ').insertAfter($('body'));
+            sweetAlert
+                ({
+                    title: "Successful reply",
+                    type: "success"
+                })
+          
+            GetList_comment();
         },
     });
 

@@ -31,7 +31,7 @@
         </div>
         <div>
             <div class="row">
-                <div class="col-md-12">                   
+                <div class="col-md-12">
                     <div class="card" id="dataContainer">
                         @{ Html.RenderAction("CommentProductList", "CommentProducts");}
                     </div>
@@ -40,3 +40,41 @@
         </div>
     </div>
 </section>
+@section scripts {
+    <script type="text/javascript">
+        var row;
+        $(document).ready(function () {
+            $('#example').DataTable({
+                pagingType: 'full_numbers',
+            });
+            $('#example1').DataTable({
+                pagingType: 'full_numbers',
+            });
+            $('#example2').DataTable({
+                pagingType: 'full_numbers',
+            });
+
+        });
+        //----------------------FILTER ORDER DATE TIME------------------------------------------------
+
+        function GetList_comment() {
+            $.ajax({
+                url: '@Url.Action("CommentProductList", "CommentProducts")',
+                data: {},
+            }).done(function (result) {
+                $('#dataContainer').html(result);
+                $('#example').DataTable();
+                $('#example1').DataTable();
+                $('#example2').DataTable();
+
+
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(textStatus)
+                console.log(errorThrown)
+                alert("Something Went Wrong, Try Later");
+            });
+        }
+
+
+    </script>
+}

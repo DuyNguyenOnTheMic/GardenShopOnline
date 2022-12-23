@@ -4,9 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<input type="text" hidden id="URLOrrderList" value="@Url.Action("OrrderList", "CustomerOrders")" />
 <input type="text" hidden id="URLFindOrder" value="@Url.Action("FindOrder", "CustomerOrders")/" />
-<input type="text" hidden id="URLOrrderDetailsList" value="@Url.Action("OrrderDetailsList", "CustomerOrders")" />
 
 
 <section class="pcoded-main-container">
@@ -97,11 +95,7 @@
             });
         });
         //----------------------FILTER ORDER DATE TIME------------------------------------------------
-        $('#URLOrrderList')
-            .keypress(function () {
-                URLOrrderList = $(this).val();
-            })
-            .keypress();
+
 
         $("#filter_DateStart").change(function () {
             var date_start = $("#filter_DateStart").val();
@@ -117,7 +111,7 @@
         function GetList_order(date_start, date_end) {
             console.log(date_start)
             $.ajax({
-                url: URLOrrderList,
+                url: '@Url.Action("OrrderList", "CustomerOrders")',
                 data: {
                     date_start: date_start,
                     date_end: date_end,
@@ -136,14 +130,10 @@
                 alert("Something Went Wrong, Try Later");
             });
         }
-        $('#URLOrrderDetailsList')
-            .keypress(function () {
-                URLOrrderDetailsList = $(this).val();
-            })
-            .keypress();
+
         function GetList_orderDetails(id) {
             $.ajax({
-                url: URLOrrderDetailsList,
+                url: '@Url.Action("OrrderDetailsList", "CustomerOrders")',
                 data: {
                     order_id: id,
                 }

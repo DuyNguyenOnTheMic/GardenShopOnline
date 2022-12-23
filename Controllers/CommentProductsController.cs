@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GardenShopOnline.Models;
+using Microsoft.AspNet.Identity;
 
 namespace GardenShopOnline.Controllers
 {
@@ -31,7 +32,40 @@ namespace GardenShopOnline.Controllers
             var commentProducts = db.CommentProducts.Include(c => c.Product);
             return PartialView(commentProducts.ToList());
         }
+        public ActionResult EditStatus_Comment(CommentProduct cmt)
+        {
+            CommentProduct comment = db.CommentProducts.Find(cmt.ID);
+            if (cmt.Status == 2)
+            {
+                comment.Status = 2;
 
+            }
+            else if (cmt.Status == 3)
+            {
+                comment.Status = 3;
+
+            }
+            db.Entry(comment).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json("EditStatus_Order", JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ReplyComment(CommentProduct cmt)
+        {
+                CommentProduct comment = new CommentProduct();
+                comment.Content = cmt.Content;
+                comment.ProductID = cmt.ProductID;
+                comment.DateCreated = DateTime.Now;
+                comment.UserID = User.Identity.GetUserId();
+                comment.Reply_coment = cmt.Reply_coment;
+                comment.Status = 2;
+                db.CommentProducts.Add(comment);
+            db.SaveChanges();
+            CommentProduct commentProduct = db.CommentProducts.Find(cmt.Reply_coment);
+            commentProduct.Status = 2;
+            db.Entry(commentProduct).State = EntityState.Modified;
+            db.SaveChanges();
+                return Json("ReplyComment", JsonRequestBehavior.AllowGet);         
+        }
         // GET: CommentProducts/Details/5
         public ActionResult Details(int? id)
         {
