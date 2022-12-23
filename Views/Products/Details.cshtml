@@ -187,18 +187,25 @@
 
                                 <div class="feedback-area">
                                     <h2 class="heading">Leave a comment</h2>
-                                    <form class="feedback-form">
-                                        <input type="hidden" id="product_id" value="@Model.ID" />
-                                        <div class="form-field mt-30">
-                                            <textarea name="message" id="Message" placeholder="Message" class="textarea-field" required></textarea>
-                                        </div>
-                                        <div class="button-wrap pt-5">
-                                            <button type="button" value="submit" onclick="Comment()" class="btn btn-custom-size xl-size btn-pronia-primary" name="submit">
-                                                Post
-                                                Comment
-                                            </button>
-                                        </div>
-                                    </form>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <form class="feedback-form">
+                                            <input type="hidden" id="product_id" value="@Model.ID" />
+                                            <div class="form-field mt-30">
+                                                <textarea name="message" id="Message" placeholder="Message" class="textarea-field" required></textarea>
+                                            </div>
+                                            <div class="button-wrap pt-5">
+                                                <button type="button" value="submit" onclick="Comment()" class="btn btn-custom-size xl-size btn-pronia-primary" name="submit">
+                                                    Post
+                                                    Comment
+                                                </button>
+                                            </div>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <p>To leave a comment, <a href="@Url.Action("Login", "Account")">Login into the system</a></p>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -416,10 +423,10 @@
         </div>
     </div>
 </div>
-  
-            
-           
-    
+
+
+
+
 
 @section scripts {
     <script type="text/javascript">
@@ -443,7 +450,7 @@
         function Comment() {
             var product_id = $('#product_id').val();
             var Message = $('#Message').val();
-          
+
             $.ajax({
                 url: '@Url.Action("Comment_product", "Products")',
                 data: {
