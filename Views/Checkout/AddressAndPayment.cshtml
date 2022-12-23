@@ -23,7 +23,7 @@
     </div>
     <div class="checkout-area section-space-y-axis-100">
         <div class="container">
-            @using (Html.BeginForm())
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "orderForm" }))
             {
                 <div class="row justify-content-md-center">
                     <div class="col-lg-8">
@@ -140,4 +140,18 @@
 
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $('#orderForm').submit(function (e) {
+            if ($(this).valid()) {
+                e.preventDefault();
+                if (!$('.your-order-table tbody tr').length) {
+                    Swal.fire(
+                        'Warning',
+                        'Your cart is empty!',
+                        'warning'
+                    )
+                }
+            }
+        });
+    </script>
 }
