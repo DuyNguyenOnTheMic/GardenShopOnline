@@ -1,4 +1,5 @@
-﻿using GardenShopOnline.Models;
+﻿using GardenShopOnline.Hubs;
+using GardenShopOnline.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Web.Mvc;
@@ -17,8 +18,9 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpPost]
-        public ActionResult SendMessage(string message, string toUserId)
+        public JsonResult SendMessage(string message, string toUserId)
         {
+            // Send message to user
             var fromUserId = User.Identity.GetUserId();
             db.Messages.Add(new Message()
             {
@@ -28,7 +30,8 @@ namespace GardenShopOnline.Controllers
                 Status = 1,
                 DateCreated = DateTime.Now
             });
-            return View();
+            ChatHub.Send("blabla", message);
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }
