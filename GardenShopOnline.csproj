@@ -744,6 +744,7 @@
     <Content Include="assets\admin\assets\js\vendor-all.js" />
     <Content Include="assets\admin\assets\js\vendor-all.min.js" />
     <Content Include="assets\chat\css\app-chat.min.css" />
+    <Content Include="assets\chat\js\app-chat.js" />
     <Content Include="assets\customer\css\animate.min.css" />
     <Content Include="assets\customer\css\bootstrap.min.css" />
     <Content Include="assets\customer\css\font-awesome.min.css" />
