@@ -35,6 +35,16 @@ namespace GardenShopOnline.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Customer(string fromUserId)
+        {
+            var toUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
+            ViewData["fromUserId"] = fromUserId;
+            ViewData["toUserId"] = toUserId;
+            var query_message = db.Messages.Where(m => m.FromUserId == fromUserId && m.ToUserId == toUserId).OrderByDescending(m => m.ID).ToList();
+            return PartialView("_Chat", query_message);
+        }
+
         // GET: Contact
         [HttpGet]
         public ActionResult Index()

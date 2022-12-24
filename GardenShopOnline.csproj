@@ -1026,6 +1026,7 @@
     <Content Include="Views\CommentProducts\CommentProduct.cshtml" />
     <Content Include="Views\CommentProducts\CommentProductList.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Contact\_Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
