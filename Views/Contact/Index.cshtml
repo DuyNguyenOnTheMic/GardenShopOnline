@@ -299,6 +299,8 @@
     <script src="~/signalr/hubs"></script>
     <script type="text/javascript">
         $(function () {
+            var url = '/Contact/SendMessage'
+
             // Reference the auto-generated proxy for the hub.
             var chat = $.connection.chatHub;
             // Create a function that the hub can call back to display messages.
@@ -310,7 +312,12 @@
             $.connection.hub.start().done(function () {
                 $('#sendmessage').click(function () {
                     // Call the Send method on the hub.
-                    chat.server.send($('#displayname').val(), $('#message').val());
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        success: function (response) {
+                        }
+                    });
                     // Clear text box and reset focus for next comment.
                     $('#message').val('').focus();
                 });
