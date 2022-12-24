@@ -45,7 +45,6 @@
                                         </div>
                                         <p class="name-time">
                                             <span class="name">Steve Bangalter</span>
-                                            <span class="time">15/02/2019</span>
                                         </p>
                                     </li>
                                     <li class="person" data-chat="person1">
@@ -55,7 +54,6 @@
                                         </div>
                                         <p class="name-time">
                                             <span class="name">Steve Bangalter</span>
-                                            <span class="time">15/02/2019</span>
                                         </p>
                                     </li>
                                     <li class="person active-user" data-chat="person2">
@@ -65,7 +63,6 @@
                                         </div>
                                         <p class="name-time">
                                             <span class="name">Peter Gregor</span>
-                                            <span class="time">12/02/2019</span>
                                         </p>
                                     </li>
                                     <li class="person" data-chat="person3">
@@ -75,7 +72,6 @@
                                         </div>
                                         <p class="name-time">
                                             <span class="name">Jessica Larson</span>
-                                            <span class="time">11/02/2019</span>
                                         </p>
                                     </li>
                                     <li class="person" data-chat="person4">
@@ -85,7 +81,6 @@
                                         </div>
                                         <p class="name-time">
                                             <span class="name">Lisa Guerrero</span>
-                                            <span class="time">08/02/2019</span>
                                         </p>
                                     </li>
                                     <li class="person" data-chat="person5">
@@ -95,7 +90,6 @@
                                         </div>
                                         <p class="name-time">
                                             <span class="name">Michael Jordan</span>
-                                            <span class="time">05/02/2019</span>
                                         </p>
                                     </li>
                                     <li class="person" data-chat="person5">
@@ -105,7 +99,6 @@
                                         </div>
                                         <p class="name-time">
                                             <span class="name">Michael Jordan</span>
-                                            <span class="time">05/02/2019</span>
                                         </p>
                                     </li>
                                     <li class="person" data-chat="person5">
@@ -115,7 +108,6 @@
                                         </div>
                                         <p class="name-time">
                                             <span class="name">Michael Jordan</span>
-                                            <span class="time">05/02/2019</span>
                                         </p>
                                     </li>
                                     <li class="person" data-chat="person5">
@@ -125,7 +117,6 @@
                                         </div>
                                         <p class="name-time">
                                             <span class="name">Michael Jordan</span>
-                                            <span class="time">05/02/2019</span>
                                         </p>
                                     </li>
                                 </ul>
@@ -258,7 +249,7 @@
 
                                 </ul>
                                 <div class="mt-3 mb-0">
-                                    <form class="d-flex flex-row bd-highlight mb-3" action="javascript:void(0);" onsubmit="enterChat();">
+                                    <form class="d-flex flex-row bd-highlight mb-3" action="@Url.Action("SendMessage", "Contact")" data-touserid="@ViewData["ToUserId"]" id="formMessage">
                                         <div class="input-group input-group-merge me-1 form-send-message">
                                             <input type="text" class="form-control message" id="message" placeholder="Type your message or use speech to text">
                                             <span class="input-group-text">
@@ -268,9 +259,9 @@
                                                 </label>
                                             </span>
                                         </div>
-                                        <button type="button" class="btn btn-primary send waves-effect waves-float waves-light" onclick="enterChat();">
+                                        <button type="submit" class="btn btn-primary send waves-effect waves-float waves-light">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send d-lg-none"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                                            <span class="d-none d-lg-block" id="sendMessage">Send</span>
+                                            <span class="d-none d-lg-block">Send</span>
                                         </button>
                                     </form>
                                 </div>
@@ -299,8 +290,6 @@
     <script src="~/signalr/hubs"></script>
     <script type="text/javascript">
         $(function () {
-            var url = '/Contact/SendMessage'
-
             // Reference the auto-generated proxy for the hub.
             var chat = $.connection.chatHub;
             // Create a function that the hub can call back to display messages.
@@ -310,11 +299,21 @@
                     + '</strong>: ' + htmlEncode(message) + '</li>');
             };
             $.connection.hub.start().done(function () {
-                $('#sendmessage').click(function () {
+                $('#formMessage').submit(function (e) {
+                    // Prevent default form submit
+                    e.preventDefault();
+
+                    alert('eheh');
+
+                    var form = $(this);
+                    var actionUrl = form.attr('action');
+                    var message = $('#message').val();
+                    var toUserId = form.data('touserid');
                     // Call the Send method on the hub.
                     $.ajax({
-                        url: url,
+                        url: actionUrl,
                         type: 'POST',
+                        data: { message, toUserId },
                         success: function (response) {
                             $('#discussion').append('<li class="chat-right">'
                                 + '<div class="chat-hour">08:56 <span class="fa fa-check-circle"></span></div>'
