@@ -143,24 +143,7 @@
             url: '@Url.Action("GetOrderData", "Statistics")',
             data: { startDate, endDate },
             success: function (response) {
-                const chartData = {
-                    labels: getDateLabels(startDateLabel, endDateLabel),
-                    datasets: [{
-                        label: 'My First dataset',
-                        backgroundColor: 'rgba(75, 192, 192, 0.8)',
-                        borderColor: 'rgb(75, 192, 192)',
-                        fill: false,
-                        data: response,
-                        datalabels: {
-                            align: 'start',
-                            anchor: 'start',
-                            display: function (context) {
-                                // Only return positive values
-                                return context.dataset.data[context.dataIndex] !== 0;
-                            }
-                        }
-                    }]
-                }
+                var chartData = fetchData(response, startDateLabel, endDateLabel);
 
                 // Create the chart
                 var chart = new Chart(ctx, {
@@ -180,25 +163,7 @@
                         url: '@Url.Action("GetOrderData", "Statistics")',
                         data: { startDate, endDate },
                         success: function (response) {
-                            var chartData = {
-                                labels: getDateLabels(startDateLabel, endDateLabel),
-                                datasets: [{
-                                    label: 'My First dataset',
-                                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
-                                    borderColor: 'rgb(75, 192, 192)',
-                                    fill: false,
-                                    data: response,
-                                    datalabels: {
-                                        align: 'start',
-                                        anchor: 'start',
-                                        display: function (context) {
-                                            // Only return positive values
-                                            return context.dataset.data[context.dataIndex] !== 0;
-                                        }
-                                    }
-                                }]
-                            }
-
+                            var chartData = fetchData(response, startDateLabel, endDateLabel);
                             chart.data = chartData;
                             chart.update();
                         }
@@ -214,6 +179,50 @@
                 dates.push(new Date(d).toLocaleDateString('en-GB'));
             }
             return dates;
+        }
+
+        function fetchData(response, startDateLabel, endDateLabel) {
+            // Get data
+            var orderCount = response.map(function (e) {
+                return e.Item1;
+            });
+            var accountCount = response.map(function (e) {
+                return e.Item2;
+            });
+
+            return chartData = {
+                labels: getDateLabels(startDateLabel, endDateLabel),
+                datasets: [{
+                    label: 'Order created',
+                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                    borderColor: 'rgb(75, 192, 192)',
+                    fill: false,
+                    data: orderCount,
+                    datalabels: {
+                        align: 'start',
+                        anchor: 'start',
+                        display: function (context) {
+                            // Only return positive values
+                            return context.dataset.data[context.dataIndex] !== 0;
+                        }
+                    }
+                },
+                {
+                    label: 'Account created',
+                    backgroundColor: 'rgba(255, 55, 132, 0.8)',
+                    borderColor: 'rgb(255, 55, 132)',
+                    fill: false,
+                    data: accountCount,
+                    datalabels: {
+                        align: 'start',
+                        anchor: 'start',
+                        display: function (context) {
+                            // Only return positive values
+                            return context.dataset.data[context.dataIndex] !== 0;
+                        }
+                    }
+                }]
+            }
         }
     </script>
 }

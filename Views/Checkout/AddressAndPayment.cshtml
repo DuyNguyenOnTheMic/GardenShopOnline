@@ -143,8 +143,8 @@
     <script type="text/javascript">
         $('#orderForm').submit(function (e) {
             if ($(this).valid()) {
-                e.preventDefault();
                 if (!$('.your-order-table tbody tr').length) {
+                    e.preventDefault();
                     Swal.fire(
                         'Warning',
                         'Your cart is empty!',

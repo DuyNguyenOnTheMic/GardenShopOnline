@@ -22,7 +22,8 @@ namespace GardenShopOnline.Models
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.CommentProducts = new HashSet<CommentProduct>();
             this.CustomerOrders = new HashSet<CustomerOrder>();
-            this.Feedbacks = new HashSet<Feedback>();
+            this.Messages = new HashSet<Message>();
+            this.Messages1 = new HashSet<Message>();
             this.AspNetRoles = new HashSet<AspNetRole>();
         }
     
@@ -54,7 +55,9 @@ namespace GardenShopOnline.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerOrder> CustomerOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Feedback> Feedbacks { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Message> Messages1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
