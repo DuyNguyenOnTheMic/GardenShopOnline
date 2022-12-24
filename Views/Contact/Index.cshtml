@@ -135,7 +135,7 @@
                                         if (item.FromUserId == ViewData["fromUserId"].ToString())
                                         {
                                             <li class="chat-right">
-                                                <div class="chat-hour">@item.DateCreated <span class="fa fa-check-circle"></span></div>
+                                                <div class="chat-hour">@item.DateCreated.ToString("HH:mm") <span class="fa fa-check-circle ms-1"></span></div>
                                                 <div class="chat-text">
                                                     @item.Message1
                                                 </div>
@@ -152,7 +152,7 @@
                                                 <div class="chat-text">
                                                     @item.Message1
                                                 </div>
-                                                <div class="chat-hour">@item.DateCreated <span class="fa fa-check-circle"></span></div>
+                                                <div class="chat-hour">@item.DateCreated.ToString("HH:mm") <span class="fa fa-check-circle"></span></div>
                                             </li>
                                         }
                                     }
