@@ -43,7 +43,7 @@ namespace GardenShopOnline.Controllers
             var toUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
             ViewData["fromUserId"] = fromUserId;
             ViewData["toUserId"] = toUserId;
-            var query_message = db.Messages.Where(m => m.FromUserId == fromUserId && m.ToUserId == toUserId).ToList();
+            var query_message = db.Messages.Where(m => m.FromUserId == fromUserId && m.ToUserId == toUserId).OrderByDescending(m => m.ID).ToList();
             return View(query_message);
         }
 
