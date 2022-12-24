@@ -41,16 +41,16 @@ namespace GardenShopOnline.Controllers
         {
             var fromUserId = User.Identity.GetUserId();
             var toUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
-            ViewData["ToUserId"] = toUserId;
+            ViewData["fromUserId"] = fromUserId;
+            ViewData["toUserId"] = toUserId;
             var query_message = db.Messages.Where(m => m.FromUserId == fromUserId && m.ToUserId == toUserId).ToList();
             return View(query_message);
         }
 
         [HttpPost]
-        public JsonResult SendMessage(string message, string toUserId)
+        public JsonResult SendMessage(string message, string fromUserId, string toUserId)
         {
             // Send message to user
-            var fromUserId = User.Identity.GetUserId();
             db.Messages.Add(new Message()
             {
                 FromUserId = fromUserId,
