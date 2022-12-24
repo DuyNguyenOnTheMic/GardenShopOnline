@@ -36,7 +36,14 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpGet]
-        public ActionResult Customer(string fromUserId)
+        public ActionResult Customer()
+        {
+            var query_userChat = db.Messages.ToList();
+            return View(query_userChat);
+        }
+
+        [HttpGet]
+        public ActionResult GetData(string fromUserId)
         {
             var toUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
             ViewData["fromUserId"] = fromUserId;
