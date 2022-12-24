@@ -38,8 +38,8 @@ namespace GardenShopOnline.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var adminUser = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
-            ViewData["ToUserId"] = adminUser;
+            var adminUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
+            ViewData["ToUserId"] = adminUserId;
             return View();
         }
 
