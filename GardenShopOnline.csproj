@@ -188,6 +188,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlMinifierExtensions.cs" />
+    <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -908,7 +909,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Hubs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\admin\assets\fonts\fa-brands-400.eot" />
