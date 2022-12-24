@@ -175,6 +175,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\CommentProductsController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\CustomerOrdersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -741,6 +742,7 @@
     <Content Include="assets\admin\assets\js\uikit.min.js" />
     <Content Include="assets\admin\assets\js\vendor-all.js" />
     <Content Include="assets\admin\assets\js\vendor-all.min.js" />
+    <Content Include="assets\chat\css\app-chat.min.css" />
     <Content Include="assets\customer\css\animate.min.css" />
     <Content Include="assets\customer\css\bootstrap.min.css" />
     <Content Include="assets\customer\css\font-awesome.min.css" />
@@ -1022,6 +1024,7 @@
     <Content Include="Views\CommentProducts\Index.cshtml" />
     <Content Include="Views\CommentProducts\CommentProduct.cshtml" />
     <Content Include="Views\CommentProducts\CommentProductList.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
