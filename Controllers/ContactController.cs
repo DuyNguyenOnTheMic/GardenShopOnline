@@ -38,7 +38,8 @@ namespace GardenShopOnline.Controllers
         [HttpGet]
         public ActionResult Customer()
         {
-            var query_userChat = db.Messages.ToList();
+            var currentUserId = "7d920d3d-74f1-4a72-bbce-e2301afaf321";
+            var query_userChat = db.Messages.Where(m => m.FromUserId != currentUserId).GroupBy(m => m.FromUserId).ToList();
             return View(query_userChat);
         }
 
