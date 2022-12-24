@@ -3,6 +3,7 @@ using GardenShopOnline.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -38,9 +39,11 @@ namespace GardenShopOnline.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var adminUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
-            ViewData["ToUserId"] = adminUserId;
-            return View();
+            var fromUserId = User.Identity.GetUserId();
+            var toUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
+            ViewData["ToUserId"] = toUserId;
+            var query_message = db.Messages.Where(m => m.FromUserId == fromUserId && m.ToUserId == toUserId).ToList();
+            return View(query_message);
         }
 
         [HttpPost]
