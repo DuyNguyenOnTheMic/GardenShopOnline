@@ -51,17 +51,18 @@ namespace GardenShopOnline.Controllers
         public JsonResult SendMessage(string message, string fromUserId, string toUserId)
         {
             // Send message to user
-            db.Messages.Add(new Message()
+            Message ms = new Message()
             {
                 FromUserId = fromUserId,
                 ToUserId = toUserId,
                 Message1 = message,
                 Status = 1,
                 DateCreated = DateTime.Now
-            });
+            };
+            db.Messages.Add(ms);
             db.SaveChanges();
             ChatHub.Send("blabla", message);
-            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, time = ms.DateCreated.ToString("HH:mm") }, JsonRequestBehavior.AllowGet);
         }
     }
 }
