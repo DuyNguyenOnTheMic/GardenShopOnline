@@ -136,7 +136,7 @@
                                 <span>To: <span class="name">Emily Russell</span></span>
                             </div>
                             <div class="chat-container">
-                                <ul class="chat-box chatContainerScroll">
+                                <ul class="chat-box chatContainerScroll" id="discussion">
                                     <li class="chat-left">
                                         <div class="chat-avatar">
                                             <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">
@@ -316,6 +316,15 @@
                         url: url,
                         type: 'POST',
                         success: function (response) {
+                            $('#discussion').append('<li class="chat-right">'
+                                + '<div class="chat-hour">08:56 <span class="fa fa-check-circle"></span></div>'
+                                + '<div class="chat-text">'
+                                + 'Hi, Russell <br /> I need more information about Developer Plan.'
+                                + '<div class="chat-avatar">'
+                                + '<img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">'
+                                + '<div class="chat-name">Sam</div>'
+                                + '</div>'
+                                + '</li>');
                         }
                     });
                     // Clear text box and reset focus for next comment.
