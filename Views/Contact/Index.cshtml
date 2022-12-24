@@ -226,7 +226,11 @@
                         type: 'POST',
                         data: { message, fromUserId, toUserId },
                         success: function (response) {
-                            $('#discussion').prepend('<li class="chat-right"><div class="chat-hour">08:56<span class="fa fa-check-circle"></span></div><div class="chat-text">Hi, Russell<br>I need more information about Developer Plan.</div><div class="chat-avatar"><img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"><div class="chat-name">Sam</div></div></li>');
+                            $('#discussion').prepend('<li class="chat-right">'
+                                + '<div class="chat-hour">08:56<span class="fa fa-check-circle ms-1"></span></div>'
+                                + '<div class="chat-text">' + htmlEncode(message) + '</div>'
+                                + '<div class="chat-avatar"</div>'
+                                + '</li>');
                         }
                     });
                     // Clear text box and reset focus for next comment.
