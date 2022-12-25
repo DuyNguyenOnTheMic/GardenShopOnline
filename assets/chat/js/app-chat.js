@@ -2,10 +2,10 @@
     // Reference the auto-generated proxy for the hub.
     var chat = $.connection.chatHub;
     // Create a function that the hub can call back to display messages.
-    chat.client.addNewMessageToPage = function (time, message, userId) {
+    chat.client.addNewMessageToPage = function (time, message, userId, toUserId) {
         // Add the message to the page.
         var discussion = $('#discussion');
-        if (discussion.data('userid') == userId) {
+        if (discussion.data('userid') == userId && discussion.data('currentuser') == toUserId) {
             discussion.prepend('<li class="chat-left">'
                 + '<div class="chat-avatar"><img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"></div>'
                 + '<div class="chat-text">' + htmlEncode(message) + '</div>'

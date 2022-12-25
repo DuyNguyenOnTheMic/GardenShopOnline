@@ -80,7 +80,7 @@ namespace GardenShopOnline.Controllers
             var time = ms.DateCreated.ToString("HH:mm");
             db.Messages.Add(ms);
             db.SaveChanges();
-            ChatHub.Send(time, message, connectionId, fromUserId);
+            ChatHub.Send(time, message, connectionId, fromUserId, toUserId);
             return Json(new { success = true, time }, JsonRequestBehavior.AllowGet);
         }
     }

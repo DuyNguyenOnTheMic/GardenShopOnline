@@ -4,7 +4,7 @@
     <span>To: <span class="name">Emily Russell</span></span>
 </div>
 <div class="chat-container">
-    <ul class="chat-box chatContainerScroll" id="discussion" data-userid="@ViewData["fromUserId"]">
+    <ul class="chat-box chatContainerScroll" id="discussion" data-userid="@ViewData["fromUserId"]" data-currentuser="@ViewData["toUserId"]">
         @foreach (var item in Model)
         {
             if (item.FromUserId == ViewData["toUserId"].ToString())
