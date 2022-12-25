@@ -16,6 +16,7 @@
             // Scroll to bottom
             discussion.scrollTop(discussion.prop("scrollHeight"))
         } else {
+            // Add new not seen status
             $('.person .status').addClass('busy');
         }
     };
