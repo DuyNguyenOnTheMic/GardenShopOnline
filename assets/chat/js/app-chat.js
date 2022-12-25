@@ -9,9 +9,10 @@
     };
     $.connection.hub.start().done(function () {
         console.log(chat.connection.id);
-        $('#formMessage').submit(function (e) {
+        $(document).on('submit', '#formMessage', function (e) {
             // Prevent default form submit
             e.preventDefault();
+            alert('hehe');
 
             var form = $(this);
             var actionUrl = form.attr('action');
