@@ -40,6 +40,14 @@
             $('#message').val('').focus();
         });
     });
+
+    $('.person').click(function () {
+        var url = $(this).data('chat');
+        $.get(url, function (data) {
+            // Populate statistics data
+            $('#chatDiv').html(data);
+        });
+    });
 });
 // This optional function html-encodes messages for display in the page.
 function htmlEncode(value) {

@@ -62,7 +62,7 @@
                                                     <ul class="users">
                                                         @foreach (var item in Model)
                                                         {
-                                                            <li class="person" data-chat="person1">
+                                                            <li class="person" data-chat="@Url.Action("GetData", "Contact", new { fromUserId = item.Key })">
                                                                 <div class="user">
                                                                     <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">
                                                                     <span class="status busy"></span>
@@ -75,10 +75,12 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            @*@Html.Action("Customer", "Contact")*@
+                                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
+                                                <div id="chatDiv"></div>
+                                            </div>
+                                            </div>
+                                            <!-- Row end -->
                                         </div>
-                                        <!-- Row end -->
-                                    </div>
                                 </div>
                             </div>
                         </div>
