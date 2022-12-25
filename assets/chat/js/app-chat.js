@@ -22,26 +22,28 @@
             var message = $('#message').val();
             var fromUserId = form.data('fromuserid');
             var toUserId = form.data('touserid');
-            // Call the Send method on the hub.
-            $.ajax({
-                url: actionUrl,
-                type: 'POST',
-                data: { message, fromUserId, toUserId, connectionId },
-                success: function (response) {
-                    if (response.success) {
-                        // Add chat message
-                        $('#discussion').prepend('<li class="chat-right">'
-                            + '<div class="chat-hour">' + response.time + '<span class="fa fa-check-circle ms-1"></span></div>'
-                            + '<div class="chat-text">' + htmlEncode(message) + '</div>'
-                            + '<div class="chat-avatar"</div>'
-                            + '</li>');
-                    } else {
-                        alert('An error has occured, please try again later!')
+            if (message) {
+                // Call the Send method on the hub.
+                $.ajax({
+                    url: actionUrl,
+                    type: 'POST',
+                    data: { message, fromUserId, toUserId, connectionId },
+                    success: function (response) {
+                        if (response.success) {
+                            // Add chat message
+                            $('#discussion').prepend('<li class="chat-right">'
+                                + '<div class="chat-hour">' + response.time + '<span class="fa fa-check-circle ms-1"></span></div>'
+                                + '<div class="chat-text">' + htmlEncode(message) + '</div>'
+                                + '<div class="chat-avatar"</div>'
+                                + '</li>');
+                        } else {
+                            alert('An error has occured, please try again later!')
+                        }
                     }
-                }
-            });
-            // Clear text box and reset focus for next comment.
-            $('#message').val('').focus();
+                });
+                // Clear text box and reset focus for next comment.
+                $('#message').val('').focus();
+            }
         });
     });
 
