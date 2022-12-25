@@ -77,7 +77,7 @@
             });
 
             // Remove not seen class
-            $('.person .status-' + fromUserId).removeClass('busy');
+            $('.person .status-' + toUserId).removeClass('busy');
         });
     });
 });
