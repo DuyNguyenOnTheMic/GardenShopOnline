@@ -127,7 +127,7 @@
                                 <span>To: <span class="name">Emily Russell</span></span>
                             </div>
                             <div class="chat-container">
-                                <ul class="chat-box chatContainerScroll" id="discussion">
+                                <ul class="chat-box chatContainerScroll" id="discussion" data-userid="@ViewData["toUserId"]">
                                     @foreach (var item in Model)
                                     {
                                         if (item.FromUserId == ViewData["fromUserId"].ToString())
