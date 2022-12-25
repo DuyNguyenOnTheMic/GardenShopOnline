@@ -1,5 +1,6 @@
 ﻿using GardenShopOnline.Hubs;
 using GardenShopOnline.Models;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
@@ -82,6 +83,14 @@ namespace GardenShopOnline.Controllers
             db.SaveChanges();
             ChatHub.Send(time, message, connectionId, fromUserId, toUserId);
             return Json(new { success = true, time }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult UpdateState(string fromUserId, string toUserId)
+        {
+            db.Messages.Where(m => ((m.FromUserId == fromUserId && m.ToUserId == toUserId) || (m.FromUserId == toUserId && m.ToUserId == fromUserId)) && m.DateViewed == null).ForEach(m => m.DateViewed = DateTime.Now);
+            db.SaveChanges();
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

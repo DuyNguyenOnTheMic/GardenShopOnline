@@ -62,6 +62,16 @@
         $.get(url, function (data) {
             // Populate statistics data
             $('#chatDiv').html(data);
+
+            var form = $('#formMessage');
+            var actionUrl = form.data('updatestate');
+            var fromUserId = form.data('fromuserid');
+            var toUserId = form.data('touserid');
+            $.ajax({
+                url: actionUrl,
+                type: 'POST',
+                data: { fromUserId, toUserId }
+            });
         });
     });
 });
