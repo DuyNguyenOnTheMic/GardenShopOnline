@@ -70,7 +70,7 @@
                                                             <li class="person" data-chat="@Url.Action("GetData", "Contact", new { fromUserId = item.Key })">
                                                                 <div class="user">
                                                                     <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">
-                                                                    <span class="status @seen"></span>
+                                                                    <span class="status status-@item.Key @seen"></span>
                                                                 </div>
                                                                 <p class="name-time">
                                                                     <span class="name">@item.FirstOrDefault().AspNetUser.Email</span>

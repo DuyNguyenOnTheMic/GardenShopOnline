@@ -17,7 +17,7 @@
             discussion.scrollTop(discussion.prop("scrollHeight"))
         } else {
             // Add new not seen status
-            $('.person .status').addClass('busy');
+            $('.person .status-' + userId).addClass('busy');
         }
     };
     $.connection.hub.start().done(function () {
@@ -61,10 +61,6 @@
     });
 
     $('.person').click(function () {
-
-        // Remove not seen class
-        $('.person .status').removeClass('busy');
-
         var url = $(this).data('chat');
         $.get(url, function (data) {
             // Populate statistics data
@@ -79,6 +75,9 @@
                 type: 'POST',
                 data: { fromUserId, toUserId }
             });
+
+            // Remove not seen class
+            $('.person .status' + fromUserId).removeClass('busy');
         });
     });
 });
