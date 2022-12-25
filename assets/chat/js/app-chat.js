@@ -34,11 +34,15 @@
                     success: function (response) {
                         if (response.success) {
                             // Add chat message
-                            $('#discussion').prepend('<li class="chat-right">'
+                            var discussion = $('#discussion');
+                            discussion.prepend('<li class="chat-right">'
                                 + '<div class="chat-hour">' + response.time + '<span class="fa fa-check-circle ms-1"></span></div>'
                                 + '<div class="chat-text">' + htmlEncode(message) + '</div>'
                                 + '<div class="chat-avatar"</div>'
                                 + '</li>');
+
+                            // Scroll to bottom
+                            discussion.scrollTop(discussion.prop("scrollHeight"))
                         } else {
                             alert('An error has occured, please try again later!')
                         }
