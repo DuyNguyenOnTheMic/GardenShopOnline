@@ -9,7 +9,7 @@
             discussion.prepend('<li class="chat-left">'
                 + '<div class="chat-avatar"><img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"></div>'
                 + '<div class="chat-text">' + htmlEncode(message) + '</div>'
-                + '<div class="chat-hour">' + time + '<span class="fa fa-check-circle ms-1"></span></div>'
+                + '<div class="chat-hour">' + time + '<span class="fa fa-check-circle ms-1 ml-1"></span></div>'
                 + '<div class="chat-avatar"</div>'
                 + '</li>');
         }
@@ -36,7 +36,7 @@
                             // Add chat message
                             var discussion = $('#discussion');
                             discussion.prepend('<li class="chat-right">'
-                                + '<div class="chat-hour">' + response.time + '<span class="fa fa-check-circle ms-1"></span></div>'
+                                + '<div class="chat-hour">' + response.time + '<span class="fa fa-check-circle ms-1 ml-1"></span></div>'
                                 + '<div class="chat-text">' + htmlEncode(message) + '</div>'
                                 + '<div class="chat-avatar"</div>'
                                 + '</li>');
