@@ -12,7 +12,6 @@
         $(document).on('submit', '#formMessage', function (e) {
             // Prevent default form submit
             e.preventDefault();
-            alert('hehe');
 
             var form = $(this);
             var actionUrl = form.attr('action');
