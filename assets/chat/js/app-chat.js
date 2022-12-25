@@ -2,10 +2,14 @@
     // Reference the auto-generated proxy for the hub.
     var chat = $.connection.chatHub;
     // Create a function that the hub can call back to display messages.
-    chat.client.addNewMessageToPage = function (name, message) {
+    chat.client.addNewMessageToPage = function (time, message) {
+        alert('hehe');
         // Add the message to the page.
-        /*$('#discussion').prepend('<li><strong>' + htmlEncode(name)
-            + '</strong>: ' + htmlEncode(message) + '</li>');*/
+        $('#discussion').prepend('<li class="chat-left">'
+            + '<div class="chat-hour">' + time + '<span class="fa fa-check-circle ms-1"></span></div>'
+            + '<div class="chat-text">' + htmlEncode(message) + '</div>'
+            + '<div class="chat-avatar"</div>'
+            + '</li>');
     };
     $.connection.hub.start().done(function () {
         console.log(chat.connection.id);

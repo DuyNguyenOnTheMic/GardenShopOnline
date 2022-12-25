@@ -61,7 +61,7 @@ namespace GardenShopOnline.Controllers
             var toUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
             ViewData["fromUserId"] = fromUserId;
             ViewData["toUserId"] = toUserId;
-            var query_message = db.Messages.Where(m => m.FromUserId == fromUserId && m.ToUserId == toUserId).OrderByDescending(m => m.ID).ToList();
+            var query_message = db.Messages.Where(m => (m.FromUserId == fromUserId && m.ToUserId == toUserId) || (m.FromUserId == toUserId && m.ToUserId == fromUserId)).OrderByDescending(m => m.ID).ToList();
             return View(query_message);
         }
 
@@ -77,10 +77,11 @@ namespace GardenShopOnline.Controllers
                 Status = 1,
                 DateCreated = DateTime.Now
             };
+            var time = ms.DateCreated.ToString("HH:mm");
             db.Messages.Add(ms);
             db.SaveChanges();
-            ChatHub.Send("blabla", message);
-            return Json(new { success = true, time = ms.DateCreated.ToString("HH:mm") }, JsonRequestBehavior.AllowGet);
+            ChatHub.Send(time, message);
+            return Json(new { success = true, time = time }, JsonRequestBehavior.AllowGet);
         }
     }
 }
