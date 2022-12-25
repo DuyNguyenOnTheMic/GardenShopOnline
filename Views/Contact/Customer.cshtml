@@ -62,10 +62,15 @@
                                                     <ul class="users">
                                                         @foreach (var item in Model)
                                                         {
+                                                            string seen = "";
+                                                            if (item.Any(m => m.DateViewed == null))
+                                                            {
+                                                                seen = "busy";
+                                                            }
                                                             <li class="person" data-chat="@Url.Action("GetData", "Contact", new { fromUserId = item.Key })">
                                                                 <div class="user">
                                                                     <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">
-                                                                    <span class="status busy"></span>
+                                                                    <span class="status @seen"></span>
                                                                 </div>
                                                                 <p class="name-time">
                                                                     <span class="name">@item.FirstOrDefault().AspNetUser.Email</span>
