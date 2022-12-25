@@ -5,71 +5,89 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="container">
-    <!-- Page header start -->
-    <div class="page-title">
-        <div class="row gutters">
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                <h5 class="title">Chat App</h5>
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Order statistics</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="https://tancool.net">
+                                    <i class="feather icon-home">
+                                    </i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0)">Order statistics</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12"> </div>
         </div>
-    </div>
-    <!-- Page header end -->
-    <!-- Content wrapper start -->
-    <div class="content-wrapper">
-
-        <!-- Row start -->
-        <div class="row gutters">
-
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-
-                <div class="card m-0">
-
-                    <!-- Row start -->
-                    <div class="row no-gutters">
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
-                            <div class="users-container">
-                                <div class="chat-search-box">
-                                    <div class="input-group">
-                                        <input class="form-control" placeholder="Search">
-                                        <div class="input-group-btn">
-                                            <button type="button" class="btn btn-primary">
-                                                <i class="pe-7s-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4>Order statistics</h4>
                                 </div>
-                                <ul class="users">
-                                    @foreach (var item in Model)
-                                    {
-                                        <li class="person" data-chat="person1">
-                                            <div class="user">
-                                                <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">
-                                                <span class="status busy"></span>
-                                            </div>
-                                            <p class="name-time">
-                                                <span class="name">@item.FirstOrDefault().AspNetUser.Email</span>
-                                            </p>
-                                        </li>
-                                    }
-                                </ul>
                             </div>
                         </div>
-                        @*@Html.Action("Customer", "Contact")*@
+                        <div class="card-body p-0">
+                            <div class="row gutters">
+
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                                    <div class="card m-0">
+
+                                        <!-- Row start -->
+                                        <div class="row no-gutters">
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
+                                                <div class="users-container">
+                                                    <div class="chat-search-box">
+                                                        <div class="input-group mb-3">
+                                                            <input class="form-control" placeholder="Search">
+                                                            <button type="button" class="btn btn-primary">
+                                                                <i class="feather icon-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <ul class="users">
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <li class="person" data-chat="person1">
+                                                                <div class="user">
+                                                                    <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">
+                                                                    <span class="status busy"></span>
+                                                                </div>
+                                                                <p class="name-time">
+                                                                    <span class="name">@item.FirstOrDefault().AspNetUser.Email</span>
+                                                                </p>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            @*@Html.Action("Customer", "Contact")*@
+                                        </div>
+                                        <!-- Row end -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Row end -->
                 </div>
-
             </div>
-
         </div>
-        <!-- Row end -->
-
     </div>
-    <!-- Content wrapper end -->
-
-</div>
+</section>
 
 @section styles {
     <link href="~/assets/chat/css/app-chat.min.css" rel="stylesheet" />
