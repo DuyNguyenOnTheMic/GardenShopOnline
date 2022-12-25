@@ -3,7 +3,6 @@
     var chat = $.connection.chatHub;
     // Create a function that the hub can call back to display messages.
     chat.client.addNewMessageToPage = function (time, message) {
-        alert('hehe');
         // Add the message to the page.
         $('#discussion').prepend('<li class="chat-left">'
             + '<div class="chat-avatar"><img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"></div>'
@@ -13,7 +12,7 @@
             + '</li>');
     };
     $.connection.hub.start().done(function () {
-        console.log(chat.connection.id);
+        var connectionId = chat.connection.id;
         $(document).on('submit', '#formMessage', function (e) {
             // Prevent default form submit
             e.preventDefault();
@@ -27,7 +26,7 @@
             $.ajax({
                 url: actionUrl,
                 type: 'POST',
-                data: { message, fromUserId, toUserId },
+                data: { message, fromUserId, toUserId, connectionId },
                 success: function (response) {
                     if (response.success) {
                         // Add chat message

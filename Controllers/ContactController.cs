@@ -66,7 +66,7 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpPost]
-        public JsonResult SendMessage(string message, string fromUserId, string toUserId)
+        public JsonResult SendMessage(string message, string fromUserId, string toUserId, string connectionId)
         {
             // Send message to user
             Message ms = new Message()
@@ -80,7 +80,7 @@ namespace GardenShopOnline.Controllers
             var time = ms.DateCreated.ToString("HH:mm");
             db.Messages.Add(ms);
             db.SaveChanges();
-            ChatHub.Send(time, message);
+            ChatHub.Send(time, message, connectionId);
             return Json(new { success = true, time = time }, JsonRequestBehavior.AllowGet);
         }
     }
