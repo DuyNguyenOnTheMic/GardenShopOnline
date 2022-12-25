@@ -12,6 +12,9 @@
                 + '<div class="chat-hour">' + time + '<span class="fa fa-check-circle ms-1 ml-1"></span></div>'
                 + '<div class="chat-avatar"</div>'
                 + '</li>');
+
+            // Scroll to bottom
+            discussion.scrollTop(discussion.prop("scrollHeight"))
         }
     };
     $.connection.hub.start().done(function () {
