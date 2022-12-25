@@ -15,6 +15,8 @@
 
             // Scroll to bottom
             discussion.scrollTop(discussion.prop("scrollHeight"))
+        } else {
+            $('.person .status').addClass('busy');
         }
     };
     $.connection.hub.start().done(function () {
@@ -58,6 +60,10 @@
     });
 
     $('.person').click(function () {
+
+        // Remove not seen class
+        $('.person .status').removeClass('busy');
+
         var url = $(this).data('chat');
         $.get(url, function (data) {
             // Populate statistics data
