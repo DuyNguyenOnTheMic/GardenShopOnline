@@ -81,7 +81,7 @@ namespace GardenShopOnline.Controllers
             db.Messages.Add(ms);
             db.SaveChanges();
             ChatHub.Send(time, message, connectionId);
-            return Json(new { success = true, time = time }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, time }, JsonRequestBehavior.AllowGet);
         }
     }
 }
