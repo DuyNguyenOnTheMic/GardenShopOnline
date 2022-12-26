@@ -409,38 +409,6 @@ if ($('#description').length) {
 
 //-----------------------Edit status------------------------------------------
 
-function EditStatus_order(id) {
-    var URDEditStatus_Order = "";
-    $('#URDEditStatus_Order')
-        .keypress(function () {
-            URDEditStatus_Order = $(this).val();
-        })
-        .keypress();
-    console.log(URDEditStatus_Order);
-                var CustomerOrder = {};
-                CustomerOrder.id = id;
-                $.ajax({
-                    url: URDEditStatus_Order,
-                    data: JSON.stringify(CustomerOrder),
-                    type: "POST",
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    success: function (data) {
-                        $('#detailModal.close').css('display', 'none');
-                        $('#detailModal').modal('hide');
-                        sweetAlert
-                            ({
-                                title: "Cập nhật trạng thái thành công!",
-                                type: "success"
-                            })
-                        var date_start = $("#filter_DateStart").val();
-                        var date_end = $("#filter_DateEnd").val();
-                        GetList_order(date_start, date_end)
-                    },
-                });
-
-}
-
 function EditStatus_comment(id, status) {
     var URDEditStatus_Comment = "";
     $('#URDEditStatus_Comment')

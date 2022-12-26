@@ -54,30 +54,32 @@
                                 @foreach (var item in Model.Where(m => m.Status == 1))
                                 {
                                     no1++;
-                                    <tr>
-                                        <td>@no1</td>
-                                        <td>@item.ID</td>
-                                        <td>@item.AspNetUser.UserName</td>
-                                        <td>@item.FullName</td>
-                                        <td>@item.Phone</td>
-                                        <td>@item.Address</td>
-                                        <td>@item.Total.ToString("N0")</td>
-                                        <td>@item.DateCreated</td>
-                                        <td class="text-center">
-                                            <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
-                                              Details
-                                            </button>
+                                <tr>
+                                    <td>@no1</td>
+                                    <td>@item.ID</td>
+                                    <td>@item.AspNetUser.UserName</td>
+                                    <td>@item.FullName</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.Total.ToString("N0")</td>
+                                    <td>@item.DateCreated</td>
+                                    <td>@item.Status</td>
 
-                                            <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
-                                                Order confirmation
-                                            </button>
+                                    <td class="text-center">
+                                        <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
+                                            Details
+                                        </button>
 
-                                            <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
-                                                Cancel
-                                            </button>
+                                        <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
+                                            Edit 
+                                        </button>
 
-                                        </td>
-                                    </tr>
+                                        <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
+                                            Cancel
+                                        </button>
+
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

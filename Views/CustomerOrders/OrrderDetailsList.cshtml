@@ -2,6 +2,11 @@
 @{ 
     int no = 0;
     string order_id = TempData["order_id"].ToString();
+    int order_status = 0;
+    if (TempData["order_status"] != null)
+    {
+        order_status = int.Parse(TempData["order_status"].ToString());
+    }
 }
 <div id="detailModal" tabindex="-1" aria-labelledby="detailModalTitle" class="modal fade bd-example-modal-lg" style="display: none;" aria-hidden="true">
     <div role="document" class="modal-dialog modal-lg">
@@ -69,18 +74,32 @@
                                                     @Model.Sum(s => s.UnitPrice)
                                                 </h5>
                                             </td>
-                                            
-                                            
+
+
                                         </tr>
                                         <tr>
                                             <td colspan="6" class="text-right">
+                                                <select class="custom-select" id="status_order" name="CategoryDropdown" value="2">
+                                                    <option value="1">Chờ xác nhận</option>
+                                                    <option value="2">Đã xác nhận</option>
+                                                    <option value="3">Giao hàng</option>
+                                                    <option value="4">Hoàn tất</option>
+                                                    <option value="5"> Hủy đơn</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="text-right">
+                                                <button type="button" class="btn  btn-secondary" data-dismiss="modal">Hủy</button>
+
                                                 <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@order_id')">
                                                     Order confirmation
-                                                </button>                                             
+                                                </button>
                                             </td>
                                         </tr>
 
-                                      
+
+
                                     </tfoot>
                                 </table>
                             </div>
@@ -90,3 +109,41 @@
             </div>
     </div>
 </div>
+<script>
+    $('#status_order').val(@order_status);
+
+    function EditStatus_order(id) {
+        var URDEditStatus_Order = "";
+        $('#URDEditStatus_Order')
+            .keypress(function () {
+                URDEditStatus_Order = $(this).val();
+            })
+            .keypress();
+        var status = $('#status_order').val();
+        console.log(status);
+        var CustomerOrder = {};
+        CustomerOrder.id = id;
+        CustomerOrder.Status = status;
+        $.ajax({
+            url: URDEditStatus_Order,
+            data: JSON.stringify(CustomerOrder),
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (data) {
+                $('#detailModal.close').css('display', 'none');
+                $('#detailModal').modal('hide');
+                sweetAlert
+                    ({
+                        title: "Cập nhật trạng thái thành công!",
+                        type: "success"
+                    })
+                var date_start = $("#filter_DateStart").val();
+                var date_end = $("#filter_DateEnd").val();
+                GetList_order(date_start, date_end)
+            },
+        });
+
+    }
+
+</script>
