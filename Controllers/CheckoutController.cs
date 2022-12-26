@@ -15,6 +15,11 @@ namespace GardenShopOnline.Controllers
         // GET: /Checkout/AddressAndPayment
         public ActionResult AddressAndPayment()
         {
+            var userId = User.Identity.GetUserId();
+            var user = db.AspNetUsers.Find(userId);
+            ViewData["FullName"] = user.FullName;
+            ViewData["Address"] = user.Address;
+            ViewData["Phone"] = user.PhoneNumber;
             return View();
         }
 

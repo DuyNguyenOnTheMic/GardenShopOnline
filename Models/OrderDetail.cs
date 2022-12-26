@@ -16,10 +16,10 @@ namespace GardenShopOnline.Models
     {
         public int ID { get; set; }
         public string OrderID { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<int> ProductID { get; set; }
+        public int Quantity { get; set; }
+        public int ProductID { get; set; }
         public string Note { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
+        public decimal UnitPrice { get; set; }
     
         public virtual CustomerOrder CustomerOrder { get; set; }
         public virtual Product Product { get; set; }

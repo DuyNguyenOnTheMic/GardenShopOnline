@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -23,10 +22,12 @@ namespace GardenShopOnline.Controllers
         {
             startDate = startDate.Date;
             endDate = endDate.Date;
-            var countList = new List<int>();
+            var countList = new List<Tuple<int, int>>();
             for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
             {
-                countList.Add(db.CustomerOrders.Count(o => DbFunctions.TruncateTime(o.DateCreated) == date));
+                var orderCount = db.CustomerOrders.Count(o => DbFunctions.TruncateTime(o.DateCreated) == date);
+                var accountCount = db.AspNetUsers.Count(a => DbFunctions.TruncateTime(a.DateCreated) == date);
+                countList.Add(Tuple.Create(orderCount, accountCount));
             }
             return Json(countList, JsonRequestBehavior.AllowGet);
         }

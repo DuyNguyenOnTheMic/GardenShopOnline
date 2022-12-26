@@ -1,0 +1,46 @@
+﻿@model IEnumerable<GardenShopOnline.Models.OrderDetail>
+
+@{
+    decimal total = (decimal)ViewData["Total"];
+}
+
+<div class="your-order">
+    <h3>@ViewData["Id"]</h3>
+    <p><i class="pe-7s-user fw-bold"></i> Full name: @ViewData["FullName"]</p>
+    <p><i class="pe-7s-home fw-bold"></i> Address: @ViewData["Address"]</p>
+    <p><i class="pe-7s-phone fw-bold"></i> Phone: @ViewData["Phone"]</p>
+    <div class="your-order-table table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="cart-product-name">Product</th>
+                    <th class="cart-product-total">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    decimal subTotal = item.UnitPrice * item.Quantity;
+                    <tr class="cart_item">
+                        <td class="cart-product-name">
+                            @item.Product.Name<strong class="product-quantity">
+                                × @item.Quantity
+                            </strong>
+                        </td>
+                        <td class="cart-product-total text-center"><span class="amount">@subTotal.ToString("N0") ₫</span></td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr class="cart-subtotal">
+                    <th>Cart Subtotal</th>
+                    <td class="text-center"><span class="amount">@total.ToString("N0") ₫</span></td>
+                </tr>
+                <tr class="order-total">
+                    <th>Order Total</th>
+                    <td class="text-center"><strong><span class="amount">@total.ToString("N0") ₫</span></strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

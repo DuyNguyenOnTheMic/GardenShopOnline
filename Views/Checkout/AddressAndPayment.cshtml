@@ -23,7 +23,7 @@
     </div>
     <div class="checkout-area section-space-y-axis-100">
         <div class="container">
-            @using (Html.BeginForm())
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "orderForm" }))
             {
                 <div class="row justify-content-md-center">
                     <div class="col-lg-8">
@@ -33,21 +33,21 @@
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Full Name <span class="required">*</span></label>
-                                        @Html.TextBoxFor(m => m.FullName, new { @placeholder = "Your full name" })
+                                        @Html.TextBoxFor(m => m.FullName, new { @placeholder = "Your full name", @Value = ViewData["FullName"] })
                                         @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Address <span class="required">*</span></label>
-                                        @Html.TextBoxFor(m => m.Address, new { @placeholder = "Street address" })
+                                        @Html.TextBoxFor(m => m.Address, new { @placeholder = "Street address", @Value = ViewData["Address"] })
                                         @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Phone <span class="required">*</span></label>
-                                        @Html.TextBoxFor(m => m.Phone, new { @placeholder = "Your phone number" })
+                                        @Html.TextBoxFor(m => m.Phone, new { @placeholder = "Your phone number", @Value = ViewData["Phone"] })
                                         @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -140,4 +140,18 @@
 
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $('#orderForm').submit(function (e) {
+            if ($(this).valid()) {
+                if (!$('.your-order-table tbody tr').length) {
+                    e.preventDefault();
+                    Swal.fire(
+                        'Warning',
+                        'Your cart is empty!',
+                        'warning'
+                    )
+                }
+            }
+        });
+    </script>
 }

@@ -2,7 +2,6 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -75,20 +74,29 @@ namespace GardenShopOnline.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public ActionResult GetDetails()
         {
             var user = db.AspNetUsers.Find(User.Identity.GetUserId());
             return PartialView("_Details", user);
         }
 
-        public ActionResult UpdateDetails(AspNetUser aspNetUser)
+        [HttpPost]
+        public JsonResult UpdateDetails(AspNetUser aspNetUser)
         {
             AspNetUser user = db.AspNetUsers.Find(aspNetUser.Id);
             user.FullName = aspNetUser.FullName;
             user.Address = aspNetUser.Address;
             user.PhoneNumber = aspNetUser.PhoneNumber;
             db.SaveChanges();
-            return null;
+            return Json("Update account details succeeded!", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetAddress()
+        {
+            var address = db.AspNetUsers.Find(User.Identity.GetUserId()).Address;
+            return PartialView("_Address", address);
         }
 
         //

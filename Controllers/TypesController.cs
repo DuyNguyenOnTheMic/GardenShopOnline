@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GardenShopOnline.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using GardenShopOnline.Models;
 
 namespace GardenShopOnline.Controllers
 {
@@ -82,7 +79,7 @@ namespace GardenShopOnline.Controllers
             return Json(db.Types.Where(c => c.Status == 1).OrderByDescending(c => c.ID).Select(x => new
             {
                 TypeID = x.ID,
-                TypeName = x.Name    
+                TypeName = x.Name
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 

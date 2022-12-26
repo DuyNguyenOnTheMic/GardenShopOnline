@@ -12,16 +12,17 @@ namespace GardenShopOnline.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Feedback
+    public partial class Message
     {
         public int ID { get; set; }
-        public string Content { get; set; }
-        public string AccManagerID { get; set; }
-        public string Answer { get; set; }
-        public int AccCustomerID { get; set; }
-        public Nullable<System.DateTime> DateCreated { get; set; }
-        public Nullable<bool> Approval { get; set; }
+        public string FromUserId { get; set; }
+        public string ToUserId { get; set; }
+        public string Message1 { get; set; }
+        public int Status { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public Nullable<System.DateTime> DateViewed { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUser AspNetUser1 { get; set; }
     }
 }
