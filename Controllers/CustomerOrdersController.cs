@@ -107,6 +107,11 @@ namespace GardenShopOnline.Controllers
                 Session["pills-sent-show"] = "active show";
             }
             customerOrder.Status = order.Status;
+            if (order.Status == 5)
+            {
+                customerOrder.Paid_Advance = order.Paid_Advance;
+                customerOrder.Note = order.Note;
+            }
             db.Entry(customerOrder).State = EntityState.Modified;
             db.SaveChanges();
             return Json("EditStatus_Order", JsonRequestBehavior.AllowGet);

@@ -25,7 +25,7 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">#</th>
+                                            <th>#</th>
                                             <th class="text-center">Product Name</th>
                                             <th class="text-center">Unit price</th>
                                             <th class="text-center">Quantity</th>
@@ -39,7 +39,7 @@
                                             no++;
                                             
                                         <tr>
-                                            <td class="text-center">
+                                            <td>
                                                 @no
                                             </td>
                                            
@@ -84,16 +84,58 @@
                                                     <option value="2">Đã xác nhận</option>
                                                     <option value="3">Giao hàng</option>
                                                     <option value="4">Hoàn tất</option>
-                                                    <option value="5"> Hủy đơn</option>
+                                                    <option value="5">Trả trước</option>
+                                                    <option value="6"> Hủy đơn</option>
                                                 </select>
                                             </td>
                                         </tr>
+                                        <tr style="display: none;" id="paid">
+                                            <td colspan="6">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Paid in advance <span class="text-danger">*</span>
+                                                        </label>
+
+                                                        <input type="text" placeholder="Enter product quantity... " id="Paid_advance" class="form-control " name="quantity" pattern="\S+.*">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Note 
+                                                        </label>
+
+                                                        <textarea id="Paid_note" placeholder="Note" class="form-control "></textarea>
+
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr style="display: none;" id="reason_check">
+                                            <td colspan="6">
+                                                
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Reason <span class="text-danger">*</span>
+                                                        </label>
+
+                                                        <textarea id="order_reason" placeholder="Note" class="form-control "></textarea>
+
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
                                         <tr>
                                             <td colspan="6" class="text-right">
-                                                <button type="button" class="btn  btn-secondary" data-dismiss="modal">Hủy</button>
+                                                <button type="button" class="btn  btn-secondary" data-dismiss="modal">Cancel</button>
 
                                                 <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@order_id')">
-                                                    Order confirmation
+                                                    Save
                                                 </button>
                                             </td>
                                         </tr>
@@ -120,10 +162,13 @@
             })
             .keypress();
         var status = $('#status_order').val();
-        console.log(status);
+        var Paid_note = $('#Paid_note').val();
+        var Paid_advance = $('#Paid_advance').val();
         var CustomerOrder = {};
         CustomerOrder.id = id;
         CustomerOrder.Status = status;
+        CustomerOrder.Note = Paid_note;
+        CustomerOrder.Paid_Advance = Paid_advance;
         $.ajax({
             url: URDEditStatus_Order,
             data: JSON.stringify(CustomerOrder),
@@ -145,5 +190,16 @@
         });
 
     }
-
+    $("#status_order").change(function () {
+        if ($('#status_order').val() == 5) {
+            $('#paid').show();
+            $('#reason_check').hide();
+        } else if ($('#status_order').val() == 6) {
+            $('#paid').hide();
+            $('#reason_check').show();
+        } else {
+            $('#paid').hide();
+            $('#reason_check').hide();
+        }
+    });
 </script>

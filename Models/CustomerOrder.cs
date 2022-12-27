@@ -39,7 +39,8 @@ namespace GardenShopOnline.Models
         public decimal Total { get; set; }
         public int Status { get; set; }
         public string Reason { get; set; }
-    
+        public Nullable<decimal> Paid_Advance { get; set; }
+        public string Note { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
