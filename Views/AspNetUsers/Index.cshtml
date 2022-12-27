@@ -1,0 +1,185 @@
+﻿@model IEnumerable<GardenShopOnline.Models.AspNetUser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int no = 0;
+}
+
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Account</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="https://tancool.net">
+                                    <i class="feather icon-home">
+                                    </i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="javascript:void(0)">Account</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h4>ACCOUNT</h4>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn  btn-primary btn-block" data-toggle="modal" data-target="#AddCategory">Add new</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body table-border-style">
+                            <div class="table-responsive">
+                                <table id="example" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th class="text-center">Full Name</th>
+                                            <th class="text-center">Email</th>
+                                            <th class="text-center">Phone</th>
+                                            <th class="text-center">Address</th>
+                                            <th width="15%">Role</th>
+                                            <th width="15%">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                           
+                                            no++;
+                                        <tr>
+                                            <td>@no</td>
+
+                                            <td class="text-center">@item.FullName</td>
+                                            <td >@item.Email</td>
+                                            <td class="text-center">@item.PhoneNumber</td>
+                                            <td >@item.Address</td>
+                                            <td class="text-center"></td>
+
+                                            <td>
+                                                <button class="btn btn-success ">
+                                                    <i class="feather icon-edit">
+                                                    </i>
+                                                </button>
+                                                <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Category", "categories")">
+                                                <button class="btn btn-danger">
+                                                    <i class="feather icon-trash-2">
+                                                    </i>
+                                                </button>
+
+                                            </td>
+                                        </tr>
+
+                                        }
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="AddCategory" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="AddCategoryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <form class="needs-validation" method="post" action="#" novalidate>
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title" id="AddCategoryLabel">Create new account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Email<span class="text-danger">*</span>
+                                </label>
+                                <div class="position-relative">
+                                    <input type="text" placeholder="Email" id="emai" class="form-control" name="emai" pattern="\S+.*" required="">
+                                    <div class="invalid-feedback">
+                                        Please enter email !
+                                    </div>
+                                </div> <!---->
+                            </div>
+                        </div>                     
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Role<span class="text-danger">*</span>
+                                </label>
+                                <div class="position-relative">
+                                    <select class="custom-select" id="account_role" name="account_role">
+                                        <option disabled selected>Choose role</option>
+                                        <option value="" >Admin</option>
+                                        <option value="">Staff</option>
+
+                                    </select>
+                                    <div class="invalid-feedback">Please choose role</div>
+                                </div> <!---->
+
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                   Password<span class="text-danger">*</span>
+                                </label>
+                                <div class="position-relative">
+                                    <input type="password" placeholder="Password" id="account_Pass" class="form-control"  required="">
+                                    <div class="invalid-feedback">
+                                        Password cannot be left blank !
+                                    </div>
+                                </div> <!---->
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="product-price-import">
+                                    Confirm Password<span class="text-danger">*</span>
+                                </label>
+                                <div class="position-relative">
+                                    <input type="text" placeholder="Confirm Password" id="account_ConFimPass" max="999999999999" class="form-control" pattern="[0-9.,]+" data-type="number" name="purchase_price" required="">
+                                    <div class="invalid-feedback">
+                                        Confirm Password cannot be left blank !
+                                    </div>
+                                </div>
+                                <!---->
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
