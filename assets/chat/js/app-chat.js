@@ -18,17 +18,40 @@
             var message = $('#message').val();
             var fromUserId = form.data('fromuserid');
             var toUserId = form.data('touserid');
+
+            // Xử lý hình ảnh
+            var data = new FormData();
+            var files = $("#file").get(0).files;
+
+            
+            data.append("file", files[0]);
+            data.append("message", message);
+            data.append("fromUserId", fromUserId);
+            data.append("toUserId", toUserId);
+            
+            
+          
+            console.log(files[0].name)
+            var message_html = message;
+            if (files.length > 0) {
+               
+                    message_html = files[0].name;
+                
+            }
+            
             // Call the Send method on the hub.
             $.ajax({
                 url: actionUrl,
+                contentType: false,
+                processData: false,
                 type: 'POST',
-                data: { message, fromUserId, toUserId },
+                data: data,
                 success: function (response) {
                     if (response.success) {
                         // Add chat message
                         $('#discussion').prepend('<li class="chat-right">'
                             + '<div class="chat-hour">' + response.time + '<span class="fa fa-check-circle ms-1"></span></div>'
-                            + '<div class="chat-text">' + htmlEncode(message) + '</div>'
+                            + '<div class="chat-text">' + htmlEncode(message_html) + '</div>'
                             + '<div class="chat-avatar"</div>'
                             + '</li>');
                     } else {

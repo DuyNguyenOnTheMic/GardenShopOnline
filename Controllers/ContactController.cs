@@ -3,6 +3,7 @@ using GardenShopOnline.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -66,18 +67,51 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpPost]
-        public JsonResult SendMessage(string message, string fromUserId, string toUserId)
+        public JsonResult SendMessage(string message, string fromUserId, string toUserId, HttpPostedFileBase file)
         {
-            // Send message to user
-            Message ms = new Message()
+            // Send message to user   
+            Message ms = new Message(); 
+            ms.FromUserId = fromUserId;
+            ms.ToUserId = toUserId;
+            ms.Status = 1;
+            ms.DateCreated = DateTime.Now;
+            if (file != null)
+            {                             
+                string filename = Path.GetFileName(file.FileName);
+                string _filename = DateTime.Now.ToString("yymmssfff") + filename;
+
+                string extension = Path.GetExtension(file.FileName);
+
+                string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
+
+                ms.Message1 = _filename;
+                if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
+                {
+                    if (file.ContentLength <= 4000000)
+                    {
+                        db.Messages.Add(ms);
+
+                        if (db.SaveChanges() > 0)
+                        {
+                            file.SaveAs(path);
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.msg = "Hình ảnh phải lớn hơn hoặc bằng 4MB!";
+                    }
+                }
+                else
+                {
+                    ViewBag.msg = "Định dạng file không hợp lệ!";
+                }
+            }
+            else 
             {
-                FromUserId = fromUserId,
-                ToUserId = toUserId,
-                Message1 = message,
-                Status = 1,
-                DateCreated = DateTime.Now
-            };
-            db.Messages.Add(ms);
+                ms.Message1 = message;
+                db.Messages.Add(ms);
+            }
+
             db.SaveChanges();
             ChatHub.Send("blabla", message);
             return Json(new { success = true, time = ms.DateCreated.ToString("HH:mm") }, JsonRequestBehavior.AllowGet);
