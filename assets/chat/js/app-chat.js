@@ -28,10 +28,7 @@
             data.append("message", message);
             data.append("fromUserId", fromUserId);
             data.append("toUserId", toUserId);
-            
-            
-          
-            console.log(files[0].name)
+
             var message_html = message;
             if (files.length > 0) {
                
