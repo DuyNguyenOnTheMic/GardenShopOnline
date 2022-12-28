@@ -33,29 +33,29 @@
             e.preventDefault();
 
             var form = $(this);
+            var data = new FormData();
+            var files = $("#file").get(0).files;
             var actionUrl = form.attr('action');
             var message = $('#message').val();
             var fromUserId = form.data('fromuserid');
             var toUserId = form.data('touserid');
-            // Xử lý hình ảnh
-            var data = new FormData();
-            var files = $("#file").get(0).files;
 
+            if (message || files.length) {
 
-            data.append("file", files[0]);
-            data.append("message", message);
-            data.append("fromUserId", fromUserId);
-            data.append("toUserId", toUserId);
-            data.append("connectionId", connectionId);
+                // Hanle image
+                data.append("file", files[0]);
+                data.append("message", message);
+                data.append("fromUserId", fromUserId);
+                data.append("toUserId", toUserId);
+                data.append("connectionId", connectionId);
 
-            var message_html = message;
-          
+                var message_html = message;
+
                 // Call the Send method on the hub.
                 $.ajax({
                     url: actionUrl,
                     contentType: false,
                     processData: false,
-                    async: false,
                     type: 'POST',
                     data: data,
                     success: function (response) {
@@ -82,7 +82,7 @@
                 });
                 // Clear text box and reset focus for next comment.
                 $('#message').val('').focus();
-            
+            }            
         });
     });
 
