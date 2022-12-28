@@ -69,6 +69,7 @@ namespace GardenShopOnline.Controllers
         [HttpPost]
         public JsonResult SendMessage(string message, string fromUserId, string toUserId, HttpPostedFileBase file)
         {
+            string img = "";
             // Send message to user   
             Message ms = new Message(); 
             ms.FromUserId = fromUserId;
@@ -84,7 +85,9 @@ namespace GardenShopOnline.Controllers
 
                 string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
                 ms.Type = 2;
-                ms.Message1 = _filename;
+                ms.Image = _filename;
+                ms.Message1 = message;
+                img = _filename;
                 if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
                 {
                     if (file.ContentLength <= 4000000)
@@ -115,7 +118,7 @@ namespace GardenShopOnline.Controllers
             string mess = ms.Message1;
             db.SaveChanges();
             ChatHub.Send("blabla", message);
-            return Json(new { success = true, message = mess, time = ms.DateCreated.ToString("HH:mm") }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, message = mess, img = img, time = ms.DateCreated.ToString("HH:mm") }, JsonRequestBehavior.AllowGet);
         }
     }
 }

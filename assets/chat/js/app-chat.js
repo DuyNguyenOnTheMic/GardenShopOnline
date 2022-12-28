@@ -29,7 +29,7 @@
             data.append("fromUserId", fromUserId);
             data.append("toUserId", toUserId);
 
-            
+            var message_html = message;
             
             // Call the Send method on the hub.
             $.ajax({
@@ -42,9 +42,13 @@
                 success: function (response) {
                     if (response.success) {
                         if (files.length > 0) {
-                            message_html = '<img src="/assets/images/' + response.message + '" />';
+                            message_html = '<img src="/assets/images/' + response.img + '" />' + '<hr /><p>' + response.message+ '</p>' ;
                         }
                         $("#file").val('');
+                        $('#output').attr('src', '');
+
+                        
+
                         // Add chat message
                         $('#discussion').prepend('<li class="chat-right">'
                             + '<div class="chat-hour">' + response.time + '<span class="fa fa-check-circle ms-1"></span></div>'

@@ -22,6 +22,7 @@ namespace GardenShopOnline.Models
         public System.DateTime DateCreated { get; set; }
         public Nullable<System.DateTime> DateViewed { get; set; }
         public Nullable<int> Type { get; set; }
+        public string Image { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual AspNetUser AspNetUser1 { get; set; }

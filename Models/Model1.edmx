@@ -129,6 +129,7 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateViewed" Type="datetime" />
           <Property Name="Type" Type="int" />
+          <Property Name="Image" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -569,6 +570,7 @@
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Message_AspNetUsers" FromRole="Message" ToRole="AspNetUsers" />
           <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_Message_AspNetUsers1" FromRole="Message" ToRole="AspNetUsers" />
           <Property Name="Type" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -967,6 +969,7 @@
           <EntitySetMapping Name="Messages">
             <EntityTypeMapping TypeName="BonsaiGardenModel.Message">
               <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FromUserId" ColumnName="FromUserId" />
