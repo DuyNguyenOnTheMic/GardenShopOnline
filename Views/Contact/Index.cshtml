@@ -137,7 +137,14 @@
                                             <li class="chat-right">
                                                 <div class="chat-hour">@item.DateCreated.ToString("HH:mm") <span class="fa fa-check-circle ms-1"></span></div>
                                                 <div class="chat-text">
-                                                    @item.Message1
+                                                    @if (item.Type == 1)
+                                                    {
+                                                        @item.Message1
+                                                    }
+                                                    else
+                                                    {
+                                                        <img  src="@Url.Content("~/assets/images/" +item.Message1)" />
+                                                    }
                                                 </div>
                                                 <div class="chat-avatar"></div>
                                             </li>

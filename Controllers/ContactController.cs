@@ -83,7 +83,7 @@ namespace GardenShopOnline.Controllers
                 string extension = Path.GetExtension(file.FileName);
 
                 string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
-
+                ms.Type = 2;
                 ms.Message1 = _filename;
                 if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
                 {
@@ -108,13 +108,14 @@ namespace GardenShopOnline.Controllers
             }
             else 
             {
+                ms.Type = 1;
                 ms.Message1 = message;
                 db.Messages.Add(ms);
             }
-
+            string mess = ms.Message1;
             db.SaveChanges();
             ChatHub.Send("blabla", message);
-            return Json(new { success = true, time = ms.DateCreated.ToString("HH:mm") }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, message = mess, time = ms.DateCreated.ToString("HH:mm") }, JsonRequestBehavior.AllowGet);
         }
     }
 }

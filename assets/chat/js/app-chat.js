@@ -29,26 +29,26 @@
             data.append("fromUserId", fromUserId);
             data.append("toUserId", toUserId);
 
-            var message_html = message;
-            if (files.length > 0) {
-               
-                    message_html = files[0].name;
-                
-            }
+            
             
             // Call the Send method on the hub.
             $.ajax({
                 url: actionUrl,
                 contentType: false,
                 processData: false,
+                async: false,
                 type: 'POST',
                 data: data,
                 success: function (response) {
                     if (response.success) {
+                        if (files.length > 0) {
+                            message_html = '<img src="/assets/images/' + response.message + '" />';
+                        }
+                        $("#file").val('');
                         // Add chat message
                         $('#discussion').prepend('<li class="chat-right">'
                             + '<div class="chat-hour">' + response.time + '<span class="fa fa-check-circle ms-1"></span></div>'
-                            + '<div class="chat-text">' + htmlEncode(message_html) + '</div>'
+                            + '<div class="chat-text">' + message_html + '</div>'
                             + '<div class="chat-avatar"</div>'
                             + '</li>');
                     } else {
