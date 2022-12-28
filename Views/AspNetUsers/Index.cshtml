@@ -189,11 +189,13 @@
                 data: form.serialize(),
                 success: function (data) {
                     if (data.error) {
-                        Swal.fire(
-                            'Good job!',
-                            data.message,
-                            'success'
-                        )
+                        swal({
+                            title: 'Oops',
+                            text: data.message,
+                            type: 'error',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#ec6c62"
+                        })
                     }
                 }
             });

@@ -69,11 +69,11 @@ namespace GardenShopOnline.Controllers
 
                 UserManager.Create(user, password);
                 UserManager.AddToRole(user.Id, role.Name);
-                Session["notification"] = "Thêm mới thành công!";
+                Session["notification"] = "Add new item succeeded!";
                 return RedirectToAction("Index");
             }
 
-            return Json(new { error = true, message = "Email này đã tồn tại" }, JsonRequestBehavior.AllowGet);
+            return Json(new { error = true, message = "This email is already exists!" }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: AspNetUsers/Edit/5
