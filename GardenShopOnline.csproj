@@ -998,10 +998,6 @@
     <Content Include="Views\Checkout\Complete.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
-    <Content Include="Views\Types\Create.cshtml" />
-    <Content Include="Views\Types\Delete.cshtml" />
-    <Content Include="Views\Types\Details.cshtml" />
-    <Content Include="Views\Types\Edit.cshtml" />
     <Content Include="Views\Types\Index.cshtml" />
     <Content Include="Views\CustomerOrders\Create.cshtml" />
     <Content Include="Views\CustomerOrders\Delete.cshtml" />

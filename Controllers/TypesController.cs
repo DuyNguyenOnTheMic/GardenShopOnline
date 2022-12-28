@@ -65,13 +65,23 @@ namespace GardenShopOnline.Controllers
             bool status = true;
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Delete_Type(Models.Type Type)
+        public JsonResult Delete_Type(Models.Type Type)
         {
-            Models.Type Types = db.Types.Find(Type.ID);
-            Types.Status = 3;
-            db.Entry(Types).State = EntityState.Modified;
-            db.SaveChanges();
-            return Json("Delete_Type", JsonRequestBehavior.AllowGet);
+            bool status = true;
+            int  product = db.Products.Where(p => p.TypeID == Type.ID && p.Status != 3).Count();
+            if (product <= 0)
+            {
+                Models.Type Types = db.Types.Find(Type.ID);
+                Types.Status = 3;
+                db.Entry(Types).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            else
+            {
+                 status = false;
+            }
+           
+            return Json(new { status = status }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult getType()
         {

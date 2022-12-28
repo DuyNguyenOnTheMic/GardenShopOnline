@@ -65,11 +65,11 @@ function Contains(text_one, text_two) {
 }
 function deleteAlert(id, code) {
     swal({
-        title: "Bạn chắn chắn muốn xóa ?",
+        title: "Are you sure you want to delete ?",
         type: "warning",
         showCancelButton: true,
         closeOnConfirm: false,
-        confirmButtonText: "Xác nhận",
+        confirmButtonText: "Yes",
         confirmButtonColor: "#ec6c62",
     },
         function () {
@@ -84,18 +84,28 @@ function deleteAlert(id, code) {
                 dataType: 'json'
             })
                 .done(function (data) {
-                    sweetAlert
-                        ({
-                            title: "Đã xóa!",
-                            type: "success"
-                        },
-                            function () {
-                                $("table tbody").find('input[name="record"]').each(function () {
-                                    if (Contains($(this).val(), code)) {
-                                        $(this).parents("tr").remove();
-                                    }
-                                });
+                    if (data.status == true) {
+                        sweetAlert
+                            ({
+                                title: "Delete successfully",
+                                type: "success"
+                            },
+                                function () {
+                                    $("table tbody").find('input[name="record"]').each(function () {
+                                        if (Contains($(this).val(), code)) {
+                                            $(this).parents("tr").remove();
+                                        }
+                                    });
+                                })
+                    }
+                    else {
+                        sweetAlert
+                            ({
+                                title: "Delete failed !",
+                                type: "error"
                             })
+                    }
+                  
                 })
             /*   .error(function (data) {
                    swal("OOps", "Chúng tôi không thể kết nối đến server!", "error");
@@ -114,7 +124,7 @@ function EditStatus(id) {
     console.log(URDEditStatus);
     sweetAlert
         ({
-            title: "Cập nhật trạng thái thành công!",
+            title: "Status update successful!",
             type: "success"
         },
             function () {
@@ -369,7 +379,7 @@ function GetProduct(ele, id) {
                 url: URLgetCategory,
                 data: "{}",
                 success: function (data) {
-                    var s = '<option value="" disabled="disabled">Chọn danh mục</option>';
+                    var s = '<option value="" disabled="disabled">Chose Category</option>';
                     for (var i = 0; i < data.length; i++) {
                         if (category_id == data[i].categoryID) {
                             s += '<option value="' + data[i].categoryID + '"  selected="selected">' + data[i].categoryName + '</option>';
@@ -429,7 +439,7 @@ function EditStatus_comment(id, status) {
 
             sweetAlert
                 ({
-                    title: "Cập nhật trạng thái thành công!",
+                    title: "Status update successful!",
                     type: "success"
                 })
 
@@ -472,7 +482,7 @@ function DeleteOrder() {
             $('.modal ').insertAfter($('body'));
             sweetAlert
                 ({
-                    title: "Hủy đơn hàng thành công!",
+                    title: "Canceled order successfully!",
                     type: "success"
                 })
             var date_start = $("#filter_DateStart").val();
