@@ -46,7 +46,7 @@
                         </div>
                         <div class="card-body table-border-style">
                             <div class="table-responsive">
-                                <table id="example" class="table table-hover">
+                                <table id="tblUser" class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -177,32 +177,38 @@
 
 @section scripts {
     <script type="text/javascript">
-        $('#userForm').submit(function (e) {
-            var form = $(this);
+        $(document).ready(function () {
+            $('#tblUser').DataTable({
+                pagingType: 'full_numbers',
+            });
 
-            // Check if form is valid then submit ajax
-            if (form[0].checkValidity()) {
-                e.preventDefault();
-                var url = form.attr('action');
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: form.serialize(),
-                    success: function (data) {
-                        // Hide bootstrap modal to prevent conflict
-                        if (data.error) {
-                            $('#AddUser').modal('hide');
-                            swal({
-                                title: 'Oops',
-                                text: data.message,
-                                type: 'error',
-                                confirmButtonText: 'OK',
-                                confirmButtonColor: "#ec6c62"
-                            }, function () { $('#AddUser').modal('show') }); // Show bootstrap modal again
+            $('#userForm').submit(function (e) {
+                var form = $(this);
+
+                // Check if form is valid then submit ajax
+                if (form[0].checkValidity()) {
+                    e.preventDefault();
+                    var url = form.attr('action');
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: form.serialize(),
+                        success: function (data) {
+                            // Hide bootstrap modal to prevent conflict
+                            if (data.error) {
+                                $('#AddUser').modal('hide');
+                                swal({
+                                    title: 'Oops',
+                                    text: data.message,
+                                    type: 'error',
+                                    confirmButtonText: 'OK',
+                                    confirmButtonColor: "#ec6c62"
+                                }, function () { $('#AddUser').modal('show') }); // Show bootstrap modal again
+                            }
                         }
-                    }
-                });
-            }
+                    });
+                }
+            });
         });
 
         // Function to delete user
@@ -243,6 +249,10 @@
                     }
                 });
             })
+        }
+
+        function refreshTable() {
+
         }
     </script>
 }
