@@ -3,12 +3,12 @@
     var chat = $.connection.chatHub;
     // Create a function that the hub can call back to display messages.
     chat.client.addNewMessageToPage = function (time, message, userId, toUserId, Img) {
-       
+
         var message_html = message;
         if (Img != null) {
             message_html = '<img src="/assets/images/' + Img + '" />' + '<br /><p>' + message + '</p>';
         }
-       
+
         // Add the message to the page.
         var discussion = $('#discussion');
         if (discussion.data('userid') == userId && discussion.data('currentuser') == toUserId) {
@@ -82,7 +82,7 @@
                 });
                 // Clear text box and reset focus for next comment.
                 $('#message').val('').focus();
-            }            
+            }
         });
     });
 
