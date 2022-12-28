@@ -67,16 +67,13 @@ namespace GardenShopOnline.Controllers
         }
         public ActionResult Delete_Category(Category categorys)
         {
-            bool status = true;
-            int product = db.Products.Where(p => p.CategoryID == categorys.ID && p.Status != 3).Count();
-            if (product <= 0)
+            bool status = true;            try
             {
                 Category categories = db.Categories.Find(categorys.ID);
-                categories.Status = 3;
-                db.Entry(categories).State = EntityState.Modified;
+                db.Categories.Remove(categories);
                 db.SaveChanges();
             }
-            else
+            catch
             {
                 status = false;
             }
