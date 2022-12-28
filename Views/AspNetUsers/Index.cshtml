@@ -189,6 +189,8 @@
                     type: 'POST',
                     data: form.serialize(),
                     success: function (data) {
+                        // Hide bootstrap modal to prevent conflict
+                        $('#AddUser').modal('hide');
                         if (data.error) {
                             swal({
                                 title: 'Oops',
@@ -196,7 +198,7 @@
                                 type: 'error',
                                 confirmButtonText: 'OK',
                                 confirmButtonColor: "#ec6c62"
-                            })
+                            }, function () { $('#AddUser').modal('show') }); // Show bootstrap modal again
                         }
                     }
                 });
