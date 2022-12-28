@@ -203,6 +203,9 @@
                                 title: data.message,
                                 type: 'success'
                             })
+
+                            form[0].reset();
+                            form.removeClass('was-validated');
                         } else {
                             swal({
                                 title: 'Oops',
