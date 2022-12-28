@@ -339,3 +339,7 @@ ul {
 .form-send-message span.input-group-text svg {
     cursor: pointer;
 }
+
+img:not([src]), img[src=""] {
+    display: none;
+}
