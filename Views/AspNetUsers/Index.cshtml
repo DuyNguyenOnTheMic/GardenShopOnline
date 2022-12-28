@@ -76,8 +76,7 @@
                                                         <i class="feather icon-edit">
                                                         </i>
                                                     </button>
-                                                    <input hidden type="text" id="URLDelete" value="@Url.Action("Delete", "AspNetUsers")">
-                                                    <button class="btn btn-danger" onclick="deleteAlert('@item.Id', '@item.Id')" id="Delete">
+                                                    <button class="btn btn-danger" onclick="deleteUser('@item.Id')">
                                                         <i class="feather icon-trash-2">
                                                         </i>
                                                     </button>
@@ -203,5 +202,9 @@
                 });
             }
         });
+
+        function deleteUser(id) {
+
+        }
     </script>
 }
