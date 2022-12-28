@@ -64,7 +64,7 @@
                                         {
                                             no++;
                                             <tr>
-                                                <td>@no</td>
+                                                <td>@no <input hidden type="text" name="record" value="@item.Id"></td>
                                                 <td class="text-center">@item.FullName</td>
                                                 <td>@item.Email</td>
                                                 <td class="text-center">@item.PhoneNumber</td>
@@ -190,8 +190,8 @@
                     data: form.serialize(),
                     success: function (data) {
                         // Hide bootstrap modal to prevent conflict
-                        $('#AddUser').modal('hide');
                         if (data.error) {
+                            $('#AddUser').modal('hide');
                             swal({
                                 title: 'Oops',
                                 text: data.message,
@@ -206,7 +206,43 @@
         });
 
         function deleteUser(id) {
-
+            swal({
+                title: "Are you sure want to delete?",
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "Confirm",
+                confirmButtonColor: "#ec6c62",
+            }, function () {
+                $.ajax({
+                    url: '@Url.Action("Delete", "AspNetUsers")',
+                    type: 'POST',
+                    data: { id },
+                    success: function (data) {
+                        // Hide bootstrap modal to prevent conflict
+                        if (data.error) {
+                            swal({
+                                title: 'Oops',
+                                text: data.message,
+                                type: 'error',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: "#ec6c62"
+                            });
+                        } else {
+                            swal({
+                                title: "Đã xóa!",
+                                type: "success"
+                            }, function () {
+                                $("table tbody").find('input[name="record"]').each(function () {
+                                    if (Contains($(this).val(), id)) {
+                                        $(this).parents("tr").remove();
+                                    }
+                                });
+                            })
+                        }
+                    }
+                });
+            })
         }
     </script>
 }

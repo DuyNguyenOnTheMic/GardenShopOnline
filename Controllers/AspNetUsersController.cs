@@ -110,16 +110,19 @@ namespace GardenShopOnline.Controllers
         // GET: AspNetUsers/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            // Declare variables
+            ApplicationUser user = UserManager.FindById(id);
+
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // Delete user
+                UserManager.Delete(user);
             }
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            if (aspNetUser == null)
+            catch
             {
-                return HttpNotFound();
+                return Json(new { error = true, message = "Can't delete this user! Please try again later." }, JsonRequestBehavior.AllowGet);
             }
-            return View(aspNetUser);
+            return Json(new { success = true, message = "Delete succeeded!" }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
