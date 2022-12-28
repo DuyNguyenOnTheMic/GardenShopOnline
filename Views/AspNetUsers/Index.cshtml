@@ -167,14 +167,14 @@
                 { 'data': 'Name' },
                 {
                     'data': 'Id', 'render': function (data, type, row) {
-                        return ' <button class="btn btn-success ">' +
-                            '<i class="feather icon-edit">' +
-                            '</i>' +
-                            '</button>' +
-                            '<button class="btn btn-danger" onclick="deleteUser(' + data + ')">' +
-                            '<i class="feather icon-trash-2">' +
-                            '</i>' +
-                            '</button>';
+                        return "<button class='btn btn-success'>" +
+                        "<i class='feather icon-edit'>" +
+                            "</i>" +
+                            "</button>" +
+                            "<button class='btn btn-danger' onclick=deleteUser('" + data + "')>" +
+                            "<i class='feather icon-trash-2'>" +
+                            "</i>" +
+                            "</button>";
                     }
                 }
             ],
@@ -194,7 +194,10 @@
                     data: form.serialize(),
                     success: function (data) {
                         // Hide bootstrap modal to prevent conflict
-                        if (data.error) {
+                        if (data.success) {
+                            // Refresh table data
+                            dataTable.ajax.reload();
+                        } else {
                             $('#AddUser').modal('hide');
                             swal({
                                 title: 'Oops',
@@ -225,11 +228,11 @@
                     data: { id },
                     success: function (data) {
                         if (data.success) {
+                            // Refresh table data
+                            dataTable.ajax.reload();
                             swal({
                                 title: "Đã xóa!",
                                 type: "success"
-                            }, function () {
-                                dataTable.ajax.reload();
                             })
                         } else {
                             swal({
