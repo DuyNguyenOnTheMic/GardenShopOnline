@@ -156,7 +156,16 @@
                                                     <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">
                                                 </div>
                                                 <div class="chat-text">
-                                                    @item.Message1
+                                                    @if (item.Type == 1)
+                                                    {
+                                                        @item.Message1
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="@Url.Content("~/assets/images/" +item.Image)" />
+                                                        <br />
+                                                        <p>@item.Message1</p>
+                                                    }
                                                 </div>
                                                 <div class="chat-hour">@item.DateCreated.ToString("HH:mm") <span class="fa fa-check-circle ms-1"></span></div>
                                             </li>
