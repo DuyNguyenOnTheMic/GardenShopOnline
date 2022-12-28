@@ -127,12 +127,7 @@
                                     Role<span class="text-danger">*</span>
                                 </label>
                                 <div class="position-relative">
-                                    <select class="custom-select" id="account_role" name="account_role">
-                                        <option disabled selected>Choose role</option>
-                                        <option value="">Admin</option>
-                                        <option value="">Staff</option>
-
-                                    </select>
+                                    @Html.DropDownList("role_id", null, "---- Chọn role ----", htmlAttributes: new { @class = "form-control", @aria_label = "Chọn role" })
                                     <div class="invalid-feedback">Please choose role</div>
                                 </div> <!---->
 

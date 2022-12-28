@@ -13,6 +13,7 @@ namespace GardenShopOnline.Controllers
         // GET: AspNetUsers
         public ActionResult Index()
         {
+            ViewData["role_id"] = new SelectList(db.AspNetRoles.ToList(), "id", "name");
             return View(db.AspNetUsers.ToList());
         }
 
