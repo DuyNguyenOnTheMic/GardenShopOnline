@@ -43,6 +43,12 @@ namespace GardenShopOnline.Controllers
         public ActionResult OrrderDetailsList(string order_id)
         {
             TempData["order_id"] = order_id;
+            if (order_id != "#")
+            {
+                CustomerOrder order = db.CustomerOrders.Find(order_id);
+                TempData["order_status"] = order.Status;
+
+            }
             var OrrderDetailsList = db.OrderDetails.Where(o => o.OrderID == order_id);
             return PartialView(OrrderDetailsList.ToList());
         }
@@ -68,10 +74,10 @@ namespace GardenShopOnline.Controllers
 
         public ActionResult EditStatus_Order(CustomerOrder order)
         {
+
             CustomerOrder customerOrder = db.CustomerOrders.Find(order.ID);
             if (customerOrder.Status == 1)
             {
-                customerOrder.Status = 2;
                 Session["pills-create"] = "active";
                 Session["pills-confirm"] = "";
                 Session["pills-sent"] = "";
@@ -82,7 +88,6 @@ namespace GardenShopOnline.Controllers
             }
             else if (customerOrder.Status == 2)
             {
-                customerOrder.Status = 3;
                 Session["pills-create"] = "";
                 Session["pills-confirm"] = "active";
                 Session["pills-sent"] = "";
@@ -93,7 +98,6 @@ namespace GardenShopOnline.Controllers
             }
             else if (customerOrder.Status == 3)
             {
-                customerOrder.Status = 4;
                 Session["pills-create"] = "";
                 Session["pills-confirm"] = "";
                 Session["pills-sent"] = "active";
@@ -102,8 +106,12 @@ namespace GardenShopOnline.Controllers
                 Session["pills-confirm-show"] = "";
                 Session["pills-sent-show"] = "active show";
             }
-
-
+            customerOrder.Status = order.Status;
+            if (order.Status == 5)
+            {
+                customerOrder.PaidAdvance = order.PaidAdvance;
+                customerOrder.Note = order.Note;
+            }
             db.Entry(customerOrder).State = EntityState.Modified;
             db.SaveChanges();
             return Json("EditStatus_Order", JsonRequestBehavior.AllowGet);
