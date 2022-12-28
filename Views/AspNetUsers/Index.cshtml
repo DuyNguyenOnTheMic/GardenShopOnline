@@ -194,11 +194,16 @@
                     data: form.serialize(),
                     success: function (data) {
                         // Hide bootstrap modal to prevent conflict
+                        $('#AddUser').modal('hide');
+
                         if (data.success) {
                             // Refresh table data
                             dataTable.ajax.reload();
+                            swal({
+                                title: data.message,
+                                type: 'success'
+                            })
                         } else {
-                            $('#AddUser').modal('hide');
                             swal({
                                 title: 'Oops',
                                 text: data.message,
@@ -231,8 +236,8 @@
                             // Refresh table data
                             dataTable.ajax.reload();
                             swal({
-                                title: "Đã xóa!",
-                                type: "success"
+                                title: data.message,
+                                type: 'success'
                             })
                         } else {
                             swal({

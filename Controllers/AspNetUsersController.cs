@@ -83,8 +83,7 @@ namespace GardenShopOnline.Controllers
 
                 UserManager.Create(user, password);
                 UserManager.AddToRole(user.Id, role.Name);
-                Session["notification"] = "Add new item succeeded!";
-                return RedirectToAction("Index");
+                return Json(new { success = true, message = "Add succeeded!" }, JsonRequestBehavior.AllowGet);
             }
 
             return Json(new { error = true, message = "This email is already exists!" }, JsonRequestBehavior.AllowGet);
