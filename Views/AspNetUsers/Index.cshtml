@@ -99,7 +99,8 @@
 
 <div id="AddUser" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="AddUserLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <form class="needs-validation" method="post" action="#" novalidate>
+        <form class="needs-validation" method="post" action="@Url.Action("Create", "AspNetUsers")" novalidate>
+            @Html.AntiForgeryToken()
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <h5 class="modal-title" id="AddUserLabel">Create new account</h5>
@@ -114,7 +115,7 @@
                                     Email<span class="text-danger">*</span>
                                 </label>
                                 <div class="position-relative">
-                                    <input type="text" placeholder="Email" id="emai" class="form-control" name="emai" pattern="\S+.*" required="">
+                                    <input type="text" placeholder="Email" class="form-control" id="emai" name="emai" pattern="\S+.*" required="">
                                     <div class="invalid-feedback">
                                         Please enter email !
                                     </div>
@@ -140,7 +141,7 @@
                                     Password<span class="text-danger">*</span>
                                 </label>
                                 <div class="position-relative">
-                                    <input type="password" placeholder="Password" id="account_Pass" class="form-control" required="">
+                                    <input type="password" placeholder="Password" id="password" name="password" class="form-control" required>
                                     <div class="invalid-feedback">
                                         Password cannot be left blank !
                                     </div>
@@ -154,7 +155,7 @@
                                     Confirm Password<span class="text-danger">*</span>
                                 </label>
                                 <div class="position-relative">
-                                    <input type="text" placeholder="Confirm Password" id="account_ConFimPass" max="999999999999" class="form-control" pattern="[0-9.,]+" data-type="number" name="purchase_price" required="">
+                                    <input type="password" placeholder="Confirm Password" id="confirmPassword" name="confirmPassword" class="form-control" required>
                                     <div class="invalid-feedback">
                                         Confirm Password cannot be left blank !
                                     </div>

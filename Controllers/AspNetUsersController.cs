@@ -1,14 +1,39 @@
 ﻿using GardenShopOnline.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace GardenShopOnline.Controllers
 {
     public class AspNetUsersController : Controller
     {
+        private ApplicationUserManager _userManager;
         private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
+
+        public AspNetUsersController()
+        {
+        }
+
+        public AspNetUsersController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: AspNetUsers
         public ActionResult Index()
@@ -28,16 +53,26 @@ namespace GardenShopOnline.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FullName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,Address,UserName,DateCreated")] AspNetUser aspNetUser)
+        public ActionResult Create(string email, string role_id, string password)
         {
-            if (ModelState.IsValid)
+            var query_email = UserManager.FindByEmail(email);
+            var role = db.AspNetRoles.Find(role_id);
+            if (query_email == null)
             {
-                db.AspNetUsers.Add(aspNetUser);
-                db.SaveChanges();
+                ApplicationUser user = new ApplicationUser()
+                {
+                    Email = email,
+                    UserName = email
+                };
+
+                UserManager.Create(user, password);
+                UserManager.AddToRole(user.Id, role.Name);
                 return RedirectToAction("Index");
             }
 
-            return View(aspNetUser);
+            ViewData["role_id"] = new SelectList(db.AspNetRoles.ToList(), "id", "name");
+            ViewData["error"] = "Email này đã tồn tại";
+            return View();
         }
 
         // GET: AspNetUsers/Edit/5
