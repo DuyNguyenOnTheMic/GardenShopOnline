@@ -117,10 +117,11 @@ namespace GardenShopOnline.Controllers
                 db.Messages.Add(ms);
             }
             string mess = ms.Message1;
+            string Img = ms.Image;
             var time = ms.DateCreated.ToString("HH:mm");
 
             db.SaveChanges();
-            ChatHub.Send(time, message, connectionId, fromUserId, toUserId);
+            ChatHub.Send(time, message, connectionId, fromUserId, toUserId, Img);
             return Json(new { success = true, message = mess, img = img, time }, JsonRequestBehavior.AllowGet);
         }
 
