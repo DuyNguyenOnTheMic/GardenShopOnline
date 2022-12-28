@@ -76,8 +76,8 @@
                                                         <i class="feather icon-edit">
                                                         </i>
                                                     </button>
-                                                    <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Category", "Categories")">
-                                                    <button class="btn btn-danger">
+                                                    <input hidden type="text" id="URLDelete" value="@Url.Action("Delete", "AspNetUsers")">
+                                                    <button class="btn btn-danger" onclick="deleteAlert('@item.Id', '@item.Id')" id="Delete">
                                                         <i class="feather icon-trash-2">
                                                         </i>
                                                     </button>
