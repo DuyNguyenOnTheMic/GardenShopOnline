@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    int no = 0;
 }
 
 <section class="pcoded-main-container">
@@ -59,34 +58,8 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                            no++;
-                                            <tr>
-                                                <td>@no <input hidden type="text" name="record" value="@item.Id"></td>
-                                                <td class="text-center">@item.FullName</td>
-                                                <td>@item.Email</td>
-                                                <td class="text-center">@item.PhoneNumber</td>
-                                                <td>@item.Address</td>
-                                                <td class="text-center">@Html.DisplayFor(modelItem => item.AspNetRoles.FirstOrDefault().Name)</td>
-
-                                                <td>
-                                                    <button class="btn btn-success ">
-                                                        <i class="feather icon-edit">
-                                                        </i>
-                                                    </button>
-                                                    <button class="btn btn-danger" onclick="deleteUser('@item.Id')">
-                                                        <i class="feather icon-trash-2">
-                                                        </i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        }
-
-                                    </tbody>
+                                    <tbody></tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
@@ -179,6 +152,32 @@
     <script type="text/javascript">
         var dataTable;
         dataTable = $('#tblUser').DataTable({
+            ajax: {
+                url: '@Url.Action("GetData", "AspNetUsers")',
+                type: 'GET',
+                dataType: 'json',
+                dataSrc: ''
+            },
+            columns: [
+                { 'data': '', defaultContent: '' },
+                { 'data': 'FullName' },
+                { 'data': 'Email' },
+                { 'data': 'PhoneNumber' },
+                { 'data': 'Address' },
+                { 'data': 'Name' },
+                {
+                    'data': 'Id', 'render': function (data, type, row) {
+                        return ' <button class="btn btn-success ">' +
+                            '<i class="feather icon-edit">' +
+                            '</i>' +
+                            '</button>' +
+                            '<button class="btn btn-danger" onclick="deleteUser(' + data + ')">' +
+                            '<i class="feather icon-trash-2">' +
+                            '</i>' +
+                            '</button>';
+                    }
+                }
+            ],
             pagingType: 'full_numbers',
         });
 

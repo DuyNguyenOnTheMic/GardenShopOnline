@@ -40,7 +40,21 @@ namespace GardenShopOnline.Controllers
         public ActionResult Index()
         {
             ViewData["role_id"] = new SelectList(db.AspNetRoles.ToList(), "id", "name");
-            return View(db.AspNetUsers.ToList());
+            return View();
+        }
+
+        public JsonResult GetData()
+        {
+            // Get user data from database
+            return Json(db.AspNetUsers.Select(u => new
+            {
+                u.Id,
+                u.FullName,
+                u.Email,
+                u.PhoneNumber,
+                u.Address,
+                u.AspNetRoles.FirstOrDefault().Name
+            }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         // GET: AspNetUsers/Create
