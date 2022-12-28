@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Order statistics";
+    ViewBag.Title = "Statistics";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -10,7 +10,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Order statistics</h5>
+                            <h5 class="m-b-10">Statistics</h5>
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item">
@@ -20,7 +20,7 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="javascript:void(0)">Order statistics</a>
+                                <a href="javascript:void(0)">Statistics</a>
                             </li>
                         </ul>
                     </div>
@@ -34,7 +34,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h4>Order statistics</h4>
+                                    <h4>Statistics</h4>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
         const chartOptions = {
             plugins: {
                 title: {
-                    text: 'Order Statistics',
+                    text: 'Statistics',
                     display: true,
                     font: {
                         size: 25
@@ -140,7 +140,7 @@
 
         $.ajax({
             type: 'GET',
-            url: '@Url.Action("GetOrderData", "Statistics")',
+            url: '@Url.Action("GetData", "Statistics")',
             data: { startDate, endDate },
             success: function (response) {
                 var chartData = fetchData(response, startDateLabel, endDateLabel);
@@ -160,7 +160,7 @@
                         endDate = new Date(endDateFilter.val()).toUTCString();
                     $.ajax({
                         type: 'GET',
-                        url: '@Url.Action("GetOrderData", "Statistics")',
+                        url: '@Url.Action("GetData", "Statistics")',
                         data: { startDate, endDate },
                         success: function (response) {
                             var chartData = fetchData(response, startDateLabel, endDateLabel);

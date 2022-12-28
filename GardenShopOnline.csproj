@@ -1010,7 +1010,7 @@
     <Content Include="Views\CustomerOrders\Edit.cshtml" />
     <Content Include="Views\CustomerOrders\Index.cshtml" />
     <Content Include="Views\CustomerOrders\OrrderList.cshtml" />
-    <Content Include="Views\Statistics\Order.cshtml" />
+    <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\CustomerOrders\OrrderDetailsList.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Manage\_Details.cshtml" />
