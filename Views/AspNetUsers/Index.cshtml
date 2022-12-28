@@ -99,7 +99,7 @@
 
 <div id="AddUser" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="AddUserLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <form class="needs-validation" method="post" action="@Url.Action("Create", "AspNetUsers")" novalidate>
+        <form class="needs-validation" method="post" action="@Url.Action("Create", "AspNetUsers")" id="userForm" novalidate>
             @Html.AntiForgeryToken()
             <div class="modal-content">
                 <div class="modal-header bg-primary">
@@ -128,7 +128,7 @@
                                     Role<span class="text-danger">*</span>
                                 </label>
                                 <div class="position-relative">
-                                    @Html.DropDownList("role_id", null, "---- Chọn role ----", htmlAttributes: new { @class = "form-control", @aria_label = "Chọn role" })
+                                    @Html.DropDownList("role_id", null, htmlAttributes: new { @class = "form-control", @aria_label = "Choose role" })
                                     <div class="invalid-feedback">Please choose role</div>
                                 </div> <!---->
 
@@ -175,3 +175,29 @@
         </form>
     </div>
 </div>
+
+@section scripts {
+    <script type="text/javascript">
+        $('#userForm').submit(function (e) {
+            e.preventDefault();
+
+            var form = $(this);
+            var url = form.attr('action');
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: form.serialize(),
+                success: function (data) {
+                    if (data.error) {
+                        Swal.fire(
+                            'Good job!',
+                            data.message,
+                            'success'
+                        )
+                    }
+                }
+            });
+
+        });
+    </script>
+}

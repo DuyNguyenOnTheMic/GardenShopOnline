@@ -73,9 +73,7 @@ namespace GardenShopOnline.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewData["role_id"] = new SelectList(db.AspNetRoles.ToList(), "id", "name");
-            ViewData["error"] = "Email này đã tồn tại";
-            return View();
+            return Json(new { error = true, message = "Email này đã tồn tại" }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: AspNetUsers/Edit/5
