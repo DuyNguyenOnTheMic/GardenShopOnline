@@ -177,38 +177,37 @@
 
 @section scripts {
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#tblUser').DataTable({
-                pagingType: 'full_numbers',
-            });
+        var dataTable;
+        dataTable = $('#tblUser').DataTable({
+            pagingType: 'full_numbers',
+        });
 
-            $('#userForm').submit(function (e) {
-                var form = $(this);
+        $('#userForm').submit(function (e) {
+            var form = $(this);
 
-                // Check if form is valid then submit ajax
-                if (form[0].checkValidity()) {
-                    e.preventDefault();
-                    var url = form.attr('action');
-                    $.ajax({
-                        url: url,
-                        type: 'POST',
-                        data: form.serialize(),
-                        success: function (data) {
-                            // Hide bootstrap modal to prevent conflict
-                            if (data.error) {
-                                $('#AddUser').modal('hide');
-                                swal({
-                                    title: 'Oops',
-                                    text: data.message,
-                                    type: 'error',
-                                    confirmButtonText: 'OK',
-                                    confirmButtonColor: "#ec6c62"
-                                }, function () { $('#AddUser').modal('show') }); // Show bootstrap modal again
-                            }
+            // Check if form is valid then submit ajax
+            if (form[0].checkValidity()) {
+                e.preventDefault();
+                var url = form.attr('action');
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: form.serialize(),
+                    success: function (data) {
+                        // Hide bootstrap modal to prevent conflict
+                        if (data.error) {
+                            $('#AddUser').modal('hide');
+                            swal({
+                                title: 'Oops',
+                                text: data.message,
+                                type: 'error',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: "#ec6c62"
+                            }, function () { $('#AddUser').modal('show') }); // Show bootstrap modal again
                         }
-                    });
-                }
-            });
+                    }
+                });
+            }
         });
 
         // Function to delete user
@@ -231,11 +230,7 @@
                                 title: "Đã xóa!",
                                 type: "success"
                             }, function () {
-                                $("table tbody").find('input[name="record"]').each(function () {
-                                    if (Contains($(this).val(), id)) {
-                                        $(this).parents("tr").remove();
-                                    }
-                                });
+                                dataTable.ajax.reload();
                             })
                         } else {
                             swal({
