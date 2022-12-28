@@ -1,6 +1,7 @@
 ﻿using GardenShopOnline.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -62,11 +63,13 @@ namespace GardenShopOnline.Controllers
                 ApplicationUser user = new ApplicationUser()
                 {
                     Email = email,
-                    UserName = email
+                    UserName = email,
+                    DateCreated = DateTime.Now
                 };
 
                 UserManager.Create(user, password);
                 UserManager.AddToRole(user.Id, role.Name);
+                Session["notification"] = "Thêm mới thành công!";
                 return RedirectToAction("Index");
             }
 
