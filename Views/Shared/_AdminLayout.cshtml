@@ -42,7 +42,7 @@
                         <label>Quản lý</label>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="@Url.Action("Index","AspNetUsers")" class="nav-link">
                             <span class="pcoded-micon"><i class="feather icon-user"></i></span>
                             <span class="pcoded-mtext">Staff</span>
                         </a>
@@ -66,41 +66,21 @@
                             <span class="pcoded-mtext">Product</span>
                         </a>
                     </li>
-
-                    <li class="nav-item pcoded-menu-caption">
-                        <label>Hàng hoá</label>
-                    </li>
-                    <li class="nav-item">
-                        <a href="https://tancool.net/quan-ly-ban-hang" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-target"></i></span> <span class="pcoded-mtext">Bán hàng</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="https://tancool.net/doanh-thu" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-clipboard"></i></span>
-                            <span class="pcoded-mtext">Doanh thu</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Url.Action("Index","import_inventory")" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-package"></i></span>
-                            <span class="pcoded-mtext">Tồn kho</span>
-                        </a>
-                    </li>
                     <li class="nav-item">
                         <a href="@Url.Action("Index","CustomerOrders")" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-inbox"></i></span> <span class="pcoded-mtext">Đơn hàng</span>
-                        </a>
-                    </li>
-                    <li class="nav-item pcoded-menu-caption"><label>Tín năng</label></li>
-                    <li class="nav-item">
-                        <a href="https://tancool.net/doi-tra" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-repeat"></i></span> <span class="pcoded-mtext">Đổi trả</span>
+                            <span class="pcoded-micon"><i class="feather icon-inbox"></i></span> <span class="pcoded-mtext">Order</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://tancool.net/thu-chi" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-percent"></i></span> <span class="pcoded-mtext">Thu chi</span>
+                        <a href="@Url.Action("Index","Statistics")" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-bar-chart"></i></span>
+                            <span class="pcoded-mtext">Statistics</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Customer","Contact")" class="nav-link">
+                            <span class="pcoded-micon"><i class="feather icon-phone"></i></span>
+                            <span class="pcoded-mtext">Customer Contact</span>
                         </a>
                     </li>
                 </ul>
