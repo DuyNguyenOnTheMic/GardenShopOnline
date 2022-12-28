@@ -1,43 +1,48 @@
 ﻿@model IEnumerable<GardenShopOnline.Models.OrderDetail>
-@{ 
+@{
     int no = 0;
     string order_id = TempData["order_id"].ToString();
+    int order_status = 0;
+    if (TempData["order_status"] != null)
+    {
+        order_status = int.Parse(TempData["order_status"].ToString());
+    }
 }
 <div id="detailModal" tabindex="-1" aria-labelledby="detailModalTitle" class="modal fade bd-example-modal-lg" style="display: none;" aria-hidden="true">
     <div role="document" class="modal-dialog modal-lg">
-       
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h5 id="detailModalTitle" class="modal-title white">Chi tiết @order_id</h5>
-                    <button type="button" data-dismiss="modal" aria-label="Close" class="close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
+
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 id="detailModalTitle" class="modal-title white">Chi tiết @order_id</h5>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th class="text-center">Product Name</th>
+                                        <th class="text-center">Unit price</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-center">Price</th>
+                                        <th class="text-center">Note</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        no++;
+
                                         <tr>
-                                            <th class="text-center">#</th>
-                                            <th class="text-center">Product Name</th>
-                                            <th class="text-center">Unit price</th>
-                                            <th class="text-center">Quantity</th>
-                                            <th class="text-center">Price</th>
-                                            <th class="text-center">Note</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                            no++;
-                                            
-                                        <tr>
-                                            <td class="text-center">
+                                            <td>
                                                 @no
                                             </td>
-                                           
+
                                             <td class="text-center">
                                                 @item.Product.Name
                                             </td>
@@ -55,38 +60,146 @@
                                             </td>
                                         </tr>
 
-                                        }
+                                    }
 
 
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td colspan="5" class="text-right">
-                                                <h5>Total</h5>
-                                            </td>
-                                            <td class="text-left">
-                                                <h5>
-                                                    @Model.Sum(s => s.UnitPrice)
-                                                </h5>
-                                            </td>
-                                            
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td colspan="6" class="text-right">
-                                                <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@order_id')">
-                                                    Order confirmation
-                                                </button>                                             
-                                            </td>
-                                        </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" class="text-right">
+                                            <h5>Total</h5>
+                                        </td>
+                                        <td class="text-left">
+                                            <h5>
+                                                @Model.Sum(s => s.UnitPrice)
+                                            </h5>
+                                        </td>
 
-                                      
-                                    </tfoot>
-                                </table>
-                            </div>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" class="text-right">
+                                            <select class="custom-select" id="status_order" name="CategoryDropdown" value="2">
+                                                <option value="1">Chờ xác nhận</option>
+                                                <option value="2">Đã xác nhận</option>
+                                                <option value="3">Giao hàng</option>
+                                                <option value="4">Hoàn tất</option>
+                                                <option value="5">Trả trước</option>
+                                                <option value="6"> Hủy đơn</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr style="display: none;" id="paid">
+                                        <td colspan="6">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>
+                                                        Paid in advance <span class="text-danger">*</span>
+                                                    </label>
+
+                                                    <input type="text" placeholder="Enter product quantity... " id="Paid_advance" class="form-control " name="quantity" pattern="\S+.*">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>
+                                                        Note
+                                                    </label>
+
+                                                    <textarea id="Paid_note" placeholder="Note" class="form-control "></textarea>
+
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr style="display: none;" id="reason_check">
+                                        <td colspan="6">
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>
+                                                        Reason <span class="text-danger">*</span>
+                                                    </label>
+
+                                                    <textarea id="order_reason" placeholder="Note" class="form-control "></textarea>
+
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="6" class="text-right">
+                                            <button type="button" class="btn  btn-secondary" data-dismiss="modal">Cancel</button>
+
+                                            <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@order_id')">
+                                                Save
+                                            </button>
+                                        </td>
+                                    </tr>
+
+
+
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 </div>
+<script>
+    $('#status_order').val(@order_status);
+
+    function EditStatus_order(id) {
+        var URDEditStatus_Order = "";
+        $('#URDEditStatus_Order')
+            .keypress(function () {
+                URDEditStatus_Order = $(this).val();
+            })
+            .keypress();
+        var status = $('#status_order').val();
+        var Paid_note = $('#Paid_note').val();
+        var Paid_advance = $('#Paid_advance').val();
+        var CustomerOrder = {};
+        CustomerOrder.id = id;
+        CustomerOrder.Status = status;
+        CustomerOrder.Note = Paid_note;
+        CustomerOrder.Paid_Advance = Paid_advance;
+        $.ajax({
+            url: URDEditStatus_Order,
+            data: JSON.stringify(CustomerOrder),
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (data) {
+                $('#detailModal.close').css('display', 'none');
+                $('#detailModal').modal('hide');
+                sweetAlert
+                    ({
+                        title: "Cập nhật trạng thái thành công!",
+                        type: "success"
+                    })
+                var date_start = $("#filter_DateStart").val();
+                var date_end = $("#filter_DateEnd").val();
+                GetList_order(date_start, date_end)
+            },
+        });
+
+    }
+    $("#status_order").change(function () {
+        if ($('#status_order').val() == 5) {
+            $('#paid').show();
+            $('#reason_check').hide();
+        } else if ($('#status_order').val() == 6) {
+            $('#paid').hide();
+            $('#reason_check').show();
+        } else {
+            $('#paid').hide();
+            $('#reason_check').hide();
+        }
+    });
+</script>

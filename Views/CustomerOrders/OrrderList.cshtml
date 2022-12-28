@@ -12,19 +12,23 @@
 <div class="card-body">
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link @Session["pills-create"].ToString()" id="pills-create-tab" data-toggle="pill" href="#pills-create" role="tab" aria-controls="pills-create" aria-selected="true">Đơn mới tạo</a>
+            <a class="nav-link @Session["pills-create"].ToString()" id="pills-create-tab" data-toggle="pill" href="#pills-create" role="tab" aria-controls="pills-create" aria-selected="true">New</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link @Session["pills-confirm"].ToString()" id="pills-confirm-tab" data-toggle="pill" href="#pills-confirm" role="tab" aria-controls="pills-confirm" aria-selected="false">Đơn xác nhận</a>
+            <a class="nav-link" id="pills-paid-tab" data-toggle="pill" href="#pills-paid" role="tab" aria-controls="pills-paid" aria-selected="false">Pay in advance</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link @Session["pills-sent"].ToString()" id="pills-sent-tab" data-toggle="pill" href="#pills-sent" role="tab" aria-controls="pills-sent" aria-selected="false">Đang giao</a>
+            <a class="nav-link @Session["pills-confirm"].ToString()" id="pills-confirm-tab" data-toggle="pill" href="#pills-confirm" role="tab" aria-controls="pills-confirm" aria-selected="false">Approved</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="pills-success-tab" data-toggle="pill" href="#pills-success" role="tab" aria-controls="pills-success" aria-selected="false">Hoàn tất</a>
+            <a class="nav-link @Session["pills-sent"].ToString()" id="pills-sent-tab" data-toggle="pill" href="#pills-sent" role="tab" aria-controls="pills-sent" aria-selected="false">Delivering</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="pills-cancel-tab" data-toggle="pill" href="#pills-cancel" role="tab" aria-controls="pills-cancel" aria-selected="false">Đã hủy</a>
+            <a class="nav-link" id="pills-success-tab" data-toggle="pill" href="#pills-success" role="tab" aria-controls="pills-success" aria-selected="false">Completed</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" id="pills-cancel-tab" data-toggle="pill" href="#pills-cancel" role="tab" aria-controls="pills-cancel" aria-selected="false">Cancel</a>
         </li>
     </ul>
 
@@ -63,13 +67,10 @@
                                         <td>@item.Address</td>
                                         <td>@item.Total.ToString("N0")</td>
                                         <td>@item.DateCreated</td>
+
                                         <td class="text-center">
                                             <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
-                                              Details
-                                            </button>
-
-                                            <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
-                                                Order confirmation
+                                                Details
                                             </button>
 
                                             <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
@@ -124,9 +125,6 @@
                                             <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
                                                 Details
                                             </button>
-                                            <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
-                                                Delivery confirmation
-                                            </button>
 
                                             <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
                                                 Cancel
@@ -177,9 +175,7 @@
                                             <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
                                                 Details
                                             </button>
-                                            <button title="Cập nhật" class="btn btn-success" onclick="EditStatus_order('@item.ID')">
-                                                Completed
-                                            </button>
+
                                             <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
                                                 Cancel
                                             </button>
@@ -207,6 +203,7 @@
                                     <th class="text-center">Address</th>
                                     <th class="text-center">Total</th>
                                     <th class="text-center">Date created</th>
+                                    <th class=""></th>
                                 </tr>
 
                             </thead>
@@ -222,7 +219,15 @@
                                         <td>@item.Address</td>
                                         <td>@item.Total.ToString("N0")</td>
                                         <td>@item.DateCreated</td>
+                                        <td class="text-center">
+                                            <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
+                                                Details
+                                            </button>
 
+                                            <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
+                                                Cancel
+                                            </button>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
@@ -232,7 +237,7 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="pills-cancel" role="tabpanel" aria-labelledby="pills-cancel-tab">
+        <div class="tab-pane fade" id="pills-paid" role="tabpanel" aria-labelledby="pills-paid-tab">
             <div class="card">
                 <div class="card-body table-border-style">
                     <div class="table-responsive">
@@ -245,8 +250,9 @@
                                     <th class="text-center">Phone</th>
                                     <th class="text-center">Address</th>
                                     <th class="text-center">Total</th>
+                                    <th class="text-center">Pay in advance</th>
                                     <th class="text-center">Date created</th>
-                                    <th class="text-center">Reason</th>
+                                    <th class="text-center"></th>
 
                                 </tr>
 
@@ -262,8 +268,64 @@
                                         <td>@item.Phone</td>
                                         <td>@item.Address</td>
                                         <td>@item.Total.ToString("N0")</td>
+                                        <td class="text-center">@item.Paid_Advance</td>
+                                        <td>@item.DateCreated</td>
+                                        <td class="text-center">
+                                            <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
+                                                Details
+                                            </button>
+
+                                            <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
+                                                Cancel
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-cancel" role="tabpanel" aria-labelledby="pills-cancel-tab">
+            <div class="card">
+                <div class="card-body table-border-style">
+                    <div class="table-responsive">
+                        <table id="example5" class="table table-hover ">
+                            <thead>
+                                <tr>
+                                    <th class="text-center ">#</th>
+                                    <th class="">Code orders</th>
+                                    <th class="">Customer name</th>
+                                    <th class="text-center">Phone</th>
+                                    <th class="text-center">Address</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center">Date created</th>
+                                    <th class="text-center">Reason</th>
+
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Where(m => m.Status == 6))
+                                {
+                                    no5++;
+                                    <tr>
+                                        <td>@no5</td>
+                                        <td>@item.ID</td>
+                                        <td>@item.FullName</td>
+                                        <td>@item.Phone</td>
+                                        <td>@item.Address</td>
+                                        <td>@item.Total.ToString("N0")</td>
                                         <td>@item.DateCreated</td>
                                         <td class="text-center">@item.Reason</td>
+                                        <td class="text-center">
+                                            <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
+                                                Details
+                                            </button>
+
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
@@ -312,27 +374,3 @@
         </form>
     </div>
 </div>
-
-
-@section scripts {
-    <script type="text/javascript">
-        var row;
-        $(document).ready(function () {
-            $('#example').DataTable({
-                pagingType: 'full_numbers',
-            });
-            $('#example1').DataTable({
-                pagingType: 'full_numbers',
-            });
-            $('#example2').DataTable({
-                pagingType: 'full_numbers',
-            });
-            $('#example3').DataTable({
-                pagingType: 'full_numbers',
-            });
-            $('#example4').DataTable({
-                pagingType: 'full_numbers',
-            });
-
-    </script>
-}
