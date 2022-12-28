@@ -12,13 +12,13 @@ namespace GardenShopOnline.Controllers
         readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
         // GET: Statistics/Order
-        public ActionResult Order()
+        public ActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        public JsonResult GetOrderData(DateTime startDate, DateTime endDate)
+        public JsonResult GetData(DateTime startDate, DateTime endDate)
         {
             startDate = startDate.Date;
             endDate = endDate.Date;
