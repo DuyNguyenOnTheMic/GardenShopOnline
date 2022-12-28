@@ -71,14 +71,14 @@
                                                 <td>@item.Email</td>
                                                 <td class="text-center">@item.PhoneNumber</td>
                                                 <td>@item.Address</td>
-                                                <td class="text-center"></td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.AspNetRoles.FirstOrDefault().Name)</td>
 
                                                 <td>
                                                     <button class="btn btn-success ">
                                                         <i class="feather icon-edit">
                                                         </i>
                                                     </button>
-                                                    <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Category", "categories")">
+                                                    <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Category", "Categories")">
                                                     <button class="btn btn-danger">
                                                         <i class="feather icon-trash-2">
                                                         </i>
