@@ -205,6 +205,7 @@
             }
         });
 
+        // Function to delete user
         function deleteUser(id) {
             swal({
                 title: "Are you sure want to delete?",
@@ -219,16 +220,7 @@
                     type: 'POST',
                     data: { id },
                     success: function (data) {
-                        // Hide bootstrap modal to prevent conflict
-                        if (data.error) {
-                            swal({
-                                title: 'Oops',
-                                text: data.message,
-                                type: 'error',
-                                confirmButtonText: 'OK',
-                                confirmButtonColor: "#ec6c62"
-                            });
-                        } else {
+                        if (data.success) {
                             swal({
                                 title: "Đã xóa!",
                                 type: "success"
@@ -239,6 +231,14 @@
                                     }
                                 });
                             })
+                        } else {
+                            swal({
+                                title: 'Oops',
+                                text: data.message,
+                                type: 'error',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: "#ec6c62"
+                            });
                         }
                     }
                 });
