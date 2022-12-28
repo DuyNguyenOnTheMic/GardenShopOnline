@@ -81,9 +81,16 @@ namespace GardenShopOnline.Controllers
                     DateCreated = DateTime.Now
                 };
 
-                UserManager.Create(user, password);
-                UserManager.AddToRole(user.Id, role.Name);
-                return Json(new { success = true, message = "Add succeeded!" }, JsonRequestBehavior.AllowGet);
+                IdentityResult result = UserManager.Create(user, password);
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRole(user.Id, role.Name);
+                    return Json(new { success = true, message = "Add succeeded!" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { error = true, message = result.Errors }, JsonRequestBehavior.AllowGet);
+                }
             }
 
             return Json(new { error = true, message = "This email is already exists!" }, JsonRequestBehavior.AllowGet);
