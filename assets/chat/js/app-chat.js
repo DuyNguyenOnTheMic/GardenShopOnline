@@ -42,7 +42,7 @@
                 success: function (response) {
                     if (response.success) {
                         if (files.length > 0) {
-                            message_html = '<img src="/assets/images/' + response.img + '" />' + '<hr /><p>' + response.message+ '</p>' ;
+                            message_html = '<img src="/assets/images/' + response.img + '" />' + '<br /><p>' + response.message+ '</p>' ;
                         }
                         $("#file").val('');
                         $('#output').attr('src', '');
