@@ -20,15 +20,15 @@
 $(document).ready(function () {
     var forms = document.getElementsByClassName('needs-validation');
     var validation = Array.prototype.filter.call(forms, function (form) {
-    $('#submit_edit').on('click', function () {
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        } else {
-            Update();
-        }
-        form.classList.add('was-validated');
-    })
+        $('#submit_edit').on('click', function () {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            } else {
+                Update();
+            }
+            form.classList.add('was-validated');
+        })
         $('#submit_edit_product').on('click', function () {
             if (form.checkValidity() === false) {
                 event.preventDefault();
@@ -47,7 +47,7 @@ $(document).ready(function () {
             }
             form.classList.add('was-validated');
         })
-       
+
     }, false);
 })
 
@@ -75,7 +75,7 @@ function deleteAlert(id, code) {
         function () {
             var categorys = {};
             categorys.ID = id;
-            
+
             $.ajax({
                 url: URLDelete,
                 data: JSON.stringify(categorys),
@@ -112,7 +112,7 @@ $('#URDEditStatus')
     .keypress();
 function EditStatus(id) {
     console.log(URDEditStatus);
-       sweetAlert
+    sweetAlert
         ({
             title: "Cập nhật trạng thái thành công!",
             type: "success"
@@ -363,7 +363,7 @@ function GetProduct(ele, id) {
             $('textarea#edit_description').html(response.Description);
             document.images['edit_output'].src = "/assets/images/" + response.Image;
             var category_id = response.CategoryID;
-           
+
             $.ajax({
                 type: "GET",
                 url: URLgetCategory,
@@ -409,38 +409,6 @@ if ($('#description').length) {
 
 //-----------------------Edit status------------------------------------------
 
-function EditStatus_order(id) {
-    var URDEditStatus_Order = "";
-    $('#URDEditStatus_Order')
-        .keypress(function () {
-            URDEditStatus_Order = $(this).val();
-        })
-        .keypress();
-    console.log(URDEditStatus_Order);
-                var CustomerOrder = {};
-                CustomerOrder.id = id;
-                $.ajax({
-                    url: URDEditStatus_Order,
-                    data: JSON.stringify(CustomerOrder),
-                    type: "POST",
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    success: function (data) {
-                        $('#detailModal.close').css('display', 'none');
-                        $('#detailModal').modal('hide');
-                        sweetAlert
-                            ({
-                                title: "Cập nhật trạng thái thành công!",
-                                type: "success"
-                            })
-                        var date_start = $("#filter_DateStart").val();
-                        var date_end = $("#filter_DateEnd").val();
-                        GetList_order(date_start, date_end)
-                    },
-                });
-
-}
-
 function EditStatus_comment(id, status) {
     var URDEditStatus_Comment = "";
     $('#URDEditStatus_Comment')
@@ -458,13 +426,13 @@ function EditStatus_comment(id, status) {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: function (data) {
-           
+
             sweetAlert
                 ({
                     title: "Cập nhật trạng thái thành công!",
                     type: "success"
                 })
-          
+
             GetList_comment()
         },
     });
@@ -487,11 +455,11 @@ function DeleteOrder() {
             URDDeleteOrder = $(this).val();
         })
         .keypress();
-   
+
     var CustomerOrder = {};
     CustomerOrder.id = $('#edit_idOrder').val();
     CustomerOrder.Reason = $('#reason').val();
-    
+
     $.ajax({
         url: URDDeleteOrder,
         data: JSON.stringify(CustomerOrder),
@@ -554,7 +522,7 @@ function Reply_comment() {
                     title: "Successful reply",
                     type: "success"
                 })
-          
+
             GetList_comment();
         },
     });

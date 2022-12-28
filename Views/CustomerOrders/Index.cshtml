@@ -53,12 +53,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <input type="text" hidden id="URLExportExcel" value="@Url.Action("ExportExcel_Inventory", "Excel")" />
-                                    <button class="btn btn-secondary float-right ml-2" id="btnExportExcel_Inventory">
-                                        Xuất tệp
-                                    </button>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -93,6 +88,9 @@
             $('#example4').DataTable({
                 pagingType: 'full_numbers',
             });
+            $('#example5').DataTable({
+                pagingType: 'full_numbers',
+            });
         });
         //----------------------FILTER ORDER DATE TIME------------------------------------------------
 
@@ -123,6 +121,7 @@
                 $('#example2').DataTable();
                 $('#example3').DataTable();
                 $('#example4').DataTable();
+                $('#example5').DataTable();
 
             }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
                 console.log(textStatus)
