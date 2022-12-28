@@ -8,7 +8,7 @@ namespace GardenShopOnline.Controllers
 {
     public class AspNetUsersController : Controller
     {
-        private BonsaiGardenEntities db = new BonsaiGardenEntities();
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
         // GET: AspNetUsers
         public ActionResult Index()

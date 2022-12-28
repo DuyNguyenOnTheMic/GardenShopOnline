@@ -9,7 +9,7 @@ namespace GardenShopOnline.Controllers
 {
     public class TypesController : Controller
     {
-        private BonsaiGardenEntities db = new BonsaiGardenEntities();
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
         // GET: Types
         public ActionResult Index()

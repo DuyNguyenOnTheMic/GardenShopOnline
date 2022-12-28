@@ -13,7 +13,7 @@ namespace GardenShopOnline.Controllers
 {
     public class CommentProductsController : Controller
     {
-        private BonsaiGardenEntities db = new BonsaiGardenEntities();
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
         // GET: CommentProducts
         public ActionResult Index()
