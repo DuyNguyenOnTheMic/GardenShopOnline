@@ -2,7 +2,6 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -118,15 +117,24 @@ namespace GardenShopOnline.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FullName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,Address,UserName,DateCreated")] AspNetUser aspNetUser)
+        public ActionResult Edit(string id, string role_id)
         {
-            if (ModelState.IsValid)
+            string oldRole = UserManager.GetRoles(id).FirstOrDefault();
+            AspNetRole role = db.AspNetRoles.Find(role_id);
+
+            if (oldRole != null)
             {
-                db.Entry(aspNetUser).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                // Update user role
+                UserManager.RemoveFromRole(id, oldRole);
+                UserManager.AddToRole(id, role.Name);
             }
-            return View(aspNetUser);
+            else
+            {
+                // Add user to role
+                UserManager.AddToRole(id, role.Name);
+            }
+
+            return Json(new { success = true, message = "Update user succeeded!" }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: AspNetUsers/Delete/5
