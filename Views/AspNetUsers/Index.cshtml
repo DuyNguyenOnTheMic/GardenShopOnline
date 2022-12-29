@@ -149,7 +149,7 @@
 </div>
 <div id="EditUser" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditUserLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form class="needs-validation" method="post" action="@Url.Action("Create", "AspNetUsers")" id="userForm" novalidate>
+        <form class="needs-validation" method="post" action="@Url.Action("Edit", "AspNetUsers")" id="userForm" novalidate>
             @Html.AntiForgeryToken()
             <div class="modal-content">
                 <div class="modal-header bg-primary">
@@ -158,62 +158,6 @@
                 </div>
 
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>
-                                    Email<span class="text-danger">*</span>
-                                </label>
-                                <div class="position-relative">
-                                    <input type="email" placeholder="Email" class="form-control" id="email" name="email" pattern="^\w+([-+.']\w+)*@('@')\w+([-.]\w+)*\.\w+([-.]\w+)*$" required>
-                                    <div class="invalid-feedback">
-                                        Please enter valid email !
-                                    </div>
-                                </div> <!---->
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>
-                                    Role<span class="text-danger">*</span>
-                                </label>
-                                <div class="position-relative">
-                                    @Html.DropDownList("role_id", null, htmlAttributes: new { @class = "form-control", @aria_label = "Choose role" })
-                                    <div class="invalid-feedback">Please choose role</div>
-                                </div> <!---->
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>
-                                    Password<span class="text-danger">*</span>
-                                </label>
-                                <div class="position-relative">
-                                    <input type="password" placeholder="Password" id="password" name="password" class="form-control" required>
-                                    <div class="invalid-feedback">
-                                        Password cannot be left blank !
-                                    </div>
-                                </div> <!---->
-
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="product-price-import">
-                                    Confirm Password<span class="text-danger">*</span>
-                                </label>
-                                <div class="position-relative">
-                                    <input type="password" placeholder="Confirm Password" id="confirmPassword" name="confirmPassword" class="form-control" required>
-                                    <div class="invalid-feedback">
-                                        Confirm Password cannot be left blank !
-                                    </div>
-                                </div>
-                                <!---->
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn  btn-secondary" data-dismiss="modal">Cancel</button>
@@ -295,6 +239,16 @@
                 });
             }
         });
+
+        function getUser(id) {
+            $.ajax({
+                url: '@Url.Action("FindUser", "AspNetUsers")',
+                type: 'GET',
+                data: { id },
+                success: function (data) {
+                }
+            });
+        }
 
         // Function to delete user
         function deleteUser(id) {
