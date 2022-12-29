@@ -71,7 +71,7 @@
 
 <div id="AddUser" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="AddUserLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <form class="needs-validation" method="post" action="@Url.Action("Create", "AspNetUsers")" id="userForm" novalidate>
+        <form class="needs-validation" method="post" action="@Url.Action("Create", "AspNetUsers")" id="addUserForm" novalidate>
             @Html.AntiForgeryToken()
             <div class="modal-content">
                 <div class="modal-header bg-primary">
@@ -201,7 +201,7 @@
             pagingType: 'full_numbers',
         });
 
-        $('#userForm').submit(function (e) {
+        $('#addUserForm').submit(function (e) {
             var form = $(this);
 
             // Check if form is valid then submit ajax
