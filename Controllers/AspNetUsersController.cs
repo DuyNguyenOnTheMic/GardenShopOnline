@@ -47,10 +47,7 @@ namespace GardenShopOnline.Controllers
             return Json(db.AspNetUsers.Where(u => u.AspNetRoles.Any()).Select(u => new
             {
                 u.Id,
-                u.FullName,
                 u.Email,
-                u.PhoneNumber,
-                u.Address,
                 u.AspNetRoles.FirstOrDefault().Name
             }).ToList(), JsonRequestBehavior.AllowGet);
         }

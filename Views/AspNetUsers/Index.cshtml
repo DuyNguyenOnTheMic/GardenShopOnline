@@ -49,13 +49,9 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th class="text-center">Full Name</th>
-                                            <th class="text-center">Email</th>
-                                            <th class="text-center">Phone</th>
-                                            <th class="text-center">Address</th>
-                                            <th width="15%">Role</th>
-                                            <th width="15%">
-                                            </th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -180,10 +176,7 @@
             },
             columns: [
                 { 'data': '', defaultContent: '' },
-                { 'data': 'FullName' },
                 { 'data': 'Email' },
-                { 'data': 'PhoneNumber' },
-                { 'data': 'Address' },
                 { 'data': 'Name' },
                 {
                     'data': 'Id', 'render': function (data, type, row) {
@@ -198,9 +191,20 @@
                     }
                 }
             ],
-            order: [[5, 'desc']],
+            columnDefs: [
+                { className: 'text-center', targets: 1 },
+                { width: '15%', targets: 3 },
+            ],
+            order: [[1, 'desc']],
             pagingType: 'full_numbers',
         });
+
+        dataTable.on('order.dt search.dt', function () {
+            let i = 1;
+            dataTable.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                this.data(i++);
+            });
+        }).draw();
 
         $('.userForm').submit(function (e) {
             var form = $(this);
