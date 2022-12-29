@@ -57,12 +57,6 @@ namespace GardenShopOnline.Controllers
             }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
-        // GET: AspNetUsers/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         // POST: AspNetUsers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -94,21 +88,6 @@ namespace GardenShopOnline.Controllers
             }
 
             return Json(new { error = true, message = "This email is already exists!" }, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: AspNetUsers/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            if (aspNetUser == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetUser);
         }
 
         // POST: AspNetUsers/Edit/5
