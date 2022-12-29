@@ -149,7 +149,7 @@
 </div>
 <div id="EditUser" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditUserLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form class="needs-validation" method="post" action="@Url.Action("Edit", "AspNetUsers")" id="userForm" novalidate>
+        <form class="needs-validation" method="post" action="@Url.Action("Edit", "AspNetUsers")" novalidate>
             @Html.AntiForgeryToken()
             <div class="modal-content">
                 <div class="modal-header bg-primary">
@@ -187,7 +187,7 @@
                 { 'data': 'Name' },
                 {
                     'data': 'Id', 'render': function (data, type, row) {
-                        return "<button class='btn btn-success' onclick=updateUser('" + data + "')>" +
+                        return "<button class='btn btn-success' onclick=getUser('" + data + "')>" +
                         "<i class='feather icon-edit'>" +
                             "</i>" +
                             "</button>" +
@@ -242,10 +242,15 @@
 
         function getUser(id) {
             $.ajax({
-                url: '@Url.Action("FindUser", "AspNetUsers")',
+                url: '@Url.Action("Edit", "AspNetUsers")',
                 type: 'GET',
                 data: { id },
-                success: function (data) {
+                success: function (response) {
+                    // Add response in Modal body
+                    $('#EditUser .modal-body').html(response);
+
+                    // Display Modal
+                    $('#EditUser').modal('show');
                 }
             });
         }

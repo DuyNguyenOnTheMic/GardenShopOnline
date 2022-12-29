@@ -4,7 +4,6 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -99,16 +98,19 @@ namespace GardenShopOnline.Controllers
         // GET: AspNetUsers/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            ApplicationUser user = UserManager.FindById(id);
             AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            if (aspNetUser == null)
+            if (user.Roles.Count > 0)
             {
-                return HttpNotFound();
+                // Set selected value for user role
+                ViewData["role_id"] = new SelectList(db.AspNetRoles.ToList(), "id", "name", user.Roles.FirstOrDefault().RoleId);
             }
-            return View(aspNetUser);
+            else
+            {
+                // Populate new role select list
+                ViewData["role_id"] = new SelectList(db.AspNetRoles.ToList(), "id", "name");
+            }
+            return PartialView("_Edit", aspNetUser);
         }
 
         // POST: AspNetUsers/Edit/5

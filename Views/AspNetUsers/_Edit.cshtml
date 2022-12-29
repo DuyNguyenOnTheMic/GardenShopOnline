@@ -7,7 +7,7 @@
                 Email<span class="text-danger">*</span>
             </label>
             <div class="position-relative">
-                <input type="email" placeholder="Email" class="form-control" id="email" name="email" pattern="^\w+([-+.']\w+)*@('@')\w+([-.]\w+)*\.\w+([-.]\w+)*$" required>
+                <input type="email" placeholder="Email" class="form-control" id="email" name="email" pattern="^\w+([-+.']\w+)*@('@')\w+([-.]\w+)*\.\w+([-.]\w+)*$" value="@Model.Email" required>
                 <div class="invalid-feedback">
                     Please enter valid email !
                 </div>
@@ -24,35 +24,6 @@
                 <div class="invalid-feedback">Please choose role</div>
             </div> <!---->
 
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="form-group">
-            <label>
-                Password<span class="text-danger">*</span>
-            </label>
-            <div class="position-relative">
-                <input type="password" placeholder="Password" id="password" name="password" class="form-control" required>
-                <div class="invalid-feedback">
-                    Password cannot be left blank !
-                </div>
-            </div> <!---->
-
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="product-price-import">
-                Confirm Password<span class="text-danger">*</span>
-            </label>
-            <div class="position-relative">
-                <input type="password" placeholder="Confirm Password" id="confirmPassword" name="confirmPassword" class="form-control" required>
-                <div class="invalid-feedback">
-                    Confirm Password cannot be left blank !
-                </div>
-            </div>
-            <!---->
         </div>
     </div>
 </div>
