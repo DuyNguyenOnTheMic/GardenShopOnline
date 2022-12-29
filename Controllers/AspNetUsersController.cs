@@ -44,7 +44,7 @@ namespace GardenShopOnline.Controllers
         public JsonResult GetData()
         {
             // Get user data from database
-            return Json(db.AspNetUsers.Select(u => new
+            return Json(db.AspNetUsers.Where(u => u.AspNetRoles.Any()).Select(u => new
             {
                 u.Id,
                 u.FullName,
