@@ -71,7 +71,7 @@
 
 <div id="AddUser" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="AddUserLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <form class="needs-validation" method="post" action="@Url.Action("Create", "AspNetUsers")" id="addUserForm" novalidate>
+        <form class="needs-validation userForm" method="post" action="@Url.Action("Create", "AspNetUsers")" novalidate>
             @Html.AntiForgeryToken()
             <div class="modal-content">
                 <div class="modal-header bg-primary">
@@ -149,7 +149,7 @@
 </div>
 <div id="EditUser" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditUserLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form class="needs-validation" method="post" action="@Url.Action("Edit", "AspNetUsers")" id="editUserForm" novalidate>
+        <form class="needs-validation userForm" method="post" action="@Url.Action("Edit", "AspNetUsers")" novalidate>
             @Html.AntiForgeryToken()
             <div class="modal-content">
                 <div class="modal-header bg-primary">
@@ -201,7 +201,7 @@
             pagingType: 'full_numbers',
         });
 
-        $('#addUserForm').submit(function (e) {
+        $('.userForm').submit(function (e) {
             var form = $(this);
 
             // Check if form is valid then submit ajax
@@ -214,7 +214,7 @@
                     data: form.serialize(),
                     success: function (data) {
                         // Hide bootstrap modal to prevent conflict
-                        $('#AddUser').modal('hide');
+                        $('.modal').modal('hide');
 
                         if (data.success) {
                             // Refresh table data
@@ -234,45 +234,6 @@
                                 confirmButtonText: 'OK',
                                 confirmButtonColor: "#ec6c62"
                             }, function () { $('#AddUser').modal('show') }); // Show bootstrap modal again
-                        }
-                    }
-                });
-            }
-        });
-
-        $('#editUserForm').submit(function (e) {
-            var form = $(this);
-
-            // Check if form is valid then submit ajax
-            if (form[0].checkValidity()) {
-                e.preventDefault();
-                var url = form.attr('action');
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: form.serialize(),
-                    success: function (data) {
-                        // Hide bootstrap modal to prevent conflict
-                        $('#EditUser').modal('hide');
-
-                        if (data.success) {
-                            // Refresh table data
-                            dataTable.ajax.reload();
-                            swal({
-                                title: data.message,
-                                type: 'success'
-                            })
-
-                            form[0].reset();
-                            form.removeClass('was-validated');
-                        } else {
-                            swal({
-                                title: 'Oops',
-                                text: data.message,
-                                type: 'error',
-                                confirmButtonText: 'OK',
-                                confirmButtonColor: "#ec6c62"
-                            }, function () { $('#EditUser').modal('show') }); // Show bootstrap modal again
                         }
                     }
                 });
