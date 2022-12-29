@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace GardenShopOnline.Controllers
 {
+    [Authorize(Roles = "Admin, Staff")]
     public class StatisticsController : Controller
     {
         readonly BonsaiGardenEntities db = new BonsaiGardenEntities();

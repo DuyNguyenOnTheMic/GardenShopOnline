@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace GardenShopOnline.Controllers
 {
+    [Authorize]
     public class ContactController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -38,6 +39,7 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult Customer()
         {
             var currentUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
@@ -46,6 +48,7 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult GetData(string fromUserId)
         {
             var toUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
@@ -126,6 +129,7 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Staff")]
         public JsonResult UpdateState(string fromUserId, string toUserId)
         {
             db.Messages.Where(m => ((m.FromUserId == fromUserId && m.ToUserId == toUserId) || (m.FromUserId == toUserId && m.ToUserId == fromUserId)) && m.DateViewed == null).ForEach(m => m.DateViewed = DateTime.Now);
