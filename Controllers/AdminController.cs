@@ -4,8 +4,8 @@ namespace GardenShopOnline.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin/Login
-        public ActionResult Login()
+        // GET: Admin/Index
+        public ActionResult Index()
         {
             return View();
         }
