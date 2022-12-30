@@ -7,6 +7,10 @@ namespace GardenShopOnline.Controllers
         // GET: Admin/Index
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "AspNetUsers");
+            }
             return View();
         }
     }
