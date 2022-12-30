@@ -226,7 +226,7 @@
                 { className: 'text-center', targets: 1 },
                 { width: '15%', targets: 5 },
             ],
-            order: [[1, 'desc']],
+            order: [[1, 'asc']],
             pagingType: 'full_numbers',
         });
 
@@ -257,7 +257,8 @@
                             dataTable.ajax.reload();
                             swal({
                                 title: data.message,
-                                type: 'success'
+                                type: 'success',
+                                confirmButtonText: "OK"
                             })
 
                             form[0].reset();
@@ -311,7 +312,8 @@
                             dataTable.ajax.reload();
                             swal({
                                 title: data.message,
-                                type: 'success'
+                                type: 'success',
+                                confirmButtonText: "OK"
                             })
                         } else {
                             swal({

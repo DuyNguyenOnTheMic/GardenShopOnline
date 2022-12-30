@@ -119,10 +119,15 @@ namespace GardenShopOnline.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(string id, string role_id)
+        public ActionResult Edit(string id, string staffId, string fullName, string role_id)
         {
+            var user = UserManager.FindById(id);
             string oldRole = UserManager.GetRoles(id).FirstOrDefault();
             AspNetRole role = db.AspNetRoles.Find(role_id);
+
+            user.StaffId = staffId;
+            user.FullName = fullName;
+            UserManager.Update(user);
 
             if (oldRole != null)
             {
