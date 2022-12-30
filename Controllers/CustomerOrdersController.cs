@@ -14,7 +14,7 @@ namespace GardenShopOnline.Controllers
         private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
         // GET: CustomerOrders
-        [Authorize(Roles = "Admin, Staff")]
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Index()
         {
             Session["pills-create"] = "active";
@@ -27,7 +27,7 @@ namespace GardenShopOnline.Controllers
             return View(customerOrders.ToList());
         }
 
-        [Authorize(Roles = "Admin, Staff")]
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult OrrderList(DateTime? date_start, DateTime? date_end)
         {
 
@@ -43,7 +43,7 @@ namespace GardenShopOnline.Controllers
             return PartialView(OrrderList.ToList());
         }
 
-        [Authorize(Roles = "Admin, Staff")]
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult OrrderDetailsList(string order_id)
         {
             TempData["order_id"] = order_id;
@@ -76,7 +76,7 @@ namespace GardenShopOnline.Controllers
             return PartialView("_OrderDetails", OrrderDetailsList);
         }
 
-        [Authorize(Roles = "Admin, Staff")]
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult EditStatus_Order(CustomerOrder order)
         {
 
@@ -123,7 +123,7 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin, Staff")]
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public JsonResult FindOrder(string order_id)
         {
             var emp = new CustomerOrder
@@ -134,7 +134,7 @@ namespace GardenShopOnline.Controllers
             return Json(emp);
         }
 
-        [Authorize(Roles = "Admin, Staff")]
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult DeleteOrder(CustomerOrder order)
         {
             CustomerOrder customerOrder = db.CustomerOrders.Find(order.ID);
