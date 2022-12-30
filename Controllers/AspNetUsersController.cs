@@ -64,7 +64,7 @@ namespace GardenShopOnline.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string email, string role_id, string password)
+        public ActionResult Create(string email, string staffId, string fullName, string role_id, string password)
         {
             var query_email = UserManager.FindByEmail(email);
             var role = db.AspNetRoles.Find(role_id);
@@ -74,6 +74,8 @@ namespace GardenShopOnline.Controllers
                 {
                     Email = email,
                     UserName = email,
+                    StaffId = staffId,
+                    FullName = fullName,
                     DateCreated = DateTime.Now
                 };
 
