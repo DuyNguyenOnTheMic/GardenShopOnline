@@ -49,6 +49,8 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Staff ID</th>
+                                            <th>Full Name</th>
                                             <th>Email</th>
                                             <th>Role</th>
                                             <th></th>
@@ -203,6 +205,8 @@
             processing: true,
             columns: [
                 { 'data': '', defaultContent: '' },
+                { 'data': 'StaffId' },
+                { 'data': 'FullName' },
                 { 'data': 'Email' },
                 { 'data': 'Name' },
                 {
@@ -220,7 +224,7 @@
             ],
             columnDefs: [
                 { className: 'text-center', targets: 1 },
-                { width: '15%', targets: 3 },
+                { width: '15%', targets: 5 },
             ],
             order: [[1, 'desc']],
             pagingType: 'full_numbers',
