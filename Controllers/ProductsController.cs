@@ -90,6 +90,7 @@ namespace GardenShopOnline.Controllers
             Session["notification"] = "Thêm mới thành công!";
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult Delete_Product(Product product)
         {
             Product product1 = db.Products.Find(product.ID);
