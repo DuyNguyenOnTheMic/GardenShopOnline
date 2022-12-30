@@ -76,8 +76,17 @@ namespace GardenShopOnline.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    MigrateShoppingCart(model.Email);
-                    return RedirectToLocal(returnUrl);
+                    var user = await UserManager.FindAsync(model.Email, model.Password);
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+                    if (roles.Contains("Admin") || roles.Contains("Staff"))
+                    {
+                        return RedirectToAction("Index", "AspNetUsers");
+                    }
+                    else
+                    {
+                        MigrateShoppingCart(model.Email);
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.Failure:

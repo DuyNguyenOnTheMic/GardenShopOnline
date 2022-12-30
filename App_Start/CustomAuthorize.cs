@@ -20,7 +20,7 @@ public class CustomAuthorize : AuthorizeAttribute
 
             //if null, get it from config
             if (string.IsNullOrEmpty(authUrl))
-                authUrl = "~/Home/Index";
+                authUrl = "~/Admin/Index";
 
             if (!string.IsNullOrEmpty(authUrl))
                 filterContext.HttpContext.Response.Redirect(authUrl);
