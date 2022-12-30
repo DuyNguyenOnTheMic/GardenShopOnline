@@ -3,9 +3,20 @@
     int no = 0;
     string order_id = TempData["order_id"].ToString();
     int order_status = 0;
+    decimal order_paidAdvance = 0;
+    decimal order_total = 0;
     if (TempData["order_status"] != null)
     {
         order_status = int.Parse(TempData["order_status"].ToString());
+    }
+
+    if (TempData["order_total"] != null)
+    {
+        order_total = decimal.Parse(TempData["order_total"].ToString());
+    }
+    if (TempData["order_paidAdvance"] != null)
+    {
+        order_paidAdvance = decimal.Parse(TempData["order_paidAdvance"].ToString());
     }
 }
 <div id="detailModal" tabindex="-1" aria-labelledby="detailModalTitle" class="modal fade bd-example-modal-lg" style="display: none;" aria-hidden="true">
@@ -13,7 +24,7 @@
 
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h5 id="detailModalTitle" class="modal-title white">Chi tiết @order_id</h5>
+                <h5 id="detailModalTitle" class="modal-title white">Details @order_id</h5>
                 <button type="button" data-dismiss="modal" aria-label="Close" class="close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -47,13 +58,16 @@
                                                 @item.Product.Name
                                             </td>
                                             <td class="text-center">
+                                                @String.Format("{0:0,00}", item.UnitPrice)
+                                               
+                                            </td>
+                                            <td class="text-center">
                                                 @item.Quantity
+
                                             </td>
                                             <td class="text-center">
-                                                @item.Product.Price.ToString("N0")
-                                            </td>
-                                            <td class="text-center">
-                                                @item.UnitPrice
+                                                @String.Format("{0:0,00}", item.UnitPrice* item.Quantity)
+
                                             </td>
                                             <td class="text-center">
                                                 @item.Note
@@ -71,21 +85,37 @@
                                         </td>
                                         <td class="text-left">
                                             <h5>
-                                                @Model.Sum(s => s.UnitPrice)
+                                                @String.Format("{0:0,00}", order_total)
                                             </h5>
                                         </td>
 
 
                                     </tr>
+                                    @if (order_paidAdvance > 0)
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-right">
+                                                <h5>Paid</h5>
+                                            </td>
+                                            <td class="text-left">
+                                                <h5>
+                                                    @String.Format("{0:0,00}", order_paidAdvance)
+                                                </h5>
+                                            </td>
+
+
+                                        </tr>
+                                    }
+
                                     <tr>
                                         <td colspan="6" class="text-right">
                                             <select class="custom-select" id="status_order" name="CategoryDropdown" value="2">
-                                                <option value="1">Chờ xác nhận</option>
-                                                <option value="2">Đã xác nhận</option>
-                                                <option value="3">Giao hàng</option>
-                                                <option value="4">Hoàn tất</option>
-                                                <option value="5">Trả trước</option>
-                                                <option value="6"> Hủy đơn</option>
+                                                <option value="1">New</option>
+                                                <option value="5">Pay in advance</option>
+                                                <option value="2">Approved</option>
+                                                <option value="3">Delivering</option>
+                                                <option value="4">Completed</option>
+                                                <option value="6"> Canceled</option>
                                             </select>
                                         </td>
                                     </tr>

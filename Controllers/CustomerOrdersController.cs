@@ -47,7 +47,11 @@ namespace GardenShopOnline.Controllers
             {
                 CustomerOrder order = db.CustomerOrders.Find(order_id);
                 TempData["order_status"] = order.Status;
-
+                if (order.PaidAdvance != null )
+                {
+                    TempData["order_paidAdvance"] = order.PaidAdvance;
+                }
+                TempData["order_total"] = order.Total;
             }
             var OrrderDetailsList = db.OrderDetails.Where(o => o.OrderID == order_id);
             return PartialView(OrrderDetailsList.ToList());
