@@ -259,6 +259,10 @@ namespace GardenShopOnline.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+            {
+                return RedirectToAction("Index", "AspNetUsers");
+            }
             return RedirectToAction("Index", "Home");
         }
 
