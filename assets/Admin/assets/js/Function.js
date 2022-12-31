@@ -88,6 +88,7 @@ function deleteAlert(id, code) {
                         sweetAlert
                             ({
                                 title: "Delete successfully",
+                                confirmButtonText: "OK",
                                 type: "success"
                             },
                                 function () {
@@ -102,6 +103,7 @@ function deleteAlert(id, code) {
                         sweetAlert
                             ({
                                 title: "Delete failed !",
+                                confirmButtonText: "OK",
                                 type: "error"
                             })
                     }
@@ -125,6 +127,7 @@ function EditStatus(id) {
     sweetAlert
         ({
             title: "Status update successful!",
+            confirmButtonText: "OK",
             type: "success"
         },
             function () {
@@ -222,7 +225,8 @@ function Update() {
             table.draw();
             sweetAlert
                 ({
-                    title: "Cập nhật thành công !",
+                    title: "Update successful !",
+                    confirmButtonText: "OK",
                     type: "success"
                 })
         }
@@ -440,6 +444,7 @@ function EditStatus_comment(id, status) {
             sweetAlert
                 ({
                     title: "Status update successful!",
+                    confirmButtonText: "OK",
                     type: "success"
                 })
 
@@ -483,6 +488,7 @@ function DeleteOrder() {
             sweetAlert
                 ({
                     title: "Canceled order successfully!",
+                    confirmButtonText: "OK",
                     type: "success"
                 })
             var date_start = $("#filter_DateStart").val();
@@ -530,6 +536,7 @@ function Reply_comment() {
             sweetAlert
                 ({
                     title: "Successful reply",
+                    confirmButtonText: "OK",
                     type: "success"
                 })
 

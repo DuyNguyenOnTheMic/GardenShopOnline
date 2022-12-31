@@ -98,12 +98,37 @@
         $("#filter_DateStart").change(function () {
             var date_start = $("#filter_DateStart").val();
             var date_end = $("#filter_DateEnd").val();
-            GetList_order(date_start, date_end)
+            if (date_start <= date_end) {
+                GetList_order(date_start, date_end)
+            } else {
+                sweetAlert
+                    ({
+                        title: "Error",
+                        text: "The start time must be less than the end time !",
+                        confirmButtonText: "OK",
+                        type: "error",
+                        allowOutsideClick: true,
+
+                    })
+            }
+           
         });
         $("#filter_DateEnd").change(function () {
             var date_start = $("#filter_DateStart").val();
             var date_end = $("#filter_DateEnd").val();
-            GetList_order(date_start, date_end)
+            if (date_start <= date_end) {
+                GetList_order(date_start, date_end)
+            } else {
+                sweetAlert
+                    ({
+                        title: "Error",
+                        text: "The start time must be less than the end time !",
+                        confirmButtonText: "OK",
+                        type: "error",
+                        allowOutsideClick: true,
+
+                    })
+            }
         });
 
         function GetList_order(date_start, date_end) {
@@ -178,7 +203,8 @@
                     GetList_order(date_start, date_end);
                     sweetAlert
                         ({
-                            title: "Cập nhật trạng thái thành công!",
+                            title: "Status update successful!",
+                            confirmButtonText: "OK",
                             type: "success"
                         })
                   
