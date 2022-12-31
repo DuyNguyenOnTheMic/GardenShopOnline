@@ -1,9 +1,11 @@
 ﻿using GardenShopOnline.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace GardenShopOnline.Controllers
@@ -11,7 +13,29 @@ namespace GardenShopOnline.Controllers
     [Authorize]
     public class CustomerOrdersController : Controller
     {
+        private ApplicationUserManager _userManager;
         private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
+
+        public CustomerOrdersController()
+        {
+        }
+
+        public CustomerOrdersController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: CustomerOrders
         [CustomAuthorize(Roles = "Admin, Staff")]
@@ -51,7 +75,7 @@ namespace GardenShopOnline.Controllers
             {
                 CustomerOrder order = db.CustomerOrders.Find(order_id);
                 TempData["order_status"] = order.Status;
-                if (order.PaidAdvance != null )
+                if (order.PaidAdvance != null)
                 {
                     TempData["order_paidAdvance"] = order.PaidAdvance;
                 }

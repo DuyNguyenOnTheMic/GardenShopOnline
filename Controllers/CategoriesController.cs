@@ -68,7 +68,7 @@ namespace GardenShopOnline.Controllers
         }
         public ActionResult Delete_Category(Category categorys)
         {
-            bool status = true;            try
+            bool status = true; try
             {
                 Category categories = db.Categories.Find(categorys.ID);
                 db.Categories.Remove(categories);
