@@ -169,9 +169,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\MyScriptBundle.cs" />
     <Compile Include="App_Start\MyStyleBundle.cs" />
+    <Compile Include="App_Start\CustomAuthorize.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
@@ -247,6 +249,9 @@
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\ShoppingCartRemoveViewModels.cs" />
     <Compile Include="Models\ShoppingCartViewModels.cs" />
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Type.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -840,6 +845,7 @@
     <Content Include="assets\customer\images\slider\slide-img\2-1-960x741.jpg" />
     <Content Include="assets\customer\images\slider\slide-img\2-2-960x741.jpg" />
     <Content Include="assets\customer\images\slider\slide-img\2-3-960x741.jpg" />
+    <Content Include="assets\customer\images\storyset\img_thankyou.svg" />
     <Content Include="assets\customer\images\testimonial\bg\1-1-1820x443.jpg" />
     <Content Include="assets\customer\images\testimonial\icon\quotation.png" />
     <Content Include="assets\customer\images\testimonial\user\1.png" />
@@ -1025,6 +1031,8 @@
     <Content Include="Views\Contact\Customer.cshtml" />
     <Content Include="Views\AspNetUsers\Details.cshtml" />
     <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\AspNetUsers\_Edit.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

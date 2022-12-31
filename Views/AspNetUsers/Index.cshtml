@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    int no = 0;
 }
 
 <section class="pcoded-main-container">
@@ -40,58 +39,25 @@
                                     <h4>ACCOUNT</h4>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="button" class="btn  btn-primary btn-block" data-toggle="modal" data-target="#AddCategory">Add new</button>
+                                    <button type="button" class="btn  btn-primary btn-block" data-toggle="modal" data-target="#AddUser">Add new</button>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body table-border-style">
                             <div class="table-responsive">
-                                <table id="example" class="table table-hover">
+                                <table id="tblUser" class="table table-hover w-100">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th class="text-center">Full Name</th>
-                                            <th class="text-center">Email</th>
-                                            <th class="text-center">Phone</th>
-                                            <th class="text-center">Address</th>
-                                            <th width="15%">Role</th>
-                                            <th width="15%">
-                                            </th>
+                                            <th>Staff ID</th>
+                                            <th>Full Name</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-
-                                            no++;
-                                            <tr>
-                                                <td>@no</td>
-
-                                                <td class="text-center">@item.FullName</td>
-                                                <td>@item.Email</td>
-                                                <td class="text-center">@item.PhoneNumber</td>
-                                                <td>@item.Address</td>
-                                                <td class="text-center"></td>
-
-                                                <td>
-                                                    <button class="btn btn-success ">
-                                                        <i class="feather icon-edit">
-                                                        </i>
-                                                    </button>
-                                                    <input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Category", "categories")">
-                                                    <button class="btn btn-danger">
-                                                        <i class="feather icon-trash-2">
-                                                        </i>
-                                                    </button>
-
-                                                </td>
-                                            </tr>
-
-                                        }
-
-                                    </tbody>
+                                    <tbody></tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
@@ -101,12 +67,13 @@
     </div>
 </section>
 
-<div id="AddCategory" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="AddCategoryLabel" aria-hidden="true">
+<div id="AddUser" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="AddUserLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <form class="needs-validation" method="post" action="#" novalidate>
+        <form class="needs-validation userForm" method="post" action="@Url.Action("Create", "AspNetUsers")" oninput='confirmPassword.setCustomValidity(confirmPassword.value != password.value ? "Passwords do not match." : "")' novalidate>
+            @Html.AntiForgeryToken()
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <h5 class="modal-title" id="AddCategoryLabel">Create new account</h5>
+                    <h5 class="modal-title" id="AddUserLabel">Create new account</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
 
@@ -115,12 +82,38 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>
+                                    Staff ID<span class="text-danger">*</span>
+                                </label>
+                                <div class="position-relative">
+                                    <input type="text" placeholder="Staff Id" class="form-control" id="staffId" name="staffId" required>
+                                    <div class="invalid-feedback">
+                                        Please enter staff id!
+                                    </div>
+                                </div> <!---->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Full name<span class="text-danger">*</span>
+                                </label>
+                                <div class="position-relative">
+                                    <input type="text" placeholder="Full name" class="form-control" id="fullName" name="fullName" required>
+                                    <div class="invalid-feedback">
+                                        Please enter full name!
+                                    </div>
+                                </div> <!---->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
                                     Email<span class="text-danger">*</span>
                                 </label>
                                 <div class="position-relative">
-                                    <input type="text" placeholder="Email" id="emai" class="form-control" name="emai" pattern="\S+.*" required="">
+                                    <input type="email" placeholder="Email" class="form-control" id="email" name="email" pattern="^\w+([-+.']\w+)*@('@')\w+([-.]\w+)*\.\w+([-.]\w+)*$" required>
                                     <div class="invalid-feedback">
-                                        Please enter email !
+                                        Please enter valid email!
                                     </div>
                                 </div> <!---->
                             </div>
@@ -131,12 +124,7 @@
                                     Role<span class="text-danger">*</span>
                                 </label>
                                 <div class="position-relative">
-                                    <select class="custom-select" id="account_role" name="account_role">
-                                        <option disabled selected>Choose role</option>
-                                        <option value="">Admin</option>
-                                        <option value="">Staff</option>
-
-                                    </select>
+                                    @Html.DropDownList("role_id", null, htmlAttributes: new { @class = "form-control", @aria_label = "Choose role" })
                                     <div class="invalid-feedback">Please choose role</div>
                                 </div> <!---->
 
@@ -149,7 +137,7 @@
                                     Password<span class="text-danger">*</span>
                                 </label>
                                 <div class="position-relative">
-                                    <input type="password" placeholder="Password" id="account_Pass" class="form-control" required="">
+                                    <input type="password" placeholder="Password" id="password" name="password" class="form-control" required>
                                     <div class="invalid-feedback">
                                         Password cannot be left blank !
                                     </div>
@@ -163,9 +151,9 @@
                                     Confirm Password<span class="text-danger">*</span>
                                 </label>
                                 <div class="position-relative">
-                                    <input type="text" placeholder="Confirm Password" id="account_ConFimPass" max="999999999999" class="form-control" pattern="[0-9.,]+" data-type="number" name="purchase_price" required="">
+                                    <input type="password" placeholder="Confirm Password" id="confirmPassword" name="confirmPassword" class="form-control" required>
                                     <div class="invalid-feedback">
-                                        Confirm Password cannot be left blank !
+                                        Passwords do not match.
                                     </div>
                                 </div>
                                 <!---->
@@ -183,3 +171,162 @@
         </form>
     </div>
 </div>
+<div id="EditUser" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="EditUserLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="needs-validation userForm" method="post" action="@Url.Action("Edit", "AspNetUsers")" novalidate>
+            @Html.AntiForgeryToken()
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title" id="EditUserLabel">Update account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        var dataTable;
+        dataTable = $('#tblUser').DataTable({
+            ajax: {
+                url: '@Url.Action("GetData", "AspNetUsers")',
+                type: 'GET',
+                dataType: 'json',
+                dataSrc: ''
+            },
+            processing: true,
+            columns: [
+                { 'data': '', defaultContent: '' },
+                { 'data': 'StaffId' },
+                { 'data': 'FullName' },
+                { 'data': 'Email' },
+                { 'data': 'Name' },
+                {
+                    'data': 'Id', 'render': function (data, type, row) {
+                        return "<button class='btn btn-success' onclick=getUser('" + data + "')>" +
+                        "<i class='feather icon-edit'>" +
+                            "</i>" +
+                            "</button>" +
+                            "<button class='btn btn-danger' onclick=deleteUser('" + data + "')>" +
+                            "<i class='feather icon-trash-2'>" +
+                            "</i>" +
+                            "</button>";
+                    }
+                }
+            ],
+            columnDefs: [
+                { className: 'text-center', targets: 1 },
+                { width: '15%', targets: 5 },
+            ],
+            order: [[1, 'asc']],
+            pagingType: 'full_numbers',
+        });
+
+        dataTable.on('order.dt search.dt', function () {
+            let i = 1;
+            dataTable.cells(null, 0, { search: 'applied', order: 'applied' }).every(function (cell) {
+                this.data(i++);
+            });
+        }).draw();
+
+        $('.userForm').submit(function (e) {
+            var form = $(this);
+
+            // Check if form is valid then submit ajax
+            if (form[0].checkValidity()) {
+                e.preventDefault();
+                var url = form.attr('action');
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: form.serialize(),
+                    success: function (data) {
+                        // Hide bootstrap modal to prevent conflict
+                        $('.modal').modal('hide');
+
+                        if (data.success) {
+                            // Refresh table data
+                            dataTable.ajax.reload();
+                            swal({
+                                title: data.message,
+                                type: 'success',
+                                confirmButtonText: "OK"
+                            })
+
+                            form[0].reset();
+                            form.removeClass('was-validated');
+                        } else {
+                            swal({
+                                title: 'Oops',
+                                text: data.message,
+                                type: 'error',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: "#ec6c62"
+                            }, function () { $('#AddUser').modal('show') }); // Show bootstrap modal again
+                        }
+                    }
+                });
+            }
+        });
+
+        function getUser(id) {
+            $.ajax({
+                url: '@Url.Action("Edit", "AspNetUsers")',
+                type: 'GET',
+                data: { id },
+                success: function (response) {
+                    // Add response in Modal body
+                    $('#EditUser .modal-body').html(response);
+
+                    // Display Modal
+                    $('#EditUser').modal('show');
+                }
+            });
+        }
+
+        // Function to delete user
+        function deleteUser(id) {
+            swal({
+                title: "Are you sure want to delete?",
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "Confirm",
+                confirmButtonColor: "#ec6c62",
+            }, function () {
+                $.ajax({
+                    url: '@Url.Action("Delete", "AspNetUsers")',
+                    type: 'POST',
+                    data: { id },
+                    success: function (data) {
+                        if (data.success) {
+                            // Refresh table data
+                            dataTable.ajax.reload();
+                            swal({
+                                title: data.message,
+                                type: 'success',
+                                confirmButtonText: "OK"
+                            })
+                        } else {
+                            swal({
+                                title: 'Oops',
+                                text: data.message,
+                                type: 'error',
+                                confirmButtonText: 'OK',
+                                confirmButtonColor: "#ec6c62"
+                            });
+                        }
+                    }
+                });
+            })
+        }
+    </script>
+}

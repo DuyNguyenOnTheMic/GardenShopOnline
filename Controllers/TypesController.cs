@@ -7,9 +7,10 @@ using System.Web.Mvc;
 
 namespace GardenShopOnline.Controllers
 {
+    [CustomAuthorize(Roles = "Admin, Staff")]
     public class TypesController : Controller
     {
-        private BonsaiGardenEntities db = new BonsaiGardenEntities();
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
         // GET: Types
         public ActionResult Index()

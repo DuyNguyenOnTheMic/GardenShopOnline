@@ -12,14 +12,16 @@ namespace GardenShopOnline.Controllers
 {
     public class ProductsController : Controller
     {
-        private BonsaiGardenEntities db = new BonsaiGardenEntities();
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
         // GET: Products
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Index()
         {
             return View();
         }
 
+        [CustomAuthorize(Roles = "Admin, Staff")]
         // sử dụng PartialView để có thể lọc sản phẩm mà không load lại toàn trang
         public ActionResult ProductList(int category_id, int type_id)
         {
@@ -40,6 +42,7 @@ namespace GardenShopOnline.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
+        [CustomAuthorize(Roles = "Admin, Staff")]
 
         public ActionResult Create_Product(string name_product,
            int quantity, int CategoryDropdown, int TypeDropdown,
@@ -87,6 +90,7 @@ namespace GardenShopOnline.Controllers
             Session["notification"] = "Thêm mới thành công!";
             return RedirectToAction("Index");
         }
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Delete_Product(Product product)
         {
             Product product1 = db.Products.Find(product.ID);
@@ -96,6 +100,7 @@ namespace GardenShopOnline.Controllers
             return Json("Delete_Product", JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public JsonResult FindProduct(int Product_id)
         {
             Product product = db.Products.Find(Product_id);
@@ -111,6 +116,7 @@ namespace GardenShopOnline.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult UpdateProduct(int Product_id, string name_product,
            int quantity, int CategoryDropdown, int TypeDropdown,
            string price, string description, HttpPostedFileBase file)
@@ -175,6 +181,7 @@ namespace GardenShopOnline.Controllers
         }
 
         // GET: Products1/Create
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name");
@@ -182,6 +189,7 @@ namespace GardenShopOnline.Controllers
         }
 
         // GET: Products1/Edit/5
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Edit(int id)
         {
             Product product = db.Products.Find(id);
@@ -203,6 +211,8 @@ namespace GardenShopOnline.Controllers
             }
             return View(product);
         }
+
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Comment_product(int product_id, string content)
         {
             CommentProduct comment = new CommentProduct();

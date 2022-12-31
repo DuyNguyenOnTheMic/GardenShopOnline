@@ -11,7 +11,7 @@ namespace GardenShopOnline.Controllers
         public ActionResult Index()
         {
             ShoppingCart.GetCart(HttpContext);
-            return View(db.Products.ToList());
+            return View(db.Products.Where(p => p.Status == 1).ToList());
         }
     }
 }

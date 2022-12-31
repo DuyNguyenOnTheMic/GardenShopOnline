@@ -8,11 +8,13 @@ using System.Web.Mvc;
 
 namespace GardenShopOnline.Controllers
 {
+    [Authorize]
     public class CustomerOrdersController : Controller
     {
-        private BonsaiGardenEntities db = new BonsaiGardenEntities();
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
         // GET: CustomerOrders
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Index()
         {
             Session["pills-create"] = "active";
@@ -25,6 +27,7 @@ namespace GardenShopOnline.Controllers
             return View(customerOrders.ToList());
         }
 
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult OrrderList(DateTime? date_start, DateTime? date_end)
         {
 
@@ -40,6 +43,7 @@ namespace GardenShopOnline.Controllers
             return PartialView(OrrderList.ToList());
         }
 
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult OrrderDetailsList(string order_id)
         {
             TempData["order_id"] = order_id;
@@ -76,6 +80,7 @@ namespace GardenShopOnline.Controllers
             return PartialView("_OrderDetails", OrrderDetailsList);
         }
 
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult EditStatus_Order(CustomerOrder order)
         {
 
@@ -122,6 +127,7 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public JsonResult FindOrder(string order_id)
         {
             var emp = new CustomerOrder
@@ -132,6 +138,7 @@ namespace GardenShopOnline.Controllers
             return Json(emp);
         }
 
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult DeleteOrder(CustomerOrder order)
         {
             CustomerOrder customerOrder = db.CustomerOrders.Find(order.ID);

@@ -1,38 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using GardenShopOnline.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using GardenShopOnline.Models;
 
 namespace GardenShopOnline.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
     public class AspNetUsersController : Controller
     {
-        private BonsaiGardenEntities db = new BonsaiGardenEntities();
+        private ApplicationUserManager _userManager;
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
+
+        public AspNetUsersController()
+        {
+        }
+
+        public AspNetUsersController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: AspNetUsers
         public ActionResult Index()
         {
-            return View(db.AspNetUsers.ToList());
+            ViewData["role_id"] = new SelectList(db.AspNetRoles.ToList(), "id", "name");
+            return View();
         }
 
-        // GET: AspNetUsers/Details/5
-        public ActionResult Details(string id)
+        public JsonResult GetData()
         {
-            if (id == null)
+            // Get user data from database
+            return Json(db.AspNetUsers.Where(u => u.AspNetRoles.Any()).Select(u => new
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            if (aspNetUser == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetUser);
+                u.Id,
+                u.StaffId,
+                u.FullName,
+                u.Email,
+                u.AspNetRoles.FirstOrDefault().Name
+            }).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         // GET: AspNetUsers/Create
@@ -46,31 +66,52 @@ namespace GardenShopOnline.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FullName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,Address,UserName,DateCreated")] AspNetUser aspNetUser)
+        public ActionResult Create(string email, string staffId, string fullName, string role_id, string password)
         {
-            if (ModelState.IsValid)
+            var query_email = UserManager.FindByEmail(email);
+            var role = db.AspNetRoles.Find(role_id);
+            if (query_email == null)
             {
-                db.AspNetUsers.Add(aspNetUser);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                ApplicationUser user = new ApplicationUser()
+                {
+                    Email = email,
+                    UserName = email,
+                    StaffId = staffId,
+                    FullName = fullName,
+                    DateCreated = DateTime.Now
+                };
+
+                IdentityResult result = UserManager.Create(user, password);
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRole(user.Id, role.Name);
+                    return Json(new { success = true, message = "Add succeeded!" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { error = true, message = result.Errors }, JsonRequestBehavior.AllowGet);
+                }
             }
 
-            return View(aspNetUser);
+            return Json(new { error = true, message = "This email is already exists!" }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: AspNetUsers/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            ApplicationUser user = UserManager.FindById(id);
             AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            if (aspNetUser == null)
+            if (user.Roles.Count > 0)
             {
-                return HttpNotFound();
+                // Set selected value for user role
+                ViewData["role_id"] = new SelectList(db.AspNetRoles.ToList(), "id", "name", user.Roles.FirstOrDefault().RoleId);
             }
-            return View(aspNetUser);
+            else
+            {
+                // Populate new role select list
+                ViewData["role_id"] = new SelectList(db.AspNetRoles.ToList(), "id", "name");
+            }
+            return PartialView("_Edit", aspNetUser);
         }
 
         // POST: AspNetUsers/Edit/5
@@ -78,41 +119,47 @@ namespace GardenShopOnline.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FullName,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,Address,UserName,DateCreated")] AspNetUser aspNetUser)
+        public ActionResult Edit(string id, string staffId, string fullName, string role_id)
         {
-            if (ModelState.IsValid)
+            var user = UserManager.FindById(id);
+            string oldRole = UserManager.GetRoles(id).FirstOrDefault();
+            AspNetRole role = db.AspNetRoles.Find(role_id);
+
+            user.StaffId = staffId;
+            user.FullName = fullName;
+            UserManager.Update(user);
+
+            if (oldRole != null)
             {
-                db.Entry(aspNetUser).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                // Update user role
+                UserManager.RemoveFromRole(id, oldRole);
+                UserManager.AddToRole(id, role.Name);
             }
-            return View(aspNetUser);
+            else
+            {
+                // Add user to role
+                UserManager.AddToRole(id, role.Name);
+            }
+
+            return Json(new { success = true, message = "Update user succeeded!" }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: AspNetUsers/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            if (aspNetUser == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetUser);
-        }
+            // Declare variables
+            ApplicationUser user = UserManager.FindById(id);
 
-        // POST: AspNetUsers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            db.AspNetUsers.Remove(aspNetUser);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                // Delete user
+                UserManager.Delete(user);
+            }
+            catch
+            {
+                return Json(new { error = true, message = "Can't delete this user! Please try again later." }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { success = true, message = "Delete succeeded!" }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

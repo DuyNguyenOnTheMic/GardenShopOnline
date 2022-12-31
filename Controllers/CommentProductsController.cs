@@ -1,37 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GardenShopOnline.Models;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using GardenShopOnline.Models;
-using Microsoft.AspNet.Identity;
 
 namespace GardenShopOnline.Controllers
 {
     public class CommentProductsController : Controller
     {
-        private BonsaiGardenEntities db = new BonsaiGardenEntities();
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
         // GET: CommentProducts
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Index()
         {
-            
+
             var commentProducts = db.CommentProducts.Include(c => c.Product);
             return View(commentProducts.ToList());
         }
         public ActionResult CommentProduct(int product_id)
         {
-            var commentProducts = db.CommentProducts.Include(c => c.Product).Where(c => c.ProductID == product_id &&c.Status == 2);
+            var commentProducts = db.CommentProducts.Include(c => c.Product).Where(c => c.ProductID == product_id && c.Status == 2);
             return PartialView(commentProducts.ToList());
         }
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult CommentProductList()
         {
             var commentProducts = db.CommentProducts.Include(c => c.Product);
             return PartialView(commentProducts.ToList());
         }
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult EditStatus_Comment(CommentProduct cmt)
         {
             CommentProduct comment = db.CommentProducts.Find(cmt.ID);
@@ -49,23 +50,25 @@ namespace GardenShopOnline.Controllers
             db.SaveChanges();
             return Json("EditStatus_Order", JsonRequestBehavior.AllowGet);
         }
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult ReplyComment(CommentProduct cmt)
         {
-                CommentProduct comment = new CommentProduct();
-                comment.Content = cmt.Content;
-                comment.ProductID = cmt.ProductID;
-                comment.DateCreated = DateTime.Now;
-                comment.UserID = User.Identity.GetUserId();
-                comment.Reply_coment = cmt.Reply_coment;
-                comment.Status = 2;
-                db.CommentProducts.Add(comment);
+            CommentProduct comment = new CommentProduct();
+            comment.Content = cmt.Content;
+            comment.ProductID = cmt.ProductID;
+            comment.DateCreated = DateTime.Now;
+            comment.UserID = User.Identity.GetUserId();
+            comment.Reply_coment = cmt.Reply_coment;
+            comment.Status = 2;
+            db.CommentProducts.Add(comment);
             db.SaveChanges();
             CommentProduct commentProduct = db.CommentProducts.Find(cmt.Reply_coment);
             commentProduct.Status = 2;
             db.Entry(commentProduct).State = EntityState.Modified;
             db.SaveChanges();
-                return Json("ReplyComment", JsonRequestBehavior.AllowGet);         
+            return Json("ReplyComment", JsonRequestBehavior.AllowGet);
         }
+        [CustomAuthorize(Roles = "Admin, Staff")]
         // GET: CommentProducts/Details/5
         public ActionResult Details(int? id)
         {

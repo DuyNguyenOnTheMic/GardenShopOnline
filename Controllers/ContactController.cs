@@ -38,6 +38,7 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpGet]
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Customer()
         {
             var currentUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
@@ -46,6 +47,7 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpGet]
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult GetData(string fromUserId)
         {
             var toUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
@@ -57,6 +59,7 @@ namespace GardenShopOnline.Controllers
 
         // GET: Contact
         [HttpGet]
+        [Authorize]
         public ActionResult Index()
         {
             var fromUserId = User.Identity.GetUserId();
@@ -68,6 +71,7 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public JsonResult SendMessage(string message, string fromUserId, string toUserId, string connectionId, HttpPostedFileBase file)
         {
             string img = "";
@@ -126,6 +130,7 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public JsonResult UpdateState(string fromUserId, string toUserId)
         {
             db.Messages.Where(m => ((m.FromUserId == fromUserId && m.ToUserId == toUserId) || (m.FromUserId == toUserId && m.ToUserId == fromUserId)) && m.DateViewed == null).ForEach(m => m.DateViewed = DateTime.Now);
