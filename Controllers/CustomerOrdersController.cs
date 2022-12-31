@@ -154,6 +154,27 @@ namespace GardenShopOnline.Controllers
         [CustomAuthorize(Roles = "Admin, Staff")]
         public async Task EmailStatus(string userId, string orderId, string status)
         {
+            switch (status)
+            {
+                case "1":
+                    status = "Wait for confirmation";
+                    break;
+                case "2":
+                    status = "Approved";
+                    break;
+                case "3":
+                    status = "Delivering";
+                    break;
+                case "4":
+                    status = "Completed";
+                    break;
+                case "5":
+                    status = "Pay in advance";
+                    break;
+                case "6":
+                    status = "Canceled";
+                    break;
+            }
             await UserManager.SendEmailAsync(userId, "Your order " + orderId + " has been updated", "Your order's status is currently now " + status);
         }
 
