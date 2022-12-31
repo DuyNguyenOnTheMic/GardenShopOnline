@@ -179,7 +179,14 @@
                         })
                     var date_start = $("#filter_DateStart").val();
                     var date_end = $("#filter_DateEnd").val();
-                    GetList_order(date_start, date_end)
+                    GetList_order(date_start, date_end);
+                    $.ajax({
+                        url: "@Url.Action("EmailStatus", "CustomerOrders")",
+                        data: JSON.stringify(data),
+                        type: "POST",
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json'
+                    });
                 }
             });
         }
