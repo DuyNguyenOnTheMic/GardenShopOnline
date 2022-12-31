@@ -845,6 +845,7 @@
     <Content Include="assets\customer\images\slider\slide-img\2-1-960x741.jpg" />
     <Content Include="assets\customer\images\slider\slide-img\2-2-960x741.jpg" />
     <Content Include="assets\customer\images\slider\slide-img\2-3-960x741.jpg" />
+    <Content Include="assets\customer\images\storyset\img_thankyou.svg" />
     <Content Include="assets\customer\images\testimonial\bg\1-1-1820x443.jpg" />
     <Content Include="assets\customer\images\testimonial\icon\quotation.png" />
     <Content Include="assets\customer\images\testimonial\user\1.png" />
