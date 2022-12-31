@@ -57,7 +57,7 @@
                                                     <img class="w-25" src="~/assets/images/@item.Product.Image" alt="Cart Thumbnail">
                                                 </a>
                                             </td>
-                                            <td class="product-name"><a href="#">@item.Product.Name</a></td>
+                                            <td class="product-name"><a href="@Url.Action("Details", "Products", new { id = item.ProductID })">@item.Product.Name</a></td>
                                             <td class="product-price"><span class="amount">@item.Product.Price.ToString("N0") ₫</span></td>
                                             <td class="quantity" id="item-count-@item.RecordID">
                                                 <div class="cart-plus-minus" data-id="@item.RecordID" data-productid="@item.ProductID">
