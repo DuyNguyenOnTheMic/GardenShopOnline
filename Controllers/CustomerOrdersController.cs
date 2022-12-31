@@ -107,8 +107,8 @@ namespace GardenShopOnline.Controllers
         [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult EditStatus_Order(CustomerOrder order)
         {
-
             CustomerOrder customerOrder = db.CustomerOrders.Find(order.ID);
+            var user = UserManager.FindById(customerOrder.AccCustomerID);
             if (customerOrder.Status == 1)
             {
                 Session["pills-create"] = "active";
@@ -147,6 +147,7 @@ namespace GardenShopOnline.Controllers
             }
             db.Entry(customerOrder).State = EntityState.Modified;
             db.SaveChanges();
+            UserManager.SendEmail(user.Id, "Your order " + customerOrder.ID + "has been updated", "Your order's status is currently now " + customerOrder.Status);
             return Json("EditStatus_Order", JsonRequestBehavior.AllowGet);
         }
 
