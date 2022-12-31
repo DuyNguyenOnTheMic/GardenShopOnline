@@ -27,7 +27,7 @@ namespace GardenShopOnline.Controllers
             for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
             {
                 var orderCount = db.CustomerOrders.Count(o => DbFunctions.TruncateTime(o.DateCreated) == date);
-                var accountCount = db.AspNetUsers.Count(a => DbFunctions.TruncateTime(a.DateCreated) == date);
+                var accountCount = db.AspNetUsers.Count(a => DbFunctions.TruncateTime(a.DateCreated) == date && !a.AspNetRoles.Any());
                 countList.Add(Tuple.Create(orderCount, accountCount));
             }
             return Json(countList, JsonRequestBehavior.AllowGet);
