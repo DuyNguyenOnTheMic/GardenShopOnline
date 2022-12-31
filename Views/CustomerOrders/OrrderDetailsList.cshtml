@@ -169,9 +169,6 @@
                                             </button>
                                         </td>
                                     </tr>
-
-
-
                                 </tfoot>
                             </table>
                         </div>
@@ -181,55 +178,7 @@
         </div>
     </div>
 </div>
+
 <script>
-    document.getElementById('status_order').value = '@order_status';
-
-    function EditStatus_order(id) {
-        var URDEditStatus_Order = "";
-        $('#URDEditStatus_Order')
-            .keypress(function () {
-                URDEditStatus_Order = $(this).val();
-            })
-            .keypress();
-        var status = $('#status_order').val();
-        var Paid_note = $('#Paid_note').val();
-        var Paid_advance = $('#Paid_advance').val();
-        var CustomerOrder = {};
-        CustomerOrder.id = id;
-        CustomerOrder.Status = status;
-        CustomerOrder.Note = Paid_note;
-        CustomerOrder.PaidAdvance = Paid_advance;
-        $.ajax({
-            url: URDEditStatus_Order,
-            data: JSON.stringify(CustomerOrder),
-            type: "POST",
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: function (data) {
-                $('#detailModal.close').css('display', 'none');
-                $('#detailModal').modal('hide');
-                sweetAlert
-                    ({
-                        title: "Cập nhật trạng thái thành công!",
-                        type: "success"
-                    })
-                var date_start = $("#filter_DateStart").val();
-                var date_end = $("#filter_DateEnd").val();
-                GetList_order(date_start, date_end)
-            },
-        });
-
-    }
-    $("#status_order").change(function () {
-        if ($('#status_order').val() == 5) {
-            $('#paid').show();
-            $('#reason_check').hide();
-        } else if ($('#status_order').val() == 6) {
-            $('#paid').hide();
-            $('#reason_check').show();
-        } else {
-            $('#paid').hide();
-            $('#reason_check').hide();
-        }
-    });
+        document.getElementById('status_order').value = '@order_status';
 </script>

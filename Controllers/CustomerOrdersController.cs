@@ -5,6 +5,7 @@ using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -147,8 +148,13 @@ namespace GardenShopOnline.Controllers
             }
             db.Entry(customerOrder).State = EntityState.Modified;
             db.SaveChanges();
-            UserManager.SendEmail(user.Id, "Your order " + customerOrder.ID + " has been updated", "Your order's status is currently now " + customerOrder.Status);
-            return Json("EditStatus_Order", JsonRequestBehavior.AllowGet);
+            return Json(new { userId = user.Id, orderId = customerOrder.ID, status = customerOrder.Status }, JsonRequestBehavior.AllowGet);
+        }
+
+        [CustomAuthorize(Roles = "Admin, Staff")]
+        public async Task EmailStatus(string userId, string orderId, string status)
+        {
+            await UserManager.SendEmailAsync(userId, "Your order " + orderId + " has been updated", "Your order's status is currently now " + status);
         }
 
         [HttpPost]
