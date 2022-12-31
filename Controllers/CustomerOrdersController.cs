@@ -147,7 +147,7 @@ namespace GardenShopOnline.Controllers
             }
             db.Entry(customerOrder).State = EntityState.Modified;
             db.SaveChanges();
-            UserManager.SendEmail(user.Id, "Your order " + customerOrder.ID + "has been updated", "Your order's status is currently now " + customerOrder.Status);
+            UserManager.SendEmail(user.Id, "Your order " + customerOrder.ID + " has been updated", "Your order's status is currently now " + customerOrder.Status);
             return Json("EditStatus_Order", JsonRequestBehavior.AllowGet);
         }
 
