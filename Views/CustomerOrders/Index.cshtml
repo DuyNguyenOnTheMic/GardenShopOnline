@@ -165,6 +165,7 @@
             CustomerOrder.PaidAdvance = Paid_advance;
             $.ajax({
                 url: URDEditStatus_Order,
+                async:false,
                 data: JSON.stringify(CustomerOrder),
                 type: "POST",
                 contentType: 'application/json; charset=utf-8',
@@ -172,14 +173,15 @@
                 success: function (data) {
                     $('#detailModal.close').css('display', 'none');
                     $('#detailModal').modal('hide');
+                    var date_start = $("#filter_DateStart").val();
+                    var date_end = $("#filter_DateEnd").val();
+                    GetList_order(date_start, date_end);
                     sweetAlert
                         ({
                             title: "Cập nhật trạng thái thành công!",
                             type: "success"
                         })
-                    var date_start = $("#filter_DateStart").val();
-                    var date_end = $("#filter_DateEnd").val();
-                    GetList_order(date_start, date_end);
+                  
                     $.ajax({
                         url: "@Url.Action("EmailStatus", "CustomerOrders")",
                         data: JSON.stringify(data),
