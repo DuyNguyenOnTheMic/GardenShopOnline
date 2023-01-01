@@ -174,6 +174,8 @@ namespace GardenShopOnline.Controllers
                 case "6":
                     status = "Canceled";
                     break;
+                default:
+                    break;
             }
             await UserManager.SendEmailAsync(userId, "Your order " + orderId + " has been updated", "Your order's status is currently now " + status);
         }
