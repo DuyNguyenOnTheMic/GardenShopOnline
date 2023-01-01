@@ -872,6 +872,9 @@
     <Content Include="assets\customer\js\vendor\sweetalert2.all.min.js" />
     <Content Include="assets\customer\js\vendor\toastr.min.js" />
     <Content Include="assets\email-templates\confirm-email.html" />
+    <Content Include="assets\email-templates\images\bee.png" />
+    <Content Include="assets\email-templates\images\img_proccessing.svg" />
+    <Content Include="assets\email-templates\order-status.html" />
     <Content Include="assets\email-templates\reset-password.html" />
     <Content Include="assets\images\sen-da-kim-cuong.jpg" />
     <Content Include="assets\signalR\jquery.signalR.min.js" />
