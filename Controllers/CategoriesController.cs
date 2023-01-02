@@ -14,21 +14,38 @@ namespace GardenShopOnline.Controllers
         // GET: Categories
         public ActionResult Index()
         {
+            return View();
+        }
+        public ActionResult _CategoryList()
+        {
             var categories = db.Categories.Where(c => c.Status != 3).OrderByDescending(c => c.ID);
 
-            return View(categories.ToList());
+            return PartialView(categories.ToList());
         }
-        public ActionResult Create_Category(string name_Category)
+        public JsonResult Create_Category(string name)
         {
-            Category Category = new Category
+            string message = "";
+            bool status = true;
+            int check = db.Categories.Where(c => c.Name == name).Count();
+            if (check > 0)
             {
-                Name = name_Category,
-                Status = 1
-            };
-            db.Categories.Add(Category);
-            db.SaveChanges();
-            Session["notification"] = "Thêm mới thành công!";
-            return RedirectToAction("Index");
+                status = false;
+                message = "Category name already exists";
+            }
+            else
+            {
+                Category Category = new Category
+                {
+                    Name = name,
+                    Status = 1
+                };
+                db.Categories.Add(Category);
+                db.SaveChanges();
+                 message = "Created successfully";
+                 status = true;
+            }
+           
+            return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult EditStatus_Category(Category Categorys)
         {

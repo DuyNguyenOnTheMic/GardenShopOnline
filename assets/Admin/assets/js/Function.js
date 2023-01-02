@@ -10,6 +10,7 @@
                 if (form.checkValidity() === false) {
                     event.preventDefault();
                     event.stopPropagation();
+                    form.classList.remove('was-validated');
                 }
                 form.classList.add('was-validated');
             }, false);
@@ -24,8 +25,19 @@ $(document).ready(function () {
             if (form.checkValidity() === false) {
                 event.preventDefault();
                 event.stopPropagation();
+                form.classList.remove('was-validated');
             } else {
                 Update();
+            }
+            form.classList.add('was-validated');
+        })
+        $('#submit_Add').on('click', function () {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+                form.classList.remove('was-validated');
+            } else {
+                Add();
             }
             form.classList.add('was-validated');
         })
@@ -33,6 +45,8 @@ $(document).ready(function () {
             if (form.checkValidity() === false) {
                 event.preventDefault();
                 event.stopPropagation();
+                form.classList.remove('was-validated');
+
             } else {
                 Update_Product();
             }
@@ -42,11 +56,13 @@ $(document).ready(function () {
             if (form.checkValidity() === false) {
                 event.preventDefault();
                 event.stopPropagation();
+                form.classList.remove('was-validated');
             } else {
                 DeleteOrder();
             }
             form.classList.add('was-validated');
         })
+        
 
     }, false);
 })
@@ -205,6 +221,16 @@ $('#URLUpdateCategory')
         URLUpdateCategory = $(this).val();
     })
     .keypress();
+$('#URLCreate_Category')
+    .keypress(function () {
+        URLCreate_Category = $(this).val();
+    })
+    .keypress();
+$('#URL_CategoryList')
+    .keypress(function () {
+        URL_CategoryList = $(this).val();
+    })
+    .keypress();
 
 function Update() {
     var table = $('#example').DataTable();
@@ -230,6 +256,55 @@ function Update() {
                     type: "success"
                 })
         }
+    });
+}
+function Add() {
+   
+    var Name = $('#Add_name').val();
+
+    $.ajax({
+        url: URLCreate_Category,
+        type: "Post",
+        data: { name: Name},
+        dataType: "json",
+        success: function (response) {
+            $('#Addform .close').css('display', 'none');
+            $('#Addform').modal('hide');
+            if (response.status) {
+                sweetAlert
+                    ({
+                        title: response.message,
+                        confirmButtonText: "OK",
+                        type: "success"
+                    })
+                GetList_CategoryAndType();
+            } else {
+                sweetAlert
+                    ({
+                        title: "Error !",
+                        text: response.message,
+                        confirmButtonText: "OK",
+                        type: "error"
+                    })
+            }
+           
+        }
+    });
+}
+function GetList_CategoryAndType() {
+    $.ajax({
+        url: URL_CategoryList,
+        data: {
+           
+        }
+    }).done(function (result) {
+        $('#dataContainer').html(result);
+        $('#example').DataTable()
+
+    }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        console.log(textStatus)
+        console.log(errorThrown)
+        alert("Something Went Wrong, Try Later");
     });
 }
 //------------ Load dropdown form add product----------------------------------
