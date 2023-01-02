@@ -76,11 +76,13 @@ namespace GardenShopOnline.Controllers
         {
             string img = "";
             // Send message to user   
-            Message ms = new Message();
-            ms.FromUserId = fromUserId;
-            ms.ToUserId = toUserId;
-            ms.Status = 1;
-            ms.DateCreated = DateTime.Now;
+            Message ms = new Message
+            {
+                FromUserId = fromUserId,
+                ToUserId = toUserId,
+                Status = 1,
+                DateCreated = DateTime.Now
+            };
             if (file != null)
             {
                 string filename = Path.GetFileName(file.FileName);
@@ -126,7 +128,7 @@ namespace GardenShopOnline.Controllers
 
             db.SaveChanges();
             ChatHub.Send(time, message, connectionId, fromUserId, toUserId, Img);
-            return Json(new { success = true, message = mess, img = img, time }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, message = mess, img, time }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
