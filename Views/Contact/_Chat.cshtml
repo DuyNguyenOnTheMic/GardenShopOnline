@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<GardenShopOnline.Models.Message>
 
 <div class="selected-user">
-    <span>To: <span class="name">Emily Russell</span></span>
+    <span>To: <span class="name">@ViewData["userEmail"]</span></span>
 </div>
 <div class="chat-container">
     <ul class="chat-box chatContainerScroll" id="discussion" data-userid="@ViewData["fromUserId"]" data-currentuser="@ViewData["toUserId"]">
