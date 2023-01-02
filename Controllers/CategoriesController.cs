@@ -14,21 +14,38 @@ namespace GardenShopOnline.Controllers
         // GET: Categories
         public ActionResult Index()
         {
+            return View();
+        }
+        public ActionResult _CategoryList()
+        {
             var categories = db.Categories.Where(c => c.Status != 3).OrderByDescending(c => c.ID);
 
-            return View(categories.ToList());
+            return PartialView(categories.ToList());
         }
-        public ActionResult Create_Category(string name_Category)
+        public JsonResult Create_Category(string name)
         {
-            Category Category = new Category
+            string message = "";
+            bool status = true;
+            int check = db.Categories.Where(c => c.Name == name).Count();
+            if (check > 0)
             {
-                Name = name_Category,
-                Status = 1
-            };
-            db.Categories.Add(Category);
-            db.SaveChanges();
-            Session["notification"] = "Thêm mới thành công!";
-            return RedirectToAction("Index");
+                status = false;
+                message = "Category name already exists";
+            }
+            else
+            {
+                Category Category = new Category
+                {
+                    Name = name,
+                    Status = 1
+                };
+                db.Categories.Add(Category);
+                db.SaveChanges();
+                 message = "Created successfully";
+                 status = true;
+            }
+           
+            return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult EditStatus_Category(Category Categorys)
         {
@@ -48,6 +65,7 @@ namespace GardenShopOnline.Controllers
         [HttpPost]
         public JsonResult FindCategory(int Category_id)
         {
+
             Category categories = db.Categories.Find(Category_id);
             var emp = new Category
             {
@@ -58,12 +76,24 @@ namespace GardenShopOnline.Controllers
         }
         public JsonResult UpdateCategory(Category categorys)
         {
-            Category categories = db.Categories.Find(categorys.ID);
-            categories.Name = categorys.Name;
-            db.Entry(categories).State = EntityState.Modified;
-            db.SaveChanges();
-            string message = "Record Saved Successfully ";
+            string message = "";
             bool status = true;
+            int check = db.Categories.Where(c => c.Name == categorys.Name).Count();
+            if (check > 0 )
+            {
+                status = false;
+                message = "Category name already exists";
+            }
+            else
+            {
+                Category categories = db.Categories.Find(categorys.ID);
+                categories.Name = categorys.Name;
+                db.Entry(categories).State = EntityState.Modified;
+                db.SaveChanges();
+                message = "Record Saved Successfully ";
+                status = true;
+            }
+           
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Delete_Category(Category categorys)
