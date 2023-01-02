@@ -110,29 +110,13 @@
                     <div class="dropdown drp-user">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                             <img src="@Url.Content("~/assets/admin/assets/images/default-avatar.png")" alt="User-Profile-Image" class="img-radius mr-2" style="width: 2.5vw;">
-                            <span class="mr-3">Admin</span>
+                            <span class="mr-3">@User.Identity.Name</span>
                         </a>
                         <a href="javascript:document.getElementById('logoutForm').submit()" title="Log out" class="dud-logout"> <i class="feather icon-log-out"></i></a>
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                         {
                             @Html.AntiForgeryToken()
                         }
-                        <div class="dropdown-menu dropdown-menu-right profile-notification">
-                            <ul class="pro-body">
-                                <li>
-                                    <a href="https://tancool.net/thong-tin-ca-nhan" class="dropdown-item">
-                                        <i class="feather icon-user"></i>
-                                        Thông tin cá nhân
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://tancool.net/thay-doi-mat-khau" class="dropdown-item">
-                                        <i class="feather icon-lock"></i>
-                                        Đổi mật khẩu
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </li>
             </ul>
