@@ -1,14 +1,13 @@
-﻿@model IEnumerable<GardenShopOnline.Models.Category>
-
+﻿
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 
 }
-<input type="text" hidden id="URL_CategoryList" value="@Url.Action("_CategoryList", "categories")" />
+<input type="text" hidden id="URL_List" value="@Url.Action("_CategoryList", "categories")" />
 <input type="text" hidden id="URLFindCategory" value="@Url.Action("FindCategory", "categories")/" />
 <input type="text" hidden id="URLUpdateCategory" value="@Url.Action("UpdateCategory", "categories")" />
-<input type="text" hidden id="URLCreate_Category" value="@Url.Action("Create_Category", "categories")" />
+<input type="text" hidden id="URLCreate" value="@Url.Action("Create_Category", "categories")" />
 
 <section class="pcoded-main-container">
     <div class="pcoded-content">
@@ -44,7 +43,7 @@
                                     <h4>CATEGORY</h4>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="button" class="btn  btn-primary btn-block" data-toggle="modal" data-target="#AddCategory">Add new</button>
+                                    <button type="button" class="btn  btn-primary btn-block" data-toggle="modal" data-target="#Addform">Add new</button>
                                 </div>
                             </div>
                         </div>

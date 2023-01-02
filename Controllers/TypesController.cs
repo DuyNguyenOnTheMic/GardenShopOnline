@@ -15,20 +15,38 @@ namespace GardenShopOnline.Controllers
         // GET: Types
         public ActionResult Index()
         {
-            return View(db.Types.Where(c => c.Status != 3).OrderByDescending(c => c.ID).ToList());
+            return View();
+        }
+        public ActionResult _TypeList()
+        {
+            var types = db.Types.Where(c => c.Status != 3).OrderByDescending(c => c.ID);
+
+            return PartialView(types.ToList());
         }
 
-        public ActionResult Create_Type(string name_Type)
-        {
-            Models.Type Type = new Models.Type
+        public JsonResult Create_Type(string name)
+        {   
+            string message = "";
+            bool status = true;
+            int check = db.Types.Where(c => c.Name == name).Count();
+            if (check > 0)
             {
-                Name = name_Type,
-                Status = 1
-            };
-            db.Types.Add(Type);
-            db.SaveChanges();
-            Session["notification"] = "Thêm mới thành công!";
-            return RedirectToAction("Index");
+                status = false;
+                message = "Type name already exists";
+            }
+            else
+            {
+                Models.Type Type = new Models.Type
+                {
+                    Name = name,
+                    Status = 1
+                };
+                db.Types.Add(Type);
+                db.SaveChanges();
+                message = "Created successfully";
+                status = true;
+            }
+            return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult EditStatus_Type(Models.Type Types)
         {
@@ -58,12 +76,23 @@ namespace GardenShopOnline.Controllers
         }
         public JsonResult UpdateType(Models.Type Type)
         {
-            Models.Type Types = db.Types.Find(Type.ID);
-            Types.Name = Type.Name;
-            db.Entry(Types).State = EntityState.Modified;
-            db.SaveChanges();
-            string message = "Record Saved Successfully ";
+            string message = "";
             bool status = true;
+            int check = db.Types.Where(c => c.Name == Type.Name).Count();
+            if (check > 0)
+            {
+                status = false;
+                message = "Type name already exists";
+            }
+            else
+            {
+                Models.Type Types = db.Types.Find(Type.ID);
+                Types.Name = Type.Name;
+                db.Entry(Types).State = EntityState.Modified;
+                db.SaveChanges();
+                 message = "Record Saved Successfully ";
+                 status = true;
+            }
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult Delete_Type(Models.Type Type)

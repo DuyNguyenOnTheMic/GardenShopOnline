@@ -65,6 +65,7 @@ namespace GardenShopOnline.Controllers
         [HttpPost]
         public JsonResult FindCategory(int Category_id)
         {
+
             Category categories = db.Categories.Find(Category_id);
             var emp = new Category
             {
@@ -75,12 +76,24 @@ namespace GardenShopOnline.Controllers
         }
         public JsonResult UpdateCategory(Category categorys)
         {
-            Category categories = db.Categories.Find(categorys.ID);
-            categories.Name = categorys.Name;
-            db.Entry(categories).State = EntityState.Modified;
-            db.SaveChanges();
-            string message = "Record Saved Successfully ";
+            string message = "";
             bool status = true;
+            int check = db.Categories.Where(c => c.Name == categorys.Name).Count();
+            if (check > 0 )
+            {
+                status = false;
+                message = "Category name already exists";
+            }
+            else
+            {
+                Category categories = db.Categories.Find(categorys.ID);
+                categories.Name = categorys.Name;
+                db.Entry(categories).State = EntityState.Modified;
+                db.SaveChanges();
+                message = "Record Saved Successfully ";
+                status = true;
+            }
+           
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Delete_Category(Category categorys)

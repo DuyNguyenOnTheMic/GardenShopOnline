@@ -221,14 +221,14 @@ $('#URLUpdateCategory')
         URLUpdateCategory = $(this).val();
     })
     .keypress();
-$('#URLCreate_Category')
+$('#URLCreate')
     .keypress(function () {
-        URLCreate_Category = $(this).val();
+        URLCreate = $(this).val();
     })
     .keypress();
-$('#URL_CategoryList')
+$('#URL_List')
     .keypress(function () {
-        URL_CategoryList = $(this).val();
+        URL_List = $(this).val();
     })
     .keypress();
 
@@ -247,14 +247,25 @@ function Update() {
         success: function (response) {
             $('#Edit_Modal .close').css('display', 'none');
             $('#Edit_Modal').modal('hide');
-            table.cell(row, 1).data($('#Edit_name').val());
-            table.draw();
-            sweetAlert
-                ({
-                    title: "Update successful !",
-                    confirmButtonText: "OK",
-                    type: "success"
-                })
+            if (response.status) {           
+                table.cell(row, 1).data($('#Edit_name').val());
+                table.draw();
+                sweetAlert
+                    ({
+                        title: "Update successful !",
+                        confirmButtonText: "OK",
+                        type: "success"
+                    })
+            } else {
+                sweetAlert
+                    ({
+                        title: "Error !",
+                        text: response.message,
+                        confirmButtonText: "OK",
+                        type: "error"
+                    })
+            }
+          
         }
     });
 }
@@ -263,7 +274,7 @@ function Add() {
     var Name = $('#Add_name').val();
 
     $.ajax({
-        url: URLCreate_Category,
+        url: URLCreate,
         type: "Post",
         data: { name: Name},
         dataType: "json",
@@ -293,7 +304,7 @@ function Add() {
 }
 function GetList_CategoryAndType() {
     $.ajax({
-        url: URL_CategoryList,
+        url: URL_List,
         data: {
            
         }
