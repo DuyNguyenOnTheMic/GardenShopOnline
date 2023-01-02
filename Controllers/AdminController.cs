@@ -73,7 +73,9 @@ namespace GardenShopOnline.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("Index", "AspNetUsers");
+                    var user = await UserManager.FindAsync(model.Email, model.Password);
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+                    return roles.Contains("Admin") ? RedirectToAction("Index", "AspNetUsers") : RedirectToAction("Index", "Types");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.Failure:
