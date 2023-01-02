@@ -41,53 +41,92 @@
                     <li class="nav-item pcoded-menu-caption">
                         <label>Manage</label>
                     </li>
-                    <li class="nav-item">
-                        <a href="@Url.Action("Index","AspNetUsers")" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-user"></i></span>
-                            <span class="pcoded-mtext">Staff</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item ">
-                        <a href="@Url.Action("Index","Categories")" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-layout"></i></span>
-                            <span class="pcoded-mtext">Categogy</span>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a href="@Url.Action("Index","Types")" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-layout"></i></span>
-                            <span class="pcoded-mtext">Type</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Url.Action("Index","Products")" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-wind"></i></span>
-                            <span class="pcoded-mtext">Product</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Url.Action("Index","CustomerOrders")" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-inbox"></i></span> <span class="pcoded-mtext">Order</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Url.Action("Index","CommentProducts")" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-grid"></i></span> <span class="pcoded-mtext">Comment</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Url.Action("Index","Statistics")" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-bar-chart"></i></span>
-                            <span class="pcoded-mtext">Statistics</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="@Url.Action("Customer","Contact")" class="nav-link">
-                            <span class="pcoded-micon"><i class="feather icon-phone"></i></span>
-                            <span class="pcoded-mtext">Customer Contact</span>
-                        </a>
-                    </li>
+                    @if (User.IsInRole("Staff"))
+                    {
+                        <li class="nav-item ">
+                            <a href="@Url.Action("Index","Types")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-layout"></i></span>
+                                <span class="pcoded-mtext">Type</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="@Url.Action("Index","Categories")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-layout"></i></span>
+                                <span class="pcoded-mtext">Categogy</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","Products")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-wind"></i></span>
+                                <span class="pcoded-mtext">Product</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","CustomerOrders")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-inbox"></i></span> <span class="pcoded-mtext">Order</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","CommentProducts")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-grid"></i></span> <span class="pcoded-mtext">Comment</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Customer","Contact")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-phone"></i></span>
+                                <span class="pcoded-mtext">Customer Contact</span>
+                            </a>
+                        </li>
+                    }
+                    else if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","AspNetUsers")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-user"></i></span>
+                                <span class="pcoded-mtext">Staff</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="@Url.Action("Index","Types")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-layout"></i></span>
+                                <span class="pcoded-mtext">Type</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="@Url.Action("Index","Categories")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-layout"></i></span>
+                                <span class="pcoded-mtext">Categogy</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","Products")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-wind"></i></span>
+                                <span class="pcoded-mtext">Product</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","CustomerOrders")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-inbox"></i></span> <span class="pcoded-mtext">Order</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","CommentProducts")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-grid"></i></span> <span class="pcoded-mtext">Comment</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","Statistics")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-bar-chart"></i></span>
+                                <span class="pcoded-mtext">Statistics</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Customer","Contact")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-phone"></i></span>
+                                <span class="pcoded-mtext">Customer Contact</span>
+                            </a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -176,6 +215,6 @@
     <script src="~/assets/admin/assets/js/Function.js"></script>
 
     @RenderSection("scripts", required: false)
-    
+
 </body>
 </html>
