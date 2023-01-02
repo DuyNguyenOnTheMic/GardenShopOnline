@@ -171,7 +171,7 @@
         margin-bottom: 40px
     }
 
-    .chat-container li img {
+    .chat-container li .chat-avatar img {
         width: 48px;
         height: 48px;
         -webkit-border-radius: 30px;
@@ -336,10 +336,15 @@ ul {
     cursor: pointer;
 }
 
-.form-send-message span.input-group-text svg {
-    cursor: pointer;
-}
+    .form-send-message span.input-group-text svg {
+        cursor: pointer;
+    }
 
 img:not([src]), img[src=""] {
     display: none;
+}
+
+.chat-image {
+    width: 100px;
+    height: 100px;
 }
