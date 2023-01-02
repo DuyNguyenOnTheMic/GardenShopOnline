@@ -747,6 +747,7 @@
     <Content Include="assets\admin\assets\js\vendor-all.js" />
     <Content Include="assets\admin\assets\js\vendor-all.min.js" />
     <Content Include="assets\chat\css\app-chat.css" />
+    <Content Include="assets\chat\images\img_plant.png" />
     <Content Include="assets\chat\images\img_user.png" />
     <Content Include="assets\chat\js\app-chat.js" />
     <Content Include="assets\customer\css\animate.min.css" />
