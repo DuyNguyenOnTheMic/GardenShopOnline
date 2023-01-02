@@ -30,9 +30,7 @@
                     <div class="main-menu-header">
                         <img src="@Url.Content("~/assets/admin/assets/images/default-avatar.png")" alt="User-Profile-Image" class="img-radius">
                         <div class="user-details">
-                            <span>Admin</span>
-                            <div id="more-details">
-                            </div>
+                            <span>@(User.IsInRole("Admin") ? "Admin" : "Staff")</span>
                         </div>
                     </div>
                 </div>
