@@ -345,6 +345,7 @@ img:not([src]), img[src=""] {
 }
 
 .chat-image {
+    cursor: zoom-in;
     width: 100px;
     height: 100px;
 }

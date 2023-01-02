@@ -106,6 +106,11 @@
             $('.person .status-' + toUserId).removeClass('busy');
         });
     });
+
+    $(document).on("click", ".chat-image", function () {
+        $('#imagepreview').attr('src', $(this).attr('src')); // here asign the image to the modal when the user click the enlarge link
+        $('#imageModal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+    });
 });
 // This optional function html-encodes messages for display in the page.
 function htmlEncode(value) {
