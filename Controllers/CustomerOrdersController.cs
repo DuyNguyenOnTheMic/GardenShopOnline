@@ -64,9 +64,13 @@ namespace GardenShopOnline.Controllers
             {
                 date_end = DateTime.Now.AddMonths(1).AddDays(-(DateTime.Now.Day));
             }
-            var OrrderList = db.CustomerOrders.Where(s => s.DateCreated.Value.Day >= date_start.Value.Day && s.DateCreated.Value.Day <= date_end.Value.Day
-            && s.DateCreated.Value.Month >= date_start.Value.Month && s.DateCreated.Value.Month <= date_end.Value.Month
-            && s.DateCreated.Value.Year >= date_start.Value.Year && s.DateCreated.Value.Day <= date_end.Value.Year);
+            var OrrderList = db.CustomerOrders.Where(s => s.DateCreated >= date_start && s.DateCreated <= date_end
+                                                    || s.DateCreated.Value.Day == date_start.Value.Day
+                                                    && s.DateCreated.Value.Month == date_start.Value.Month
+                                                    && s.DateCreated.Value.Year == date_start.Value.Year
+                                                    || s.DateCreated.Value.Day == date_end.Value.Day
+                                                    && s.DateCreated.Value.Month == date_end.Value.Month
+                                                    && s.DateCreated.Value.Year == date_end.Value.Year);
             return PartialView(OrrderList.ToList());
         }
 
