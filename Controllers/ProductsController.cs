@@ -209,6 +209,7 @@ namespace GardenShopOnline.Controllers
             {
                 return HttpNotFound();
             }
+            ViewData["CommentCount"] = db.CommentProducts.Where(c => c.ProductID == id && c.Status == 2).Count();
             return View(product);
         }
 
