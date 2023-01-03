@@ -25,7 +25,7 @@ namespace GardenShopOnline.Controllers
         }
 
         public JsonResult Create_Type(string name)
-        {   
+        {
             string message = "";
             bool status = true;
             int check = db.Types.Where(c => c.Name == name).Count();
@@ -90,8 +90,8 @@ namespace GardenShopOnline.Controllers
                 Types.Name = Type.Name;
                 db.Entry(Types).State = EntityState.Modified;
                 db.SaveChanges();
-                 message = "Record Saved Successfully ";
-                 status = true;
+                message = "Record Saved Successfully ";
+                status = true;
             }
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
