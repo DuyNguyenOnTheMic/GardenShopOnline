@@ -12,6 +12,7 @@ namespace GardenShopOnline.Models
     {
         public string StaffId { get; set; }
         public string FullName { get; set; }
+        public string Address { get; set; }
         [Required]
         public DateTime DateCreated { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
