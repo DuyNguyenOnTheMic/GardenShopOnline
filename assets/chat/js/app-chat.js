@@ -13,7 +13,7 @@
         var discussion = $('#discussion');
         if (discussion.data('userid') == userId && discussion.data('currentuser') == toUserId) {
             discussion.prepend('<li class="chat-left">'
-                + '<div class="chat-avatar"><img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"></div>'
+                + '<div class="chat-avatar"><img src="/assets/chat/images/img_plant.png" alt="Retail Admin"></div>'
                 + '<div class="chat-text">' + message_html + '</div>'
                 + '<div class="chat-hour">' + time + '<span class="fa fa-check-circle ms-1 ml-1"></span></div>'
                 + '<div class="chat-avatar"</div>'
