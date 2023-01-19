@@ -165,6 +165,8 @@
                 },
             },
         });
+
+        mySwiper.loopDestroy();
     }
 
     /* --- Product List Slider--- */
