@@ -21,6 +21,12 @@ namespace GardenShopOnline.Controllers
             return View();
         }
 
+        public ActionResult GetRelatedProduct(int type, int category)
+        {
+            // Get related products list based on type and category
+            return PartialView("_RelatedProduct", db.Products.Where(p => p.Status == 1 && (p.TypeID == type || p.CategoryID == category)).ToList());
+        }
+
         [CustomAuthorize(Roles = "Admin, Staff")]
         // sử dụng PartialView để có thể lọc sản phẩm mà không load lại toàn trang
         public ActionResult ProductList(int category_id, int type_id)
