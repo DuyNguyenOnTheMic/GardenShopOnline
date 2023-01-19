@@ -21,10 +21,10 @@ namespace GardenShopOnline.Controllers
             return View();
         }
 
-        public ActionResult GetRelatedProducts(int type, int category)
+        public ActionResult GetRelatedProducts(int productId, int typeId, int categoryId)
         {
             // Get related products list based on type and category
-            return PartialView("_RelatedProducts", db.Products.Where(p => p.Status == 1 && (p.TypeID == type || p.CategoryID == category)).ToList());
+            return PartialView("_RelatedProducts", db.Products.Where(p => p.ID != productId && p.Status == 1 && (p.TypeID == typeId || p.CategoryID == categoryId)).ToList());
         }
 
         [CustomAuthorize(Roles = "Admin, Staff")]
