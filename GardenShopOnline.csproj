@@ -1041,6 +1041,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Categories\_CategoryList.cshtml" />
     <Content Include="Views\Types\_TypeList.cshtml" />
+    <Content Include="Views\Products\_RelatedProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
