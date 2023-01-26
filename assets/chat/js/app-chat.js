@@ -6,7 +6,7 @@
 
         var message_html = message;
         if (image != null) {
-            message_html = '<img src="/assets/images/' + image + '" />' + '<br /><p>' + message + '</p>';
+            message_html = '<img class="chat-image" src="/assets/images/' + image + '" />' + '<br /><p>' + message + '</p>';
         }
 
         // Add the message to the page.

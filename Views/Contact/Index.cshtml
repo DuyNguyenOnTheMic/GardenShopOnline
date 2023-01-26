@@ -46,7 +46,7 @@
                                                     }
                                                     else
                                                     {
-                                                        <img src="@Url.Content("~/assets/images/" +item.Image)" />
+                                                        <img class="chat-image" src="@Url.Content("~/assets/images/" +item.Image)" />
                                                         <br />
                                                         <p>@item.Message1</p>
                                                     }
@@ -67,7 +67,7 @@
                                                     }
                                                     else
                                                     {
-                                                        <img src="@Url.Content("~/assets/images/" +item.Image)" />
+                                                        <img class="chat-image" src="@Url.Content("~/assets/images/" +item.Image)" />
                                                         <br />
                                                         <p>@item.Message1</p>
                                                     }
@@ -106,15 +106,25 @@
                     </div>
                     <!-- Row end -->
                 </div>
-
             </div>
-
         </div>
         <!-- Row end -->
-
     </div>
     <!-- Content wrapper end -->
+</div>
 
+<!-- Modal -->
+<div id="imageModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img src="" id="imagepreview" class="w-75 d-flex mx-auto">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section styles {
