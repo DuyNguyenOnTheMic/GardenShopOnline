@@ -124,11 +124,11 @@ namespace GardenShopOnline.Controllers
                 db.Messages.Add(ms);
             }
             string mess = ms.Message1;
-            string Img = ms.Image;
+            string image = ms.Image;
             var time = ms.DateCreated.ToString("HH:mm");
 
             db.SaveChanges();
-            ChatHub.Send(time, message, connectionId, fromUserId, toUserId, Img);
+            ChatHub.Send(time, message, connectionId, fromUserId, toUserId, image);
             return Json(new { success = true, message = mess, img, time }, JsonRequestBehavior.AllowGet);
         }
 
