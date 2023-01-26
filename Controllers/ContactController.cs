@@ -125,7 +125,7 @@ namespace GardenShopOnline.Controllers
             }
             string mess = ms.Message1;
             string image = ms.Image;
-            var time = ms.DateCreated.ToString("HH:mm");
+            string time = ms.DateCreated.ToString("HH:mm");
 
             db.SaveChanges();
             ChatHub.Send(time, message, connectionId, fromUserId, toUserId, image);
