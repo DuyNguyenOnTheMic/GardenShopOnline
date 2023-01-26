@@ -20,7 +20,7 @@
                 + '</li>');
 
             // Scroll to bottom
-            discussion.scrollTop(discussion.prop("scrollHeight"))
+            discussion.scrollTop(discussion.prop('scrollHeight'))
         } else {
             // Add new not seen status
             $('.person .status-' + userId).addClass('busy');
@@ -34,7 +34,7 @@
 
             var form = $(this);
             var data = new FormData();
-            var files = $("#file").get(0).files;
+            var files = $('#file').get(0).files;
             var actionUrl = form.attr('action');
             var message = $('#message').val();
             var fromUserId = form.data('fromuserid');
@@ -43,11 +43,11 @@
             if (message || files.length) {
 
                 // Hanle image
-                data.append("file", files[0]);
-                data.append("message", message);
-                data.append("fromUserId", fromUserId);
-                data.append("toUserId", toUserId);
-                data.append("connectionId", connectionId);
+                data.append('file', files[0]);
+                data.append('message', message);
+                data.append('fromUserId', fromUserId);
+                data.append('toUserId', toUserId);
+                data.append('connectionId', connectionId);
 
                 var message_html = message;
 
