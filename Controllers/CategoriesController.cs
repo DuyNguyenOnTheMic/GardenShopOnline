@@ -1,4 +1,5 @@
 ﻿using GardenShopOnline.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -22,29 +23,38 @@ namespace GardenShopOnline.Controllers
 
             return PartialView(categories.ToList());
         }
-        public JsonResult Create_Category(string name)
+        public JsonResult Create_Category(string name_category)
         {
             string message = "";
             bool status = true;
-            int check = db.Categories.Where(c => c.Name == name).Count();
-            if (check > 0)
+            try
+            {
+                int check = db.Categories.Where(c => c.Name == name_category).Count();
+                if (check > 0)
+                {
+                    status = false;
+                    message = "Category name already exists";
+                }
+                else
+                {
+                    Category Category = new Category
+                    {
+                        Name = name_category,
+                        Status = 1
+                    };
+                    db.Categories.Add(Category);
+                    db.SaveChanges();
+                    message = "Created successfully";
+                    status = true;
+                }
+
+            }
+            catch (Exception e)
             {
                 status = false;
-                message = "Category name already exists";
+                message = e.Message;
             }
-            else
-            {
-                Category Category = new Category
-                {
-                    Name = name,
-                    Status = 1
-                };
-                db.Categories.Add(Category);
-                db.SaveChanges();
-                message = "Created successfully";
-                status = true;
-            }
-
+           
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult EditStatus_Category(Category Categorys)
@@ -74,25 +84,34 @@ namespace GardenShopOnline.Controllers
             };
             return Json(emp);
         }
-        public JsonResult UpdateCategory(Category categorys)
+        public JsonResult UpdateCategory(int category_id, string name_category)
         {
             string message = "";
             bool status = true;
-            int check = db.Categories.Where(c => c.Name == categorys.Name).Count();
-            if (check > 0)
+            try
+            {
+                int check = db.Categories.Where(c => c.Name == name_category).Count();
+                if (check > 0)
+                {
+                    status = false;
+                    message = "Category name already exists";
+                }
+                else
+                {
+                    Category categories = db.Categories.Find(category_id);
+                    categories.Name = name_category;
+                    db.Entry(categories).State = EntityState.Modified;
+                    db.SaveChanges();
+                    message = "Record Saved Successfully ";
+                    status = true;
+                }
+            }
+            catch (Exception e)
             {
                 status = false;
-                message = "Category name already exists";
+                message = e.Message;
             }
-            else
-            {
-                Category categories = db.Categories.Find(categorys.ID);
-                categories.Name = categorys.Name;
-                db.Entry(categories).State = EntityState.Modified;
-                db.SaveChanges();
-                message = "Record Saved Successfully ";
-                status = true;
-            }
+         
 
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }

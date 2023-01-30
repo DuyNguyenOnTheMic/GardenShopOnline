@@ -6,8 +6,6 @@
 }
 <input type="text" hidden id="URL_List" value="@Url.Action("_CategoryList", "categories")" />
 <input type="text" hidden id="URLFindCategory" value="@Url.Action("FindCategory", "categories")/" />
-<input type="text" hidden id="URLUpdateCategory" value="@Url.Action("UpdateCategory", "categories")" />
-<input type="text" hidden id="URLCreate" value="@Url.Action("Create_Category", "categories")" />
 
 <section class="pcoded-main-container">
     <div class="pcoded-content">
@@ -62,10 +60,10 @@
 
 <div id="Addform" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="AddCategoryLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form class="needs-validation" method="post" novalidate>
+        <form class="needs-validation CGForm" method="post" action="@Url.Action("Create_Category", "categories")" novalidate>
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <h5 class="modal-title" id="AddCategoryLabel">Thêm mới danh mục</h5>
+                    <h5 class="modal-title" id="AddCategoryLabel">Create Category</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
 
@@ -90,7 +88,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn  btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="submit_Add">Save</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </form>
@@ -98,7 +96,7 @@
 </div>
 <div id="Edit_Modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Edit_ModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form class="needs-validation" method="post" novalidate>
+        <form class="needs-validation CGForm" method="post" action="@Url.Action("UpdateCategory", "categories")" novalidate>
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <h5 class="modal-title" id="Edit_ModalLabel">Edit category</h5>
@@ -127,7 +125,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn  btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="submit_edit" @*onclick="Update()"*@>Save</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </form>

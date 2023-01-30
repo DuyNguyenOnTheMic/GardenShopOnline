@@ -21,26 +21,8 @@
 $(document).ready(function () {
     var forms = document.getElementsByClassName('needs-validation');
     var validation = Array.prototype.filter.call(forms, function (form) {
-        $('#submit_edit').on('click', function () {
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-                form.classList.remove('was-validated');
-            } else {
-                Update();
-            }
-            form.classList.add('was-validated');
-        })
-        $('#submit_Add').on('click', function () {
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-                form.classList.remove('was-validated');
-            } else {
-                Add();
-            }
-            form.classList.add('was-validated');
-        })
+      
+      
         $('#submit_edit_product').on('click', function () {
             if (form.checkValidity() === false) {
                 event.preventDefault();
@@ -66,6 +48,45 @@ $(document).ready(function () {
 
     }, false);
 })
+$('.CGForm').submit(function (e) {
+    var form = $(this);
+
+    // Check if form is valid then submit ajax
+    if (form[0].checkValidity()) {
+        e.preventDefault();
+        var url = form.attr('action');
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: form.serialize(),
+            success: function (data) {
+                // Hide bootstrap modal to prevent conflict
+                $('.modal').modal('hide');
+
+                if (data.status) {
+                    // Refresh table data
+                    GetList_CategoryAndType();
+                    sweetAlert
+                        ({
+                            title: "Success !",
+                            text: data.message,
+                            type: "success"
+                        })
+
+                    form[0].reset();
+                    form.removeClass('was-validated');
+                } else {
+                    swal({
+                        title: 'Lỗi !',
+                        text: data.message,
+                        type: 'error',
+
+                    }); // Show bootstrap modal again
+                }
+            }
+        });
+    }
+});
 
 //-------------------------Delete Category, Product-----------------------
 var URLDelete = "";
