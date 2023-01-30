@@ -77,7 +77,7 @@ $('.CGForm').submit(function (e) {
                     form.removeClass('was-validated');
                 } else {
                     swal({
-                        title: 'Lỗi !',
+                        title: 'Error !',
                         text: data.message,
                         type: 'error',
 
@@ -237,92 +237,14 @@ function GetCategory(ele, id) {
 }
 
 //------------------------UPDATE CATEGORY-----------------------------
-$('#URLUpdateCategory')
-    .keypress(function () {
-        URLUpdateCategory = $(this).val();
-    })
-    .keypress();
-$('#URLCreate')
-    .keypress(function () {
-        URLCreate = $(this).val();
-    })
-    .keypress();
+
 $('#URL_List')
     .keypress(function () {
         URL_List = $(this).val();
     })
     .keypress();
 
-function Update() {
-    var table = $('#example').DataTable();
-    var group = {};
-    group.ID = $('#edit_id').val();
-    group.Name = $('#Edit_name').val();
 
-    $.ajax({
-        url: URLUpdateCategory,
-        type: "Post",
-        data: JSON.stringify(group),
-        contentType: "application/json; charset=UTF-8",
-        dataType: "json",
-        success: function (response) {
-            $('#Edit_Modal .close').css('display', 'none');
-            $('#Edit_Modal').modal('hide');
-            if (response.status) {           
-                table.cell(row, 1).data($('#Edit_name').val());
-                table.draw();
-                sweetAlert
-                    ({
-                        title: "Update successful !",
-                        confirmButtonText: "OK",
-                        type: "success"
-                    })
-            } else {
-                sweetAlert
-                    ({
-                        title: "Error !",
-                        text: response.message,
-                        confirmButtonText: "OK",
-                        type: "error"
-                    })
-            }
-          
-        }
-    });
-}
-function Add() {
-   
-    var Name = $('#Add_name').val();
-
-    $.ajax({
-        url: URLCreate,
-        type: "Post",
-        data: { name: Name},
-        dataType: "json",
-        success: function (response) {
-            $('#Addform .close').css('display', 'none');
-            $('#Addform').modal('hide');
-            if (response.status) {
-                sweetAlert
-                    ({
-                        title: response.message,
-                        confirmButtonText: "OK",
-                        type: "success"
-                    })
-                GetList_CategoryAndType();
-            } else {
-                sweetAlert
-                    ({
-                        title: "Error !",
-                        text: response.message,
-                        confirmButtonText: "OK",
-                        type: "error"
-                    })
-            }
-           
-        }
-    });
-}
 function GetList_CategoryAndType() {
     $.ajax({
         url: URL_List,

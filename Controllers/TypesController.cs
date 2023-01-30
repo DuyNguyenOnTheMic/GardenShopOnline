@@ -24,28 +24,37 @@ namespace GardenShopOnline.Controllers
             return PartialView(types.ToList());
         }
 
-        public JsonResult Create_Type(string name)
+        public JsonResult Create_Type(string name_Type)
         {
             string message = "";
             bool status = true;
-            int check = db.Types.Where(c => c.Name == name).Count();
-            if (check > 0)
+            try
+            {
+                int check = db.Types.Where(c => c.Name == name_Type).Count();
+                if (check > 0)
+                {
+                    status = false;
+                    message = "Type name already exists";
+                }
+                else
+                {
+                    Models.Type Type = new Models.Type
+                    {
+                        Name = name_Type,
+                        Status = 1
+                    };
+                    db.Types.Add(Type);
+                    db.SaveChanges();
+                    message = "Created successfully";
+                    status = true;
+                }
+            }
+            catch (Exception e)
             {
                 status = false;
-                message = "Type name already exists";
+                message = e.Message;
             }
-            else
-            {
-                Models.Type Type = new Models.Type
-                {
-                    Name = name,
-                    Status = 1
-                };
-                db.Types.Add(Type);
-                db.SaveChanges();
-                message = "Created successfully";
-                status = true;
-            }
+           
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult EditStatus_Type(Models.Type Types)
@@ -74,25 +83,34 @@ namespace GardenShopOnline.Controllers
             };
             return Json(emp);
         }
-        public JsonResult UpdateType(Models.Type Type)
+        public JsonResult UpdateType(int Type_id, string name_Type)
         {
             string message = "";
             bool status = true;
-            int check = db.Types.Where(c => c.Name == Type.Name).Count();
-            if (check > 0)
+            try
+            {
+                int check = db.Types.Where(c => c.Name == name_Type).Count();
+                if (check > 0)
+                {
+                    status = false;
+                    message = "Type name already exists";
+                }
+                else
+                {
+                    Models.Type Types = db.Types.Find(Type_id);
+                    Types.Name = name_Type;
+                    db.Entry(Types).State = EntityState.Modified;
+                    db.SaveChanges();
+                    message = "Record Saved Successfully ";
+                    status = true;
+                }
+            }
+            catch (Exception e)
             {
                 status = false;
-                message = "Type name already exists";
+                message = e.Message;
             }
-            else
-            {
-                Models.Type Types = db.Types.Find(Type.ID);
-                Types.Name = Type.Name;
-                db.Entry(Types).State = EntityState.Modified;
-                db.SaveChanges();
-                message = "Record Saved Successfully ";
-                status = true;
-            }
+           
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult Delete_Type(Models.Type Type)
