@@ -21,6 +21,12 @@ namespace GardenShopOnline.Controllers
             return View();
         }
 
+        public ActionResult GetRelatedProducts(int productId, int typeId, int categoryId)
+        {
+            // Get related products list based on type and category
+            return PartialView("_RelatedProducts", db.Products.Where(p => p.ID != productId && p.Status == 1 && (p.TypeID == typeId || p.CategoryID == categoryId)).ToList());
+        }
+
         [CustomAuthorize(Roles = "Admin, Staff")]
         // sử dụng PartialView để có thể lọc sản phẩm mà không load lại toàn trang
         public ActionResult ProductList(int category_id, int type_id)
@@ -209,6 +215,7 @@ namespace GardenShopOnline.Controllers
             {
                 return HttpNotFound();
             }
+            ViewData["CommentCount"] = db.CommentProducts.Where(c => c.ProductID == id && c.Status == 2).Count();
             return View(product);
         }
 

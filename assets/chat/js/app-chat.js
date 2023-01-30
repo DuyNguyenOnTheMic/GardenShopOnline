@@ -2,25 +2,26 @@
     // Reference the auto-generated proxy for the hub.
     var chat = $.connection.chatHub;
     // Create a function that the hub can call back to display messages.
-    chat.client.addNewMessageToPage = function (time, message, userId, toUserId, Img) {
+    chat.client.addNewMessageToPage = function (time, message, userId, toUserId, image) {
 
         var message_html = message;
-        if (Img != null) {
-            message_html = '<img src="/assets/images/' + Img + '" />' + '<br /><p>' + message + '</p>';
+        if (image != null) {
+            message_html = '<img class="chat-image" src="/assets/images/' + image + '" />' + '<br /><p>' + message + '</p>';
         }
 
         // Add the message to the page.
         var discussion = $('#discussion');
         if (discussion.data('userid') == userId && discussion.data('currentuser') == toUserId) {
+            var avatarImg = $('.chat-avatar img').attr('src');
             discussion.prepend('<li class="chat-left">'
-                + '<div class="chat-avatar"><img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"></div>'
+                + '<div class="chat-avatar"><img src="' + avatarImg + '" alt="Retail Admin"></div>'
                 + '<div class="chat-text">' + message_html + '</div>'
                 + '<div class="chat-hour">' + time + '<span class="fa fa-check-circle ms-1 ml-1"></span></div>'
-                + '<div class="chat-avatar"</div>'
+                + '<div class="chat-avatar"></div>'
                 + '</li>');
 
             // Scroll to bottom
-            discussion.scrollTop(discussion.prop("scrollHeight"))
+            discussion.scrollTop(discussion.prop('scrollHeight'))
         } else {
             // Add new not seen status
             $('.person .status-' + userId).addClass('busy');
@@ -34,7 +35,7 @@
 
             var form = $(this);
             var data = new FormData();
-            var files = $("#file").get(0).files;
+            var files = $('#file').get(0).files;
             var actionUrl = form.attr('action');
             var message = $('#message').val();
             var fromUserId = form.data('fromuserid');
@@ -43,11 +44,11 @@
             if (message || files.length) {
 
                 // Hanle image
-                data.append("file", files[0]);
-                data.append("message", message);
-                data.append("fromUserId", fromUserId);
-                data.append("toUserId", toUserId);
-                data.append("connectionId", connectionId);
+                data.append('file', files[0]);
+                data.append('message', message);
+                data.append('fromUserId', fromUserId);
+                data.append('toUserId', toUserId);
+                data.append('connectionId', connectionId);
 
                 var message_html = message;
 
@@ -61,7 +62,7 @@
                     success: function (response) {
                         if (response.success) {
                             if (files.length > 0) {
-                                message_html = '<img src="/assets/images/' + response.img + '" />' + '<br /><p>' + response.message + '</p>';
+                                message_html = '<img class="chat-image" src="/assets/images/' + response.img + '" />' + '<br /><p>' + response.message + '</p>';
                             }
                             $("#file").val('');
                             $('#output').attr('src', '');
@@ -70,7 +71,7 @@
                             discussion.prepend('<li class="chat-right">'
                                 + '<div class="chat-hour">' + response.time + '<span class="fa fa-check-circle ms-1 ml-1"></span></div>'
                                 + '<div class="chat-text">' + message_html + '</div>'
-                                + '<div class="chat-avatar"</div>'
+                                + '<div class="chat-avatar"></div>'
                                 + '</li>');
 
                             // Scroll to bottom

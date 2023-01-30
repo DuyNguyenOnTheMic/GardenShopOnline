@@ -61,7 +61,7 @@
                                             <td class="product-price"><span class="amount">@item.Product.Price.ToString("N0") ₫</span></td>
                                             <td class="quantity" id="item-count-@item.RecordID">
                                                 <div class="cart-plus-minus" data-id="@item.RecordID" data-productid="@item.ProductID">
-                                                    <input class="cart-plus-minus-box" readonly value="@item.Count" type="text">
+                                                    <input class="cart-plus-minus-box" id="cartItemQuantity" readonly value="@item.Count" type="text">
                                                     <div class="dec qtybutton">
                                                         <i class="fa fa-minus"></i>
                                                     </div>
@@ -148,16 +148,12 @@
                 // Get the id from the link
                 var recordToDecrease = $(this).parent().attr('data-id');
                 var productId = $(this).parent().attr('data-productid');
-                if (recordToDecrease != '') {
+                var itemQuantity = $('#item-count-' + recordToDecrease).find('input');
+                if (recordToDecrease != '' && itemQuantity.val() > 1) {
                     // Perform the ajax post
                     $.post('/ShoppingCart/DecreaseQuantity', { 'id': recordToDecrease }, function (data) {
                         // Successful requests get here
-                        // Update the page elements
-                        if (data.ItemCount == 0) {
-                            $('#row-' + data.DecreaseId).fadeOut('slow');
-                        } else {
-                            $('#item-count-' + data.DecreaseId).find('input').val(data.ItemCount);
-                        }
+                        itemQuantity.val(data.ItemCount);
                         updateTotal(data, productId);
                         getMiniCart();
                     });

@@ -41,10 +41,10 @@ namespace GardenShopOnline.Controllers
                 };
                 db.Categories.Add(Category);
                 db.SaveChanges();
-                 message = "Created successfully";
-                 status = true;
+                message = "Created successfully";
+                status = true;
             }
-           
+
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult EditStatus_Category(Category Categorys)
@@ -79,7 +79,7 @@ namespace GardenShopOnline.Controllers
             string message = "";
             bool status = true;
             int check = db.Categories.Where(c => c.Name == categorys.Name).Count();
-            if (check > 0 )
+            if (check > 0)
             {
                 status = false;
                 message = "Category name already exists";
@@ -93,7 +93,7 @@ namespace GardenShopOnline.Controllers
                 message = "Record Saved Successfully ";
                 status = true;
             }
-           
+
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Delete_Category(Category categorys)
