@@ -1,4 +1,5 @@
-﻿using GardenShopOnline.Models;
+﻿using GardenShopOnline.Helpers;
+using GardenShopOnline.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
@@ -66,18 +67,25 @@ namespace GardenShopOnline.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string email, string staffId, string fullName, string role_id, string password)
+        public ActionResult Create(string email,string fullName, string role_id, string password)
         {
             var query_email = UserManager.FindByEmail(email);
             var role = db.AspNetRoles.Find(role_id);
             if (query_email == null)
             {
+                string StaffId = "SID" + RandomCode.Random();
+                int check_Staff = db.AspNetUsers.Where(u => u.StaffId == StaffId).Count();
+                while (check_Staff > 0)
+                {                   
+                    StaffId = "SID" + RandomCode.Random();
+                    check_Staff = db.AspNetUsers.Where(u => u.StaffId == StaffId).Count();
+                }
                 ApplicationUser user = new ApplicationUser()
                 {
                     Email = email,
                     UserName = email,
-                    StaffId = staffId,
-                    FullName = fullName,
+                    StaffId = StaffId,
+                    FullName = fullName,                   
                     DateCreated = DateTime.Now
                 };
 
