@@ -194,18 +194,20 @@ namespace GardenShopOnline.Models
             var cartItems = GetCartItems();
             // Iterate over the items in the cart, 
             // adding the order details for each
+            string Error = "";
             foreach (var item in cartItems)
             {
                 //Check product quantity
                 var product = db.Products.Find(item.ProductID);
                 if (product.Quantity < item.Count)
                 {
-                    //Invalid - redisplay with errors
-                    return  "Error";
+                    Error += " " + product.Name + " only have " + product.Quantity + "  items left." + "\r\n";
+                   
                 }
 
             }
-            return order.ID;
+            Error += " Please check again!";
+            return Error;
         }
 
         // We're using HttpContextBase to allow access to cookies.

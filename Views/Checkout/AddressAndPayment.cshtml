@@ -21,6 +21,12 @@
             </div>
         </div>
     </div>
+    @if (ViewBag.Error != null)
+    {
+<div class="alert alert-warning" role="alert">
+    @Html.Raw(ViewBag.Error) 
+</div>
+    }
     <div class="checkout-area section-space-y-axis-100">
         <div class="container">
             @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "orderForm" }))

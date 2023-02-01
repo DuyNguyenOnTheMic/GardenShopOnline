@@ -28,18 +28,17 @@ namespace GardenShopOnline.Controllers
         // POST: /Checkout/AddressAndPayment
         [HttpPost]
         public ActionResult AddressAndPayment(CustomerOrder order)
-        {
-          
-            TryUpdateModel(order);
-           
+        {         
+            TryUpdateModel(order);          
             try
             {
                 var cart = ShoppingCart.GetCart(HttpContext);
                 //Check product quantity and order quantity
                 string check = cart.checkOrder(order);
-                if (check == "Error")
+                if (check != "")
                 {
                     //Display error when order quantity exceeds product quantity
+                    ViewBag.Error = check;
                     return View(order);
                 }
                 else
