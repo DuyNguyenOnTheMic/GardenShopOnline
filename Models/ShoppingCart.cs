@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,6 +16,7 @@ namespace GardenShopOnline.Models
         {
             var cart = new ShoppingCart();
             cart.ShoppingCartId = cart.GetCartId(context);
+            
             return cart;
         }
 
@@ -163,14 +165,20 @@ namespace GardenShopOnline.Models
             // adding the order details for each
             foreach (var item in cartItems)
             {
-                var orderDetail = new OrderDetail
-                {
-                    ProductID = item.ProductID,
-                    OrderID = order.ID,
-                    UnitPrice = item.Product.Price,
-                    Quantity = item.Count
-                };
-                db.OrderDetails.Add(orderDetail);
+                var product = db.Products.Find(item.ProductID);
+               
+                    var orderDetail = new OrderDetail
+                    {
+                        ProductID = item.ProductID,
+                        OrderID = order.ID,
+                        UnitPrice = item.Product.Price,
+                        Quantity = item.Count
+                    };
+                    db.OrderDetails.Add(orderDetail);
+                    //Subtract the number of products
+                    product.Quantity -= item.Count;
+                    db.Entry(product).State = EntityState.Modified;
+               
             }
 
             // Save the order
@@ -178,6 +186,25 @@ namespace GardenShopOnline.Models
             // Empty the shopping cart
             EmptyCart();
             // Return the OrderId as the confirmation number
+            return order.ID;
+        }
+        //Check product quantity and order quantity
+        public string checkOrder(CustomerOrder order)
+        {
+            var cartItems = GetCartItems();
+            // Iterate over the items in the cart, 
+            // adding the order details for each
+            foreach (var item in cartItems)
+            {
+                //Check product quantity
+                var product = db.Products.Find(item.ProductID);
+                if (product.Quantity < item.Count)
+                {
+                    //Invalid - redisplay with errors
+                    return  "Error";
+                }
+
+            }
             return order.ID;
         }
 

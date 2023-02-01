@@ -1,6 +1,7 @@
 ﻿using GardenShopOnline.Models;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -10,7 +11,7 @@ namespace GardenShopOnline.Controllers
     public class CheckoutController : Controller
     {
         readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
-
+       
         //
         // GET: /Checkout/AddressAndPayment
         public ActionResult AddressAndPayment()
@@ -22,30 +23,42 @@ namespace GardenShopOnline.Controllers
             ViewData["Phone"] = user.PhoneNumber;
             return View();
         }
-
+     
         //
         // POST: /Checkout/AddressAndPayment
         [HttpPost]
         public ActionResult AddressAndPayment(CustomerOrder order)
         {
+          
             TryUpdateModel(order);
-
+           
             try
             {
-                order.ID = "#" + DateTime.Now.ToString("yyMMddHHmmssff");
-                order.AccCustomerID = User.Identity.GetUserId();
-                order.DateCreated = DateTime.Now;
-                order.Status = 1;
-
-                //Save Order
-                db.CustomerOrders.Add(order);
-                db.SaveChanges();
-                //Process the order
                 var cart = ShoppingCart.GetCart(HttpContext);
-                cart.CreateOrder(order);
+                //Check product quantity and order quantity
+                string check = cart.checkOrder(order);
+                if (check == "Error")
+                {
+                    //Display error when order quantity exceeds product quantity
+                    return View(order);
+                }
+                else
+                {
+                    order.ID = "#" + DateTime.Now.ToString("yyMMddHHmmssff");
+                    order.AccCustomerID = User.Identity.GetUserId();
+                    order.DateCreated = DateTime.Now;
+                    order.Status = 1;
 
-                return RedirectToAction("Complete",
-                    new { id = order.ID });
+                    //Save Order
+                    db.CustomerOrders.Add(order);
+                    db.SaveChanges();
+                    //Process the order
+                    cart.CreateOrder(order);
+
+                    return RedirectToAction("Complete",
+                        new { id = order.ID });
+                }
+               
             }
             catch
             {
