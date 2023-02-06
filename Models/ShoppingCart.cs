@@ -158,10 +158,11 @@ namespace GardenShopOnline.Models
             return total ?? decimal.Zero;
         }
 
-        public int CreateOrder(CustomerOrder order)
+        public string CreateOrder(CustomerOrder order)
         {
             var cartItems = GetCartItems();
-            int quality = 0;
+            string quality_product = "";
+            bool flat = false;
             // Iterate over the items in the cart, 
             // adding the order details for each
             foreach (var item in cartItems)
@@ -179,18 +180,31 @@ namespace GardenShopOnline.Models
                     //Subtract the number of products
                     product.Quantity -= item.Count;
                     db.Entry(product).State = EntityState.Modified;
-               quality += item.Count;
+                if (product.Quantity <10)
+                {
+                    flat = true;
+                    quality_product += "item " + product.Name + " has less than 10 products left, ";
+                }
             }
 
             // Save the order
             db.SaveChanges();
+            quality_product += " please check the item again and update the number if necessary.";
             // Empty the shopping cart
             EmptyCart();
-           
-           
+
+
 
             // Return the OrderId as the confirmation number
-            return quality;
+            if (flat == true)
+            {
+                return quality_product;
+            }
+            else
+            {
+                return "";
+            }
+            
         }
         //Check product quantity and order quantity
         public string checkOrder(CustomerOrder order)
