@@ -158,9 +158,10 @@ namespace GardenShopOnline.Models
             return total ?? decimal.Zero;
         }
 
-        public string CreateOrder(CustomerOrder order)
+        public int CreateOrder(CustomerOrder order)
         {
             var cartItems = GetCartItems();
+            int quality = 0;
             // Iterate over the items in the cart, 
             // adding the order details for each
             foreach (var item in cartItems)
@@ -178,15 +179,18 @@ namespace GardenShopOnline.Models
                     //Subtract the number of products
                     product.Quantity -= item.Count;
                     db.Entry(product).State = EntityState.Modified;
-               
+               quality += item.Count;
             }
 
             // Save the order
             db.SaveChanges();
             // Empty the shopping cart
             EmptyCart();
+           
+           
+
             // Return the OrderId as the confirmation number
-            return order.ID;
+            return quality;
         }
         //Check product quantity and order quantity
         public string checkOrder(CustomerOrder order)
@@ -195,19 +199,29 @@ namespace GardenShopOnline.Models
             // Iterate over the items in the cart, 
             // adding the order details for each
             string Error = "";
+            bool flat = false;
             foreach (var item in cartItems)
             {
                 //Check product quantity
                 var product = db.Products.Find(item.ProductID);
                 if (product.Quantity < item.Count)
                 {
+                    flat = true;
                     Error += " " + product.Name + " only have " + product.Quantity + "  items left." + "\r\n";
                    
                 }
 
             }
             Error += " Please check again!";
-            return Error;
+            if (flat == true)
+            {
+                return Error;
+
+            }
+            else
+            {
+                return "";
+            }
         }
 
         // We're using HttpContextBase to allow access to cookies.
