@@ -183,7 +183,9 @@ namespace GardenShopOnline.Models
                 if (product.Quantity <10)
                 {
                     flat = true;
-                    quality_product += "item " + product.Name + " has less than 10 products left, ";
+                    var requestContext = HttpContext.Current.Request.RequestContext;
+                    string link = new UrlHelper(requestContext).Action("Edit", "Products", new {id = product.ID }, HttpContext.Current.Request.Url.Scheme);
+                    quality_product += "item <a href='" + link + "'>"+ product.Name + "</a> has less than 10 products left, ";
                 }
             }
 
