@@ -73,13 +73,20 @@ namespace GardenShopOnline.Controllers
             var role = db.AspNetRoles.Find(role_id);
             if (query_email == null)
             {
-                string StaffId = "SID" + RandomCode.Random();
-                int check_Staff = db.AspNetUsers.Where(u => u.StaffId == StaffId).Count();
-                while (check_Staff > 0)
-                {                   
-                    StaffId = "SID" + RandomCode.Random();
-                    check_Staff = db.AspNetUsers.Where(u => u.StaffId == StaffId).Count();
+                string StaffId = "BS-NV-";
+                var check_staff = db.AspNetUsers.OrderByDescending(s => s.DateCreated).FirstOrDefault();
+                if (check_staff.StaffId.Contains(StaffId) == true)
+                {
+                    int number = int.Parse(check_staff.StaffId.Replace(StaffId, "")) + 1;
+                     StaffId +=  number.ToString("000");
                 }
+                else
+                {
+                    StaffId += 1.ToString("000");
+                }
+                                   
+                   
+                
                 ApplicationUser user = new ApplicationUser()
                 {
                     Email = email,
