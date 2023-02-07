@@ -208,13 +208,13 @@ namespace GardenShopOnline.Models
             }
 
         }
-        //Check product quantity and order quantity
-        public string checkOrder(CustomerOrder order)
+        // Check product quantity and order quantity
+        public string CheckOrder()
         {
             var cartItems = GetCartItems();
             // Iterate over the items in the cart, 
-            // adding the order details for each
-            string Error = "";
+            // Adding the order details for each
+            string error = string.Empty;
             bool flat = false;
             foreach (var item in cartItems)
             {
@@ -223,20 +223,17 @@ namespace GardenShopOnline.Models
                 if (product.Quantity < item.Count)
                 {
                     flat = true;
-                    Error += " " + product.Name + " only have " + product.Quantity + "  items left." + "\r\n";
-
+                    error += " " + product.Name + " only have " + product.Quantity + "  items left." + "\r\n";
                 }
-
             }
-            Error += " Please check again!";
+            error += " Please check again!";
             if (flat == true)
             {
-                return Error;
-
+                return error;
             }
             else
             {
-                return "";
+                return string.Empty;
             }
         }
 

@@ -33,6 +33,7 @@ namespace GardenShopOnline.Controllers
                 _userManager = value;
             }
         }
+
         //
         // GET: /Checkout/AddressAndPayment
         public ActionResult AddressAndPayment()
@@ -54,11 +55,16 @@ namespace GardenShopOnline.Controllers
             try
             {
                 var cart = ShoppingCart.GetCart(HttpContext);
-                //Check product quantity and order quantity
-                string check = cart.checkOrder(order);
-                if (check != "")
+                // Check product quantity and order quantity
+                string check = cart.CheckOrder();
+                if (check != string.Empty)
                 {
-                    //Display error when order quantity exceeds product quantity
+                    // Display error when order quantity exceeds product quantity
+                    var userId = User.Identity.GetUserId();
+                    var user = db.AspNetUsers.Find(userId);
+                    ViewData["FullName"] = user.FullName;
+                    ViewData["Address"] = user.Address;
+                    ViewData["Phone"] = user.PhoneNumber;
                     ViewBag.Error = check;
                     return View(order);
                 }
@@ -69,10 +75,10 @@ namespace GardenShopOnline.Controllers
                     order.DateCreated = DateTime.Now;
                     order.Status = 1;
 
-                    //Save Order
+                    // Save Order
                     db.CustomerOrders.Add(order);
                     db.SaveChanges();
-                    //Process the order
+                    // Process the order
                     string quality_product = cart.CreateOrder(order);
                     if (quality_product != "")
                     {
@@ -95,7 +101,7 @@ namespace GardenShopOnline.Controllers
             }
             catch
             {
-                //Invalid - redisplay with errors
+                // Invalid - redisplay with errors
                 return View(order);
             }
         }
