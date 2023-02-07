@@ -84,8 +84,6 @@ namespace GardenShopOnline.Controllers
                     StaffId += 1.ToString("000");
                 }
 
-
-
                 ApplicationUser user = new ApplicationUser()
                 {
                     Email = email,
@@ -106,7 +104,6 @@ namespace GardenShopOnline.Controllers
                     return Json(new { error = true, message = result.Errors }, JsonRequestBehavior.AllowGet);
                 }
             }
-
             return Json(new { error = true, message = "This email is already exists!" }, JsonRequestBehavior.AllowGet);
         }
 
