@@ -80,7 +80,7 @@ namespace GardenShopOnline.Controllers
                     db.SaveChanges();
                     // Process the order
                     string quality_product = cart.CreateOrder(order);
-                    if (quality_product != "")
+                    if (quality_product != string.Empty)
                     {
                         var mail_addmin = db.AspNetUsers.Where(a => a.AspNetRoles.Any(r => r.Name == "Admin")).ToList();
                         foreach (var item in mail_addmin)
