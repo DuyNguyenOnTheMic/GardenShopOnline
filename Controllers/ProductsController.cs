@@ -99,11 +99,19 @@ namespace GardenShopOnline.Controllers
         [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Delete_Product(Product product)
         {
-            Product product1 = db.Products.Find(product.ID);
-            product1.Status = 3;
-            db.Entry(product1).State = EntityState.Modified;
-            db.SaveChanges();
-            return Json("Delete_Product", JsonRequestBehavior.AllowGet);
+            bool status = true; 
+            try
+            {
+                Product product1 = db.Products.Find(product.ID);
+                db.Products.Remove(product1);
+                db.SaveChanges();
+            }
+            catch
+            {
+                status = false;
+            }
+
+            return Json(new { status = status }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         [CustomAuthorize(Roles = "Admin, Staff")]
