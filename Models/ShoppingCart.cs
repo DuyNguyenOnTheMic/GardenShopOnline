@@ -16,7 +16,7 @@ namespace GardenShopOnline.Models
         {
             var cart = new ShoppingCart();
             cart.ShoppingCartId = cart.GetCartId(context);
-            
+
             return cart;
         }
 
@@ -168,24 +168,24 @@ namespace GardenShopOnline.Models
             foreach (var item in cartItems)
             {
                 var product = db.Products.Find(item.ProductID);
-               
-                    var orderDetail = new OrderDetail
-                    {
-                        ProductID = item.ProductID,
-                        OrderID = order.ID,
-                        UnitPrice = item.Product.Price,
-                        Quantity = item.Count
-                    };
-                    db.OrderDetails.Add(orderDetail);
-                    //Subtract the number of products
-                    product.Quantity -= item.Count;
-                    db.Entry(product).State = EntityState.Modified;
-                if (product.Quantity <10)
+
+                var orderDetail = new OrderDetail
+                {
+                    ProductID = item.ProductID,
+                    OrderID = order.ID,
+                    UnitPrice = item.Product.Price,
+                    Quantity = item.Count
+                };
+                db.OrderDetails.Add(orderDetail);
+                //Subtract the number of products
+                product.Quantity -= item.Count;
+                db.Entry(product).State = EntityState.Modified;
+                if (product.Quantity < 10)
                 {
                     flat = true;
                     var requestContext = HttpContext.Current.Request.RequestContext;
-                    string link = new UrlHelper(requestContext).Action("Edit", "Products", new {id = product.ID }, HttpContext.Current.Request.Url.Scheme);
-                    quality_product += "item <a href='" + link + "'>"+ product.Name + "</a> has less than 10 products left, ";
+                    string link = new UrlHelper(requestContext).Action("Edit", "Products", new { id = product.ID }, HttpContext.Current.Request.Url.Scheme);
+                    quality_product += "item <a href='" + link + "'>" + product.Name + "</a> has less than 10 products left, ";
                 }
             }
 
@@ -206,7 +206,7 @@ namespace GardenShopOnline.Models
             {
                 return "";
             }
-            
+
         }
         //Check product quantity and order quantity
         public string checkOrder(CustomerOrder order)
@@ -224,7 +224,7 @@ namespace GardenShopOnline.Models
                 {
                     flat = true;
                     Error += " " + product.Name + " only have " + product.Quantity + "  items left." + "\r\n";
-                   
+
                 }
 
             }

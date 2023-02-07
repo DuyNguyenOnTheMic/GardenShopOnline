@@ -54,7 +54,7 @@ namespace GardenShopOnline.Controllers
                 status = false;
                 message = e.Message;
             }
-           
+
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult EditStatus_Type(Models.Type Types)
@@ -110,7 +110,7 @@ namespace GardenShopOnline.Controllers
                 status = false;
                 message = e.Message;
             }
-           
+
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult Delete_Type(Models.Type Type)

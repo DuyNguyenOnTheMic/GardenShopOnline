@@ -54,7 +54,7 @@ namespace GardenShopOnline.Controllers
                 status = false;
                 message = e.Message;
             }
-           
+
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult EditStatus_Category(Category Categorys)
@@ -111,7 +111,7 @@ namespace GardenShopOnline.Controllers
                 status = false;
                 message = e.Message;
             }
-         
+
 
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
