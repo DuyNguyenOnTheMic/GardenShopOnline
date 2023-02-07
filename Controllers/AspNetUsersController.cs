@@ -74,16 +74,16 @@ namespace GardenShopOnline.Controllers
             {
                 string StaffId = "BS-NV-";
                 var check_staff = db.AspNetUsers.OrderByDescending(s => s.DateCreated).FirstOrDefault();
-                if (String.IsNullOrEmpty(check_staff.StaffId) || check_staff.StaffId.Contains(StaffId) == false)
+                if (string.IsNullOrEmpty(check_staff.StaffId) || check_staff.StaffId.Contains(StaffId) == false)
                 {
                     StaffId += 1.ToString("000");
                 }
-                else 
+                else
                 {
                     int number = int.Parse(check_staff.StaffId.Replace(StaffId, "")) + 1;
-                     StaffId +=  number.ToString("000");
+                    StaffId += number.ToString("000");
                 }
-               
+
                 ApplicationUser user = new ApplicationUser()
                 {
                     Email = email,
