@@ -74,16 +74,16 @@ namespace GardenShopOnline.Controllers
             {
                 string StaffId = "BS-NV-";
                 var check_staff = db.AspNetUsers.OrderByDescending(s => s.DateCreated).FirstOrDefault();
-                if (check_staff.StaffId.Contains(StaffId) == true)
-                {
-                    int number = int.Parse(check_staff.StaffId.Replace(StaffId, "")) + 1;
-                    StaffId += number.ToString("000");
-                }
-                else
+                if (String.IsNullOrEmpty(check_staff.StaffId) || check_staff.StaffId.Contains(StaffId) == false)
                 {
                     StaffId += 1.ToString("000");
                 }
-
+                else 
+                {
+                    int number = int.Parse(check_staff.StaffId.Replace(StaffId, "")) + 1;
+                     StaffId +=  number.ToString("000");
+                }
+               
                 ApplicationUser user = new ApplicationUser()
                 {
                     Email = email,
@@ -130,13 +130,12 @@ namespace GardenShopOnline.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(string id, string staffId, string fullName, string role_id)
+        public ActionResult Edit(string id, string fullName, string role_id)
         {
             var user = UserManager.FindById(id);
             string oldRole = UserManager.GetRoles(id).FirstOrDefault();
             AspNetRole role = db.AspNetRoles.Find(role_id);
 
-            user.StaffId = staffId;
             user.FullName = fullName;
             UserManager.Update(user);
 
