@@ -127,11 +127,15 @@
             if (orderForm.valid()) {
                 // Show empty cart message
                 if (!$('.your-order-table tbody tr').length) {
-                    Swal.fire(
-                        'Warning',
-                        'Your cart is empty!',
-                        'warning'
-                    )
+                    Swal.fire({
+                        title: 'Warning',
+                        text: 'Your cart is empty!',
+                        icon: 'warning',
+                        customClass: {
+                            confirmButton: 'btn btn-custom-size lg-size btn-pronia-primary'
+                        },
+                        buttonsStyling: false
+                    })
                 } else {
                     // Pass payment method to controller
                     var payment = $('.panel-title a[aria-expanded="true"]').data('payment');
