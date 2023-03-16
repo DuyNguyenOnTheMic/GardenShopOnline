@@ -32,5 +32,14 @@ namespace GardenShopOnline.Controllers
             }
             return Json(countList, JsonRequestBehavior.AllowGet);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

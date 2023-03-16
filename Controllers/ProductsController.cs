@@ -99,7 +99,7 @@ namespace GardenShopOnline.Controllers
         [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Delete_Product(Product product)
         {
-            bool status = true; 
+            bool status = true;
             try
             {
                 Product product1 = db.Products.Find(product.ID);

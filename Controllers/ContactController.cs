@@ -140,5 +140,14 @@ namespace GardenShopOnline.Controllers
             db.SaveChanges();
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

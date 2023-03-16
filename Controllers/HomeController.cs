@@ -13,5 +13,14 @@ namespace GardenShopOnline.Controllers
             ShoppingCart.GetCart(HttpContext);
             return View(db.Products.Where(p => p.Status == 1).ToList());
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

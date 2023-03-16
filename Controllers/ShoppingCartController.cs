@@ -143,5 +143,14 @@ namespace GardenShopOnline.Controllers
             var cart = ShoppingCart.GetCart(HttpContext);
             return cart.GetCount();
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

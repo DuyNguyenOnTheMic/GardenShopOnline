@@ -73,7 +73,7 @@ namespace GardenShopOnline.Controllers
             if (query_email == null)
             {
                 string StaffId = "BS-NV-";
-                var check_staff = db.AspNetUsers.Where(a => a.StaffId != null ).OrderByDescending(s => s.DateCreated).FirstOrDefault();
+                var check_staff = db.AspNetUsers.Where(a => a.StaffId != null).OrderByDescending(s => s.DateCreated).FirstOrDefault();
                 if (string.IsNullOrEmpty(check_staff.StaffId) || check_staff.StaffId.Contains(StaffId) == false)
                 {
                     StaffId += 1.ToString("000");
