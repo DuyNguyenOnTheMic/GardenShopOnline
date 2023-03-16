@@ -49,7 +49,7 @@ namespace GardenShopOnline.Controllers
         //
         // POST: /Checkout/AddressAndPayment
         [HttpPost]
-        public async System.Threading.Tasks.Task<ActionResult> AddressAndPayment(CustomerOrder order)
+        public async System.Threading.Tasks.Task<ActionResult> AddressAndPayment(CustomerOrder order, string payment)
         {
             TryUpdateModel(order);
             try

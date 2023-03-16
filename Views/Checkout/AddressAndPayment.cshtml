@@ -23,9 +23,9 @@
     </div>
     @if (ViewBag.Error != null)
     {
-<div class="alert alert-warning" role="alert">
-    @Html.Raw(ViewBag.Error) 
-</div>
+        <div class="alert alert-warning" role="alert">
+            @Html.Raw(ViewBag.Error)
+        </div>
     }
     <div class="checkout-area section-space-y-axis-100">
         <div class="container">
@@ -67,10 +67,11 @@
                             <div class="payment-method">
                                 <div class="payment-accordion">
                                     <div id="accordion">
+                                        @Html.Hidden("payment")
                                         <div class="card">
                                             <div class="card-header" id="#payment-1">
                                                 <h5 class="panel-title">
-                                                    <a href="#" class="" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true">
+                                                    <a href="#" class="" data-bs-toggle="collapse" data-bs-target="#collapseOne" data-payment="cash" aria-expanded="true">
                                                         Payment Using Cash
                                                     </a>
                                                 </h5>
@@ -86,7 +87,7 @@
                                         <div class="card">
                                             <div class="card-header" id="#payment-2">
                                                 <h5 class="panel-title">
-                                                    <a href="#" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false">
+                                                    <a href="#" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" data-payment="bank" aria-expanded="false">
                                                         Direct Bank Transfer
                                                     </a>
                                                 </h5>
@@ -106,7 +107,7 @@
                                         </div>
                                     </div>
                                     <div class="order-button-payment">
-                                        <input value="Place order" type="submit">
+                                        <input value="Place order" id="placeOrder" type="submit">
                                     </div>
                                 </div>
                             </div>
@@ -121,17 +122,24 @@
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        $('#orderForm').submit(function (e) {
-            if ($(this).valid()) {
+        $('#placeOrder').click(function (e) {
+            var orderForm = $('#orderForm');
+            if (orderForm.valid()) {
+                // Show empty cart message
+                e.preventDefault();
                 if (!$('.your-order-table tbody tr').length) {
-                    e.preventDefault();
                     Swal.fire(
                         'Warning',
                         'Your cart is empty!',
                         'warning'
                     )
+                } else {
+                    // Pass payment method to controller
+                    var payment = $('.panel-title a[aria-expanded="true"]').data('payment');
+                    $('#payment').val(payment);
+                    orderForm.submit();
                 }
             }
-        });
+        })
     </script>
 }
