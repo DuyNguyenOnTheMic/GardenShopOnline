@@ -107,7 +107,7 @@
                                         </div>
                                     </div>
                                     <div class="order-button-payment">
-                                        <input value="Place order" id="placeOrder" type="submit">
+                                        <input value="Place order" id="placeOrder" type="button">
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +126,6 @@
             var orderForm = $('#orderForm');
             if (orderForm.valid()) {
                 // Show empty cart message
-                e.preventDefault();
                 if (!$('.your-order-table tbody tr').length) {
                     Swal.fire(
                         'Warning',
