@@ -182,7 +182,7 @@ function EditStatus(id) {
 }
 
 //-----------------------Định dạng giá-------------------------------------
-$('#product-price').keydown(function (e) {
+$('.productPrice').keydown(function (e) {
     setTimeout(() => {
         let parts = $(this).val().split(".");
         let v = parts[0].replace(/\D/g, ""),

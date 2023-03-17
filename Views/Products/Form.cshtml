@@ -105,13 +105,13 @@
                                         <div class="position-relative">
                                             @if (!isCreate)
                                             {
-                                                <input type="text" placeholder="Enter product price..." value="@Model.Price.ToString("N0")" id="product-price" max="999999999999" class="form-control "
+                                                <input type="tel" placeholder="Enter product price..." value="@Model.Price.ToString("N0")"  max="999999999999" class="form-control productPrice"
                                                        pattern="[0-9.,]+"  name="priceProduct" required>
                                             }
                                             else
                                             {
-                                                <input type="text" placeholder="Enter product price..." id="product-price" max="999999999999" class="form-control "
-                                                       pattern="[0-9.,]+" name="priceProduct" required>
+                                                <input type="tel" placeholder="Enter product price..."  max="999999999999" class="form-control productPrice"
+                                                       name="priceProduct" required>
                                             }
                                      </div> <!---->
                                     </div>

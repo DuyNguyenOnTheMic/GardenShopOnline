@@ -31,7 +31,6 @@ namespace GardenShopOnline.Models
         [Required(ErrorMessage = "Please enter product name !")]
         public string Name { get; set; }
         public string Description { get; set; }
-        [Required(ErrorMessage = "Product price cannot be blank !")]
         public decimal Price { get; set; }
         [Required(ErrorMessage = "Please choose an image for the product")]
         public string Image { get; set; }
