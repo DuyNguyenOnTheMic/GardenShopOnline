@@ -88,6 +88,7 @@ namespace GardenShopOnline.Controllers
                     ViewBag.msg = "Định dạng file không hợp lệ!";
                 }
                 db.SaveChanges();
+                Session["notification"] = "Thêm mới thành công!";
                 return RedirectToAction("Index");
             }
             ViewBag.isCreate = true;
@@ -140,6 +141,7 @@ namespace GardenShopOnline.Controllers
                                 {
                                     System.IO.File.Delete(oldImgPath);
                                 }
+                                Session["notification"] = "Cập nhật thành công!";
                                 return RedirectToAction("Index");
                             }
                         }

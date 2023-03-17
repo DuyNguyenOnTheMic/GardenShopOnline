@@ -50,9 +50,9 @@
                                             Bank Name <span class="text-danger">*</span>
                                         </label>
                                         <div class="position-relative">
-                                            @Html.EditorFor(model => model.Bank, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Bank, "", new { @class = "text-danger" })                                            <div class="invalid-feedback">
-                                            </div>
+                                            @Html.EditorFor(model => model.Bank, new { htmlAttributes = new { @class = "form-control", @placeholder = "Bank Name..." } })
+                                            @Html.ValidationMessageFor(model => model.Bank, "", new { @class = "text-danger" })
+
                                         </div> <!---->
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@
                                             Bank Branch <span class="text-danger">*</span>
                                         </label>
                                         <div class="position-relative">
-                                            @Html.EditorFor(model => model.Branch, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.Branch, new { htmlAttributes = new { @class = "form-control", @placeholder = "Bank Branch..." } })
                                             @Html.ValidationMessageFor(model => model.Branch, "", new { @class = "text-danger" })
                                         </div> <!---->
                                     </div>
@@ -73,7 +73,7 @@
                                             Account Number <span class="text-danger">*</span>
                                         </label>
                                         <div class="position-relative">
-                                            @Html.EditorFor(model => model.AccountNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.AccountNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Account Number..." } })
                                             @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
                                         </div> <!---->
 
@@ -85,7 +85,7 @@
                                             Account Name <span class="text-danger">*</span>
                                         </label>
                                         <div class="position-relative">
-                                            @Html.EditorFor(model => model.AccountName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.AccountName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Account Name..." } })
                                             @Html.ValidationMessageFor(model => model.AccountName, "", new { @class = "text-danger" })
                                         </div> <!---->
 
@@ -109,7 +109,7 @@
                                             else
                                             {
                                                 <div class="img-item">
-                                                    <img id="output" class="img-item-link"  />
+                                                    <img id="output" class="img-item-link" />
                                                 </div>
                                                 <input type="file" required="required" name="Image" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
                                                 @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })

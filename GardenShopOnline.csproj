@@ -887,6 +887,9 @@
     <Content Include="assets\email-templates\order-status.html" />
     <Content Include="assets\email-templates\reset-password.html" />
     <Content Include="assets\images\sen-da-kim-cuong.jpg" />
+    <Content Include="assets\jquery-validate\custom-css.css" />
+    <Content Include="assets\jquery-validate\jquery.validate.min.js" />
+    <Content Include="assets\jquery-validate\jquery.validate.unobtrusive.min.js" />
     <Content Include="assets\signalR\jquery.signalR.min.js" />
     <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
     <Content Include="Content\sweetalert\docs.css" />
@@ -1017,7 +1020,7 @@
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\ShoppingCart\_Checkout.cshtml" />
     <Content Include="Views\Checkout\Complete.cshtml" />
-    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Form.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Types\Index.cshtml" />
     <Content Include="Views\CustomerOrders\Create.cshtml" />

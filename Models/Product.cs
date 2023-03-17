@@ -11,7 +11,8 @@ namespace GardenShopOnline.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,15 +24,21 @@ namespace GardenShopOnline.Models
         }
     
         public int ID { get; set; }
+        [Required(ErrorMessage = "Please select product category !")]
         public int CategoryID { get; set; }
+        [Required(ErrorMessage = "Please select product type !")]
         public int TypeID { get; set; }
+        [Required(ErrorMessage = "Please enter product name !")]
         public string Name { get; set; }
         public string Description { get; set; }
+        [Required(ErrorMessage = "Product price cannot be blank !")]
         public decimal Price { get; set; }
+        [Required(ErrorMessage = "Please choose an image for the product")]
         public string Image { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<System.DateTime> DateUpdate { get; set; }
         public Nullable<int> Status { get; set; }
+        [Required(ErrorMessage = "Please enter product quantity !")]
         public int Quantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

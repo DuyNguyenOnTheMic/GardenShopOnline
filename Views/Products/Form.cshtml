@@ -3,9 +3,16 @@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    bool isCreate = ViewBag.isCreate;
+
 }
 <input type="text" hidden id="URLgetCategory" value="@Url.Action("getCategory", "Categories")" />
 <input type="text" hidden id="URLgetType" value="@Url.Action("getType", "Types")" />
+@if (!isCreate)
+{
+    <input type="text" hidden id="PEdit_Description" value="@Model.Description" />
+}
+
 
 <section class="pcoded-main-container">
     <div class="pcoded-content">
@@ -35,18 +42,23 @@
                         <h5>Create product</h5>
                     </div>
                     <div class="card-body">
-                        <form class="needs-validation" method="post" action="@Url.Action("Create_Product", "products")" enctype="multipart/form-data" novalidate>
-                            <div class="row">
+                        <form method="post" action= "@Url.Action(isCreate ? "Create" : "Edit", "products")" enctype="multipart/form-data" novalidate>
+                            @Html.AntiForgeryToken()
+                            @if (!isCreate)
+                            {
+                                @Html.HiddenFor(m => m.ID)
+                                @Html.HiddenFor(m => m.Status)
+                                @Html.HiddenFor(m => m.Image)
+                            }                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>
                                             Name <span class="text-danger">*</span>
                                         </label>
                                         <div class="position-relative">
-                                            <input type="text" placeholder="Enter product name..." id="add_name" class="form-control" name="name_product" pattern="\S+.*" required>
-                                            <div class="invalid-feedback">
-                                                Please enter product name !
-                                            </div>
+
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter product name..." } })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                                         </div> <!---->
                                     </div>
                                 </div>
@@ -56,9 +68,8 @@
                                             Category <span class="text-danger">*</span>
                                         </label>
                                         <div class="position-relative">
-                                            <select class="custom-select" id="CategoryDropdown" name="CategoryDropdown" required>
-                                            </select>
-                                            <div class="invalid-feedback">Please select product category !</div>
+                                            @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
                                         </div> <!---->
 
                                     </div>
@@ -69,9 +80,8 @@
                                             Type <span class="text-danger">*</span>
                                         </label>
                                         <div class="position-relative">
-                                            <select class="custom-select" id="TypeDropdown" name="TypeDropdown" required>
-                                            </select>
-                                            <div class="invalid-feedback">Please select product type !</div>
+                                            @Html.DropDownList("TypeID", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
                                         </div> <!---->
 
                                     </div>
@@ -82,10 +92,8 @@
                                             Quantity <span class="text-danger">*</span>
                                         </label>
                                         <div class="position-relative">
-                                            <input type="text" placeholder="Enter product quantity... " id="add_quantity" class="form-control " name="quantity" pattern="\S+.*" required>
-                                            <div class="invalid-feedback">
-                                                Please enter product quantity !
-                                            </div>
+                                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter product quantity..." } })
+                                            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
                                         </div> <!---->
                                     </div>
                                 </div>
@@ -95,20 +103,26 @@
                                             Price <span class="text-danger">*</span>
                                         </label>
                                         <div class="position-relative">
-                                            <input type="text" placeholder="Enter product price..." id="product-price" max="999999999999" class="form-control "
-                                                   pattern="[0-9.,]+" data-type="number" name="price" required>
-                                            <div class="invalid-feedback">
-                                                Product price cannot be blank !
-                                            </div>
-                                        </div> <!---->
-
+                                            @if (!isCreate)
+                                            {
+                                                <input type="text" placeholder="Enter product price..." value="@Model.Price.ToString("N0")" id="product-price" max="999999999999" class="form-control "
+                                                       pattern="[0-9.,]+"  name="priceProduct" required>
+                                            }
+                                            else
+                                            {
+                                                <input type="text" placeholder="Enter product price..." id="product-price" max="999999999999" class="form-control "
+                                                       pattern="[0-9.,]+" name="priceProduct" required>
+                                            }
+                                     </div> <!---->
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Description</label>
                                         <div class="position-relative">
-                                            <textarea id="description" name="description" placeholder="Enter product description..." rows="4" class="form-control"></textarea>
+                                            <textarea id="description" name="Description" placeholder="Enter product description..." rows="4" class="form-control"></textarea>
+                                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
                                         </div>
                                         <!---->
                                     </div>
@@ -120,14 +134,22 @@
                                             Image <span class="text-danger">(*)</span>
                                         </label>
                                         <div class="position-relative">
-                                            <div class="img-item">
-                                                <img id="output" class="img-item-link" />
+                                            @if (!isCreate)
+                                            {
+                                                <div class="img-item">
+                                                    <img id="output" class="img-item-link" src="@Url.Content("~/assets/images/" + Model.Image)" />
+                                                </div>
+                                                <input type="file" name="file" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
+                                            }
+                                            else
+                                            {
+                                                <div class="img-item">
+                                                    <img id="output" class="img-item-link" />
+                                                </div>
+                                                <input type="file" required="required" name="Image" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
+                                                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
 
-                                            </div>
-                                            <input type="file" required="required" name="file" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
-                                            <div class="invalid-feedback">
-                                                Please choose an image for the product!
-                                            </div>
+                                            }
                                         </div>
                                         <script>
                                             var loadFile_edit = function (event) {
@@ -137,11 +159,8 @@
                                         </script>
                                     </div>
                                 </div>
-
-
                                 <div class="col-md-12 ">
                                     <button type="submit" class="btn btn-primary float-right">Save</button>
-
                                     <button type="button" class="btn  btn-secondary float-right" onclick="location.href='@Url.Action("Index","Products")';">Cancel</button>
                                 </div>
                             </div>
@@ -155,16 +174,3 @@
 
     </div>
 </section>
-
-
-
-
-
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

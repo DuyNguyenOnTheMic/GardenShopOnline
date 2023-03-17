@@ -13,7 +13,10 @@ namespace GardenShopOnline.Controllers
     public class ProductsController : Controller
     {
         private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
-
+        public ProductsController()
+        {
+            ViewBag.isCreate = false;
+        }
         // GET: Products
         [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Index()
@@ -46,56 +49,7 @@ namespace GardenShopOnline.Controllers
             return PartialView(links.Where(c => c.Status != 3).OrderByDescending(c => c.ID));
 
         }
-        [HttpPost]
-        [ValidateInput(false)]
-        [CustomAuthorize(Roles = "Admin, Staff")]
-
-        public ActionResult Create_Product(string name_product,
-           int quantity, int CategoryDropdown, int TypeDropdown,
-           string price, string description, HttpPostedFileBase file)
-        {
-            Product product = new Product();
-
-            product.Name = name_product;
-            product.Quantity = quantity;
-            product.CategoryID = CategoryDropdown;
-            product.TypeID = TypeDropdown;
-            product.Price = int.Parse(price.Replace(",", ""));
-            product.Description = description;
-            product.Status = 1;
-            string filename = Path.GetFileName(file.FileName);
-            string _filename = DateTime.Now.ToString("yymmssfff") + filename;
-
-            string extension = Path.GetExtension(file.FileName);
-
-            string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
-
-            product.Image = _filename;
-            if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
-            {
-                if (file.ContentLength <= 4000000)
-                {
-                    db.Products.Add(product);
-
-                    if (db.SaveChanges() > 0)
-                    {
-                        file.SaveAs(path);
-
-                    }
-                }
-                else
-                {
-                    ViewBag.msg = "Hình ảnh phải lớn hơn hoặc bằng 4MB!";
-                }
-            }
-            else
-            {
-                ViewBag.msg = "Định dạng file không hợp lệ!";
-            }
-            db.SaveChanges();
-            Session["notification"] = "Thêm mới thành công!";
-            return RedirectToAction("Index");
-        }
+       
         [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Delete_Product(Product product)
         {
@@ -113,6 +67,7 @@ namespace GardenShopOnline.Controllers
 
             return Json(new { status = status }, JsonRequestBehavior.AllowGet);
         }
+        
         [HttpPost]
         [CustomAuthorize(Roles = "Admin, Staff")]
         public JsonResult FindProduct(int Product_id)
@@ -128,49 +83,45 @@ namespace GardenShopOnline.Controllers
             emp.Description = product.Description;
             return Json(emp);
         }
-        [HttpPost]
-        [ValidateInput(false)]
+        
+        // GET: Products1/Create
         [CustomAuthorize(Roles = "Admin, Staff")]
-        public ActionResult UpdateProduct(int Product_id, string name_product,
-           int quantity, int CategoryDropdown, int TypeDropdown,
-           string price, string description, HttpPostedFileBase file)
+        public ActionResult Create()
         {
-            Product product = db.Products.Find(Product_id);
-            Session["imgPath"] = product.Image;
-            product.Name = name_product;
-            product.CategoryID = CategoryDropdown;
-            product.TypeID = TypeDropdown;
-            product.Price = int.Parse(price.Contains('.') ? price.Replace(".", "") : price.Replace(",", ""));
-            product.Quantity = quantity;
-            product.Description = description;
-            product.DateUpdate = DateTime.Now;
-
-            if (file != null)
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name");
+            ViewBag.TypeID = new SelectList(db.Types, "ID", "Name");
+            ViewBag.isCreate = true;
+            return View("Form");
+        }        
+        
+        [CustomAuthorize(Roles = "Admin, Staff")]
+        [HttpPost, ValidateInput(false)]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ID,CategoryID,TypeID,Name,Description,Image,DateCreated,DateUpdate,Status,Quantity")] Product product, HttpPostedFileBase Image, string priceProduct)
+        {
+            if (ModelState.IsValid)
             {
-                string filename = Path.GetFileName(file.FileName);
+                decimal price = decimal.Parse(priceProduct.Replace(",", "").Replace(".", ""));
+                product.Status = 1;
+                product.Price = price;
+                string filename = Path.GetFileName(Image.FileName);
                 string _filename = DateTime.Now.ToString("yymmssfff") + filename;
 
-                string extension = Path.GetExtension(file.FileName);
+                string extension = Path.GetExtension(Image.FileName);
 
                 string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
 
                 product.Image = _filename;
-
                 if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
                 {
-                    if (file.ContentLength <= 4000000)
+                    if (Image.ContentLength <= 4000000)
                     {
-                        db.Entry(product).State = EntityState.Modified;
-                        string oldImgPath = Request.MapPath(Session["imgPath"].ToString());
+                        db.Products.Add(product);
 
                         if (db.SaveChanges() > 0)
                         {
-                            file.SaveAs(path);
-                            if (System.IO.File.Exists(oldImgPath))
-                            {
-                                System.IO.File.Delete(oldImgPath);
-                            }
-                            return RedirectToAction("Index");
+                            Image.SaveAs(path);
+
                         }
                     }
                     else
@@ -182,26 +133,17 @@ namespace GardenShopOnline.Controllers
                 {
                     ViewBag.msg = "Định dạng file không hợp lệ!";
                 }
+                db.SaveChanges();
+                Session["notification"] = "Thêm mới thành công!";
+                return RedirectToAction("Index");
             }
-            else
-            {
-                product.Image = Session["imgPath"].ToString();
-            }
 
-            db.Entry(product).State = EntityState.Modified;
-            db.SaveChanges();
-            Session["notification"] = "Cập nhật thành công!";
-            return RedirectToAction("Index");
-        }
-
-        // GET: Products1/Create
-        [CustomAuthorize(Roles = "Admin, Staff")]
-        public ActionResult Create()
-        {
-            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name");
-            return View();
-        }
-
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
+            ViewBag.TypeID = new SelectList(db.Types, "ID", "Name", product.TypeID);
+            ViewBag.isCreate = true;
+            return View("Form",product);
+    }
+        
         // GET: Products1/Edit/5
         [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Edit(int id)
@@ -212,6 +154,62 @@ namespace GardenShopOnline.Controllers
                 return HttpNotFound();
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
+            ViewBag.TypeID = new SelectList(db.Types, "ID", "Name", product.TypeID);
+            return View("Form", product);
+        }
+        
+        [CustomAuthorize(Roles = "Admin, Staff")]
+        [HttpPost, ValidateInput(false)]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ID,CategoryID,TypeID,Name,Description,Price,Image,DateCreated,DateUpdate,Status,Quantity")] Product product, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                if (file != null)
+                {
+                    string filename = Path.GetFileName(file.FileName);
+                    string _filename = DateTime.Now.ToString("yymmssfff") + filename;
+
+                    string extension = Path.GetExtension(file.FileName);
+
+                    string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
+
+                    product.Image = _filename;
+
+                    if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
+                    {
+                        if (file.ContentLength <= 4000000)
+                        {
+                            db.Entry(product).State = EntityState.Modified;
+                            string oldImgPath = Request.MapPath(product.Image);
+
+                            if (db.SaveChanges() > 0)
+                            {
+                                file.SaveAs(path);
+                                if (System.IO.File.Exists(oldImgPath))
+                                {
+                                    System.IO.File.Delete(oldImgPath);
+                                }
+                                Session["notification"] = "Cập nhật thành công!";
+                                return RedirectToAction("Index");
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.msg = "Hình ảnh phải lớn hơn hoặc bằng 4MB!";
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.msg = "Định dạng file không hợp lệ!";
+                    }
+                }
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
+            ViewBag.TypeID = new SelectList(db.Types, "ID", "Name", product.TypeID);
             return View(product);
         }
 

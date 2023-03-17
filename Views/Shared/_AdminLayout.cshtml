@@ -13,6 +13,7 @@
     <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
     <link href="~/assets/admin/assets/css/style.css" rel="stylesheet" />
     <link href="~/assets/admin/assets/css/plugins/animate.min.css" rel="stylesheet" />
+    <link href="~/assets/jquery-validate/custom-css.css" rel="stylesheet" />
     @RenderSection("styles", required: false)
 </head>
 
@@ -82,6 +83,12 @@
                             <a href="@Url.Action("Index","AspNetUsers")" class="nav-link">
                                 <span class="pcoded-micon"><i class="feather icon-user"></i></span>
                                 <span class="pcoded-mtext">Staff</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index","BankPayments")" class="nav-link">
+                                <span class="pcoded-micon"><i class="feather icon-monitor"></i></span>
+                                <span class="pcoded-mtext">Bank Payment</span>
                             </a>
                         </li>
                         <li class="nav-item ">
@@ -209,9 +216,9 @@
     <!-- Data Table -->
     <script src="~/assets/admin/assets/js/jquery.dataTables.min.js"></script>
     <!--My script function-->
-
     <script src="~/assets/admin/assets/js/Function.js"></script>
-
+    <script src="~/assets/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/assets/jquery-validate/jquery.validate.unobtrusive.min.js"></script>
     @RenderSection("scripts", required: false)
 
 </body>
