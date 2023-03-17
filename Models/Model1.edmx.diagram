@@ -33,6 +33,7 @@
         <AssociationConnector Association="BonsaiGardenModel.FK__OrderDeta__Produ__45F365D3" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK_Product_Type" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.BankPayment" Width="1.5" PointX="8.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
