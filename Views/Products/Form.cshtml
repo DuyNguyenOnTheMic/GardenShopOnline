@@ -41,7 +41,7 @@
                         <h5>Create product</h5>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="@Url.Action(isCreate ? "Create" : "Edit", "products")" enctype="multipart/form-data" novalidate>
+                        <form method="post" action="@Url.Action(isCreate ? "Create" : "Edit", "Products")" enctype="multipart/form-data" novalidate>
                             @Html.AntiForgeryToken()
                             @if (!isCreate)
                             {
@@ -102,16 +102,8 @@
                                             Price <span class="text-danger">*</span>
                                         </label>
                                         <div class="position-relative">
-                                            @if (!isCreate)
-                                            {
-                                                <input type="tel" placeholder="Enter product price..." value="@Model.Price.ToString("N0")"  max="999999999999" class="form-control productPrice"
-                                                       pattern="[0-9.,]+"  name="priceProduct" required>
-                                            }
-                                            else
-                                            {
-                                                <input type="tel" placeholder="Enter product price..."  max="999999999999" class="form-control productPrice"
-                                                       name="priceProduct" required>
-                                            }
+                                            <input class="form-control productPrice text-box single-line" data-val="true" data-val-length="Please enter a value less than or equal to 999,999,999,999" data-val-length-max="15" data-val-number="The field Price must be a number." data-val-required="Please enter product price!" id="priceProduct" name="priceProduct" pattern="[0-9.,]+" placeholder="Enter product Price..." type="text" value="@(isCreate ? string.Empty : @Model.Price.ToString("N0"))">
+                                            @Html.ValidationMessage("priceProduct", "", new { @class = "text-danger" })
                                         </div> <!---->
                                     </div>
                                 </div>
@@ -121,7 +113,6 @@
                                         <div class="position-relative">
                                             <textarea id="description" name="Description" placeholder="Enter product description..." rows="4" class="form-control"></textarea>
                                             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-
                                         </div>
                                         <!---->
                                     </div>

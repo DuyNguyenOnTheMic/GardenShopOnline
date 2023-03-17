@@ -24,11 +24,11 @@ namespace GardenShopOnline.Models
         }
     
         public int ID { get; set; }
-        [Required(ErrorMessage = "Please select product category !")]
+        [Required(ErrorMessage = "Please select product category!")]
         public int CategoryID { get; set; }
-        [Required(ErrorMessage = "Please select product type !")]
+        [Required(ErrorMessage = "Please select product type!")]
         public int TypeID { get; set; }
-        [Required(ErrorMessage = "Please enter product name !")]
+        [Required(ErrorMessage = "Please enter product name!")]
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
