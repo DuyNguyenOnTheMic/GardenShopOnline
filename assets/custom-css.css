@@ -35,14 +35,6 @@ form :is(.select2, .form-select).input-validation-error + .select2-container--bo
     opacity: 1;
 }
 
-.w-5 {
-    width: 5% !important
-}
-
-.w-15 {
-    width: 15% !important
-}
-
 label.error {
     color: #dc3545;
 }
