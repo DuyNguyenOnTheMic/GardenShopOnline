@@ -887,7 +887,7 @@
     <Content Include="assets\email-templates\order-status.html" />
     <Content Include="assets\email-templates\reset-password.html" />
     <Content Include="assets\images\sen-da-kim-cuong.jpg" />
-    <Content Include="assets\jquery-validate\custom-css.css" />
+    <Content Include="assets\custom-css.css" />
     <Content Include="assets\signalR\jquery.signalR.min.js" />
     <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
     <Content Include="Content\sweetalert\docs.css" />
