@@ -71,10 +71,21 @@ namespace GardenShopOnline.Controllers
                 }
                 else
                 {
+                    
                     order.ID = "#" + DateTime.Now.ToString("yyMMddHHmmssff");
                     order.AccCustomerID = User.Identity.GetUserId();
                     order.DateCreated = DateTime.Now;
-                    order.Status = 1;
+                    if (payment == "bank")
+                    {
+                        order.Status = 5;
+                        order.Method = 2;
+                        order.PaidAdvance = order.Total;
+                    }
+                    else
+                    {
+                        order.Status = 1;
+                        order.Method = 1;
+                    }
 
                     // Save Order
                     db.CustomerOrders.Add(order);

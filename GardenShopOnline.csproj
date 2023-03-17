@@ -252,6 +252,12 @@
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\ShoppingCartRemoveViewModels.cs" />
     <Compile Include="Models\ShoppingCartViewModels.cs" />
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

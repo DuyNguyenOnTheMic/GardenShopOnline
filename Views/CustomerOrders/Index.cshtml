@@ -66,7 +66,6 @@
     </div>
 </section>
 <div id="dataContainer2">
-    @{ Html.RenderAction("OrrderDetailsList", "CustomerOrders", new { order_id = "#" });}
 </div>
 
 @section scripts {
@@ -182,7 +181,7 @@
                 .keypress();
             var status = $('#status_order').val();
             var Paid_note = $('#Paid_note').val();
-            var Paid_advance = $('#Paid_advance').val();
+            var Paid_advance = $('#Paid_advance').val().replace(/\,/g, '').replace(/\./g, '');
             var CustomerOrder = {};
             CustomerOrder.id = id;
             CustomerOrder.Status = status;

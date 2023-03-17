@@ -77,17 +77,8 @@ namespace GardenShopOnline.Controllers
         [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult OrrderDetailsList(string order_id)
         {
-            TempData["order_id"] = order_id;
-            if (order_id != "#")
-            {
-                CustomerOrder order = db.CustomerOrders.Find(order_id);
-                TempData["order_status"] = order.Status;
-                if (order.PaidAdvance != null)
-                {
-                    TempData["order_paidAdvance"] = order.PaidAdvance;
-                }
-                TempData["order_total"] = order.Total;
-            }
+            CustomerOrder order = db.CustomerOrders.Find(order_id);
+            ViewBag.Order = order;
             var OrrderDetailsList = db.OrderDetails.Where(o => o.OrderID == order_id);
             return PartialView(OrrderDetailsList.ToList());
         }
@@ -151,6 +142,7 @@ namespace GardenShopOnline.Controllers
             {
                 customerOrder.PaidAdvance = order.PaidAdvance;
                 customerOrder.Note = order.Note;
+                customerOrder.Method = 2;
             }
             db.Entry(customerOrder).State = EntityState.Modified;
             db.SaveChanges();

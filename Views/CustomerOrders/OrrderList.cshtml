@@ -48,6 +48,7 @@
                                     <th class="text-center">Phone</th>
                                     <th class="text-center">Address</th>
                                     <th class="text-center">Total</th>
+                                    <th class="text-center">Method</th>
                                     <th class="text-center">Date created</th>
                                     <th class="text-center"></th>
 
@@ -58,27 +59,28 @@
                                 @foreach (var item in Model.Where(m => m.Status == 1))
                                 {
                                     no1++;
-                                    <tr>
-                                        <td>@no1</td>
-                                        <td>@item.ID</td>
-                                        <td>@item.AspNetUser.UserName</td>
-                                        <td>@item.FullName</td>
-                                        <td>@item.Phone</td>
-                                        <td>@item.Address</td>
-                                        <td>@item.Total.ToString("N0")</td>
-                                        <td>@item.DateCreated</td>
+                                <tr>
+                                    <td>@no1</td>
+                                    <td>@item.ID</td>
+                                    <td>@item.AspNetUser.UserName</td>
+                                    <td>@item.FullName</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.Total.ToString("N0")</td>
+                                    <th>@(item.Method == 2 ? "Banking":"")</th>
+                                    <td>@item.DateCreated</td>
 
-                                        <td class="text-center">
-                                            <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
-                                                Details
-                                            </button>
+                                    <td class="text-center">
+                                        <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
+                                            Details
+                                        </button>
 
-                                            <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
-                                                Cancel
-                                            </button>
+                                        <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
+                                            Cancel
+                                        </button>
 
-                                        </td>
-                                    </tr>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -103,6 +105,7 @@
                                     <th class="text-center">Phone</th>
                                     <th class="text-center">Address</th>
                                     <th class="text-center">Total</th>
+                                    <th class="text-center">Method</th>
                                     <th class="text-center">Date created</th>
                                     <th class="text-center"></th>
 
@@ -113,24 +116,25 @@
                                 @foreach (var item in Model.Where(m => m.Status == 2))
                                 {
                                     no2++;
-                                    <tr>
-                                        <td>@no2</td>
-                                        <td>@item.ID</td>
-                                        <td>@item.FullName</td>
-                                        <td>@item.Phone</td>
-                                        <td>@item.Address</td>
-                                        <td>@item.Total.ToString("N0")</td>
-                                        <td>@item.DateCreated</td>
-                                        <td class="text-center">
-                                            <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
-                                                Details
-                                            </button>
+                                <tr>
+                                    <td>@no2</td>
+                                    <td>@item.ID</td>
+                                    <td>@item.FullName</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.Total.ToString("N0")</td>
+                                    <th>@(item.Method == 2 ? "Banking":"")</th>
+                                    <td>@item.DateCreated</td>
+                                    <td class="text-center">
+                                        <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
+                                            Details
+                                        </button>
 
-                                            <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
-                                                Cancel
-                                            </button>
-                                        </td>
-                                    </tr>
+                                        <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -153,6 +157,7 @@
                                     <th class="text-center">Phone</th>
                                     <th class="text-center">Address</th>
                                     <th class="text-center">Total</th>
+                                    <th class="text-center">Method</th>
                                     <th class="text-center">Date created</th>
                                     <th class="text-center"></th>
 
@@ -163,24 +168,25 @@
                                 @foreach (var item in Model.Where(m => m.Status == 3))
                                 {
                                     no3++;
-                                    <tr>
-                                        <td>@no3</td>
-                                        <td>@item.ID</td>
-                                        <td>@item.FullName</td>
-                                        <td>@item.Phone</td>
-                                        <td>@item.Address</td>
-                                        <td>@item.Total.ToString("N0")</td>
-                                        <td>@item.DateCreated</td>
-                                        <td class="text-center">
-                                            <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
-                                                Details
-                                            </button>
+                                <tr>
+                                    <td>@no3</td>
+                                    <td>@item.ID</td>
+                                    <td>@item.FullName</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.Total.ToString("N0")</td>
+                                    <th>@(item.Method == 2 ? "Banking":"")</th>
+                                    <td>@item.DateCreated</td>
+                                    <td class="text-center">
+                                        <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
+                                            Details
+                                        </button>
 
-                                            <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
-                                                Cancel
-                                            </button>
-                                        </td>
-                                    </tr>
+                                        <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -202,6 +208,7 @@
                                     <th class="text-center">Phone</th>
                                     <th class="text-center">Address</th>
                                     <th class="text-center">Total</th>
+                                    <th class="text-center">Method</th>
                                     <th class="text-center">Date created</th>
                                     <th class=""></th>
                                 </tr>
@@ -211,24 +218,25 @@
                                 @foreach (var item in Model.Where(m => m.Status == 4))
                                 {
                                     no4++;
-                                    <tr>
-                                        <td>@no4</td>
-                                        <td>@item.ID</td>
-                                        <td>@item.FullName</td>
-                                        <td>@item.Phone</td>
-                                        <td>@item.Address</td>
-                                        <td>@item.Total.ToString("N0")</td>
-                                        <td>@item.DateCreated</td>
-                                        <td class="text-center">
-                                            <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
-                                                Details
-                                            </button>
+                                <tr>
+                                    <td>@no4</td>
+                                    <td>@item.ID</td>
+                                    <td>@item.FullName</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.Total.ToString("N0")</td>
+                                    <th>@(item.Method == 2 ? "Banking":"")</th>
+                                    <td>@item.DateCreated</td>
+                                    <td class="text-center">
+                                        <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
+                                            Details
+                                        </button>
 
-                                            <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
-                                                Cancel
-                                            </button>
-                                        </td>
-                                    </tr>
+                                        <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -251,6 +259,7 @@
                                     <th class="text-center">Address</th>
                                     <th class="text-center">Total</th>
                                     <th class="text-center">Pay in advance</th>
+                                    <th class="text-center">Method</th>
                                     <th class="text-center">Date created</th>
                                     <th class="text-center"></th>
 
@@ -261,25 +270,26 @@
                                 @foreach (var item in Model.Where(m => m.Status == 5))
                                 {
                                     no5++;
-                                    <tr>
-                                        <td>@no5</td>
-                                        <td>@item.ID</td>
-                                        <td>@item.FullName</td>
-                                        <td>@item.Phone</td>
-                                        <td>@item.Address</td>
-                                        <td>@item.Total.ToString("N0")</td>
-                                        <td class="text-center">@String.Format("{0:0,00}", item.PaidAdvance)</td>
-                                        <td>@item.DateCreated</td>
-                                        <td class="text-center">
-                                            <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
-                                                Details
-                                            </button>
+                                <tr>
+                                    <td>@no5</td>
+                                    <td>@item.ID</td>
+                                    <td>@item.FullName</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.Total.ToString("N0")</td>
+                                    <td class="text-center">@String.Format("{0:0,00}", item.PaidAdvance)</td>
+                                    <th>@(item.Method == 2 ? "Banking":"")</th>
+                                    <td>@item.DateCreated</td>
+                                    <td class="text-center">
+                                        <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
+                                            Details
+                                        </button>
 
-                                            <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
-                                                Cancel
-                                            </button>
-                                        </td>
-                                    </tr>
+                                        <button class="btn btn-danger " onclick="GetOrder('@item.ID')">
+                                            Cancel
+                                        </button>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -301,6 +311,7 @@
                                     <th class="text-center">Phone</th>
                                     <th class="text-center">Address</th>
                                     <th class="text-center">Total</th>
+                                    <th class="text-center">Method</th>
                                     <th class="text-center">Date created</th>
                                     <th class="text-center">Reason</th>
                                     <th class="text-center"></th>
@@ -311,22 +322,23 @@
                                 @foreach (var item in Model.Where(m => m.Status == 6))
                                 {
                                     no5++;
-                                    <tr>
-                                        <td>@no5</td>
-                                        <td>@item.ID</td>
-                                        <td>@item.FullName</td>
-                                        <td>@item.Phone</td>
-                                        <td>@item.Address</td>
-                                        <td>@item.Total.ToString("N0")</td>
-                                        <td>@item.DateCreated</td>
-                                        <td class="text-center">@item.Reason</td>
-                                        <td class="text-center">
-                                            <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
-                                                Details
-                                            </button>
+                                <tr>
+                                    <td>@no5</td>
+                                    <td>@item.ID</td>
+                                    <td>@item.FullName</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.Total.ToString("N0")</td>
+                                    <th>@(item.Method == 2 ? "Banking":"")</th>
+                                    <td>@item.DateCreated</td>
+                                    <td class="text-center">@item.Reason</td>
+                                    <td class="text-center">
+                                        <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
+                                            Details
+                                        </button>
 
-                                        </td>
-                                    </tr>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
