@@ -4,15 +4,14 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     bool isCreate = ViewBag.isCreate;
-
 }
+
 <input type="text" hidden id="URLgetCategory" value="@Url.Action("getCategory", "Categories")" />
 <input type="text" hidden id="URLgetType" value="@Url.Action("getType", "Types")" />
 @if (!isCreate)
 {
     <input type="text" hidden id="PEdit_Description" value="@Model.Description" />
 }
-
 
 <section class="pcoded-main-container">
     <div class="pcoded-content">
@@ -42,7 +41,7 @@
                         <h5>Create product</h5>
                     </div>
                     <div class="card-body">
-                        <form method="post" action= "@Url.Action(isCreate ? "Create" : "Edit", "products")" enctype="multipart/form-data" novalidate>
+                        <form method="post" action="@Url.Action(isCreate ? "Create" : "Edit", "products")" enctype="multipart/form-data" novalidate>
                             @Html.AntiForgeryToken()
                             @if (!isCreate)
                             {
@@ -106,14 +105,14 @@
                                             @if (!isCreate)
                                             {
                                                 <input type="text" placeholder="Enter product price..." value="@Model.Price.ToString("N0")" id="product-price" max="999999999999" class="form-control "
-                                                       pattern="[0-9.,]+"  name="priceProduct" required>
+                                                       pattern="[0-9.,]+" name="priceProduct" required>
                                             }
                                             else
                                             {
                                                 <input type="text" placeholder="Enter product price..." id="product-price" max="999999999999" class="form-control "
                                                        pattern="[0-9.,]+" name="priceProduct" required>
                                             }
-                                     </div> <!---->
+                                        </div> <!---->
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -171,6 +170,9 @@
 
         </div>
         <!-- [ Main Content ] end -->
-
     </div>
 </section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
