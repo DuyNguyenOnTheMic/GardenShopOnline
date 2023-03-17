@@ -1,6 +1,9 @@
-﻿@model GardenShopOnline.Models.CustomerOrder
+﻿@model CustomerOrder
+@using GardenShopOnline.Models
+
 @{
     ViewBag.Title = "Address And Payment";
+    IEnumerable<BankPayment> bankPayments = ViewBag.BankPayments;
 }
 
 <main class="main-content">
@@ -94,21 +97,20 @@
                                             </div>
                                             <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
                                                 <div class="card-body">
+                                                    <p>
+                                                        In the transfer content, please specify your <span class="fw-bold text-danger">"Phone number, first name and last name."</span>
+                                                    </p>
                                                     <div class="row justify-content-center">
-                                                        <div class="col-4">
-                                                            <h5 class="text-center fw-bold">Vietcombank</h5>
-                                                            <img class="mb-3" src="~/assets/images/sen-da-kim-cuong.jpg" /><br />
-                                                            <span><strong>STK:</strong> 0181003636741</span><br />
-                                                            <span><strong>Chủ TK:</strong> NGUYEN TAN DUY</span><br />
-                                                            <span><strong>Chi nhánh:</strong> HCM, PGD Q4</span>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <h5 class="text-center fw-bold">Vietcombank</h5>
-                                                            <img class="mb-3" src="~/assets/images/sen-da-kim-cuong.jpg" /><br />
-                                                            <span><strong>STK:</strong> 0181003636741</span><br />
-                                                            <span><strong>Chủ TK:</strong> NGUYEN TAN DUY</span><br />
-                                                            <span><strong>Chi nhánh:</strong> HCM, PGD Q4</span>
-                                                        </div>
+                                                        @foreach (var item in bankPayments)
+                                                        {
+                                                            <div class="col-6">
+                                                                <h5 class="text-center fw-bold">@item.Bank</h5>
+                                                                <img class="mx-auto d-block mb-3" height="150" src="~/assets/images/@item.Image" />
+                                                                <span><strong>Account number:</strong> @item.AccountNumber</span><br />
+                                                                <span><strong>Account name:</strong> @item.AccountName</span><br />
+                                                                <span><strong>Branch:</strong> @item.Branch</span>
+                                                            </div>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,7 +132,7 @@
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        $('#placeOrder').click(function (e) {
+        $('#placeOrder').click(function () {
             var orderForm = $('#orderForm');
             if (orderForm.valid()) {
                 // Show empty cart message
