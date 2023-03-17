@@ -161,10 +161,12 @@ namespace GardenShopOnline.Controllers
         [CustomAuthorize(Roles = "Admin, Staff")]
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CategoryID,TypeID,Name,Description,Price,Image,DateCreated,DateUpdate,Status,Quantity")] Product product, HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "ID,CategoryID,TypeID,Name,Description,Price,Image,DateCreated,DateUpdate,Status,Quantity")] Product product, HttpPostedFileBase file, string priceProduct)
         {
             if (ModelState.IsValid)
             {
+                decimal price = decimal.Parse(priceProduct.Replace(",", "").Replace(".", ""));
+                product.Price = price;
                 if (file != null)
                 {
                     string filename = Path.GetFileName(file.FileName);
