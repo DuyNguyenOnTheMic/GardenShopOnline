@@ -888,8 +888,6 @@
     <Content Include="assets\email-templates\reset-password.html" />
     <Content Include="assets\images\sen-da-kim-cuong.jpg" />
     <Content Include="assets\jquery-validate\custom-css.css" />
-    <Content Include="assets\jquery-validate\jquery.validate.min.js" />
-    <Content Include="assets\jquery-validate\jquery.validate.unobtrusive.min.js" />
     <Content Include="assets\signalR\jquery.signalR.min.js" />
     <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
     <Content Include="Content\sweetalert\docs.css" />
