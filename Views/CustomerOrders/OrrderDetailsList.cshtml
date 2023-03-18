@@ -100,7 +100,7 @@
                                                     Paid in advance <span class="text-danger">*</span>
                                                 </label>
 
-                                                <input type="text" placeholder="Enter product quantity... " value="@(((decimal)Order.PaidAdvance).ToString("N0"))" id="Paid_advance" class="form-control priceProduct" name="quantity" pattern="\S+.*">
+                                                <input type="text" placeholder="Enter product quantity... " value="@(((decimal)Order.PaidAdvance).ToString("N0"))" id="Paid_advance" class="form-control productPrice" name="quantity" pattern="\S+.*">
 
                                             </td>
                                         </tr>
@@ -127,7 +127,7 @@
                                                         Paid in advance <span class="text-danger">*</span>
                                                     </label>
 
-                                                    <input type="text" placeholder="Enter product quantity... " id="Paid_advance" class="form-control priceProduct" name="quantity" pattern="\S+.*">
+                                                    <input type="text" placeholder="Enter product quantity... " id="Paid_advance" class="form-control productPrice" name="quantity" pattern="\S+.*">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -180,5 +180,18 @@
 </div>
 
 <script>
-        document.getElementById('status_order').value = '@Order.Status';
+    document.getElementById('status_order').value = '@Order.Status';
+    $('.productPrice').keydown(function (e) {
+        setTimeout(() => {
+            let parts = $(this).val().split(".");
+            let v = parts[0].replace(/\D/g, ""),
+                dec = parts[1]
+            let calc_num = Number((dec !== undefined ? v + "." + dec : v));
+            // use this for numeric calculations
+            // console.log('number for calculations: ', calc_num);
+            let n = new Intl.NumberFormat('en-EN').format(v);
+            n = dec !== undefined ? n + "." + dec : n;
+            $(this).val(n);
+        })
+    })
 </script>
