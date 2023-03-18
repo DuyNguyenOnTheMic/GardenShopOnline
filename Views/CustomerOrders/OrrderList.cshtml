@@ -67,7 +67,7 @@
                                     <td>@item.Phone</td>
                                     <td>@item.Address</td>
                                     <td>@item.Total.ToString("N0")</td>
-                                    <th>@(item.Method == 2 ? "Banking":"")</th>
+                                    <th>@(item.PaymentMethod == 2 ? "Banking":"")</th>
                                     <td>@item.DateCreated</td>
 
                                     <td class="text-center">
@@ -123,7 +123,7 @@
                                     <td>@item.Phone</td>
                                     <td>@item.Address</td>
                                     <td>@item.Total.ToString("N0")</td>
-                                    <th>@(item.Method == 2 ? "Banking":"")</th>
+                                    <th>@(item.PaymentMethod == 2 ? "Banking":"")</th>
                                     <td>@item.DateCreated</td>
                                     <td class="text-center">
                                         <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
@@ -175,7 +175,7 @@
                                     <td>@item.Phone</td>
                                     <td>@item.Address</td>
                                     <td>@item.Total.ToString("N0")</td>
-                                    <th>@(item.Method == 2 ? "Banking":"")</th>
+                                    <th>@(item.PaymentMethod == 2 ? "Banking":"")</th>
                                     <td>@item.DateCreated</td>
                                     <td class="text-center">
                                         <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
@@ -225,7 +225,7 @@
                                     <td>@item.Phone</td>
                                     <td>@item.Address</td>
                                     <td>@item.Total.ToString("N0")</td>
-                                    <th>@(item.Method == 2 ? "Banking":"")</th>
+                                    <th>@(item.PaymentMethod == 2 ? "Banking":"")</th>
                                     <td>@item.DateCreated</td>
                                     <td class="text-center">
                                         <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
@@ -278,7 +278,7 @@
                                     <td>@item.Address</td>
                                     <td>@item.Total.ToString("N0")</td>
                                     <td class="text-center">@String.Format("{0:0,00}", item.PaidAdvance)</td>
-                                    <th>@(item.Method == 2 ? "Banking":"")</th>
+                                    <th>@(item.PaymentMethod == 2 ? "Banking":"")</th>
                                     <td>@item.DateCreated</td>
                                     <td class="text-center">
                                         <button title="Xem chi tiết" class="btn btn-info" onclick="GetList_orderDetails('@item.ID')">
@@ -329,7 +329,7 @@
                                     <td>@item.Phone</td>
                                     <td>@item.Address</td>
                                     <td>@item.Total.ToString("N0")</td>
-                                    <th>@(item.Method == 2 ? "Banking":"")</th>
+                                    <th>@(item.PaymentMethod == 2 ? "Banking":"")</th>
                                     <td>@item.DateCreated</td>
                                     <td class="text-center">@item.Reason</td>
                                     <td class="text-center">

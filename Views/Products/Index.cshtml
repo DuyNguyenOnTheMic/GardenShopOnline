@@ -6,11 +6,9 @@
 }
 <input type="text" hidden id="URLgetCategory" value="@Url.Action("getCategory", "Categories")" />
 <input type="text" hidden id="URLgetType" value="@Url.Action("getType", "Types")" />
-
 <input type="text" hidden id="URLProductList" value="@Url.Action("ProductList", "Products")" />
 <input type="text" hidden id="URLFindProduct" value="@Url.Action("FindProduct", "Products")/" />
-@*<input type="text" hidden id="URLUpdateProduct" value="@Url.Action("UpdateProduct", "Products")" />
-*@
+
 <section class="pcoded-main-container">
     <div class="pcoded-content">
         <div class="page-header">
@@ -21,7 +19,7 @@
                             <h5 class="m-b-10">Product Management</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index", "AspNetUsers")"><i class="feather icon-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="#!">Products</a></li>
                         </ul>
                     </div>
