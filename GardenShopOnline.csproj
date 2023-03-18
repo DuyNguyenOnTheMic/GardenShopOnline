@@ -857,6 +857,7 @@
     <Content Include="assets\customer\images\testimonial\user\2.png" />
     <Content Include="assets\customer\images\testimonial\user\3.png" />
     <Content Include="assets\customer\js\main.js" />
+    <Content Include="assets\customer\js\main.min.js" />
     <Content Include="assets\customer\js\plugins\ion.rangeSlider.min.js" />
     <Content Include="assets\customer\js\plugins\jquery.counterup.js" />
     <Content Include="assets\customer\js\plugins\jquery.magnific-popup.min.js" />
