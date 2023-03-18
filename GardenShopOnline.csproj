@@ -760,7 +760,9 @@
     <Content Include="assets\customer\css\magnific-popup.min.css" />
     <Content Include="assets\customer\css\nice-select.css" />
     <Content Include="assets\customer\css\Pe-icon-7-stroke.css" />
+    <Content Include="assets\customer\css\Pe-icon-7-stroke.min.css" />
     <Content Include="assets\customer\css\style.css" />
+    <Content Include="assets\customer\css\style.min.css" />
     <Content Include="assets\customer\css\swiper-bundle.min.css" />
     <Content Include="assets\customer\css\toastr.min.css" />
     <Content Include="assets\customer\fonts\fontawesome-webfont.svg" />
