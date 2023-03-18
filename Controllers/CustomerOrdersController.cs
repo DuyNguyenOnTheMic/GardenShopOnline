@@ -142,7 +142,7 @@ namespace GardenShopOnline.Controllers
             {
                 customerOrder.PaidAdvance = order.PaidAdvance;
                 customerOrder.Note = order.Note;
-                customerOrder.Method = 2;
+                customerOrder.PaymentMethod = 2;
             }
             db.Entry(customerOrder).State = EntityState.Modified;
             db.SaveChanges();
