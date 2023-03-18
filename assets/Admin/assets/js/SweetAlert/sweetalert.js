@@ -14,9 +14,9 @@
             showCancelButton: false,
             closeOnConfirm: true,
             closeOnCancel: true,
-            confirmButtonText: 'Xác nhận',
+            confirmButtonText: 'Confirm',
             confirmButtonClass: 'btn-confirm',
-            cancelButtonText: 'Hủy',
+            cancelButtonText: 'Cancel',
             imageUrl: null,
             imageSize: null,
             timer: null

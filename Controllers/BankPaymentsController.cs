@@ -88,7 +88,7 @@ namespace GardenShopOnline.Controllers
                     ViewBag.msg = "Định dạng file không hợp lệ!";
                 }
                 db.SaveChanges();
-                Session["notification"] = "Thêm mới thành công!";
+                Session["notification"] = "Add succeeded!";
                 return RedirectToAction("Index");
             }
             ViewBag.isCreate = true;
@@ -141,7 +141,7 @@ namespace GardenShopOnline.Controllers
                                 {
                                     System.IO.File.Delete(oldImgPath);
                                 }
-                                Session["notification"] = "Cập nhật thành công!";
+                                Session["notification"] = "Update succeeded!";
                                 return RedirectToAction("Index");
                             }
                         }
@@ -177,9 +177,8 @@ namespace GardenShopOnline.Controllers
                 status = false;
             }
 
-            return Json(new { status = status }, JsonRequestBehavior.AllowGet);
-        }
-       
+            return Json(new { status }, JsonRequestBehavior.AllowGet);
+        }    
 
         protected override void Dispose(bool disposing)
         {
