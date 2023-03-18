@@ -20,7 +20,7 @@
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
                             <li class="breadcrumb-item"><a href="#!">Products</a></li>
-                            <li class="breadcrumb-item"><a href="#!">Create Bank Payment</a></li>
+                            <li class="breadcrumb-item"><a href="#!">@(isCreate ? "Create bank payment" : "Edit bank payment")</a></li>
                         </ul>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Create product</h5>
+                        <h5>@(isCreate ? "Create bank payment" : "Edit bank payment")</h5>
                     </div>
                     <div class="card-body">
                         <form method="post" action="@Url.Action(isCreate ? "Create" : "Edit", "BankPayments")" enctype="multipart/form-data" novalidate>
@@ -105,18 +105,16 @@
                                                     <img id="output" class="img-item-link" src="@Url.Content("~/assets/images/" + Model.Image)" />
                                                 </div>
                                                 <input type="file" required="required" name="file" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
-                                            }
-                                            else
-                                            {
+                                                    }
+                                                    else
+                                                    {
                                                 <div class="img-item">
-                                                    <img id="output" class="img-item-link" />
+                                                    <img id = "output" class="img-item-link" />
                                                 </div>
-                                                <input type="file" required="required" name="Image" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
+                                                <input type = "file" required="required" name="Image" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
                                                 @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
-
                                             }
                                         </div>
-
                                         <script>
                                             var loadFile_edit = function (event) {
                                                 var image = document.getElementById('output');

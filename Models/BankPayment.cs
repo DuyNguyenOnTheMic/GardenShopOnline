@@ -24,7 +24,7 @@ namespace GardenShopOnline.Models
         [Required(ErrorMessage = "Please enter account name.")]
         [StringLength(255, ErrorMessage = "Account name up to 255 characters.")]
         public string AccountName { get; set; }
-        [Required(ErrorMessage = "Please enter Image QR.")]
+        [Required(ErrorMessage = "Please choose Bank Payment QR Image.")]
         public string Image { get; set; }
         [Required(ErrorMessage = "Please enter bank branch.")]
         [StringLength(255, ErrorMessage = "Bank branch name up to 255 characters.")]
