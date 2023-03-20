@@ -113,7 +113,7 @@
     <script type="text/javascript">
         $(function () {
             // Document.ready -> link up remove event handler
-            $('.product_remove').click(function (e) {
+            $('.product_remove').on('click', function (e) {
                 e.preventDefault();
                 // Get the id from the link
                 var recordToDelete = $(this).attr('data-id');
@@ -130,34 +130,40 @@
                 }
             });
 
-            $('.quantity .inc').click(function () {
-                // Get the id from the link
+            $('.qtybutton').on('click', function () {
+                var $button = $(this);
+                var oldValue = $button.parent().find('input').val();
                 var productId = $(this).parent().attr('data-productid');
-                if (productId != '') {
-                    // Perform the ajax post
-                    $.get('/ShoppingCart/AddToCart', { 'id': productId }, function (data) {
-                        // Successful requests get here
-                        // Update the page elements
-                        updateTotal(data, productId);
-                        getMiniCart();
-                    });
+                if ($button.hasClass('inc')) {
+                    var newVal = parseFloat(oldValue) + 1;
+                    if (productId != '') {
+                        // Perform the ajax post
+                        $.get('/ShoppingCart/AddToCart', { 'id': productId }, function (data) {
+                            // Successful requests get here
+                            // Update the page elements
+                            updateTotal(data, productId);
+                            getMiniCart();
+                        });
+                    }
+                } else {
+                    // Don't allow decrementing below zero
+                    if (oldValue > 1) {
+                        var newVal = parseFloat(oldValue) - 1;
+                        // Get the id from the link
+                        var recordToDecrease = $(this).parent().attr('data-id');
+                        if (recordToDecrease != '') {
+                            // Perform the ajax post
+                            $.post('/ShoppingCart/DecreaseQuantity', { 'id': recordToDecrease }, function (data) {
+                                // Successful requests get here
+                                updateTotal(data, productId);
+                                getMiniCart();
+                            });
+                        }
+                    } else {
+                        newVal = 1;
+                    }
                 }
-            });
-
-            $('.quantity .dec').click(function () {
-                // Get the id from the link
-                var recordToDecrease = $(this).parent().attr('data-id');
-                var productId = $(this).parent().attr('data-productid');
-                var itemQuantity = $('#cartItemQuantity-' + recordToDecrease);
-                if (recordToDecrease != '' && itemQuantity.val() >= 1) {
-                    // Perform the ajax post
-                    $.post('/ShoppingCart/DecreaseQuantity', { 'id': recordToDecrease }, function (data) {
-                        // Successful requests get here
-                        itemQuantity.val(data.ItemCount);
-                        updateTotal(data, productId);
-                        getMiniCart();
-                    });
-                }
+                $button.parent().find('input').val(newVal);
             });
 
             function updateTotal(data, productId) {
