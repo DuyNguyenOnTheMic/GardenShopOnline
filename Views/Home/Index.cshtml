@@ -1207,7 +1207,7 @@
 
 @section scripts{
 <script type="text/javascript">
-    $('.add-to-cart').click(function (e) {
+    $('.add-to-cart').on('click', function (e) {
         e.preventDefault();
         // Call action to add product to cart
         $.ajax({
