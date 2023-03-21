@@ -847,6 +847,8 @@
     <Content Include="assets\customer\images\slider\bg\2-1.jpg" />
     <Content Include="assets\customer\images\slider\inner-img\1-1-524x617.png" />
     <Content Include="assets\customer\images\slider\inner-img\1-2-524x617.png" />
+    <Content Include="assets\customer\images\slider\inner-img\New.png" />
+    <Content Include="assets\customer\images\slider\inner-img\New2.png" />
     <Content Include="assets\customer\images\slider\slide-img\2-1-960x741.jpg" />
     <Content Include="assets\customer\images\slider\slide-img\2-2-960x741.jpg" />
     <Content Include="assets\customer\images\slider\slide-img\2-3-960x741.jpg" />

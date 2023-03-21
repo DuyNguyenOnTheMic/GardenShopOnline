@@ -9,34 +9,31 @@
 
     <!-- Main Slider -->
     <div class="swiper-container main-slider swiper-arrow with-bg_white">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide animation-style-01">
-                <div class="slide-inner style-1 bg-height" data-bg-image="../../assets/customer/images/slider/bg/1-1.jpg">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-6 order-2 order-lg-1 align-self-center">
-                                <div class="slide-content text-black">
-                                    <span class="offer">65% Off</span>
-                                    <h2 class="title">New Plant</h2>
-                                    <p class="short-desc">Pronia, With 100% Natural, Organic & Plant Shop.</p>
-                                    <div class="btn-wrap">
-                                        <a class="btn btn-custom-size xl-size btn-pronia-primary" href="shop.html">Discover Now</a>
+        <div class="swiper-wrapper">        
+                <div class="swiper-slide animation-style-01">
+                    <div class="slide-inner style-1 bg-height" data-bg-image="../../assets/customer/images/slider/bg/1-1.jpg">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 order-2 order-lg-1 align-self-center">
+                                    <div class="slide-content text-black">
+                                        <span class="offer">65% Off</span>
+                                        <h2 class="title">New Plant</h2>
+                                        <p class="short-desc">Pronia, With 100% Natural, Organic & Plant Shop.</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 col-md-8 offset-md-2 offset-lg-0 order-1 order-lg-2">
-                                <div class="inner-img">
-                                    <div class="scene fill">
-                                        <div class="expand-width" data-depth="0.2">
-                                            <img src="~/assets/customer/images/slider/inner-img/1-1-524x617.png" alt="Inner Image">
+                                <div class="col-lg-6 col-md-8 offset-md-2 offset-lg-0 order-1 order-lg-2">
+                                    <div class="inner-img">
+                                        <div class="scene fill">
+                                            <div class="expand-width" data-depth="0.2">
+                                                <img src="~/assets/customer/images/slider/inner-img/New.png" alt="Inner Image">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div>          
             <div class="swiper-slide animation-style-01">
                 <div class="slide-inner style-1 bg-height" data-bg-image="../../assets/customer/images/slider/bg/1-1.jpg">
                     <div class="container">
@@ -46,16 +43,13 @@
                                     <span class="offer">65% Off</span>
                                     <h2 class="title">New Plant</h2>
                                     <p class="short-desc">Pronia, With 100% Natural, Organic & Plant Shop.</p>
-                                    <div class="btn-wrap">
-                                        <a class="btn btn-custom-size xl-size btn-pronia-primary" href="shop.html">Discover Now</a>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-8 offset-md-2 offset-lg-0 order-1 order-lg-2">
                                 <div class="inner-img">
                                     <div class="scene fill">
                                         <div class="expand-width" data-depth="0.2">
-                                            <img src="~/assets/customer/images/slider/inner-img/1-2-524x617.png" alt="Inner Image">
+                                            <img src="~/assets/customer/images/slider/inner-img/New2.png" alt="Inner Image">
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +61,6 @@
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination d-md-none"></div>
-
         <!-- Add Arrows -->
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
@@ -125,82 +118,55 @@
             <h2 class="section-title mb-0">Our Products</h2>
         </div>
         <div class="row">
-            <div class="col-lg-12">
-                <ul class="nav product-tab-nav tab-style-1" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a class="active" id="featured-tab" data-bs-toggle="tab" href="#featured" role="tab" aria-controls="featured" aria-selected="true">
-                            Featured
-                        </a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a id="bestseller-tab" data-bs-toggle="tab" href="#bestseller" role="tab" aria-controls="bestseller" aria-selected="false">
-                            Bestseller
-                        </a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a id="latest-tab" data-bs-toggle="tab" href="#latest" role="tab" aria-controls="latest" aria-selected="false">
-                            Latest
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="featured" role="tabpanel" aria-labelledby="featured-tab">
-                        <div class="product-item-wrap row">
-                            @foreach (var item in Model)
-                            {
-                                <div class="col-xl-3 col-md-4 col-sm-6">
-                                    <div class="product-item">
-                                        <div class="product-img">
-                                            <a href="@Url.Action("Details", "Products", new { id = item.ID })">
-                                                <img class="primary-img" src="~/assets/images/@item.Image" alt="Product Images">
-                                            </a>
-                                            <div class="product-add-action">
-                                                <ul>
-                                                    <li>
-                                                        <a class="add-to-cart" href="@Url.Action("AddToCart", "ShoppingCart", new { id = item.ID })" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                            <i class="pe-7s-cart"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-content">
-                                            <a class="product-name" href="@Url.Action("Details", "Products", new { id = item.ID })">@item.Name</a>
-                                            <div class="price-box pb-1">
-                                                <span class="new-price">@item.Price.ToString("N0") ₫</span>
-                                            </div>
-                                        </div>
+            <div class="col-lg-12 mb-4">
+                <div class="product-item-wrap row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-xl-3 col-md-4 col-sm-6">
+                            <div class="product-item">
+                                <div class="product-img">
+                                    <a href="@Url.Action("Details", "Products", new { id = item.ID })">
+                                        <img class="primary-img" src="~/assets/images/@item.Image" alt="Product Images">
+                                    </a>
+                                    <div class="product-add-action">
+                                        <ul>
+                                            <li>
+                                                <a class="add-to-cart" href="@Url.Action("AddToCart", "ShoppingCart", new { id = item.ID })" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                                    <i class="pe-7s-cart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
-                            }
+                                <div class="product-content">
+                                    <a class="product-name" href="@Url.Action("Details", "Products", new { id = item.ID })">@item.Name</a>
+                                    <div class="price-box pb-1">
+                                        <span class="new-price">@item.Price.ToString("N0") ₫</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    
+                    }
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- Product Area End Here -->
-
-
-
-
 @section scripts{
-<script type="text/javascript">
-    $('.add-to-cart').on('click', function (e) {
-        e.preventDefault();
-        // Call action to add product to cart
-        $.ajax({
-            url: $(this).attr('href'),
-            type: 'GET'
-        }).done(function () {
-            // Refresh mini cart
-            getMiniCart();
-            toastr.options.positionClass = 'toast-bottom-right';
-            toastr["success"]("Add succeeded!");
+    <script type="text/javascript">
+        $('.add-to-cart').on('click', function (e) {
+            e.preventDefault();
+            // Call action to add product to cart
+            $.ajax({
+                url: $(this).attr('href'),
+                type: 'GET'
+            }).done(function () {
+                // Refresh mini cart
+                getMiniCart();
+                toastr.options.positionClass = 'toast-bottom-right';
+                toastr["success"]("Add succeeded!");
+            });
         });
-    });
-</script>
+    </script>
 }
