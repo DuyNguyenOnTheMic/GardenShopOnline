@@ -63,6 +63,23 @@ namespace GardenShopOnline.Controllers
             return PartialView(links.Where(c => c.Status != 3).OrderByDescending(c => c.ID));
 
         }
+        [CustomAuthorize(Roles = "Admin, Staff")]
+
+        public ActionResult EditStatus_Product(Product product)
+        {
+            Product products = db.Products.Find(product.ID);
+            if (products.Status == 1)
+            {
+                products.Status = 2;
+            }
+            else
+            {
+                products.Status = 1;
+            }
+            db.Entry(products).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json("EditStatus_Product", JsonRequestBehavior.AllowGet);
+        }
 
         [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Delete_Product(Product product)
