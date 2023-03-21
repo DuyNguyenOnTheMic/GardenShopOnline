@@ -31,9 +31,9 @@ namespace GardenShopOnline.Controllers
             ViewData["Category"] = new SelectList(db.Categories.ToList(), "ID", "Name", categoryId);
             ViewData["Type"] = new SelectList(db.Types.ToList(), "ID", "Name", typeId);
             ViewData["TotalCount"] = dbProduct.Count();
-            var products = dbProduct.Where(x => (string.IsNullOrEmpty(searchKey)
+            var products = dbProduct.Where(x => x.Status == 1 && (string.IsNullOrEmpty(searchKey)
             || x.Name.ToLower().Contains(searchKey.ToLower()) || searchKey.ToLower().Contains(x.Name.ToLower()))
-            && (!typeId.HasValue || x.CategoryID == typeId)
+            && (!typeId.HasValue || x.TypeID == typeId)
             && (!categoryId.HasValue || x.CategoryID == categoryId));
             return View(products.ToList());
         }

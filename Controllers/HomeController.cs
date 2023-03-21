@@ -20,9 +20,7 @@ namespace GardenShopOnline.Controllers
         [HttpGet]
         public ActionResult ProductList(int? categoryId, int? typeId)
         {
-            var links = from l in db.Products
-                        where l.Category.Status != 3 && l.Type.Status != 3
-                        select l;
+            var links = from l in db.Products select l;
 
             if (categoryId != null)
             {
@@ -32,7 +30,7 @@ namespace GardenShopOnline.Controllers
             {
                 links = links.Where(p => p.TypeID == typeId);
             }
-            return PartialView("_ProductList", links.Where(c => c.Status != 3).OrderByDescending(c => c.ID));
+            return PartialView("_ProductList", links.Where(c => c.Status == 1).OrderByDescending(c => c.ID));
         }
 
         protected override void Dispose(bool disposing)
