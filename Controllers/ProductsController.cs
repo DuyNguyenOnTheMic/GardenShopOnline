@@ -24,6 +24,11 @@ namespace GardenShopOnline.Controllers
             return View();
         }
 
+        public ActionResult Search()
+        {
+            return View();
+        }
+
         public ActionResult GetRelatedProducts(int productId, int typeId, int categoryId)
         {
             // Get related products list based on type and category

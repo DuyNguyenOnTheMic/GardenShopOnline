@@ -1,0 +1,38 @@
+﻿@model IEnumerable<GardenShopOnline.Models.Product>
+
+@if (Model.Any())
+{
+    <div class="product-item-wrap row">
+        @foreach (var item in Model)
+        {
+            <div class="col-xl-3 col-md-4 col-sm-6">
+                <div class="product-item">
+                    <div class="product-img">
+                        <a href="@Url.Action("Details", "Products", new { id = item.ID })">
+                            <img class="primary-img" src="~/assets/images/@item.Image" alt="Product Images">
+                        </a>
+                        <div class="product-add-action">
+                            <ul>
+                                <li>
+                                    <a class="add-to-cart" href="@Url.Action("AddToCart", "ShoppingCart", new { id = item.ID })" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
+                                        <i class="pe-7s-cart"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <a class="product-name" href="@Url.Action("Details", "Products", new { id = item.ID })">@item.Name</a>
+                        <div class="price-box pb-1">
+                            <span class="new-price">@item.Price.ToString("N0") ₫</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h4 class="text-center mt-3">No results found<i class="pe-7s-help1"></i></h4>
+}
