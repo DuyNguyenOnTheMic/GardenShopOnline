@@ -249,7 +249,7 @@
 
 @section scripts {
     <script type="text/javascript">
-        $('.add-to-cart .btn').on('click', function (e) {
+        $('a.add-to-cart, .add-to-cart .btn').on('click', function (e) {
             e.preventDefault();
             var id = $(this).data('id');
             var quantity = $(this).parents().find('input.cart-plus-minus-box').val();
