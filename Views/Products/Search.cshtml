@@ -1,6 +1,4 @@
-﻿@model List<GardenShopOnline.Models.Product>
-
-@{
+﻿@{
     ViewBag.Title = "Search products";
     string searchKey = Request.QueryString["searchKey"] != null ? Request.QueryString["searchKey"] : "";
 }
@@ -13,7 +11,7 @@
                 <div class="col-xl-3 col-lg-4 order-2 order-lg-1 pt-5 pt-lg-0">
                     <div class="sidebar-area">
                         <div class="widgets-searchbox">
-                            <form action="@Url.Action("Search", "Products")" id="widgets-searchbox">
+                            <form action="#" id="widgets-searchbox">
                                 @Html.TextBox("searchKey", searchKey, new { @type = "search", @class = "input-field", @placeholder = "Search" })
                                 <button class="widgets-searchbox-btn" type="submit">
                                     <i class="fa fa-search"></i>
@@ -36,40 +34,9 @@
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab">
                             <div class="product-grid-view row g-y-20">
-                                @if (Model.Any())
-                                {
-                                    foreach (var item in Model)
-                                    {
-                                        <div class="col-xl-3 col-md-4 col-sm-6">
-                                            <div class="product-item">
-                                                <div class="product-img">
-                                                    <a href="@Url.Action("Details", "Products", new { id = item.ID })">
-                                                        <img class="primary-img" src="~/assets/images/@item.Image" alt="Product Images">
-                                                    </a>
-                                                    <div class="product-add-action">
-                                                        <ul>
-                                                            <li>
-                                                                <a class="add-to-cart" href="@Url.Action("AddToCart", "ShoppingCart", new { id = item.ID })" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                    <i class="pe-7s-cart"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="product-content">
-                                                    <a class="product-name" href="@Url.Action("Details", "Products", new { id = item.ID })">@item.Name</a>
-                                                    <div class="price-box pb-1">
-                                                        <span class="new-price">@item.Price.ToString("N0") ₫</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                }
-                                else
-                                {
-                                    <div class="text-center mt-3">No results found <i class="pe-7s-help1"></i></div>
-                                }
+                                <div id="dataContainer">
+                                    @Html.Action("GetSearchData", "Products")
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -95,7 +62,7 @@
 
         function GetProductList(typeId, categoryId) {
             $.ajax({
-                url: '@Url.Action("Search", "Products")',
+                url: '@Url.Action("GetSearchData", "Home")',
                 type: 'GET',
                 data: {
                     searchKey: $('#searchKey').val(),

@@ -25,7 +25,13 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpGet]
-        public ActionResult Search(string searchKey, int? categoryId, int? typeId)
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult GetSearchData(string searchKey, int? categoryId, int? typeId)
         {
             var dbProduct = db.Products;
             ViewData["Category"] = new SelectList(db.Categories.ToList(), "ID", "Name");
@@ -34,7 +40,7 @@ namespace GardenShopOnline.Controllers
             var products = dbProduct.Where(x => (string.IsNullOrEmpty(searchKey)
             || x.Name.ToLower().Contains(searchKey.ToLower()) || searchKey.ToLower().Contains(x.Name.ToLower()))
             && (!categoryId.HasValue || x.CategoryID == categoryId));
-            return View(products.ToList());
+            return PartialView("_ProductList", products.ToList());
         }
 
         public ActionResult GetRelatedProducts(int productId, int typeId, int categoryId)
