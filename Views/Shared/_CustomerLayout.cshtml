@@ -95,7 +95,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="header-sticky py-4 py-lg-0">
                 <div class="container">
                     <div class="header-nav position-relative">
@@ -112,8 +112,8 @@
                                     <nav class="main-nav">
                                         <ul>
                                             <li class="drop-holder">
-                                                <a href="@Url.Action("Index", "Home")">Home</a>                                              
-                                            </li>                                         
+                                                <a href="@Url.Action("Index", "Home")">Home</a>
+                                            </li>
                                             <li>
                                                 <a href="@Url.Action("Index", "Contact")">Contact Us</a>
                                             </li>
@@ -142,7 +142,7 @@
                                                     </li>
                                                 }
                                             </ul>
-                                        </li>                                   
+                                        </li>
                                         <li class="minicart-wrap me-3 me-lg-0">
                                             <a href="#miniCart" class="minicart-btn toolbar-btn">
                                                 <i class="pe-7s-shopbag"></i>
@@ -168,9 +168,9 @@
                     <div class="inner-body">
                         <div class="offcanvas-top">
                             <a href="#" class="button-close"><i class="pe-7s-close"></i></a>
-                        </div>                        
+                        </div>
                         <div class="offcanvas-user-info">
-                            <ul class="dropdown-wrap">                                                               
+                            <ul class="dropdown-wrap">
                                 <li class="dropdown">
                                     <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button" id="settingButtonTwo" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="pe-7s-users"></i>
@@ -184,7 +184,7 @@
                                             </li>
                                         }
                                     </ul>
-                                </li>                              
+                                </li>
                             </ul>
                         </div>
                         <div class="offcanvas-menu_area">
@@ -195,8 +195,8 @@
                                             <span class="mm-text">
                                                 Home
                                             </span>
-                                        </a>                                       
-                                    </li>                                 
+                                        </a>
+                                    </li>
                                     <li>
                                         <a href="@Url.Action("Index", "Contact")">
                                             <span class="mm-text">Contact</span>
@@ -218,8 +218,8 @@
                         <div class="modal-body">
                             <div class="modal-search">
                                 <span class="searchbox-info">Start typing and press Enter to search or ESC to close</span>
-                                <form action="#" class="hm-searchbox">
-                                    <input type="text" name="Search..." value="Search..." onblur="if(this.value==''){this.value='Search...'}" onfocus="if(this.value=='Search...'){this.value=''}" autocomplete="off">
+                                <form action="@Url.Action("Search", "Products")" class="hm-searchbox">
+                                    <input type="text" name="searchKey" value="Search..." onblur="if(this.value==''){this.value='searchKey'}" onfocus="if(this.value=='Search...'){this.value=''}" autocomplete="off">
                                     <button class="search-btn" type="submit" aria-label="searchbtn">
                                         <i class="pe-7s-search"></i>
                                     </button>

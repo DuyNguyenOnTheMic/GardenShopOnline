@@ -24,9 +24,17 @@ namespace GardenShopOnline.Controllers
             return View();
         }
 
-        public ActionResult Search()
+        [HttpGet]
+        public ActionResult Search(string searchKey, int? categoryFilter)
         {
-            return View();
+            var dbProduct = db.Products;
+            ViewData["Category"] = new SelectList(db.Categories.ToList(), "ID", "Name");
+            ViewData["Type"] = new SelectList(db.Types.ToList(), "ID", "Name");
+            ViewData["TotalCount"] = dbProduct.Count();
+            var products = dbProduct.Where(x => (string.IsNullOrEmpty(searchKey)
+            || x.Name.ToLower().Contains(searchKey.ToLower()) || searchKey.ToLower().Contains(x.Name.ToLower()))
+            && (!categoryFilter.HasValue || x.CategoryID == categoryFilter));
+            return View(products.ToList());
         }
 
         public ActionResult GetRelatedProducts(int productId, int typeId, int categoryId)

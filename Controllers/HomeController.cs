@@ -8,29 +8,31 @@ namespace GardenShopOnline.Controllers
     {
         readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
+        [HttpGet]
         public ActionResult Index()
         {
             ShoppingCart.GetCart(HttpContext);
-            ViewBag.Catgory = db.Categories.ToList();
-            ViewBag.Type = db.Types.ToList();
+            ViewData["Category"] = new SelectList(db.Categories.ToList(), "ID", "Name");
+            ViewData["Type"] = new SelectList(db.Types.ToList(), "ID", "Name");
             return View(db.Products.Where(p => p.Status == 1).ToList());
         }
-        public ActionResult _ProductList(int categoryId, int typeId)
+
+        [HttpGet]
+        public ActionResult ProductList(int? categoryId, int? typeId)
         {
             var links = from l in db.Products
                         where l.Category.Status != 3 && l.Type.Status != 3
                         select l;
 
-            if (categoryId != -1)
+            if (categoryId != null)
             {
                 links = links.Where(p => p.CategoryID == categoryId);
             }
-            if (typeId != -1)
+            if (typeId != null)
             {
                 links = links.Where(p => p.TypeID == typeId);
             }
-            return PartialView(links.Where(c => c.Status != 3).OrderByDescending(c => c.ID));
-
+            return PartialView("_ProductList", links.Where(c => c.Status != 3).OrderByDescending(c => c.ID));
         }
 
         protected override void Dispose(bool disposing)

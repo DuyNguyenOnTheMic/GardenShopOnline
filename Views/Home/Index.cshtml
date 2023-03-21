@@ -2,8 +2,6 @@
 
 @{
     ViewBag.Title = "Trang chủ";
-    var category = new SelectList(ViewBag.Catgory,"ID", "Name");
-    var type = new SelectList(ViewBag.Type, "ID", "Name");
 }
 
 <!-- Begin Slider Area -->
@@ -124,27 +122,15 @@
                 <div class="product-topbar pb-0 pt-3">
                     <ul>
                         <li class="short">
-                            <select id="filterType" class="nice-select">
-                                <option value="-1">Sort by Type</option>
-                                @foreach (var item in type)
-                                {
-                                    <option value="@item.Value">@item.Text</option>
-                                }
-                            </select>
+                            @Html.DropDownList("Type", null, "Sort by type", new { @class = "nice-select", @id = "typeFilter" })
                         </li>
                         <li class="short">
-                            <select  id="filterCategory" class="nice-select">
-                                <option value="-1">Sort by Category</option>
-                                @foreach (var item in category)
-                                {
-                                    <option value="@item.Value">@item.Text</option>
-                                }
-                            </select>
+                            @Html.DropDownList("Category", null, "Sort by category", new { @class = "nice-select", @id = "categoryFilter" })
                         </li>
                     </ul>
                 </div>
                 <div id="dataContainer">
-                    @{ Html.RenderAction("_ProductList", "Home", new { categoryId = -1, typeId = -1 });}
+                    @{ Html.RenderAction("ProductList", "Home");}
                 </div>
             </div>
         </div>
@@ -166,23 +152,20 @@
                 toastr["success"]("Add succeeded!");
             });
         });
-        $("#filterCategory").change(function () {
-            console.log("hihi");
-
-            var typeId = $("#filterType").val();
-            var categoryId = $("#filterCategory").val();
+        $("#categoryFilter").change(function () {
+            var typeId = $("#typeFilter").val();
+            var categoryId = $(this).val();
             GetProductList(typeId, categoryId)
         });
-        $("#filterType").change(function () {
-            var typeId = $("#filterType").val();
-            var categoryId = $("#filterCategory").val();
+        $("#typeFilter").change(function () {
+            var typeId = $(this).val();
+            var categoryId = $('#categoryFilter').val();
             GetProductList(typeId, categoryId)
         });
 
         function GetProductList(typeId, categoryId) {
-            console.log("hihi");
             $.ajax({
-                url: '@Url.Action("_ProductList", "Home")',
+                url: '@Url.Action("ProductList", "Home")',
                 type: 'GET',
                 data: {
                     categoryId: categoryId,
