@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GardenShopOnline.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.IO;
@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using GardenShopOnline.Models;
 
 namespace GardenShopOnline.Controllers
 {
@@ -107,7 +106,7 @@ namespace GardenShopOnline.Controllers
             {
                 return HttpNotFound();
             }
-            return View("Form",bankPayment);
+            return View("Form", bankPayment);
         }
 
         [HttpPost]
@@ -154,7 +153,7 @@ namespace GardenShopOnline.Controllers
                     {
                         ViewBag.msg = "Định dạng file không hợp lệ!";
                     }
-                }             
+                }
                 db.Entry(bankPayment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -178,7 +177,7 @@ namespace GardenShopOnline.Controllers
             }
 
             return Json(new { status }, JsonRequestBehavior.AllowGet);
-        }    
+        }
 
         protected override void Dispose(bool disposing)
         {

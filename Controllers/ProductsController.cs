@@ -54,7 +54,7 @@ namespace GardenShopOnline.Controllers
             return PartialView(links.Where(c => c.Status != 3).OrderByDescending(c => c.ID));
 
         }
-       
+
         [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Delete_Product(Product product)
         {
@@ -72,7 +72,7 @@ namespace GardenShopOnline.Controllers
 
             return Json(new { status = status }, JsonRequestBehavior.AllowGet);
         }
-        
+
         [HttpPost]
         [CustomAuthorize(Roles = "Admin, Staff")]
         public JsonResult FindProduct(int Product_id)
@@ -88,7 +88,7 @@ namespace GardenShopOnline.Controllers
             emp.Description = product.Description;
             return Json(emp);
         }
-        
+
         // GET: Products1/Create
         [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Create()
@@ -97,8 +97,8 @@ namespace GardenShopOnline.Controllers
             ViewBag.TypeID = new SelectList(db.Types, "ID", "Name");
             ViewBag.isCreate = true;
             return View("Form");
-        }        
-        
+        }
+
         [CustomAuthorize(Roles = "Admin, Staff")]
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
@@ -146,9 +146,9 @@ namespace GardenShopOnline.Controllers
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
             ViewBag.TypeID = new SelectList(db.Types, "ID", "Name", product.TypeID);
             ViewBag.isCreate = true;
-            return View("Form",product);
-    }
-        
+            return View("Form", product);
+        }
+
         // GET: Products1/Edit/5
         [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Edit(int id)
@@ -162,7 +162,7 @@ namespace GardenShopOnline.Controllers
             ViewBag.TypeID = new SelectList(db.Types, "ID", "Name", product.TypeID);
             return View("Form", product);
         }
-        
+
         [CustomAuthorize(Roles = "Admin, Staff")]
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]

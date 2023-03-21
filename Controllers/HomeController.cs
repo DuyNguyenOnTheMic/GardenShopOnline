@@ -11,7 +11,7 @@ namespace GardenShopOnline.Controllers
         public ActionResult Index()
         {
             ShoppingCart.GetCart(HttpContext);
-            ViewBag.Catgory =db.Categories.ToList();
+            ViewBag.Catgory = db.Categories.ToList();
             ViewBag.Type = db.Types.ToList();
             return View(db.Products.Where(p => p.Status == 1).ToList());
         }
