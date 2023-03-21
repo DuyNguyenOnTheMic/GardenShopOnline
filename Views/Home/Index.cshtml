@@ -122,10 +122,10 @@
                 <div class="product-topbar pb-0 pt-3">
                     <ul>
                         <li class="short">
-                            @Html.DropDownList("Type", null, "Sort by type", new { @class = "nice-select", @id = "typeFilter" })
+                            @Html.DropDownList("Type", null, "Sort by type", new { @class = "nice-select filter-select", @id = "typeFilter" })
                         </li>
                         <li class="short">
-                            @Html.DropDownList("Category", null, "Sort by category", new { @class = "nice-select", @id = "categoryFilter" })
+                            @Html.DropDownList("Category", null, "Sort by category", new { @class = "nice-select filter-select", @id = "categoryFilter" })
                         </li>
                     </ul>
                 </div>
@@ -152,13 +152,10 @@
                 toastr["success"]("Add succeeded!");
             });
         });
-        $("#categoryFilter").change(function () {
+
+        // Handle event on filter change
+        $(".filter-select").on('change', function () {
             var typeId = $("#typeFilter").val();
-            var categoryId = $(this).val();
-            GetProductList(typeId, categoryId)
-        });
-        $("#typeFilter").change(function () {
-            var typeId = $(this).val();
             var categoryId = $('#categoryFilter').val();
             GetProductList(typeId, categoryId)
         });
