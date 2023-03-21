@@ -9,11 +9,11 @@
                    data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50"
                    data-tippy-arrow="true" data-tippy-theme="sharpborder"></i>
             </a>
-            <a href="single-product-variable.html" class="product-item_img">
+            <a href="@Url.Action("Details", "Products", new { id = item.ID })" class="product-item_img">
                 <img class="img-full" src="~/assets/images/@item.Product.Image" alt="Product Image">
             </a>
             <div class="product-item_content">
-                <a class="product-item_title" href="single-product-variable.html">@item.Product.Name</a>
+                <a class="product-item_title" href="@Url.Action("Details", "Products", new { id = item.ID })">@item.Product.Name</a>
                 <span class="product-item_quantity">@item.Count x @item.Product.Price.ToString("N0") ₫</span>
             </div>
         </li>
