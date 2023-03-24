@@ -3557,6 +3557,10 @@ blockquote p {
   line-height: 30px;
 }
 
+    .product-description-body ul {
+        list-style: circle !important;
+    }
+
 /* ---Feedback--- */
 .feedback-area {
   background-color: #f6f7fb;
