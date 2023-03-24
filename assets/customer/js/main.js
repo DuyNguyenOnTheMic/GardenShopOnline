@@ -145,28 +145,12 @@
         var mySwiper = new Swiper('.product-slider', {
             slidesPerView: 4,
             spaceBetween: 30,
-            loop: true,
+            loop: false,
             navigation: {
                 nextEl: '.product-button-next',
                 prevEl: '.product-button-prev',
-            },
-            breakpoints: {
-                320: {
-                    slidesPerView: 1,
-                },
-                480: {
-                    slidesPerView: 2,
-                },
-                768: {
-                    slidesPerView: 3,
-                },
-                992: {
-                    slidesPerView: 4,
-                },
-            },
+            }
         });
-
-        mySwiper.loopDestroy();
     }
 
     /* --- Product List Slider--- */
