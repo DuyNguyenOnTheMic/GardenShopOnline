@@ -1054,6 +1054,7 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Home\_ProductList.cshtml" />
     <Content Include="Views\Products\Search.cshtml" />
+    <Content Include="Views\Home\_CategoryList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
