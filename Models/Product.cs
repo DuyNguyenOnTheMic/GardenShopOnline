@@ -21,8 +21,9 @@ namespace GardenShopOnline.Models
             this.Carts = new HashSet<Cart>();
             this.CommentProducts = new HashSet<CommentProduct>();
             this.OrderDetails = new HashSet<OrderDetail>();
+            this.ImageProducts = new HashSet<ImageProduct>();
         }
-    
+
         public int ID { get; set; }
         [Required(ErrorMessage = "Please select product category!")]
         public int CategoryID { get; set; }
@@ -48,5 +49,7 @@ namespace GardenShopOnline.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual Type Type { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ImageProduct> ImageProducts { get; set; }
     }
 }
