@@ -17,15 +17,15 @@
                                 @Html.ValidationSummary("", new { @class = "text-danger mb-2" })
                                 <div class="col-md-6">
                                     <label>Full Name</label>
-                                    @Html.EditorFor(m => m.FullName, new { @placeholder = "Your full name" })
+                                    @Html.TextBoxFor(m => m.FullName, new { @placeholder = "Your full name" })
                                 </div>
                                 <div class="col-md-6">
                                     <label>Phone Number</label>
-                                    @Html.EditorFor(m => m.PhoneNumber, new { @placeholder = "Your phone number" })
+                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "Your phone number" })
                                 </div>
                                 <div class="col-md-12">
                                     <label>Address</label>
-                                    @Html.EditorFor(m => m.Address, new { @placeholder = "Street address" })
+                                    @Html.TextBoxFor(m => m.Address, new { @placeholder = "Street address" })
                                 </div>
                                 <div class="col-md-12">
                                     <label>Email Address <span class="text-danger">*</span></label>
