@@ -67,11 +67,11 @@
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <div class="form-check">
-                                        @Html.RadioButton("payment", "cash", true, new { @class = "form-check-input", data_bs_toggle="collapse", data_bs_target="#collapseOne", data_payment="cash", aria_expanded="true" })
-                                        <label class="form-check-label" for="payment">
+                                        @Html.RadioButton("payment", "cash", true, new { @class = "form-check-input" })
+                                        <label class="form-check-label">
                                             Payment using cash
                                         </label>
-                                        <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                                        <div id="collapseOne" class="collapse show">
                                             <div class="card-body">
                                                 <p>
                                                     Payment on delivery. Household collection fee: ₫0 VND. Preferential shipping fee (if any) also applies to collection fee.
@@ -80,11 +80,11 @@
                                         </div>
                                     </div>
                                     <div class="form-check">
-                                        @Html.RadioButton("payment", "bank", false, new { @class = "form-check-input", data_bs_toggle="collapse", data_bs_target="#collapseTwo", data_payment="bank", aria_expanded="false" })
-                                        <label class="form-check-label" for="flexRadioDefault1">
+                                        @Html.RadioButton("payment", "bank", false, new { @class = "form-check-input" })
+                                        <label class="form-check-label">
                                             Direct bank transfer
                                         </label>
-                                        <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+                                        <div id="collapseTwo" class="collapse">
                                             <div class="card-body">
                                                 <p>
                                                     In the transfer content, please specify your <span class="fw-bold text-danger">"Phone number, first name and last name."</span>
@@ -145,6 +145,20 @@
                     orderForm.submit();
                 }
             }
-        })
+        });
+
+        $("input[name='payment']").click(function () {
+            var checkedValue = $("input[name='payment']:checked").val();
+            console.log(checkedValue);
+            if (checkedValue == "cash") {
+                $("#collapseOne").collapse('show');
+                $("#collapseTwo").collapse('hide');
+            } else if (checkedValue == "bank") {
+                $("#collapseOne").collapse('hide');
+                $("#collapseTwo").collapse('show');
+            } else {
+                console.log("Oops.");
+            }
+        });
     </script>
 }
