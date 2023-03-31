@@ -40,11 +40,14 @@ namespace GardenShopOnline.Controllers
         {
             var userId = User.Identity.GetUserId();
             var user = db.AspNetUsers.Find(userId);
-            ViewData["FullName"] = user.FullName;
-            ViewData["Address"] = user.Address;
-            ViewData["Phone"] = user.PhoneNumber;
+            var customerOrder = new CustomerOrder()
+            {
+                FullName = user.FullName,
+                Address = user.Address,
+                Phone = user.PhoneNumber
+            };
             ViewBag.BankPayments = db.BankPayments.Where(b => b.Status == 1).ToList();
-            return View();
+            return View(customerOrder);
         }
 
         //

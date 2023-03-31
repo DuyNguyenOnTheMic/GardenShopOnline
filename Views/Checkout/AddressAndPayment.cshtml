@@ -42,21 +42,21 @@
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Full Name <span class="required">*</span></label>
-                                        @Html.TextBoxFor(m => m.FullName, new { @placeholder = "Your full name", @Value = ViewData["FullName"] })
+                                        @Html.TextBoxFor(m => m.FullName, new { @placeholder = "Your full name" })
                                         @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Address <span class="required">*</span></label>
-                                        @Html.TextBoxFor(m => m.Address, new { @placeholder = "Street address", @Value = ViewData["Address"] })
+                                        @Html.TextBoxFor(m => m.Address, new { @placeholder = "Street address" })
                                         @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Phone <span class="required">*</span></label>
-                                        @Html.TextBoxFor(m => m.Phone, new { @placeholder = "Your phone number", @Value = ViewData["Phone"] })
+                                        @Html.TextBoxFor(m => m.Phone, new { @placeholder = "Your phone number" })
                                         @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -65,18 +65,44 @@
                         <div class="checkbox-form">
                             <h3>Payment</h3>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 mb-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
+                                        @Html.RadioButton("payment", "cash", true, new { @class = "form-check-input", data_bs_toggle="collapse", data_bs_target="#collapseOne", data_payment="cash", aria_expanded="true" })
+                                        <label class="form-check-label" for="payment">
                                             Payment using cash
                                         </label>
+                                        <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                                            <div class="card-body">
+                                                <p>
+                                                    Payment on delivery. Household collection fee: ₫0 VND. Preferential shipping fee (if any) also applies to collection fee.
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                        @Html.RadioButton("payment", "bank", false, new { @class = "form-check-input", data_bs_toggle="collapse", data_bs_target="#collapseTwo", data_payment="bank", aria_expanded="false" })
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             Direct bank transfer
                                         </label>
+                                        <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+                                            <div class="card-body">
+                                                <p>
+                                                    In the transfer content, please specify your <span class="fw-bold text-danger">"Phone number, first name and last name."</span>
+                                                </p>
+                                                <div class="row justify-content-center">
+                                                    @foreach (var item in bankPayments)
+                                                    {
+                                                        <div class="col-6">
+                                                            <h5 class="text-center fw-bold">@item.Bank</h5>
+                                                            <img class="mx-auto d-block mb-3" height="150" src="~/assets/images/@item.Image" />
+                                                            <span><strong>Account number:</strong> @item.AccountNumber</span><br />
+                                                            <span><strong>Account name:</strong> @item.AccountName</span><br />
+                                                            <span><strong>Branch:</strong> @item.Branch</span>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -86,59 +112,8 @@
                         <div class="your-order">
                             <h3>Your order</h3>
                             @Html.Action("GetCheckoutCart", "ShoppingCart")
-                            <div class="payment-method">
-                                <div class="payment-accordion">
-                                    <div id="accordion">
-                                        @Html.Hidden("payment")
-                                        <div class="card">
-                                            <div class="card-header" id="#payment-1">
-                                                <h5 class="panel-title">
-                                                    <a href="#" class="" data-bs-toggle="collapse" data-bs-target="#collapseOne" data-payment="cash" aria-expanded="true">
-                                                        Payment Using Cash
-                                                    </a>
-                                                </h5>
-                                            </div>
-                                            <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
-                                                <div class="card-body">
-                                                    <p>
-                                                        Payment on delivery. Household collection fee: ₫0 VND. Preferential shipping fee (if any) also applies to collection fee.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header" id="#payment-2">
-                                                <h5 class="panel-title">
-                                                    <a href="#" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" data-payment="bank" aria-expanded="false">
-                                                        Direct Bank Transfer
-                                                    </a>
-                                                </h5>
-                                            </div>
-                                            <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
-                                                <div class="card-body">
-                                                    <p>
-                                                        In the transfer content, please specify your <span class="fw-bold text-danger">"Phone number, first name and last name."</span>
-                                                    </p>
-                                                    <div class="row justify-content-center">
-                                                        @foreach (var item in bankPayments)
-                                                        {
-                                                            <div class="col-6">
-                                                                <h5 class="text-center fw-bold">@item.Bank</h5>
-                                                                <img class="mx-auto d-block mb-3" height="150" src="~/assets/images/@item.Image" />
-                                                                <span><strong>Account number:</strong> @item.AccountNumber</span><br />
-                                                                <span><strong>Account name:</strong> @item.AccountName</span><br />
-                                                                <span><strong>Branch:</strong> @item.Branch</span>
-                                                            </div>
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="order-button-payment">
-                                        <input value="Place order" id="placeOrder" type="button">
-                                    </div>
-                                </div>
+                            <div class="order-button-payment">
+                                <input value="Place order" id="placeOrder" type="button">
                             </div>
                         </div>
                     </div>
@@ -167,8 +142,6 @@
                     })
                 } else {
                     // Pass payment method to controller
-                    var payment = $('.panel-title a[aria-expanded="true"]').data('payment');
-                    $('#payment').val(payment);
                     orderForm.submit();
                 }
             }
