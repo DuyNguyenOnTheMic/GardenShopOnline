@@ -126,24 +126,57 @@
                                         <div class="position-relative">
                                             @if (!isCreate)
                                             {
-                                                <div class="img-item">
-                                                    <img id="output" class="img-item-link" src="@Url.Content("~/assets/images/" + Model.Image)" />
-                                                </div>
-                                                <input type="file" name="file" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
+                                            <div class="img-item">
+                                                @{var image = Model.ImageProducts.ToArray();}
+                                                @for (int i = 0; i < 5; i++)
+                                                {
+                                                    if (i < image.Length)
+                                                    {
+                                                        <img id="output[@i]" class="img-item-link" src="@Url.Content("~/assets/images/" + image[i].Image)" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img id="output[@i]" class="img-item-link" />
+                                                    }
+
+                                                }
+                                            </div>
+                                                <input type="file" multiple name="file" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
                                             }
                                             else
                                             {
                                                 <div class="img-item">
-                                                    <img id="output" class="img-item-link" />
+                                                    <img id="output[0]" class="img-item-link" />
+                                                    <img id="output[1]" class="img-item-link" />
+                                                    <img id="output[2]" class="img-item-link" />
+                                                    <img id="output[3]" class="img-item-link" />
+                                                    <img id="output[4]" class="img-item-link" />
                                                 </div>
-                                                <input type="file" required="required" name="Image" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
+                                                <input type="file" multiple required="required"  name="Image" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
                                                 @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
                                             }
                                         </div>
                                         <script>
                                             var loadFile_edit = function (event) {
-                                                var image = document.getElementById('output');
-                                                image.src = URL.createObjectURL(event.target.files[0]);
+                                                for (var i = 0; i < 5; i++) {
+                                                    document.getElementById('output[' + i + ']').removeAttribute('src');
+                                                }
+                                                if ($("#file")[0].files.length <= 5) {
+                                                    for (var i = 0; i < $("#file")[0].files.length; i++) {
+                                                        var image = document.getElementById('output[' + i + ']');
+                                                        image.src = URL.createObjectURL(event.target.files[i]);
+                                                    }
+                                                } else {
+                                                    $("#file").val('');
+                                                    for (var i = 0; i < 5; i++) {
+                                                        document.getElementById('output[' + i+']').removeAttribute('src');
+                                                    }
+                                                    swal({
+                                                        title: 'Error !',
+                                                        text: 'You can only select up to 5 photos, please check again !',
+                                                        type: 'error',
+                                                    });
+                                                }
                                             };
                                         </script>
                                     </div>

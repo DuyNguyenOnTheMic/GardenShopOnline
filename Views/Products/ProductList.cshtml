@@ -26,7 +26,12 @@
             no++;
         <tr>
             <td>@no  <input hidden type="text" name="record" value="@item.ID"></td>
-            <td class="text-center"><img class="img-item-product" src="@Url.Content("~/assets/images/" +item.Image)" /></td>
+            <td class="text-center">
+                @if (item.ImageProducts.Any())
+                {
+                    <img class="img-item-product" src="@Url.Content("~/assets/images/" +item.ImageProducts.FirstOrDefault().Image)" />
+                }
+            </td>
             <td class="text-center">@item.Name</td>
             <td class=" text-center">@item.Category.Name</td>
             <td class="text-center">@item.Price.ToString("N0")</td>
