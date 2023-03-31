@@ -14,7 +14,7 @@ namespace GardenShopOnline.Controllers
             ShoppingCart.GetCart(HttpContext);
             ViewData["Category"] = new SelectList(db.Categories.ToList(), "ID", "Name");
             ViewData["Type"] = new SelectList(db.Types.ToList(), "ID", "Name");
-            return View(db.Products.Where(p => p.Status == 1).ToList());
+            return View();
         }
 
         [HttpGet]
@@ -37,7 +37,7 @@ namespace GardenShopOnline.Controllers
             {
                 links = links.Where(p => p.TypeID == typeId);
             }
-            return PartialView("_ProductList", links.Where(c => c.Status == 1).OrderByDescending(c => c.ID));
+            return PartialView("_ProductList", links.Where(c => c.Status == 1).Take(10).OrderByDescending(c => c.ID));
         }
 
         protected override void Dispose(bool disposing)
