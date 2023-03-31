@@ -33,6 +33,9 @@
         <AssociationConnector Association="BonsaiGardenModel.FK__OrderDeta__Produ__45F365D3" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.FK_Product_Type" ManuallyRouted="false" />
         <AssociationConnector Association="BonsaiGardenModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.ImageProduct" Width="1.5" PointX="8.25" PointY="2" />
+        <EntityTypeShape EntityType="BonsaiGardenModel.sysdiagram" Width="1.5" PointX="10.375" PointY="0.75" />
+        <AssociationConnector Association="BonsaiGardenModel.FK_ImageProduct_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

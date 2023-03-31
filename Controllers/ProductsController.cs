@@ -88,6 +88,16 @@ namespace GardenShopOnline.Controllers
             try
             {
                 Product product1 = db.Products.Find(product.ID);
+                var image = db.ImageProducts.Where(x => x.ProductID == product.ID);
+                foreach (var item in image)
+                {
+                    db.ImageProducts.Remove(item);
+                    string oldImgPath = Request.MapPath(item.Image);
+                    if (System.IO.File.Exists(oldImgPath))
+                    {
+                        System.IO.File.Delete(oldImgPath);
+                    }
+                }
                 db.Products.Remove(product1);
                 db.SaveChanges();
             }
@@ -128,47 +138,53 @@ namespace GardenShopOnline.Controllers
         [CustomAuthorize(Roles = "Admin, Staff")]
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CategoryID,TypeID,Name,Description,Image,DateCreated,DateUpdate,Status,Quantity")] Product product, HttpPostedFileBase Image, string priceProduct)
+        public ActionResult Create([Bind(Include = "ID,CategoryID,TypeID,Name,Description,Image,DateCreated,DateUpdate,Status,Quantity")] Product product, HttpPostedFileBase[] Image, string priceProduct)
         {
-            if (ModelState.IsValid)
+            if (Image.Length <= 5)
             {
-                decimal price = decimal.Parse(priceProduct.Replace(",", "").Replace(".", ""));
-                product.Status = 1;
-                product.Price = price;
-                string filename = Path.GetFileName(Image.FileName);
-                string _filename = DateTime.Now.ToString("yymmssfff") + filename;
-
-                string extension = Path.GetExtension(Image.FileName);
-
-                string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
-
-                product.Image = _filename;
-                if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
+                if (ModelState.IsValid)
                 {
-                    if (Image.ContentLength <= 4000000)
+                    decimal price = decimal.Parse(priceProduct.Replace(",", "").Replace(".", ""));
+                    product.Status = 1;
+                    product.Price = price;
+                    db.Products.Add(product);
+                    foreach (var item in Image)
                     {
-                        db.Products.Add(product);
+                        string filename = Path.GetFileName(item.FileName);
+                        string _filename = DateTime.Now.ToString("yymmssfff") + filename;
 
-                        if (db.SaveChanges() > 0)
+                        string extension = Path.GetExtension(item.FileName);
+
+                        string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
+
+                        ImageProduct imageProduct = new ImageProduct();
+                        imageProduct.ProductID = product.ID;
+                        imageProduct.Image = _filename;
+                        if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
                         {
-                            Image.SaveAs(path);
-
+                            if (item.ContentLength <= 4000000)
+                            {
+                                db.ImageProducts.Add(imageProduct);
+                                if (db.SaveChanges() > 0)
+                                {
+                                    item.SaveAs(path);
+                                }
+                            }
+                            else
+                            {
+                                ViewBag.msg = "Hình ảnh phải lớn hơn hoặc bằng 4MB!";
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.msg = "Định dạng file không hợp lệ!";
                         }
                     }
-                    else
-                    {
-                        ViewBag.msg = "Hình ảnh phải lớn hơn hoặc bằng 4MB!";
-                    }
+                    db.SaveChanges();
+                    Session["notification"] = "Add succeeded!";
+                    return RedirectToAction("Index");
                 }
-                else
-                {
-                    ViewBag.msg = "Định dạng file không hợp lệ!";
-                }
-                db.SaveChanges();
-                Session["notification"] = "Add succeeded!";
-                return RedirectToAction("Index");
             }
-
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
             ViewBag.TypeID = new SelectList(db.Types, "ID", "Name", product.TypeID);
             ViewBag.isCreate = true;
@@ -192,49 +208,59 @@ namespace GardenShopOnline.Controllers
         [CustomAuthorize(Roles = "Admin, Staff")]
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CategoryID,TypeID,Name,Description,Price,Image,DateCreated,DateUpdate,Status,Quantity")] Product product, HttpPostedFileBase file, string priceProduct)
+        public ActionResult Edit([Bind(Include = "ID,CategoryID,TypeID,Name,Description,Price,Image,DateCreated,DateUpdate,Status,Quantity")] Product product, HttpPostedFileBase[] file, string priceProduct)
         {
             if (ModelState.IsValid)
             {
                 decimal price = decimal.Parse(priceProduct.Replace(",", "").Replace(".", ""));
                 product.Price = price;
-                if (file != null)
+                if (file.Length > 0 && file[0] != null)
                 {
-                    string filename = Path.GetFileName(file.FileName);
-                    string _filename = DateTime.Now.ToString("yymmssfff") + filename;
-
-                    string extension = Path.GetExtension(file.FileName);
-
-                    string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
-
-                    product.Image = _filename;
-
-                    if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
+                    var image = db.ImageProducts.Where(x => x.ProductID == product.ID);
+                    foreach (var item in image)
                     {
-                        if (file.ContentLength <= 4000000)
+                        db.ImageProducts.Remove(item);
+                        string oldImgPath = Request.MapPath(item.Image);
+                        if (System.IO.File.Exists(oldImgPath))
                         {
-                            db.Entry(product).State = EntityState.Modified;
-                            string oldImgPath = Request.MapPath(product.Image);
+                            System.IO.File.Delete(oldImgPath);
+                        }
+                    }
+                    foreach (var item in file)
+                    {
+                        string filename = Path.GetFileName(item.FileName);
+                        string _filename = DateTime.Now.ToString("yymmssfff") + filename;
 
-                            if (db.SaveChanges() > 0)
+                        string extension = Path.GetExtension(item.FileName);
+
+                        string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
+
+                        ImageProduct imageProduct = new ImageProduct();
+                        imageProduct.ProductID = product.ID;
+                        imageProduct.Image = _filename;
+
+                        if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
+                        {
+                            if (item.ContentLength <= 4000000)
                             {
-                                file.SaveAs(path);
-                                if (System.IO.File.Exists(oldImgPath))
-                                {
-                                    System.IO.File.Delete(oldImgPath);
-                                }
-                                Session["notification"] = "Update succeeded!";
-                                return RedirectToAction("Index");
+                                db.ImageProducts.Add(imageProduct);
+                                item.SaveAs(path);
+                            }
+                            else
+                            {
+                                ViewBag.msg = "Hình ảnh phải lớn hơn hoặc bằng 4MB!";
                             }
                         }
                         else
                         {
-                            ViewBag.msg = "Hình ảnh phải lớn hơn hoặc bằng 4MB!";
+                            ViewBag.msg = "Định dạng file không hợp lệ!";
                         }
                     }
-                    else
+                    db.Entry(product).State = EntityState.Modified;
+                    if (db.SaveChanges() > 0)
                     {
-                        ViewBag.msg = "Định dạng file không hợp lệ!";
+                        Session["notification"] = "Update succeeded!";
+                        return RedirectToAction("Index");
                     }
                 }
                 db.Entry(product).State = EntityState.Modified;
