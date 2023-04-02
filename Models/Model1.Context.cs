@@ -35,11 +35,11 @@ namespace GardenShopOnline.Models
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CommentProduct> CommentProducts { get; set; }
         public virtual DbSet<CustomerOrder> CustomerOrders { get; set; }
+        public virtual DbSet<ImageProduct> ImageProducts { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Type> Types { get; set; }
-        public virtual DbSet<ImageProduct> ImageProducts { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Type> Types { get; set; }
     }
 }

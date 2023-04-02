@@ -11,8 +11,7 @@ namespace GardenShopOnline.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,23 +19,19 @@ namespace GardenShopOnline.Models
         {
             this.Carts = new HashSet<Cart>();
             this.CommentProducts = new HashSet<CommentProduct>();
-            this.OrderDetails = new HashSet<OrderDetail>();
             this.ImageProducts = new HashSet<ImageProduct>();
+            this.OrderDetails = new HashSet<OrderDetail>();
         }
-
+    
         public int ID { get; set; }
-        [Required(ErrorMessage = "Please select product category!")]
         public int CategoryID { get; set; }
-        [Required(ErrorMessage = "Please select product type!")]
         public int TypeID { get; set; }
-        [Required(ErrorMessage = "Please enter product name!")]
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<System.DateTime> DateUpdate { get; set; }
         public Nullable<int> Status { get; set; }
-        [Required(ErrorMessage = "Please enter product quantity !")]
         public int Quantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -45,9 +40,9 @@ namespace GardenShopOnline.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CommentProduct> CommentProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ImageProduct> ImageProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual Type Type { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ImageProduct> ImageProducts { get; set; }
     }
 }
