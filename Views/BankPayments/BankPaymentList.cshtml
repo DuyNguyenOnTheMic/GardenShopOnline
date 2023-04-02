@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<GardenShopOnline.Models.BankPayment>
+@using Constants = GardenShopOnline.Helpers.Constants;
 
 @{
     int no = 0;
@@ -32,7 +33,7 @@
                 <td class="text-center">@item.AccountName</td>
                 <td class="text-center">@item.Branch</td>
                 <td class="text-center">
-                    @if (item.Status == 1)
+                    @if (item.Status == Constants.SHOW_STATUS)
                     {
                         <div class="custom-control custom-switch">
                             <input type="checkbox" checked class="custom-control-input" id="@customswitch_SP">

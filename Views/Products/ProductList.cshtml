@@ -34,7 +34,7 @@
             <td class="text-center">@item.Price.ToString("N0")</td>
             <td class="text-center">@item.Quantity.ToString("N0")</td>
             <td class="text-center">
-                @if (item.Status == 1)
+                @if (item.Status == Constants.SHOW_STATUS)
                 {
                     <div class="custom-control custom-switch">
                         <input type="checkbox" checked class="custom-control-input" id="@customswitch_SP">
