@@ -33,7 +33,6 @@ namespace GardenShopOnline.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        [Required(ErrorMessage = "Please choose an image for the product")]
         public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<System.DateTime> DateUpdate { get; set; }
         public Nullable<int> Status { get; set; }
