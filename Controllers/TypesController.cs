@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Constants = GardenShopOnline.Helpers.Constants;
 
 namespace GardenShopOnline.Controllers
 {
@@ -41,7 +42,7 @@ namespace GardenShopOnline.Controllers
                     Models.Type Type = new Models.Type
                     {
                         Name = name_Type,
-                        Status = 1
+                        Status = Constants.SHOW_STATUS
                     };
                     db.Types.Add(Type);
                     db.SaveChanges();
@@ -66,7 +67,7 @@ namespace GardenShopOnline.Controllers
             }
             else
             {
-                Type.Status = 1;
+                Type.Status = Constants.SHOW_STATUS;
             }
             db.Entry(Type).State = EntityState.Modified;
             db.SaveChanges();

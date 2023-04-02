@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Constants = GardenShopOnline.Helpers.Constants;
 
 namespace GardenShopOnline.Controllers
 {
@@ -19,18 +20,18 @@ namespace GardenShopOnline.Controllers
         }
         // GET: Products
         [CustomAuthorize(Roles = "Admin, Staff")]
-        public ActionResult Index()
+        public ActionResult AdminIndex()
         {
             return View();
         }
 
         [HttpGet]
-        public ActionResult Search(string searchKey, int? categoryId, int? typeId)
+        public ActionResult Index(string searchKey, int? categoryId, int? typeId)
         {
             var dbProduct = db.Products;
             ViewData["Category"] = new SelectList(db.Categories.ToList(), "ID", "Name", categoryId);
             ViewData["Type"] = new SelectList(db.Types.ToList(), "ID", "Name", typeId);
-            ViewData["TotalCount"] = dbProduct.Count();
+            ViewData["TotalCount"] = dbProduct.Where(x => x.Status == 1).Count();
             var products = dbProduct.Where(x => x.Status == 1 && (string.IsNullOrEmpty(searchKey)
             || x.Name.ToLower().Contains(searchKey.ToLower()) || searchKey.ToLower().Contains(x.Name.ToLower()))
             && (!typeId.HasValue || x.TypeID == typeId)

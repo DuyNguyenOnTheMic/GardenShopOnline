@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Constants = GardenShopOnline.Helpers.Constants;
 
 namespace GardenShopOnline.Controllers
 {
@@ -56,7 +57,7 @@ namespace GardenShopOnline.Controllers
         {
             if (ModelState.IsValid)
             {
-                bankPayment.Status = 1;
+                bankPayment.Status = Constants.SHOW_STATUS;
                 string filename = Path.GetFileName(Image.FileName);
                 string _filename = DateTime.Now.ToString("yymmssfff") + filename;
 

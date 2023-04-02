@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Constants = GardenShopOnline.Helpers.Constants;
 
 namespace GardenShopOnline.Controllers
 {
@@ -39,7 +40,7 @@ namespace GardenShopOnline.Controllers
                     Category Category = new Category
                     {
                         Name = name_category,
-                        Status = 1
+                        Status = Constants.SHOW_STATUS
                     };
                     db.Categories.Add(Category);
                     db.SaveChanges();
@@ -59,13 +60,13 @@ namespace GardenShopOnline.Controllers
         public ActionResult EditStatus_Category(Category Categorys)
         {
             Category categories = db.Categories.Find(Categorys.ID);
-            if (categories.Status == 1)
+            if (categories.Status == Constants.SHOW_STATUS)
             {
-                categories.Status = 2;
+                categories.Status = Constants.HIDDEN_STATUS;
             }
             else
             {
-                categories.Status = 1;
+                categories.Status = Constants.SHOW_STATUS;
             }
             db.Entry(categories).State = EntityState.Modified;
             db.SaveChanges();

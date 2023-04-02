@@ -5,6 +5,8 @@ using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Constants = GardenShopOnline.Helpers.Constants;
+
 
 namespace GardenShopOnline.Controllers
 {
@@ -86,7 +88,7 @@ namespace GardenShopOnline.Controllers
                     }
                     else
                     {
-                        order.Status = 1;
+                        order.Status = Constants.WAIT_FOR_CONFIRMATION;
                         order.PaymentMethod = 1;
                     }
 
