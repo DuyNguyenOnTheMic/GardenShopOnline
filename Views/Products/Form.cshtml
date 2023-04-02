@@ -47,8 +47,8 @@
                             {
                                 @Html.HiddenFor(m => m.ID)
                                 @Html.HiddenFor(m => m.Status)
-                                @Html.HiddenFor(m => m.Image)
-                            }                            <div class="row">
+                            }
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>
@@ -126,21 +126,21 @@
                                         <div class="position-relative">
                                             @if (!isCreate)
                                             {
-                                            <div class="img-item">
-                                                @{var image = Model.ImageProducts.ToArray();}
-                                                @for (int i = 0; i < 5; i++)
-                                                {
-                                                    if (i < image.Length)
+                                                <div class="img-item">
+                                                    @{var image = Model.ImageProducts.ToArray();}
+                                                    @for (int i = 0; i < 5; i++)
                                                     {
-                                                        <img id="output[@i]" class="img-item-link" src="@Url.Content("~/assets/images/" + image[i].Image)" />
-                                                    }
-                                                    else
-                                                    {
-                                                        <img id="output[@i]" class="img-item-link" />
-                                                    }
+                                                        if (i < image.Length)
+                                                        {
+                                                            <img id="output[@i]" class="img-item-link" src="@Url.Content("~/assets/images/" + image[i].Image)" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <img id="output[@i]" class="img-item-link" />
+                                                        }
 
-                                                }
-                                            </div>
+                                                    }
+                                                </div>
                                                 <input type="file" multiple name="file" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
                                             }
                                             else
@@ -152,8 +152,8 @@
                                                     <img id="output[3]" class="img-item-link" />
                                                     <img id="output[4]" class="img-item-link" />
                                                 </div>
-                                                <input type="file" multiple required="required"  name="Image" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
-                                                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                                                <input type="file" multiple required="required" name="Image" id="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" onchange="loadFile_edit(event)" />
+                                                @Html.ValidationMessage("Image", "", new { @class = "text-danger" })
                                             }
                                         </div>
                                         <script>
@@ -169,7 +169,7 @@
                                                 } else {
                                                     $("#file").val('');
                                                     for (var i = 0; i < 5; i++) {
-                                                        document.getElementById('output[' + i+']').removeAttribute('src');
+                                                        document.getElementById('output[' + i + ']').removeAttribute('src');
                                                     }
                                                     swal({
                                                         title: 'Error !',
@@ -204,7 +204,7 @@
             CKEDITOR.replace("description", {
                 cloudServices_tokenUrl: 'https://example.com/cs-token-endpoint',
                 cloudServices_uploadUrl: 'https://your-organization-id.cke-cs.com/easyimage/upload/'
-            });          
+            });
 
             var PEdit_Description = "";
             $('#PEdit_Description')
