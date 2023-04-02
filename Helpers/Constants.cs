@@ -25,7 +25,6 @@ namespace GardenShopOnline.Helpers
         /// To use switch case User roles
         /// </summary>
         public const string ACCOUNT_ADMIN = "1";
-
         public const string ACCOUNT_STUDENT = "2";
         public const string ACCOUNT_STAFF = "3";
         public const string ACCOUNT_TEACHER = "4";
@@ -82,28 +81,10 @@ namespace GardenShopOnline.Helpers
 
         ///Phương thức thanh toán
         ///
-        public static int BANK_METHOD = 1;
-
-        ///Loan Form state
-        ///
-        public static int SIGN_UP_LOAN = 1;
-        public static int BORROW_MORE = 2;
-        public static int LOANING = 3;
-        public static int RETURNED_LOAN = 4;
-        public static int INFULL_REFUND_LOAN = 5;
-        public static int CANCEL_LOAN = 6;
-
-        public static readonly Dictionary<int, Tuple<string, string>> StateLoanForm = new Dictionary<int, Tuple<string, string>> {
-            {SIGN_UP_LOAN, new Tuple<string, string>("Đăng ký", "secondary")},
-            {BORROW_MORE, new Tuple<string, string>("Yêu cầu mượn thêm", "info") },
-            {LOANING, new Tuple<string, string>("Đang mượn", "primary") },
-            {RETURNED_LOAN, new Tuple < string, string >("Đã trả", "success") },
-            {INFULL_REFUND_LOAN, new Tuple < string, string >("Chưa trả hết", "warning") },
-            {CANCEL_LOAN, new Tuple < string, string >("Huỷ bỏ", "danger") }
-        };
-
+        public static int BANK_METHOD = 2;
+        public static int CASH_METHOD = 1;
+        
        
-
         /// <summary>
         /// connectionString for Import Excel Data
         /// </summary>

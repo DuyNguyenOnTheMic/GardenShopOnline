@@ -61,9 +61,9 @@ namespace GardenShopOnline.Controllers
         public ActionResult EditStatus_Type(Models.Type Types)
         {
             Models.Type Type = db.Types.Find(Types.ID);
-            if (Type.Status == 1)
+            if (Type.Status == Constants.SHOW_STATUS)
             {
-                Type.Status = 2;
+                Type.Status = Constants.HIDDEN_STATUS;
             }
             else
             {
@@ -133,7 +133,7 @@ namespace GardenShopOnline.Controllers
         public ActionResult getType()
         {
 
-            return Json(db.Types.Where(c => c.Status == 1).OrderByDescending(c => c.ID).Select(x => new
+            return Json(db.Types.Where(c => c.Status == Constants.SHOW_STATUS).OrderByDescending(c => c.ID).Select(x => new
             {
                 TypeID = x.ID,
                 TypeName = x.Name

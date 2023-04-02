@@ -64,18 +64,18 @@ namespace GardenShopOnline.Controllers
             return PartialView(links.Where(c => c.Status != 3).OrderByDescending(c => c.ID));
 
         }
-        [CustomAuthorize(Roles = "Admin, Staff")]
 
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult EditStatus_Product(Product product)
         {
             Product products = db.Products.Find(product.ID);
-            if (products.Status == 1)
+            if (products.Status == Constants.SHOW_STATUS)
             {
-                products.Status = 2;
+                products.Status = Constants.HIDDEN_STATUS;
             }
             else
             {
-                products.Status = 1;
+                products.Status = Constants.SHOW_STATUS;
             }
             db.Entry(products).State = EntityState.Modified;
             db.SaveChanges();
@@ -265,7 +265,7 @@ namespace GardenShopOnline.Controllers
             {
                 return HttpNotFound();
             }
-            ViewData["CommentCount"] = db.CommentProducts.Where(c => c.ProductID == id && c.Status == 2).Count();
+            ViewData["CommentCount"] = db.CommentProducts.Where(c => c.ProductID == id && c.Status == Constants.HIDDEN_STATUS).Count();
             return View(product);
         }
 
@@ -277,7 +277,7 @@ namespace GardenShopOnline.Controllers
             comment.ProductID = product_id;
             comment.DateCreated = DateTime.Now;
             comment.UserID = User.Identity.GetUserId();
-            comment.Status = 1;
+            comment.Status = Constants.SHOW_STATUS;
             db.CommentProducts.Add(comment);
             db.SaveChanges();
             return Json("Comment_product", JsonRequestBehavior.AllowGet);

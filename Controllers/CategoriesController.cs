@@ -75,7 +75,6 @@ namespace GardenShopOnline.Controllers
         [HttpPost]
         public JsonResult FindCategory(int Category_id)
         {
-
             Category categories = db.Categories.Find(Category_id);
             var emp = new Category
             {

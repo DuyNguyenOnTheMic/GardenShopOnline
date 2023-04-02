@@ -48,7 +48,7 @@ namespace GardenShopOnline.Controllers
                 Address = user.Address,
                 Phone = user.PhoneNumber
             };
-            ViewBag.BankPayments = db.BankPayments.Where(b => b.Status == 1).ToList();
+            ViewBag.BankPayments = db.BankPayments.Where(b => b.Status == Constants.SHOW_STATUS).ToList();
             return View(customerOrder);
         }
 
@@ -83,13 +83,13 @@ namespace GardenShopOnline.Controllers
                     if (payment == "bank")
                     {
                         order.Status = 5;
-                        order.PaymentMethod = 2;
+                        order.PaymentMethod = Constants.BANK_METHOD;
                         order.PaidAdvance = order.Total;
                     }
                     else
                     {
                         order.Status = Constants.WAIT_FOR_CONFIRMATION;
-                        order.PaymentMethod = 1;
+                        order.PaymentMethod = Constants.CASH_METHOD;
                     }
 
                     // Save Order

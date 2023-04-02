@@ -46,7 +46,7 @@
                             <label class="custom-control-label" for="@customswitch_SP"></label>
                         </div>
                     }
-                    <input hidden type="text" id="URDEditStatus" value="@Url.Action("EditStatus_Product", "products")">
+                    <input hidden type="text" id="URDEditStatus" value="@Url.Action("EditStatus_Bank", "BankPayments")">
                     <script language="javascript">
                          document.getElementById('@customswitch_SP').onclick = function (e) {
                                                                 EditStatus(@item.ID);
