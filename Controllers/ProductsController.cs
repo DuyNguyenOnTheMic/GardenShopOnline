@@ -110,22 +110,6 @@ namespace GardenShopOnline.Controllers
             return Json(new { status = status }, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        [CustomAuthorize(Roles = "Admin, Staff")]
-        public JsonResult FindProduct(int Product_id)
-        {
-            Product product = db.Products.Find(Product_id);
-            var emp = new Product();
-            emp.ID = Product_id;
-            emp.Name = product.Name;
-            emp.Quantity = product.Quantity;
-            emp.Price = product.Price;
-            emp.CategoryID = product.CategoryID;
-            emp.Image = product.Image;
-            emp.Description = product.Description;
-            return Json(emp);
-        }
-
         // GET: Products1/Create
         [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Create()
