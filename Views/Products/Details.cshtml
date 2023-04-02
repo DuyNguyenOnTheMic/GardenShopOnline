@@ -10,9 +10,39 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="single-product-img">
-                        <a href="~/assets/images/@Model.Image" class="single-img gallery-popup">
-                            <img class="img-full" src="~/assets/images/@Model.Image" alt="Product Image">
-                        </a>
+                        <div class="swiper-container single-product-slider">
+                            <div class="swiper-wrapper">
+                                @foreach (var item in Model.ImageProducts)
+                                {
+                                    <div class="swiper-slide">
+                                        <a href="~/assets/images/@item.Image" class="single-img gallery-popup">
+                                            <img class="img-full" src="~/assets/images/@item.Image" alt="Product Image">
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="thumbs-arrow-holder">
+                        <div class="swiper-container single-product-thumbs">
+                            <div class="swiper-wrapper">
+                                @foreach (var item in Model.ImageProducts)
+                                {
+                                    <a href="#" class="swiper-slide">
+                                        <img class="img-full" src="~/assets/images/@item.Image" alt="Product Thumnail">
+                                    </a>
+                                }
+                            </div>
+                            <!-- Add Arrows -->
+                            <div class=" thumbs-button-wrap d-none d-md-block">
+                                <div class="thumbs-button-prev">
+                                    <i class="pe-7s-angle-left"></i>
+                                </div>
+                                <div class="thumbs-button-next">
+                                    <i class="pe-7s-angle-right"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 pt-5 pt-lg-0">
@@ -227,8 +257,8 @@
         </div>
     </div>
     <!-- Product Area End Here -->
-
 </main>
+
 <div class="modal quick-view-modal fade" id="quickModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="quickModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
