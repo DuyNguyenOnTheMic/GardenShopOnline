@@ -12,8 +12,6 @@ namespace GardenShopOnline.Controllers
         public ActionResult Index()
         {
             ShoppingCart.GetCart(HttpContext);
-            ViewData["Category"] = new SelectList(db.Categories.ToList(), "ID", "Name");
-            ViewData["Type"] = new SelectList(db.Types.ToList(), "ID", "Name");
             return View();
         }
 

@@ -88,16 +88,6 @@
         </div>
         <div class="row">
             <div class="col-lg-12 mb-4">
-                <div class="product-topbar pb-0 pt-3">
-                    <ul>
-                        <li class="short">
-                            @Html.DropDownList("Type", null, "Sort by type", new { @class = "nice-select filter-select", @id = "typeFilter" })
-                        </li>
-                        <li class="short">
-                            @Html.DropDownList("Category", null, "Sort by category", new { @class = "nice-select filter-select", @id = "categoryFilter" })
-                        </li>
-                    </ul>
-                </div>
                 <div id="dataContainer">
                     @{ Html.RenderAction("ProductList", "Home");}
                 </div>
@@ -121,29 +111,5 @@
                 toastr["success"]("Add succeeded!");
             });
         });
-
-        // Handle event on filter change
-        $(".filter-select").on('change', function () {
-            var typeId = $("#typeFilter").val();
-            var categoryId = $('#categoryFilter').val();
-            GetProductList(typeId, categoryId)
-        });
-
-        function GetProductList(typeId, categoryId) {
-            $.ajax({
-                url: '@Url.Action("ProductList", "Home")',
-                type: 'GET',
-                data: {
-                    categoryId: categoryId,
-                    typeId: typeId,
-                },
-            }).done(function (result) {
-                $('#dataContainer').html(result);
-            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(textStatus)
-                console.log(errorThrown)
-                alert("Something Went Wrong, Try Later");
-            });
-        }
     </script>
 }
