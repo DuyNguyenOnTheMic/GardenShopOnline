@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Constants = GardenShopOnline.Helpers.Constants;
 
 namespace GardenShopOnline.Controllers
 {
@@ -41,7 +42,7 @@ namespace GardenShopOnline.Controllers
                     Models.Type Type = new Models.Type
                     {
                         Name = name_Type,
-                        Status = 1
+                        Status = Constants.SHOW_STATUS
                     };
                     db.Types.Add(Type);
                     db.SaveChanges();
@@ -60,13 +61,13 @@ namespace GardenShopOnline.Controllers
         public ActionResult EditStatus_Type(Models.Type Types)
         {
             Models.Type Type = db.Types.Find(Types.ID);
-            if (Type.Status == 1)
+            if (Type.Status == Constants.SHOW_STATUS)
             {
-                Type.Status = 2;
+                Type.Status = Constants.HIDDEN_STATUS;
             }
             else
             {
-                Type.Status = 1;
+                Type.Status = Constants.SHOW_STATUS;
             }
             db.Entry(Type).State = EntityState.Modified;
             db.SaveChanges();
@@ -132,7 +133,7 @@ namespace GardenShopOnline.Controllers
         public ActionResult getType()
         {
 
-            return Json(db.Types.Where(c => c.Status == 1).OrderByDescending(c => c.ID).Select(x => new
+            return Json(db.Types.Where(c => c.Status == Constants.SHOW_STATUS).OrderByDescending(c => c.ID).Select(x => new
             {
                 TypeID = x.ID,
                 TypeName = x.Name

@@ -384,51 +384,6 @@ function GetList(type_id, category_id) {
         alert("Something Went Wrong, Try Later");
     });
 }
-//----------------------LOAD FORM EDIT PRODUCT---------------------------------------
-
-$('#URLFindProduct')
-    .keypress(function () {
-        URLFindProduct = $(this).val();
-    })
-    .keypress();
-
-function GetProduct(ele, id) {
-    row = $(ele).closest('tr');
-    $.ajax({
-        type: 'POST',
-        url: URLFindProduct,
-        data: { "Product_id": id },
-        success: function (response) {
-            $('#edit_id').val(response.ID);
-            $('#edit_name').val(response.Name);
-            $('#edit_quantity').val(response.Quantity);
-            $('#edit_product_price').val(response.Price);
-            $('textarea#edit_description').html(response.Description);
-            document.images['edit_output'].src = "/assets/images/" + response.Image;
-            var category_id = response.CategoryID;
-
-            $.ajax({
-                type: "GET",
-                url: URLgetCategory,
-                data: "{}",
-                success: function (data) {
-                    var s = '<option value="" disabled="disabled">Chose Category</option>';
-                    for (var i = 0; i < data.length; i++) {
-                        if (category_id == data[i].categoryID) {
-                            s += '<option value="' + data[i].categoryID + '"  selected="selected">' + data[i].categoryName + '</option>';
-                        } else {
-                            s += '<option value="' + data[i].categoryID + '" >' + data[i].categoryName + '</option>';
-
-                        }
-                    }
-                    $("#edit_Category").html(s);
-                }
-            });
-            $('#EditProduct .close').css('display', 'none');
-            $('#EditProduct').modal('show');
-        }
-    })
-}
 
 //-----------------------Edit status------------------------------------------
 

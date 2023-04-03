@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Constants = GardenShopOnline.Helpers.Constants;
 
 namespace GardenShopOnline.Controllers
 {
@@ -19,18 +20,18 @@ namespace GardenShopOnline.Controllers
         }
         // GET: Products
         [CustomAuthorize(Roles = "Admin, Staff")]
-        public ActionResult Index()
+        public ActionResult AdminIndex()
         {
             return View();
         }
 
         [HttpGet]
-        public ActionResult Search(string searchKey, int? categoryId, int? typeId)
+        public ActionResult Index(string searchKey, int? categoryId, int? typeId)
         {
             var dbProduct = db.Products;
             ViewData["Category"] = new SelectList(db.Categories.ToList(), "ID", "Name", categoryId);
             ViewData["Type"] = new SelectList(db.Types.ToList(), "ID", "Name", typeId);
-            ViewData["TotalCount"] = dbProduct.Count();
+            ViewData["TotalCount"] = dbProduct.Where(x => x.Status == 1).Count();
             var products = dbProduct.Where(x => x.Status == 1 && (string.IsNullOrEmpty(searchKey)
             || x.Name.ToLower().Contains(searchKey.ToLower()) || searchKey.ToLower().Contains(x.Name.ToLower()))
             && (!typeId.HasValue || x.TypeID == typeId)
@@ -63,18 +64,18 @@ namespace GardenShopOnline.Controllers
             return PartialView(links.Where(c => c.Status != 3).OrderByDescending(c => c.ID));
 
         }
-        [CustomAuthorize(Roles = "Admin, Staff")]
 
+        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult EditStatus_Product(Product product)
         {
             Product products = db.Products.Find(product.ID);
-            if (products.Status == 1)
+            if (products.Status == Constants.SHOW_STATUS)
             {
-                products.Status = 2;
+                products.Status = Constants.HIDDEN_STATUS;
             }
             else
             {
-                products.Status = 1;
+                products.Status = Constants.SHOW_STATUS;
             }
             db.Entry(products).State = EntityState.Modified;
             db.SaveChanges();
@@ -264,7 +265,7 @@ namespace GardenShopOnline.Controllers
             {
                 return HttpNotFound();
             }
-            ViewData["CommentCount"] = db.CommentProducts.Where(c => c.ProductID == id && c.Status == 2).Count();
+            ViewData["CommentCount"] = db.CommentProducts.Where(c => c.ProductID == id && c.Status == Constants.HIDDEN_STATUS).Count();
             return View(product);
         }
 
@@ -276,7 +277,7 @@ namespace GardenShopOnline.Controllers
             comment.ProductID = product_id;
             comment.DateCreated = DateTime.Now;
             comment.UserID = User.Identity.GetUserId();
-            comment.Status = 1;
+            comment.Status = Constants.SHOW_STATUS;
             db.CommentProducts.Add(comment);
             db.SaveChanges();
             return Json("Comment_product", JsonRequestBehavior.AllowGet);

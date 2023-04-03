@@ -189,6 +189,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRole.cs">
@@ -1010,7 +1011,7 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Products\AdminIndex.cshtml" />
     <Content Include="Views\Products\ProductList.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\_MiniCart.cshtml" />
@@ -1056,7 +1057,7 @@
     <Content Include="Views\BankPayments\BankPaymentList.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Home\_ProductList.cshtml" />
-    <Content Include="Views\Products\Search.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Home\_CategoryList.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Constants = GardenShopOnline.Helpers.Constants;
+
 
 namespace GardenShopOnline.Controllers
 {
@@ -142,7 +144,7 @@ namespace GardenShopOnline.Controllers
             {
                 customerOrder.PaidAdvance = order.PaidAdvance;
                 customerOrder.Note = order.Note;
-                customerOrder.PaymentMethod = 2;
+                customerOrder.PaymentMethod = Constants.BANK_METHOD;
             }
             db.Entry(customerOrder).State = EntityState.Modified;
             db.SaveChanges();

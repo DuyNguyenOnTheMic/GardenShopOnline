@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Constants = GardenShopOnline.Helpers.Constants;
 
 namespace GardenShopOnline.Controllers
 {
@@ -56,7 +57,7 @@ namespace GardenShopOnline.Controllers
         {
             if (ModelState.IsValid)
             {
-                bankPayment.Status = 1;
+                bankPayment.Status = Constants.SHOW_STATUS;
                 string filename = Path.GetFileName(Image.FileName);
                 string _filename = DateTime.Now.ToString("yymmssfff") + filename;
 
@@ -179,6 +180,22 @@ namespace GardenShopOnline.Controllers
             return Json(new { status }, JsonRequestBehavior.AllowGet);
         }
 
+        [CustomAuthorize(Roles = "Admin, Staff")]
+        public ActionResult EditStatus_Bank(BankPayment bankPayment)
+        {
+            BankPayment bank = db.BankPayments.Find(bankPayment.ID);
+            if (bank.Status == Constants.SHOW_STATUS)
+            {
+                bank.Status = Constants.HIDDEN_STATUS;
+            }
+            else
+            {
+                bank.Status = Constants.SHOW_STATUS;
+            }
+            db.Entry(bank).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json("EditStatus_Bank", JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<GardenShopOnline.Models.Type>
-@{ 
+@using Constants = GardenShopOnline.Helpers.Constants;
+
+@{
     int no = 0;
 }
 <table id="example" class="table table-hover">
@@ -24,7 +26,7 @@
                 <td class="text-center">@item.Name</td>
 
                 <td>
-                    @if (item.Status == 1)
+                    @if (item.Status == Constants.SHOW_STATUS)
                     {
                         <div class="custom-control custom-switch">
                             <input type="checkbox" checked class="custom-control-input" id="@customswitch_DM">
