@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace GardenShopOnline.Helpers
 {
@@ -40,7 +39,7 @@ namespace GardenShopOnline.Helpers
         public const string ALERT_TYPE_ERROR = "error"; // THẤT BẠI
         public const string ALERT_TYPE_WARNING = "warning"; // CẢNH BÁO
 
-      
+
         ///
         public static readonly Dictionary<int, string> RolePer = new Dictionary<int, string> {
             {ADMIN, "Quản trị hệ thống"},
@@ -83,8 +82,8 @@ namespace GardenShopOnline.Helpers
         ///
         public static int BANK_METHOD = 2;
         public static int CASH_METHOD = 1;
-        
-       
+
+
         /// <summary>
         /// connectionString for Import Excel Data
         /// </summary>

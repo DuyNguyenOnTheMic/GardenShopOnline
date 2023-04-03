@@ -77,6 +77,10 @@ namespace GardenShopOnline.Controllers
             {
                 case SignInStatus.Success:
                     MigrateShoppingCart(model.Email);
+                    if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+                    {
+                        return RedirectToAction("Index", "AspNetUsers");
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -250,10 +254,6 @@ namespace GardenShopOnline.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            if (User.IsInRole("Admin") || User.IsInRole("Staff"))
-            {
-                return RedirectToAction("Index", "AspNetUsers");
-            }
             return RedirectToAction("Index", "Home");
         }
 
