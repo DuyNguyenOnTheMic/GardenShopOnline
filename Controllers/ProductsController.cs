@@ -19,7 +19,7 @@ namespace GardenShopOnline.Controllers
             ViewBag.isCreate = false;
         }
         // GET: Products
-        [CustomAuthorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult AdminIndex()
         {
             return View();
@@ -45,7 +45,7 @@ namespace GardenShopOnline.Controllers
             return PartialView("_RelatedProducts", db.Products.Where(p => p.ID != productId && p.Status == 1 && (p.TypeID == typeId || p.CategoryID == categoryId)).ToList());
         }
 
-        [CustomAuthorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         // sử dụng PartialView để có thể lọc sản phẩm mà không load lại toàn trang
         public ActionResult ProductList(int category_id, int type_id)
         {
@@ -65,7 +65,7 @@ namespace GardenShopOnline.Controllers
 
         }
 
-        [CustomAuthorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult EditStatus_Product(Product product)
         {
             Product products = db.Products.Find(product.ID);
@@ -82,7 +82,7 @@ namespace GardenShopOnline.Controllers
             return Json("EditStatus_Product", JsonRequestBehavior.AllowGet);
         }
 
-        [CustomAuthorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult Delete_Product(Product product)
         {
             bool status = true;
@@ -111,7 +111,7 @@ namespace GardenShopOnline.Controllers
         }
 
         // GET: Products1/Create
-        [CustomAuthorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name");
@@ -120,7 +120,7 @@ namespace GardenShopOnline.Controllers
             return View("Form");
         }
 
-        [CustomAuthorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,CategoryID,TypeID,Name,Description,Image,DateCreated,DateUpdate,Status,Quantity")] Product product, HttpPostedFileBase[] Image, string priceProduct)
@@ -179,7 +179,7 @@ namespace GardenShopOnline.Controllers
         }
 
         // GET: Products1/Edit/5
-        [CustomAuthorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult Edit(int id)
         {
             Product product = db.Products.Find(id);
@@ -192,7 +192,7 @@ namespace GardenShopOnline.Controllers
             return View("Form", product);
         }
 
-        [CustomAuthorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,CategoryID,TypeID,Name,Description,Price,Image,DateCreated,DateUpdate,Status,Quantity")] Product product, HttpPostedFileBase[] file, string priceProduct)
@@ -273,7 +273,7 @@ namespace GardenShopOnline.Controllers
             return View(product);
         }
 
-        [CustomAuthorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult Comment_product(int product_id, string content)
         {
             CommentProduct comment = new CommentProduct

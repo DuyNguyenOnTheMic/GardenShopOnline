@@ -8,7 +8,7 @@ using Constants = GardenShopOnline.Helpers.Constants;
 
 namespace GardenShopOnline.Controllers
 {
-    [CustomAuthorize(Roles = "Admin, Staff")]
+    [Authorize(Roles = "Admin, Staff")]
     public class TypesController : Controller
     {
         private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();

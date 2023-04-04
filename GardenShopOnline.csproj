@@ -166,7 +166,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\MyScriptBundle.cs" />
     <Compile Include="App_Start\MyStyleBundle.cs" />
-    <Compile Include="App_Start\CustomAuthorize.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />

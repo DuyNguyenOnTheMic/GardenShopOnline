@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace GardenShopOnline.Controllers
 {
-    [CustomAuthorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AspNetUsersController : Controller
     {
         private ApplicationUserManager _userManager;

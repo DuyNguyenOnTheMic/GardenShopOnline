@@ -11,7 +11,7 @@ using Constants = GardenShopOnline.Helpers.Constants;
 
 namespace GardenShopOnline.Controllers
 {
-    [CustomAuthorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class BankPaymentsController : Controller
     {
         private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();

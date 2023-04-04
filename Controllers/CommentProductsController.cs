@@ -14,25 +14,28 @@ namespace GardenShopOnline.Controllers
         private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
         // GET: CommentProducts
-        [CustomAuthorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult Index()
         {
 
             var commentProducts = db.CommentProducts.Include(c => c.Product);
             return View(commentProducts.ToList());
         }
+
         public ActionResult CommentProduct(int product_id)
         {
             var commentProducts = db.CommentProducts.Include(c => c.Product).Where(c => c.ProductID == product_id && c.Status == 2);
             return PartialView(commentProducts.ToList());
         }
-        [CustomAuthorize(Roles = "Admin, Staff")]
+
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult CommentProductList()
         {
             var commentProducts = db.CommentProducts.Include(c => c.Product);
             return PartialView(commentProducts.ToList());
         }
-        [CustomAuthorize(Roles = "Admin, Staff")]
+
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult EditStatus_Comment(CommentProduct cmt)
         {
             CommentProduct comment = db.CommentProducts.Find(cmt.ID);
@@ -50,7 +53,8 @@ namespace GardenShopOnline.Controllers
             db.SaveChanges();
             return Json("EditStatus_Order", JsonRequestBehavior.AllowGet);
         }
-        [CustomAuthorize(Roles = "Admin, Staff")]
+
+        [Authorize(Roles = "Admin, Staff")]
         public ActionResult ReplyComment(CommentProduct cmt)
         {
             CommentProduct comment = new CommentProduct
@@ -70,7 +74,8 @@ namespace GardenShopOnline.Controllers
             db.SaveChanges();
             return Json("ReplyComment", JsonRequestBehavior.AllowGet);
         }
-        [CustomAuthorize(Roles = "Admin, Staff")]
+
+        [Authorize(Roles = "Admin, Staff")]
         // GET: CommentProducts/Details/5
         public ActionResult Details(int? id)
         {
