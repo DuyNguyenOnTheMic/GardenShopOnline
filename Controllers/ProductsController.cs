@@ -142,9 +142,11 @@ namespace GardenShopOnline.Controllers
 
                         string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
 
-                        ImageProduct imageProduct = new ImageProduct();
-                        imageProduct.ProductID = product.ID;
-                        imageProduct.Image = _filename;
+                        ImageProduct imageProduct = new ImageProduct
+                        {
+                            ProductID = product.ID,
+                            Image = _filename
+                        };
                         if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
                         {
                             if (item.ContentLength <= 4000000)
@@ -220,9 +222,11 @@ namespace GardenShopOnline.Controllers
 
                         string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
 
-                        ImageProduct imageProduct = new ImageProduct();
-                        imageProduct.ProductID = product.ID;
-                        imageProduct.Image = _filename;
+                        ImageProduct imageProduct = new ImageProduct
+                        {
+                            ProductID = product.ID,
+                            Image = _filename
+                        };
 
                         if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
                         {
@@ -272,12 +276,14 @@ namespace GardenShopOnline.Controllers
         [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Comment_product(int product_id, string content)
         {
-            CommentProduct comment = new CommentProduct();
-            comment.Content = content;
-            comment.ProductID = product_id;
-            comment.DateCreated = DateTime.Now;
-            comment.UserID = User.Identity.GetUserId();
-            comment.Status = Constants.SHOW_STATUS;
+            CommentProduct comment = new CommentProduct
+            {
+                Content = content,
+                ProductID = product_id,
+                DateCreated = DateTime.Now,
+                UserID = User.Identity.GetUserId(),
+                Status = Constants.SHOW_STATUS
+            };
             db.CommentProducts.Add(comment);
             db.SaveChanges();
             return Json("Comment_product", JsonRequestBehavior.AllowGet);

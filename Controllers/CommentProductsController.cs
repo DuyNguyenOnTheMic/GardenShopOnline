@@ -53,13 +53,15 @@ namespace GardenShopOnline.Controllers
         [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult ReplyComment(CommentProduct cmt)
         {
-            CommentProduct comment = new CommentProduct();
-            comment.Content = cmt.Content;
-            comment.ProductID = cmt.ProductID;
-            comment.DateCreated = DateTime.Now;
-            comment.UserID = User.Identity.GetUserId();
-            comment.Reply_coment = cmt.Reply_coment;
-            comment.Status = 2;
+            CommentProduct comment = new CommentProduct
+            {
+                Content = cmt.Content,
+                ProductID = cmt.ProductID,
+                DateCreated = DateTime.Now,
+                UserID = User.Identity.GetUserId(),
+                Reply_coment = cmt.Reply_coment,
+                Status = 2
+            };
             db.CommentProducts.Add(comment);
             db.SaveChanges();
             CommentProduct commentProduct = db.CommentProducts.Find(cmt.Reply_coment);

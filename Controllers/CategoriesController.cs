@@ -18,11 +18,13 @@ namespace GardenShopOnline.Controllers
         {
             return View();
         }
+
         public ActionResult _CategoryList()
         {
             var categories = db.Categories.Where(c => c.Status != 3).OrderByDescending(c => c.ID);
             return PartialView(categories.ToList());
         }
+
         public JsonResult Create_Category(string name_category)
         {
             string message = "";
@@ -57,6 +59,7 @@ namespace GardenShopOnline.Controllers
 
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult EditStatus_Category(Category Categorys)
         {
             Category categories = db.Categories.Find(Categorys.ID);
@@ -72,6 +75,7 @@ namespace GardenShopOnline.Controllers
             db.SaveChanges();
             return Json("EditStatus_Category", JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public JsonResult FindCategory(int Category_id)
         {
@@ -83,6 +87,8 @@ namespace GardenShopOnline.Controllers
             };
             return Json(emp);
         }
+
+        [HttpPost]
         public JsonResult UpdateCategory(int category_id, string name_category)
         {
             string message = "";
@@ -110,10 +116,9 @@ namespace GardenShopOnline.Controllers
                 status = false;
                 message = e.Message;
             }
-
-
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult Delete_Category(Category categorys)
         {
             bool status = true; try
@@ -127,11 +132,11 @@ namespace GardenShopOnline.Controllers
                 status = false;
             }
 
-            return Json(new { status = status }, JsonRequestBehavior.AllowGet);
+            return Json(new { status }, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult getCategory()
         {
-
             return Json(db.Categories.Where(c => c.Status == 1).OrderByDescending(c => c.ID).Select(x => new
             {
                 categoryID = x.ID,

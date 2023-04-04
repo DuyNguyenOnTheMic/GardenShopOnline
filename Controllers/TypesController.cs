@@ -18,6 +18,7 @@ namespace GardenShopOnline.Controllers
         {
             return View();
         }
+
         public ActionResult _TypeList()
         {
             var types = db.Types.Where(c => c.Status != 3).OrderByDescending(c => c.ID);
@@ -58,6 +59,7 @@ namespace GardenShopOnline.Controllers
 
             return Json(new { status, message }, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult EditStatus_Type(Models.Type Types)
         {
             Models.Type Type = db.Types.Find(Types.ID);
@@ -73,6 +75,7 @@ namespace GardenShopOnline.Controllers
             db.SaveChanges();
             return Json("EditStatus_Type", JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public JsonResult FindType(int category_id)
         {
@@ -84,6 +87,7 @@ namespace GardenShopOnline.Controllers
             };
             return Json(emp);
         }
+
         public JsonResult UpdateType(int Type_id, string name_Type)
         {
             string message = "";
@@ -123,16 +127,16 @@ namespace GardenShopOnline.Controllers
                 db.Types.Remove(Types);
                 db.SaveChanges();
             }
-            catch (System.Exception)
+            catch
             {
                 status = false;
             }
 
-            return Json(new { status = status }, JsonRequestBehavior.AllowGet);
+            return Json(new { status }, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult getType()
         {
-
             return Json(db.Types.Where(c => c.Status == Constants.SHOW_STATUS).OrderByDescending(c => c.ID).Select(x => new
             {
                 TypeID = x.ID,
