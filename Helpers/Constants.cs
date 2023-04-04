@@ -4,32 +4,19 @@ namespace GardenShopOnline.Helpers
 {
     public class Constants
     {
-        /// <summary>
-        /// subdomain
-        /// </summary>
-        public static readonly string subdomain = "";
-
-        public static readonly string webUrl = "";
-
+       
         /// <summary>
         /// User roles
         /// </summary>
         public static readonly int ADMIN = 1;
-        public static readonly int STUDENT = 2;
-        public static readonly int STAFF = 3;
-        public static readonly int TEACHER = 4;
-        public static readonly int LEADER = 5;
-        public static readonly int ACCOUNTANT = 6;
+        public static readonly int STAFF = 2;
+
 
         /// To use switch case User roles
         /// </summary>
         public const string ACCOUNT_ADMIN = "1";
-        public const string ACCOUNT_STUDENT = "2";
-        public const string ACCOUNT_STAFF = "3";
-        public const string ACCOUNT_TEACHER = "4";
-        public const string ACCOUNT_LEADER = "5";
-        public const string ACCOUNT_ACCOUNTANT = "6";
-        public const string TEMP_ACCOUNT = "temp";
+        public const string ACCOUNT_STAFF = "2";
+
 
         /// <summary>
         /// Alert Type For Message
@@ -42,12 +29,8 @@ namespace GardenShopOnline.Helpers
 
         ///
         public static readonly Dictionary<int, string> RolePer = new Dictionary<int, string> {
-            {ADMIN, "Quản trị hệ thống"},
-            {STUDENT, "Sinh viên" },
-            {STAFF, "Thủ kho" },
-            {TEACHER, "Giảng viên" },
-            {LEADER, "Lãnh đạo" },
-            {ACCOUNTANT, "Kế toán" },
+            {ADMIN, "Admin"},
+            {STAFF, "Staff" },
         };
 
 
@@ -74,8 +57,8 @@ namespace GardenShopOnline.Helpers
         public static int SHOW_STATUS = 1;
         public static int HIDDEN_STATUS = 2;
         public static readonly Dictionary<int, string> Status = new Dictionary<int, string> {
-            {SHOW_STATUS, "Trạng thái hiện"},
-            {HIDDEN_STATUS, "Trạng thái ẩn" }
+            {SHOW_STATUS, "Show"},
+            {HIDDEN_STATUS, "Hidden" }
         };
 
         ///Phương thức thanh toán
@@ -83,15 +66,11 @@ namespace GardenShopOnline.Helpers
         public static int BANK_METHOD = 2;
         public static int CASH_METHOD = 1;
 
-
-        /// <summary>
-        /// connectionString for Import Excel Data
-        /// </summary>
-        public const string MS_EXCEL = "application/vnd.ms-excel";
-
-        public const string OPENXMLFORMATS = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-        public const string Microsoft_Jet_OLEDB_4 = "Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;";
-        public const string Microsoft_ACE_OLEDB_12 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1\";";
+        ///Phương thức thanh toán
+        ///
+        public static int NEW_COMMENT = 1;
+        public static int APPROVED_COMMENT = 2;
+        public static int REFUSED_COMMENT = 3;
 
 
     }

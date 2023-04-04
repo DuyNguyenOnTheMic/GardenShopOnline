@@ -7,6 +7,8 @@
 }
 <input hidden type="text" id="URDEditStatus_Comment" value="@Url.Action("EditStatus_Comment", "CommentProducts")">
 <input hidden type="text" id="URDReplyComment" value="@Url.Action("ReplyComment", "CommentProducts")">
+<input hidden type="text" id="URLDelete" value="@Url.Action("Delete_Category", "categories")">
+
 
 
 <div class="card-body">
@@ -63,7 +65,6 @@
                                                 <i class="feather icon-check">
                                                 </i>
                                             </button>
-
                                             <button title="từ chối" class="btn btn-danger " onclick="EditStatus_comment('@item.ID', 3)">
                                                 <i class="feather icon-trash-2">
                                                 </i>
@@ -93,8 +94,9 @@
                                     <th class="">Name product</th>
                                     <th class="">Email</th>
                                     <th class="">Content</th>
+                                    <th class="">State</th>
                                     <th class="text-center">Date created</th>
-
+                                    <th></th>
                                 </tr>
 
                             </thead>
@@ -102,14 +104,26 @@
                                 @foreach (var item in Model.Where(m => m.Status == 2))
                                 {
                                     no2++;
-                                    <tr>
-                                        <td>@no2</td>
-                                        <td><a href="@Url.Action("Details","Products", new { id = item.ProductID })">@item.Product.Name</a></td>
-                                        <td>@item.AspNetUser.UserName</td>
-                                        <td>@item.Content</td>
-                                        <td>@item.DateCreated</td>
-
-                                    </tr>
+                                <tr>
+                                    <td>@no2</td>
+                                    <td><a href="@Url.Action("Details","Products", new { id = item.ProductID })">@item.Product.Name</a></td>
+                                    <td>@item.AspNetUser.UserName</td>
+                                    <td>@item.Content</td>
+                                    <td>@item.DateCreated</td>
+                                    <td>
+                                        @(item.Reply_coment!= null ? "Reply" : " ")
+                                    </td>
+                                    <td class="text-center">
+                                        <button title="Reply" class="btn btn-info" onclick="GetCmt('@item.ID', '@item.ProductID')">
+                                            <i class="feather icon-server">
+                                            </i>
+                                        </button>
+                                        <button title="từ chối" class="btn btn-danger " onclick="EditStatus_comment('@item.ID', 3)">
+                                            <i class="feather icon-trash-2">
+                                            </i>
+                                        </button>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -131,7 +145,6 @@
                                     <th class="">Email</th>
                                     <th class="">Content</th>
                                     <th class="text-center">Date created</th>
-
                                 </tr>
 
                             </thead>
@@ -139,14 +152,13 @@
                                 @foreach (var item in Model.Where(m => m.Status == 3))
                                 {
                                     no3++;
-                                    <tr>
-                                        <td>@no3</td>
-                                        <td><a href="@Url.Action("Details","Products", new { id = item.ProductID })">@item.Product.Name</a></td>
-                                        <td>@item.AspNetUser.UserName</td>
-                                        <td>@item.Content</td>
-                                        <td>@item.DateCreated</td>
-
-                                    </tr>
+                                <tr>
+                                    <td>@no3</td>
+                                    <td><a href="@Url.Action("Details","Products", new { id = item.ProductID })">@item.Product.Name</a></td>
+                                    <td>@item.AspNetUser.UserName</td>
+                                    <td>@item.Content</td>
+                                    <td>@item.DateCreated</td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -166,7 +178,6 @@
                     <h5 class="modal-title" id="AddCategoryLabel">Reply</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">

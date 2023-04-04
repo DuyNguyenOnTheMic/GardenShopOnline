@@ -11,7 +11,7 @@
                         <a href="@Url.Action("Details", "Products", new { id = item.ID })">
                             <img class="primary-img" src="~/assets/images/@(item.ImageProducts.FirstOrDefault()?.Image)" alt="Product Images">
                         </a>
-                        @if (!(User.IsInRole("Admin") || User.IsInRole("Staff")))
+                        @if (!(User.IsInRole("Admin") || User.IsInRole("Staff")) || item.Quantity > 0)
                         {
                             <div class="product-add-action">
                                 <ul>
