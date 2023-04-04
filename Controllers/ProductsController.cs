@@ -123,7 +123,7 @@ namespace GardenShopOnline.Controllers
         [Authorize(Roles = "Admin, Staff")]
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CategoryID,TypeID,Name,Description,Image,DateCreated,DateUpdate,Status,Quantity")] Product product, HttpPostedFileBase[] Image, string priceProduct)
+        public ActionResult Create([Bind(Include = "ID,CategoryID,TypeID,Name,Description,Image,DateCreated,DateUpdate,Status,Quantity,Place")] Product product, HttpPostedFileBase[] Image, string priceProduct)
         {
             if (Image.Length <= 5)
             {
@@ -169,7 +169,7 @@ namespace GardenShopOnline.Controllers
                     }
                     db.SaveChanges();
                     Session["notification"] = "Add succeeded!";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("AdminIndex");
                 }
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
@@ -195,7 +195,7 @@ namespace GardenShopOnline.Controllers
         [Authorize(Roles = "Admin, Staff")]
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CategoryID,TypeID,Name,Description,Price,Image,DateCreated,DateUpdate,Status,Quantity")] Product product, HttpPostedFileBase[] file, string priceProduct)
+        public ActionResult Edit([Bind(Include = "ID,CategoryID,TypeID,Name,Description,Price,Image,DateCreated,DateUpdate,Status,Quantity,Place")] Product product, HttpPostedFileBase[] file, string priceProduct)
         {
             if (ModelState.IsValid)
             {
@@ -249,12 +249,12 @@ namespace GardenShopOnline.Controllers
                     if (db.SaveChanges() > 0)
                     {
                         Session["notification"] = "Update succeeded!";
-                        return RedirectToAction("Index");
+                        return RedirectToAction("AdminIndex");
                     }
                 }
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AdminIndex");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
             ViewBag.TypeID = new SelectList(db.Types, "ID", "Name", product.TypeID);

@@ -38,7 +38,8 @@ namespace GardenShopOnline.Models
         public Nullable<int> Status { get; set; }
         [Required(ErrorMessage = "Please enter product quantity !")]
         public int Quantity { get; set; }
-    
+        public string Place { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual Category Category { get; set; }
