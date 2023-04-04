@@ -66,6 +66,12 @@ namespace GardenShopOnline.Helpers
         public static int BANK_METHOD = 2;
         public static int CASH_METHOD = 1;
 
+        ///Phương thức thanh toán
+        ///
+        public static int NEW_COMMENT = 1;
+        public static int APPROVED_COMMENT = 2;
+        public static int REFUSED_COMMENT = 3;
+
 
     }
 }
