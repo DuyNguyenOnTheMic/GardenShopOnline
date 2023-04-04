@@ -17,27 +17,27 @@
                                 @Html.ValidationSummary("", new { @class = "text-danger mb-2" })
                                 <div class="col-md-6">
                                     <label>Full Name</label>
-                                    @Html.TextBoxFor(m => m.FullName, new { @placeholder = "Your full name" })
+                                    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @placeholder = "Your full name" })
                                 </div>
                                 <div class="col-md-6">
                                     <label>Phone Number</label>
-                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "Your phone number" })
+                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Your phone number" })
                                 </div>
                                 <div class="col-md-12">
                                     <label>Address</label>
-                                    @Html.TextBoxFor(m => m.Address, new { @placeholder = "Street address" })
+                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Street address" })
                                 </div>
                                 <div class="col-md-12">
                                     <label>Email Address <span class="text-danger">*</span></label>
-                                    @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email addresss" })
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email addresss" })
                                 </div>
                                 <div class="col-md-6">
                                     <label>Password <span class="text-danger">*</span></label>
-                                    @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
                                 </div>
                                 <div class="col-md-6">
                                     <label>Confirm Password <span class="text-danger">*</span></label>
-                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Confirm Password" })
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
                                 </div>
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-custom-size lg-size btn-pronia-primary">Register</button>
