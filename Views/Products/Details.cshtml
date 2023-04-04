@@ -57,7 +57,7 @@
                             </div>
                         </div>
                         <ul class="quantity-with-btn d-flex align-items-center">
-                            @if (!(User.IsInRole("Admin") || User.IsInRole("Staff")) || Model.Quantity > 0)
+                            @if (!User.IsInRole("Admin") && !User.IsInRole("Staff") && Model.Quantity > 0)
                             {
                                 <li class="quantity">
                                     <div class="cart-plus-minus">
