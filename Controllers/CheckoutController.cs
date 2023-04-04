@@ -14,7 +14,7 @@ namespace GardenShopOnline.Controllers
     public class CheckoutController : Controller
     {
         private ApplicationUserManager _userManager;
-        readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
         public CheckoutController()
         {
         }

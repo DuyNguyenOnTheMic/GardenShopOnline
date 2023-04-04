@@ -6,7 +6,7 @@ namespace GardenShopOnline.Controllers
 {
     public class HomeController : Controller
     {
-        readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
         [HttpGet]
         public ActionResult Index()

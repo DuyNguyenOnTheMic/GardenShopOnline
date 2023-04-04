@@ -10,7 +10,7 @@ namespace GardenShopOnline.Controllers
     [Authorize(Roles = "Admin")]
     public class StatisticsController : Controller
     {
-        readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
         // GET: Statistics/Order
         public ActionResult Index()

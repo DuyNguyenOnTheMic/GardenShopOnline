@@ -11,7 +11,7 @@ namespace GardenShopOnline.Controllers
     [Authorize]
     public class ManageController : Controller
     {
-        readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 

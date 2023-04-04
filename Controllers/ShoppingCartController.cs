@@ -6,7 +6,7 @@ namespace GardenShopOnline.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
         //
         // GET: /ShoppingCart/
