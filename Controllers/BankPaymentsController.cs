@@ -11,37 +11,25 @@ using Constants = GardenShopOnline.Helpers.Constants;
 
 namespace GardenShopOnline.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
     public class BankPaymentsController : Controller
     {
-        private BonsaiGardenEntities db = new BonsaiGardenEntities();
+        private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
         public BankPaymentsController()
         {
             ViewBag.isCreate = false;
         }
+
         // GET: BankPayments
         public ActionResult Index()
         {
-            return View(db.BankPayments.ToList());
+            return View();
         }
+
         public ActionResult BankPaymentList()
         {
             return PartialView(db.BankPayments.Where(c => c.Status != 3).ToList().OrderByDescending(c => c.ID));
 
-        }
-
-        // GET: BankPayments/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            BankPayment bankPayment = db.BankPayments.Find(id);
-            if (bankPayment == null)
-            {
-                return HttpNotFound();
-            }
-            return View(bankPayment);
         }
 
         // GET: BankPayments/Create
@@ -162,7 +150,6 @@ namespace GardenShopOnline.Controllers
             return View(bankPayment);
         }
 
-        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult Delete_BankPayment(BankPayment bankPayment)
         {
             bool status = true;
@@ -180,7 +167,6 @@ namespace GardenShopOnline.Controllers
             return Json(new { status }, JsonRequestBehavior.AllowGet);
         }
 
-        [CustomAuthorize(Roles = "Admin, Staff")]
         public ActionResult EditStatus_Bank(BankPayment bankPayment)
         {
             BankPayment bank = db.BankPayments.Find(bankPayment.ID);
@@ -196,6 +182,7 @@ namespace GardenShopOnline.Controllers
             db.SaveChanges();
             return Json("EditStatus_Bank", JsonRequestBehavior.AllowGet);
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
