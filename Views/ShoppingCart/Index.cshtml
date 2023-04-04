@@ -54,7 +54,7 @@
                                             </td>
                                             <td class="product-thumbnail">
                                                 <a href="#">
-                                                    <img class="w-25" src="~/assets/images/@item.Product.Image" alt="Cart Thumbnail">
+                                                    <img class="w-25" src="~/assets/images/@(item.Product.ImageProducts.FirstOrDefault()?.Image)" alt="Cart Thumbnail">
                                                 </a>
                                             </td>
                                             <td class="product-name"><a href="@Url.Action("Details", "Products", new { id = item.ProductID })">@item.Product.Name</a></td>
