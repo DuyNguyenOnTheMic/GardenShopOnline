@@ -77,7 +77,10 @@ namespace GardenShopOnline.Controllers
             {
                 case SignInStatus.Success:
                     MigrateShoppingCart(model.Email);
-                    if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+                    // Update redirect base on user role
+                    var user = await UserManager.FindAsync(model.Email, model.Password);
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+                    if (roles.Contains("Admin") || roles.Contains("Staff"))
                     {
                         return RedirectToAction("Index", "AspNetUsers");
                     }
