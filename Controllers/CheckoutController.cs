@@ -36,8 +36,7 @@ namespace GardenShopOnline.Controllers
             }
         }
 
-        //
-        // GET: /Checkout/AddressAndPayment
+        [HttpGet]
         public ActionResult AddressAndPayment()
         {
             var userId = User.Identity.GetUserId();
@@ -52,8 +51,6 @@ namespace GardenShopOnline.Controllers
             return View(customerOrder);
         }
 
-        //
-        // POST: /Checkout/AddressAndPayment
         [HttpPost]
         public async System.Threading.Tasks.Task<ActionResult> AddressAndPayment(CustomerOrder order, string payment)
         {
@@ -123,8 +120,7 @@ namespace GardenShopOnline.Controllers
             }
         }
 
-        //
-        // GET: /Checkout/Complete
+        [HttpGet]
         public ActionResult Complete(string id)
         {
             var userId = User.Identity.GetUserId();
@@ -148,8 +144,14 @@ namespace GardenShopOnline.Controllers
         {
             if (disposing)
             {
+                if (_userManager != null)
+                {
+                    _userManager.Dispose();
+                    _userManager = null;
+                }
                 db.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }
