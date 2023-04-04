@@ -107,7 +107,7 @@ namespace GardenShopOnline.Controllers
                 status = false;
             }
 
-            return Json(new { status = status }, JsonRequestBehavior.AllowGet);
+            return Json(new { status }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Products1/Create
