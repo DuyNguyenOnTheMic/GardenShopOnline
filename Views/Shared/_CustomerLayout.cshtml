@@ -74,14 +74,17 @@
                                                 <a class="btn btn-custom-size sm-size btn-pronia-primary justify-content-center" href="@Url.Action("Login", "Account")">Login</a>
                                             }
                                         </li>
-                                        <li class="minicart-wrap me-3 me-lg-0">
-                                            <a href="#miniCart" class="minicart-btn toolbar-btn">
-                                                <i class="pe-7s-shopbag"></i>
-                                                <div id="cartCountHead">
-                                                    <span class="quantity number-count">@Html.Action("CartSummary", "ShoppingCart")</span>
-                                                </div>
-                                            </a>
-                                        </li>
+                                        @if (!(User.IsInRole("Admin") || User.IsInRole("Staff")))
+                                        {
+                                            <li class="minicart-wrap me-3 me-lg-0">
+                                                <a href="#miniCart" class="minicart-btn toolbar-btn">
+                                                    <i class="pe-7s-shopbag"></i>
+                                                    <div id="cartCountHead">
+                                                        <span class="quantity number-count">@Html.Action("CartSummary", "ShoppingCart")</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        }
                                         <li class="mobile-menu_wrap d-block d-lg-none">
                                             <a href="#mobileMenu" class="mobile-menu_btn toolbar-btn pl-0">
                                                 <i class="pe-7s-menu"></i>
@@ -141,14 +144,17 @@
                                                 <a class="btn btn-custom-size sm-size btn-pronia-primary justify-content-center" href="@Url.Action("Login", "Account")">Login</a>
                                             }
                                         </li>
-                                        <li class="minicart-wrap me-3 me-lg-0">
-                                            <a href="#miniCart" class="minicart-btn toolbar-btn">
-                                                <i class="pe-7s-shopbag"></i>
-                                                <div id="cartCountStick">
-                                                    <span class="quantity number-count">@Html.Action("CartSummary", "ShoppingCart")</span>
-                                                </div>
-                                            </a>
-                                        </li>
+                                        @if (!(User.IsInRole("Admin") || User.IsInRole("Staff")))
+                                        {
+                                            <li class="minicart-wrap me-3 me-lg-0">
+                                                <a href="#miniCart" class="minicart-btn toolbar-btn">
+                                                    <i class="pe-7s-shopbag"></i>
+                                                    <div id="cartCountStick">
+                                                        <span class="quantity number-count">@Html.Action("CartSummary", "ShoppingCart")</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        }
                                         <li class="mobile-menu_wrap d-block d-lg-none">
                                             <a href="#mobileMenu" class="mobile-menu_btn toolbar-btn pl-0">
                                                 <i class="pe-7s-menu"></i>
