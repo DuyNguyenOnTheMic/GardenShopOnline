@@ -9,35 +9,6 @@ namespace GardenShopOnline.Helpers
         /// </summary>
         public const string ACCOUNT_BONSAIGARDEN = "bonsaigarden6@gmail.com";
 
-        /// <summary>
-        /// User roles
-        /// </summary>
-        public static readonly int ADMIN = 1;
-        public static readonly int STAFF = 2;
-
-
-        /// To use switch case User roles
-        /// </summary>
-        public const string ACCOUNT_ADMIN = "1";
-        public const string ACCOUNT_STAFF = "2";
-
-
-        /// <summary>
-        /// Alert Type For Message
-        /// </summary>
-        public const string ALERT_TYPE_SUCCESS = "success"; // THÀNH CÔNG
-
-        public const string ALERT_TYPE_ERROR = "error"; // THẤT BẠI
-        public const string ALERT_TYPE_WARNING = "warning"; // CẢNH BÁO
-
-
-        ///
-        public static readonly Dictionary<int, string> RolePer = new Dictionary<int, string> {
-            {ADMIN, "Admin"},
-            {STAFF, "Staff" },
-        };
-
-
         ///Trạng thái đơn hàng
         ///
         public static int WAIT_FOR_CONFIRMATION = 1;
@@ -79,6 +50,6 @@ namespace GardenShopOnline.Helpers
         ///Loại tin nhắn
         ///
         public static int TYPE_TEXT = 1;
-        public static int TYPR_IMAGE = 2;
+        public static int TYPE_IMAGE = 2;
     }
 }

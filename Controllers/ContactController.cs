@@ -93,7 +93,7 @@ namespace GardenShopOnline.Controllers
                 string extension = Path.GetExtension(file.FileName);
 
                 string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
-                ms.Type = Constants.TYPR_IMAGE;
+                ms.Type = Constants.TYPE_IMAGE;
                 ms.Image = _filename;
                 ms.Message1 = message;
                 img = _filename;
