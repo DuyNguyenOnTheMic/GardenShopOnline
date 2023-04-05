@@ -80,9 +80,13 @@ namespace GardenShopOnline.Controllers
                     // Update redirect base on user role
                     var user = await UserManager.FindAsync(model.Email, model.Password);
                     var roles = await UserManager.GetRolesAsync(user.Id);
-                    if (roles.Contains("Admin") || roles.Contains("Staff"))
+                    if (roles.Contains("Admin"))
                     {
                         return RedirectToAction("Index", "AspNetUsers");
+                    }
+                    else if (roles.Contains("Staff"))
+                    {
+                        return RedirectToAction("Index", "Types");
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
