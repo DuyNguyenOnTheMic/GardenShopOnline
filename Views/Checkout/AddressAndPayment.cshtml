@@ -60,6 +60,13 @@
                                         @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Note</label>
+                                        @Html.TextBoxFor(m => m.Note, new { @placeholder = "Your Note" })
+                                        @Html.ValidationMessageFor(m => m.Note, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="checkbox-form">
