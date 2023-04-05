@@ -12,13 +12,19 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-4 order-2 order-lg-1 pt-5 pt-lg-0">
                     <div class="sidebar-area">
-                        <div class="widgets-searchbox">
+                        <div class="widgets-searchbox mb-4">
                             <form action="@Url.Action("Index","Products")" id="widgets-searchbox">
                                 @Html.TextBox("searchKey", searchKey, new { @type = "search", @class = "input-field", @placeholder = "Search" })
                                 <button class="widgets-searchbox-btn" type="submit">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </form>
+                        </div>
+                        <div class="short">
+                            @Html.DropDownList("Type", null, "Sort by type", new { @class = "nice-select filter-select mb-3 w-100", @id = "typeFilter" })
+                        </div>
+                        <div class="short">
+                            @Html.DropDownList("Category", null, "Sort by category", new { @class = "nice-select filter-select w-100", @id = "categoryFilter" })
                         </div>
                     </div>
                 </div>
@@ -27,12 +33,6 @@
                         <ul>
                             <li class="page-count">
                                 <span>@Model.Count</span> Product Found of <span>@ViewData["TotalCount"]</span>
-                            </li>
-                            <li class="short">
-                                @Html.DropDownList("Type", null, "Sort by type", new { @class = "nice-select filter-select", @id = "typeFilter" })
-                            </li>
-                            <li class="short">
-                                @Html.DropDownList("Category", null, "Sort by category", new { @class = "nice-select filter-select", @id = "categoryFilter" })
                             </li>
                         </ul>
                     </div>
@@ -49,18 +49,18 @@
                                                     <a href="@Url.Action("Details", "Products", new { id = item.ID })">
                                                         <img class="primary-img" src="~/assets/images/@(item.ImageProducts.FirstOrDefault()?.Image)" alt="Product Images">
                                                     </a>
-                                                    <div class="product-add-action">
-                                                        <ul>
-                                                            @if (item.Quantity > 0)
-                                                            {
+                                                    @if (!User.IsInRole("Admin") && !User.IsInRole("Staff") && item.Quantity > 0)
+                                                    {
+                                                        <div class="product-add-action">
+                                                            <ul>
                                                                 <li>
                                                                     <a class="add-to-cart" href="@Url.Action("AddToCart", "ShoppingCart", new { id = item.ID })" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
                                                                         <i class="pe-7s-cart"></i>
                                                                     </a>
                                                                 </li>
-                                                            }
-                                                        </ul>
-                                                    </div>
+                                                            </ul>
+                                                        </div>
+                                                    }
                                                 </div>
                                                 <div class="product-content">
                                                     <a class="product-name" href="@Url.Action("Details", "Products", new { id = item.ID })">@item.Name</a>

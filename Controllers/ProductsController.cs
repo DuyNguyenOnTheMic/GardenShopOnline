@@ -262,12 +262,12 @@ namespace GardenShopOnline.Controllers
         }
 
         // GET: Products/Details
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             Product product = db.Products.Find(id);
             if (product == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Error");
             }
             ViewData["CommentCount"] = db.CommentProducts.Where(c => c.ProductID == id && c.Status == Constants.HIDDEN_STATUS).Count();
             return View(product);
