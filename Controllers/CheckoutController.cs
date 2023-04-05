@@ -68,7 +68,7 @@ namespace GardenShopOnline.Controllers
                     ViewData["FullName"] = user.FullName;
                     ViewData["Address"] = user.Address;
                     ViewData["Phone"] = user.PhoneNumber;
-                    ViewBag.BankPayments = db.BankPayments.Where(b => b.Status == 1).ToList();
+                    ViewBag.BankPayments = db.BankPayments.Where(b => b.Status == Constants.SHOW_STATUS).ToList();
                     ViewBag.Error = check;
                     return View(order);
                 }

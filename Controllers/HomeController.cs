@@ -1,6 +1,7 @@
 ﻿using GardenShopOnline.Models;
 using System.Linq;
 using System.Web.Mvc;
+using Constants = GardenShopOnline.Helpers.Constants;
 
 namespace GardenShopOnline.Controllers
 {
@@ -35,7 +36,7 @@ namespace GardenShopOnline.Controllers
             {
                 links = links.Where(p => p.TypeID == typeId);
             }
-            return PartialView("_ProductList", links.Where(c => c.Status == 1).Take(10).OrderByDescending(c => c.ID));
+            return PartialView("_ProductList", links.Where(c => c.Status == Constants.SHOW_STATUS).Take(10).OrderByDescending(c => c.ID));
         }
 
         protected override void Dispose(bool disposing)

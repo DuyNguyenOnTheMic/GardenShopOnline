@@ -21,7 +21,7 @@ namespace GardenShopOnline.Controllers
 
         public ActionResult _TypeList()
         {
-            var types = db.Types.Where(c => c.Status != 3).OrderByDescending(c => c.ID);
+            var types = db.Types.OrderByDescending(c => c.ID);
 
             return PartialView(types.ToList());
         }

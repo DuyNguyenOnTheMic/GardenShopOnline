@@ -1,10 +1,12 @@
 ﻿using GardenShopOnline.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using Constants = GardenShopOnline.Helpers.Constants;
 
@@ -13,8 +15,30 @@ namespace GardenShopOnline.Controllers
 {
     public class CommentProductsController : Controller
     {
+
+        private ApplicationUserManager _userManager;
         private readonly BonsaiGardenEntities db = new BonsaiGardenEntities();
 
+        public CommentProductsController()
+        {
+        }
+
+        public CommentProductsController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         // GET: CommentProducts
         [Authorize(Roles = "Admin, Staff")]
         public ActionResult Index()
@@ -50,12 +74,14 @@ namespace GardenShopOnline.Controllers
         [Authorize(Roles = "Admin, Staff")]
         public ActionResult ReplyComment(CommentProduct cmt)
         {
+            var currentUserId = UserManager.FindByEmail(Constants.ACCOUNT_BONSAIGARDEN).Id;
+
             CommentProduct comment = new CommentProduct
             {
                 Content = cmt.Content,
                 ProductID = cmt.ProductID,
                 DateCreated = DateTime.Now,
-                UserID = User.Identity.GetUserId(),
+                UserID = currentUserId,
                 Reply_coment = cmt.Reply_coment,
                 Status = Constants.APPROVED_COMMENT
             };

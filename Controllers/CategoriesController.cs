@@ -137,7 +137,7 @@ namespace GardenShopOnline.Controllers
 
         public ActionResult getCategory()
         {
-            return Json(db.Categories.Where(c => c.Status == 1).OrderByDescending(c => c.ID).Select(x => new
+            return Json(db.Categories.Where(c => c.Status == Constants.SHOW_STATUS).OrderByDescending(c => c.ID).Select(x => new
             {
                 categoryID = x.ID,
                 categoryName = x.Name

@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Constants = GardenShopOnline.Helpers.Constants;
 
 namespace GardenShopOnline.Controllers
 {
@@ -41,7 +42,7 @@ namespace GardenShopOnline.Controllers
         [Authorize(Roles = "Admin, Staff")]
         public ActionResult Customer()
         {
-            var currentUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
+            var currentUserId = UserManager.FindByEmail(Constants.ACCOUNT_BONSAIGARDEN).Id;
             var query_userChat = db.Messages.Where(m => m.FromUserId != currentUserId).GroupBy(m => m.FromUserId).ToList();
             return View(query_userChat);
         }
@@ -50,7 +51,7 @@ namespace GardenShopOnline.Controllers
         [Authorize(Roles = "Admin, Staff")]
         public ActionResult GetData(string fromUserId)
         {
-            var toUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
+            var toUserId = UserManager.FindByEmail(Constants.ACCOUNT_BONSAIGARDEN).Id;
             ViewData["fromUserId"] = fromUserId;
             ViewData["toUserId"] = toUserId;
             ViewData["userEmail"] = UserManager.FindById(fromUserId).Email;
@@ -64,7 +65,7 @@ namespace GardenShopOnline.Controllers
         public ActionResult Index()
         {
             var fromUserId = User.Identity.GetUserId();
-            var toUserId = UserManager.FindByEmail("bonsaigarden6@gmail.com").Id;
+            var toUserId = UserManager.FindByEmail(Constants.ACCOUNT_BONSAIGARDEN).Id;
             ViewData["fromUserId"] = fromUserId;
             ViewData["toUserId"] = toUserId;
             var query_message = db.Messages.Where(m => (m.FromUserId == fromUserId && m.ToUserId == toUserId) || (m.FromUserId == toUserId && m.ToUserId == fromUserId)).OrderByDescending(m => m.ID).ToList();
@@ -81,7 +82,7 @@ namespace GardenShopOnline.Controllers
             {
                 FromUserId = fromUserId,
                 ToUserId = toUserId,
-                Status = 1,
+                Status = Constants.SHOW_STATUS,
                 DateCreated = DateTime.Now
             };
             if (file != null)
@@ -92,7 +93,7 @@ namespace GardenShopOnline.Controllers
                 string extension = Path.GetExtension(file.FileName);
 
                 string path = Path.Combine(Server.MapPath("~/assets/images/"), _filename);
-                ms.Type = 2;
+                ms.Type = Constants.TYPR_IMAGE;
                 ms.Image = _filename;
                 ms.Message1 = message;
                 img = _filename;
@@ -119,7 +120,7 @@ namespace GardenShopOnline.Controllers
             }
             else
             {
-                ms.Type = 1;
+                ms.Type = Constants.TYPE_TEXT;
                 ms.Message1 = message;
                 db.Messages.Add(ms);
             }

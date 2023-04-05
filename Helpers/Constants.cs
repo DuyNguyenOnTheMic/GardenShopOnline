@@ -4,7 +4,11 @@ namespace GardenShopOnline.Helpers
 {
     public class Constants
     {
-       
+        /// <summary>
+        /// Account Web
+        /// </summary>
+        public const string ACCOUNT_BONSAIGARDEN = "bonsaigarden6@gmail.com";
+
         /// <summary>
         /// User roles
         /// </summary>
@@ -43,7 +47,7 @@ namespace GardenShopOnline.Helpers
         public static int PAY_IN_ADVANCE = 5;
         public static int CANCELED = 6;
 
-        public static readonly Dictionary<int, string> StateReceipt = new Dictionary<int, string> {
+        public static readonly Dictionary<int, string> StateOder = new Dictionary<int, string> {
             {WAIT_FOR_CONFIRMATION, "Wait for confirmation"},
             {APPROVED, "Approved" },
             {DELIVERING, "Delivering" },
@@ -72,6 +76,9 @@ namespace GardenShopOnline.Helpers
         public static int APPROVED_COMMENT = 2;
         public static int REFUSED_COMMENT = 3;
 
-
+        ///Loại tin nhắn
+        ///
+        public static int TYPE_TEXT = 1;
+        public static int TYPR_IMAGE = 2;
     }
 }

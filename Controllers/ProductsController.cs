@@ -31,8 +31,8 @@ namespace GardenShopOnline.Controllers
             var dbProduct = db.Products;
             ViewData["Category"] = new SelectList(db.Categories.ToList(), "ID", "Name", categoryId);
             ViewData["Type"] = new SelectList(db.Types.ToList(), "ID", "Name", typeId);
-            ViewData["TotalCount"] = dbProduct.Where(x => x.Status == 1).Count();
-            var products = dbProduct.Where(x => x.Status == 1 && (string.IsNullOrEmpty(searchKey)
+            ViewData["TotalCount"] = dbProduct.Where(x => x.Status == Constants.SHOW_STATUS).Count();
+            var products = dbProduct.Where(x => x.Status == Constants.SHOW_STATUS && (string.IsNullOrEmpty(searchKey)
             || x.Name.ToLower().Contains(searchKey.ToLower()) || searchKey.ToLower().Contains(x.Name.ToLower()))
             && (!typeId.HasValue || x.TypeID == typeId)
             && (!categoryId.HasValue || x.CategoryID == categoryId));
@@ -42,7 +42,7 @@ namespace GardenShopOnline.Controllers
         public ActionResult GetRelatedProducts(int productId, int typeId, int categoryId)
         {
             // Get related products list based on type and category
-            return PartialView("_RelatedProducts", db.Products.Where(p => p.ID != productId && p.Status == 1 && (p.TypeID == typeId || p.CategoryID == categoryId)).ToList());
+            return PartialView("_RelatedProducts", db.Products.Where(p => p.ID != productId && p.Status == Constants.SHOW_STATUS && (p.TypeID == typeId || p.CategoryID == categoryId)).ToList());
         }
 
         [Authorize(Roles = "Admin, Staff")]
@@ -130,7 +130,7 @@ namespace GardenShopOnline.Controllers
                 if (ModelState.IsValid)
                 {
                     decimal price = decimal.Parse(priceProduct.Replace(",", "").Replace(".", ""));
-                    product.Status = 1;
+                    product.Status = Constants.SHOW_STATUS;
                     product.Price = price;
                     db.Products.Add(product);
                     foreach (var item in Image)
