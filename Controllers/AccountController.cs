@@ -80,6 +80,11 @@ namespace GardenShopOnline.Controllers
                     // Update redirect base on user role
                     var user = await UserManager.FindAsync(model.Email, model.Password);
                     var roles = await UserManager.GetRolesAsync(user.Id);
+
+                    // Set user name into session
+                    Session["UserName"] = user.FullName ?? User.Identity.Name;
+
+                    // Redirect user based on role
                     if (roles.Contains("Admin"))
                     {
                         return RedirectToAction("Index", "AspNetUsers");
@@ -261,6 +266,7 @@ namespace GardenShopOnline.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
 

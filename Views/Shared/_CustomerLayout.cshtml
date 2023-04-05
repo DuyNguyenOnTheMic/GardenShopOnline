@@ -67,7 +67,7 @@
                                         <li class="dropdown d-none d-lg-block">
                                             @if (User.Identity.IsAuthenticated)
                                             {
-                                                <a class="" href="@Url.Action("Index", "Manage")">@User.Identity.Name</a>
+                                                <a class="" href="@Url.Action("Index", "Manage")">@Session["UserName"]</a>
                                             }
                                             else
                                             {
@@ -137,7 +137,7 @@
                                         <li class="dropdown d-none d-lg-block">
                                             @if (User.Identity.IsAuthenticated)
                                             {
-                                                <a class="" href="@Url.Action("Index", "Manage")">@User.Identity.Name</a>
+                                                <a class="" href="@Url.Action("Index", "Manage")">@Session["UserName"]</a>
                                             }
                                             else
                                             {

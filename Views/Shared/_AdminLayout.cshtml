@@ -155,7 +155,7 @@
                     <div class="dropdown drp-user">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                             <img src="@Url.Content("~/assets/admin/assets/images/default-avatar.png")" alt="User-Profile-Image" class="img-radius mr-2" style="width: 2.5vw;">
-                            <span class="mr-3">@User.Identity.Name</span>
+                            <span class="mr-3">@Session["UserName"]</span>
                         </a>
                         <a href="javascript:document.getElementById('logoutForm').submit()" title="Log out" class="dud-logout"> <i class="feather icon-log-out"></i></a>
                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
