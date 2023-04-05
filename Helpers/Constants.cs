@@ -32,10 +32,8 @@ namespace GardenShopOnline.Helpers
         /// </summary>
         public static int SHOW_STATUS = 1;
         public static int HIDDEN_STATUS = 2;
-        public static readonly Dictionary<int, string> Status = new Dictionary<int, string> {
-            {SHOW_STATUS, "Show"},
-            {HIDDEN_STATUS, "Hidden" }
-        };
+        public static int DELETED_STATUS = 3;
+
 
         /// <summary>
         /// Phương thức thanh toán

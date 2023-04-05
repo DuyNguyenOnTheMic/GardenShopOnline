@@ -50,7 +50,7 @@ namespace GardenShopOnline.Controllers
         public ActionResult ProductList(int category_id, int type_id)
         {
             var links = from l in db.Products
-                        where l.Category.Status != 3 && l.Type.Status != 3
+                        where l.Category.Status != Constants.DELETED_STATUS && l.Type.Status != Constants.DELETED_STATUS
                         select l;
 
             if (category_id != -1)
@@ -61,7 +61,7 @@ namespace GardenShopOnline.Controllers
             {
                 links = links.Where(p => p.TypeID == type_id);
             }
-            return PartialView(links.Where(c => c.Status != 3).OrderByDescending(c => c.ID));
+            return PartialView(links.Where(c => c.Status != Constants.DELETED_STATUS).OrderByDescending(c => c.ID));
 
         }
 
@@ -89,17 +89,8 @@ namespace GardenShopOnline.Controllers
             try
             {
                 Product product1 = db.Products.Find(product.ID);
-                var image = db.ImageProducts.Where(x => x.ProductID == product.ID);
-                foreach (var item in image)
-                {
-                    db.ImageProducts.Remove(item);
-                    string oldImgPath = Request.MapPath(item.Image);
-                    if (System.IO.File.Exists(oldImgPath))
-                    {
-                        System.IO.File.Delete(oldImgPath);
-                    }
-                }
-                db.Products.Remove(product1);
+                product1.Status = Constants.DELETED_STATUS;
+                db.Entry(product1).State = EntityState.Modified;
                 db.SaveChanges();
             }
             catch
