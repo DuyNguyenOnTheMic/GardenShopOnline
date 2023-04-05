@@ -95,13 +95,12 @@ namespace GardenShopOnline.Controllers
         public ActionResult GetOrderDetails(string order_id)
         {
             var order = db.CustomerOrders.Find(order_id);
-            var OrrderDetailsList = db.OrderDetails.Where(o => o.OrderID == order_id).ToList();
-            ViewData["Id"] = order_id;
-            ViewData["FullName"] = order.FullName;
-            ViewData["Address"] = order.Address;
-            ViewData["Phone"] = order.Phone;
-            ViewData["Total"] = OrrderDetailsList.First().CustomerOrder.Total;
-            return PartialView("_OrderDetails", OrrderDetailsList);
+            var orrderDetailsList = db.OrderDetails.Where(o => o.OrderID == order_id).ToList();
+            return PartialView("_OrderDetails", new CustomerOrderViewModels
+            {
+                CustomerOrder = order,
+                OrderDetails = orrderDetailsList
+            });
         }
 
         [Authorize(Roles = "Admin, Staff")]
