@@ -595,6 +595,7 @@
     <Content Include="assets\admin\assets\css\plugins\perfect-scrollbar.css" />
     <Content Include="assets\admin\assets\css\plugins\prism-coy.css" />
     <Content Include="assets\admin\assets\css\style.css" />
+    <Content Include="assets\admin\assets\css\style.min.css" />
     <Content Include="assets\admin\assets\fonts\fa-brands-400.svg" />
     <Content Include="assets\admin\assets\fonts\fa-regular-400.svg" />
     <Content Include="assets\admin\assets\fonts\fa-solid-900.svg" />
@@ -608,6 +609,7 @@
     <Content Include="assets\admin\assets\js\analytics.js" />
     <Content Include="assets\admin\assets\js\analytics.min.js" />
     <Content Include="assets\admin\assets\js\Function.js" />
+    <Content Include="assets\admin\assets\js\Function.min.js" />
     <Content Include="assets\admin\assets\js\horizontal-menu.js" />
     <Content Include="assets\admin\assets\js\jquery-3.5.1.js" />
     <Content Include="assets\admin\assets\js\jquery.dataTables.min.css" />
@@ -626,6 +628,7 @@
     <Content Include="assets\admin\assets\js\plugins\perfect-scrollbar.min.js" />
     <Content Include="assets\admin\assets\js\plugins\prism.js" />
     <Content Include="assets\admin\assets\js\SweetAlert\sweetalert.js" />
+    <Content Include="assets\admin\assets\js\SweetAlert\sweetalert.min.js" />
     <Content Include="assets\admin\assets\js\uikit.js" />
     <Content Include="assets\admin\assets\js\uikit.min.js" />
     <Content Include="assets\admin\assets\js\vendor-all.js" />
