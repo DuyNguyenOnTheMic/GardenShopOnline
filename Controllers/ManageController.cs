@@ -88,6 +88,7 @@ namespace GardenShopOnline.Controllers
             user.FullName = aspNetUser.FullName;
             user.Address = aspNetUser.Address;
             user.PhoneNumber = aspNetUser.PhoneNumber;
+            Session["UserName"] = user.FullName;
             db.SaveChanges();
             return Json("Update account details succeeded!", JsonRequestBehavior.AllowGet);
         }
