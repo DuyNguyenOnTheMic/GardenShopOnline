@@ -139,20 +139,25 @@
         });
 
         function PrintElem(elem) {
+            Popup($('<div/>').append($(elem).clone()).html());
+        }
+
+        function Popup(data) {
             var mywindow = window.open();
             mywindow.document.write('<html><head><title>' + document.title + '</title>');
-            mywindow.document.write('<link rel="stylesheet" href="assets/customer/css/invoice.css" type="text/css" />');
+            mywindow.document.write("<link rel=\"stylesheet\" href=\"/assets/customer/css/invoice.css\" type=\"text/css\"/>");
+            mywindow.document.write("<link rel=\"stylesheet\" href=\"/assets/customer/css/bootstrap.min.css\" type=\"text/css\"/>");
             mywindow.document.write('</head><body>');
-            mywindow.document.write('<h1>' + document.title + '</h1>');
-            mywindow.document.write(document.getElementById(elem).innerHTML);
+            mywindow.document.write(data);
             mywindow.document.write('</body></html>');
 
             mywindow.document.close(); // necessary for IE >= 10
             mywindow.focus(); // necessary for IE >= 10*/
 
-            mywindow.print();
-            mywindow.close();
-
+            setTimeout(function () {
+                mywindow.print();
+                mywindow.close();
+            }, 1000);
             return true;
         }
     </script>
