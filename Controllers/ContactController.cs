@@ -146,6 +146,11 @@ namespace GardenShopOnline.Controllers
         {
             if (disposing)
             {
+                if (_userManager != null)
+                {
+                    _userManager.Dispose();
+                    _userManager = null;
+                }
                 db.Dispose();
             }
             base.Dispose(disposing);
