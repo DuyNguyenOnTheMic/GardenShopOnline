@@ -641,6 +641,7 @@
     <Content Include="assets\customer\css\animate.min.css" />
     <Content Include="assets\customer\css\bootstrap.min.css" />
     <Content Include="assets\customer\css\font-awesome.min.css" />
+    <Content Include="assets\customer\css\invoice.css" />
     <Content Include="assets\customer\css\ion.rangeSlider.min.css" />
     <Content Include="assets\customer\css\magnific-popup.min.css" />
     <Content Include="assets\customer\css\nice-select.css" />
