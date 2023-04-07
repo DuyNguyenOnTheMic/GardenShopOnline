@@ -663,6 +663,15 @@
     <Content Include="assets\customer\images\logo\dark.png" />
     <Content Include="assets\customer\images\newsletter\1-1920x400.jpg" />
     <Content Include="assets\customer\images\offcanvas\close-white.svg" />
+    <Content Include="assets\customer\images\shipping\icon\car.png" />
+    <Content Include="assets\customer\images\shipping\icon\card.png" />
+    <Content Include="assets\customer\images\shipping\icon\earphones.png" />
+    <Content Include="assets\customer\images\shipping\icon\home.png" />
+    <Content Include="assets\customer\images\shipping\icon\message.png" />
+    <Content Include="assets\customer\images\shipping\icon\phone.png" />
+    <Content Include="assets\customer\images\shipping\icon\plane.png" />
+    <Content Include="assets\customer\images\shipping\icon\service.png" />
+    <Content Include="assets\customer\images\shipping\icon\shield.png" />
     <Content Include="assets\customer\images\slider\bg\1-1.jpg" />
     <Content Include="assets\customer\images\slider\bg\2-1.jpg" />
     <Content Include="assets\customer\images\slider\inner-img\New.png" />
