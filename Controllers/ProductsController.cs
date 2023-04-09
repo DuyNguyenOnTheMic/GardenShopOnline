@@ -140,7 +140,7 @@ namespace GardenShopOnline.Controllers
                         };
                         if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
                         {
-                            if (item.ContentLength <= 4000000)
+                            if (item.ContentLength <= 50000000)
                             {
                                 db.ImageProducts.Add(imageProduct);
                                 if (db.SaveChanges() > 0)
@@ -150,12 +150,20 @@ namespace GardenShopOnline.Controllers
                             }
                             else
                             {
-                                ViewBag.msg = "Hình ảnh phải lớn hơn hoặc bằng 4MB!";
+                                ViewBag.msg = "Hình ảnh phải nhỏ hơn hoặc bằng 50MB!";
+                                ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
+                                ViewBag.TypeID = new SelectList(db.Types, "ID", "Name", product.TypeID);
+                                ViewBag.isCreate = true;
+                                return View("Form", product);
                             }
                         }
                         else
                         {
                             ViewBag.msg = "Định dạng file không hợp lệ!";
+                            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
+                            ViewBag.TypeID = new SelectList(db.Types, "ID", "Name", product.TypeID);
+                            ViewBag.isCreate = true;
+                            return View("Form", product);
                         }
                     }
                     db.SaveChanges();
@@ -221,19 +229,27 @@ namespace GardenShopOnline.Controllers
 
                         if (extension.ToLower() == ".jpg" || extension.ToLower() == ".jpeg" || extension.ToLower() == ".png")
                         {
-                            if (item.ContentLength <= 4000000)
+                            if (item.ContentLength <= 50000000)
                             {
                                 db.ImageProducts.Add(imageProduct);
                                 item.SaveAs(path);
                             }
                             else
                             {
-                                ViewBag.msg = "Hình ảnh phải lớn hơn hoặc bằng 4MB!";
+                                ViewBag.msg = "Hình ảnh phải nhỏ hơn hoặc bằng 50MB!";
+                                ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
+                                ViewBag.TypeID = new SelectList(db.Types, "ID", "Name", product.TypeID);
+                                ViewBag.isCreate = true;
+                                return View("Form", product);
                             }
                         }
                         else
                         {
                             ViewBag.msg = "Định dạng file không hợp lệ!";
+                            ViewBag.CategoryID = new SelectList(db.Categories, "ID", "Name", product.CategoryID);
+                            ViewBag.TypeID = new SelectList(db.Types, "ID", "Name", product.TypeID);
+                            ViewBag.isCreate = true;
+                            return View("Form", product);
                         }
                     }
                     db.Entry(product).State = EntityState.Modified;

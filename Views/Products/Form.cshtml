@@ -48,6 +48,12 @@
                                 @Html.HiddenFor(m => m.ID)
                                 @Html.HiddenFor(m => m.Status)
                             }
+                            @if (ViewBag.msg != null)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    @ViewBag.msg
+                                </div>
+                            }
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
