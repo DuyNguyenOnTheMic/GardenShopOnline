@@ -28,7 +28,7 @@ namespace GardenShopOnline.Controllers
 
         public ActionResult BankPaymentList()
         {
-            return PartialView(db.BankPayments.Where(c => c.Status != 3).ToList().OrderByDescending(c => c.ID));
+            return PartialView(db.BankPayments.ToList().OrderByDescending(c => c.ID));
 
         }
 

@@ -105,10 +105,10 @@
                                     <td><a href="@Url.Action("Details","Products", new { id = item.ProductID })">@item.Product.Name</a></td>
                                     <td>@item.AspNetUser.UserName</td>
                                     <td>@item.Content</td>
-                                    <td>@item.DateCreated</td>
                                     <td>
                                         @(item.Reply_coment!= null ? "Reply" : " ")
                                     </td>
+                                    <td>@item.DateCreated</td>
                                     <td class="text-center">
                                         <button title="Reply" class="btn btn-info" onclick="GetCmt('@item.ID', '@item.ProductID')">
                                             <i class="feather icon-server">
