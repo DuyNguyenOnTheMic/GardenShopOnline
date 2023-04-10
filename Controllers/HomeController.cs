@@ -39,6 +39,15 @@ namespace GardenShopOnline.Controllers
             return PartialView("_ProductList", links.Where(c => c.Status == Constants.SHOW_STATUS).Take(10).OrderByDescending(c => c.ID));
         }
 
+        [ChildActionOnly]
+        public ActionResult GetAdminSidebar()
+        {
+            ViewData["OrderCount"] = db.CustomerOrders.Count(c => c.Status == Constants.WAIT_FOR_CONFIRMATION);
+            ViewData["CommentCount"] = db.CommentProducts.Count(c => c.Status == Constants.NEW_COMMENT);
+            ViewData["ContactCount"] = db.Messages.Count(c => c.DateViewed == null);
+            return PartialView("_AdminSidebar");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
