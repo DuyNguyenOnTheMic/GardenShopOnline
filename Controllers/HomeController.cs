@@ -39,7 +39,7 @@ namespace GardenShopOnline.Controllers
             return PartialView("_ProductList", links.Where(c => c.Status == Constants.SHOW_STATUS).Take(10).OrderByDescending(c => c.ID));
         }
 
-        [ChildActionOnly]
+        [HttpGet]
         public ActionResult GetAdminSidebar()
         {
             ViewData["OrderCount"] = db.CustomerOrders.Count(c => c.Status == Constants.WAIT_FOR_CONFIRMATION);

@@ -24,18 +24,18 @@
         </li>
         <li class="nav-item">
             <a href="@Url.Action("Index","CustomerOrders")" class="nav-link">
-                <span class="pcoded-micon"><i class="feather icon-inbox"></i></span> <span class="pcoded-mtext">Order <span class="badge badge-light float-right ml-2">@ViewData["OrderCount"]</span></span>
+                <span class="pcoded-micon"><i class="feather icon-inbox"></i></span> <span class="pcoded-mtext">Order <span class="badge badge-light float-right ml-2" id="orderCount">@ViewData["OrderCount"]</span></span>
             </a>
         </li>
         <li class="nav-item">
             <a href="@Url.Action("Index","CommentProducts")" class="nav-link">
-                <span class="pcoded-micon"><i class="feather icon-grid"></i></span> <span class="pcoded-mtext">Comment <span class="badge badge-light float-right ml-2">@ViewData["CommentCount"]</span></span>
+                <span class="pcoded-micon"><i class="feather icon-grid"></i></span> <span class="pcoded-mtext">Comment <span class="badge badge-light float-right ml-2" id="commentCount">@ViewData["CommentCount"]</span></span>
             </a>
         </li>
         <li class="nav-item">
             <a href="@Url.Action("Customer","Contact")" class="nav-link">
                 <span class="pcoded-micon"><i class="feather icon-phone"></i></span>
-                <span class="pcoded-mtext">Customer Contact <span class="badge badge-light float-right ml-2">@ViewData["ContactCount"]</span></span>
+                <span class="pcoded-mtext">Customer Contact <span class="badge badge-light float-right ml-2" id="contactCount">@ViewData["ContactCount"]</span></span>
             </a>
         </li>
     }
@@ -73,12 +73,12 @@
         </li>
         <li class="nav-item">
             <a href="@Url.Action("Index","CustomerOrders")" class="nav-link">
-                <span class="pcoded-micon"><i class="feather icon-inbox"></i></span> <span class="pcoded-mtext">Order <span class="badge badge-light float-right ml-2">@ViewData["OrderCount"]</span></span>
+                <span class="pcoded-micon"><i class="feather icon-inbox"></i></span> <span class="pcoded-mtext">Order <span class="badge badge-light float-right ml-2" id="orderCount">@ViewData["OrderCount"]</span></span>
             </a>
         </li>
         <li class="nav-item">
             <a href="@Url.Action("Index","CommentProducts")" class="nav-link">
-                <span class="pcoded-micon"><i class="feather icon-grid"></i></span> <span class="pcoded-mtext">Comment <span class="badge badge-light float-right ml-2">@ViewData["CommentCount"]</span></span>
+                <span class="pcoded-micon"><i class="feather icon-grid"></i></span> <span class="pcoded-mtext">Comment <span class="badge badge-light float-right ml-2" id="commentCount">@ViewData["CommentCount"]</span></span>
             </a>
         </li>
         <li class="nav-item">
@@ -90,7 +90,7 @@
         <li class="nav-item">
             <a href="@Url.Action("Customer","Contact")" class="nav-link">
                 <span class="pcoded-micon"><i class="feather icon-phone"></i></span>
-                <span class="pcoded-mtext">Customer Contact <span class="badge badge-light float-right ml-2">@ViewData["ContactCount"]</span></span>
+                <span class="pcoded-mtext">Customer Contact <span class="badge badge-light float-right ml-2" id="contactCount">@ViewData["ContactCount"]</span></span>
             </a>
         </li>
     }

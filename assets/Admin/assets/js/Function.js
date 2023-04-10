@@ -412,6 +412,9 @@ function EditStatus_comment(id, status) {
                     type: "success"
                 })
 
+            // Refresh admin count of comment
+            $("#commentCount").parent().load('/Home/GetAdminSidebar' + " #commentCount");
+
             GetList_comment()
         },
     });

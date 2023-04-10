@@ -137,7 +137,6 @@ namespace GardenShopOnline.Controllers
 
         //
         // GET: /ShoppingCart/CartSummary
-        [ChildActionOnly]
         public int CartSummary()
         {
             var cart = ShoppingCart.GetCart(HttpContext);
