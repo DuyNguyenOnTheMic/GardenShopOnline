@@ -100,7 +100,11 @@
             $.ajax({
                 url: actionUrl,
                 type: 'POST',
-                data: { fromUserId, toUserId }
+                data: { fromUserId, toUserId },
+                success: function () {
+                    // Refresh admin count of contact
+                    $("#contactCount").parent().load('/Home/GetAdminSidebar' + " #contactCount");
+                }
             });
 
             // Remove not seen class
