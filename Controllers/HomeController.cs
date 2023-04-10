@@ -19,7 +19,7 @@ namespace GardenShopOnline.Controllers
         [HttpGet]
         public ActionResult CategoryList()
         {
-            var categories = db.Categories.Where(c => c.Status != 3).OrderByDescending(c => c.ID);
+            var categories = db.Categories.OrderByDescending(c => c.ID);
             return PartialView("_CategoryList", categories.ToList());
         }
 
@@ -37,6 +37,15 @@ namespace GardenShopOnline.Controllers
                 links = links.Where(p => p.TypeID == typeId);
             }
             return PartialView("_ProductList", links.Where(c => c.Status == Constants.SHOW_STATUS).Take(10).OrderByDescending(c => c.ID));
+        }
+
+        [HttpGet]
+        public ActionResult GetAdminSidebar()
+        {
+            ViewData["OrderCount"] = db.CustomerOrders.Count(c => c.Status == Constants.WAIT_FOR_CONFIRMATION);
+            ViewData["CommentCount"] = db.CommentProducts.Count(c => c.Status == Constants.NEW_COMMENT);
+            ViewData["ContactCount"] = db.Messages.Count(c => c.DateViewed == null);
+            return PartialView("_AdminSidebar");
         }
 
         protected override void Dispose(bool disposing)

@@ -65,9 +65,6 @@ namespace GardenShopOnline.Controllers
                     // Display error when order quantity exceeds product quantity
                     var userId = User.Identity.GetUserId();
                     var user = db.AspNetUsers.Find(userId);
-                    ViewData["FullName"] = user.FullName;
-                    ViewData["Address"] = user.Address;
-                    ViewData["Phone"] = user.PhoneNumber;
                     ViewBag.BankPayments = db.BankPayments.Where(b => b.Status == Constants.SHOW_STATUS).ToList();
                     ViewBag.Error = check;
                     return View(order);
@@ -79,7 +76,7 @@ namespace GardenShopOnline.Controllers
                     order.DateCreated = DateTime.Now;
                     if (payment == "bank")
                     {
-                        order.Status = 5;
+                        order.Status = Constants.PAY_IN_ADVANCE;
                         order.PaymentMethod = Constants.BANK_METHOD;
                         order.PaidAdvance = order.Total;
                     }

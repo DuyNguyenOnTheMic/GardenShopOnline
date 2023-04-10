@@ -6,8 +6,8 @@
         @foreach (var item in Model)
         {
             <div class="col-xl-2 col-md-3 col-sm-6">
-                <div class="product-item">
-                    <div class="product-content">
+                <div class="product-item" >
+                    <div class="product-content" style="border: 1px solid #0d934e; border-radius: 10px;">
                         <a class="product-name" href="@Url.Action("Index","Products", new { categoryId = item.ID })">@item.Name</a>
                     </div>
                 </div>

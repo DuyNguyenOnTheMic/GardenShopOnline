@@ -1,5 +1,4 @@
-﻿var url = '/ShoppingCart/GetMiniCart',
-    miniCartList = $('#miniCartList');
+﻿var miniCartList = $('#miniCartList');
 
 $(function () {
     getMiniCart();
@@ -24,7 +23,7 @@ $(function () {
 
                 if ($('.your-order').length) {
                     $('.your-order').load(location.href + ' .your-order > *');
-                } 
+                }
             });
         }
     });
@@ -32,7 +31,7 @@ $(function () {
 
 function getMiniCart() {
     // Get Partial View cart data
-    $.get(url, function (data) {
+    $.get('/ShoppingCart/GetMiniCart', function (data) {
         miniCartList.html(data);
     });
 
@@ -46,6 +45,8 @@ function numberWithDots(x) {
 
 function refreshCount() {
     // Refresh cart count
-    $("#cartCountHead").load(location.href + " #cartCountHead > *");
-    $("#cartCountStick").load(location.href + " #cartCountStick > *");
+    $.get('/ShoppingCart/CartSummary', function (data) {
+        $("#cartCountHead > *").text(data);
+        $("#cartCountStick > *").text(data);
+    });
 }

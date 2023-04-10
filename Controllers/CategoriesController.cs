@@ -21,7 +21,7 @@ namespace GardenShopOnline.Controllers
 
         public ActionResult _CategoryList()
         {
-            var categories = db.Categories.Where(c => c.Status != 3).OrderByDescending(c => c.ID);
+            var categories = db.Categories.OrderByDescending(c => c.ID);
             return PartialView(categories.ToList());
         }
 

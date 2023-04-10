@@ -21,8 +21,8 @@
 $(document).ready(function () {
     var forms = document.getElementsByClassName('needs-validation');
     var validation = Array.prototype.filter.call(forms, function (form) {
-      
-      
+
+
         $('#submit_edit_product').on('click', function () {
             if (form.checkValidity() === false) {
                 event.preventDefault();
@@ -44,7 +44,7 @@ $(document).ready(function () {
             }
             form.classList.add('was-validated');
         })
-        
+
 
     }, false);
 })
@@ -144,7 +144,7 @@ function deleteAlert(id, code) {
                                 type: "error"
                             })
                     }
-                  
+
                 })
             /*   .error(function (data) {
                    swal("OOps", "Chúng tôi không thể kết nối đến server!", "error");
@@ -249,7 +249,7 @@ function GetList_CategoryAndType() {
     $.ajax({
         url: URL_List,
         data: {
-           
+
         }
     }).done(function (result) {
         $('#dataContainer').html(result);
@@ -411,6 +411,9 @@ function EditStatus_comment(id, status) {
                     confirmButtonText: "OK",
                     type: "success"
                 })
+
+            // Refresh admin count of comment
+            $("#commentCount").parent().load('/Home/GetAdminSidebar' + " #commentCount");
 
             GetList_comment()
         },

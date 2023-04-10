@@ -61,11 +61,11 @@
                                                 <i class="feather icon-server">
                                                 </i>
                                             </button>
-                                            <button title="chấp nhận" class="btn btn-success" onclick="EditStatus_comment('@item.ID', 2)">
+                                            <button title="Apcet" class="btn btn-success" onclick="EditStatus_comment('@item.ID', 2)">
                                                 <i class="feather icon-check">
                                                 </i>
                                             </button>
-                                            <button title="từ chối" class="btn btn-danger " onclick="EditStatus_comment('@item.ID', 3)">
+                                            <button title="Decline" class="btn btn-danger " onclick="EditStatus_comment('@item.ID', 3)">
                                                 <i class="feather icon-trash-2">
                                                 </i>
                                             </button>
@@ -75,10 +75,6 @@
                                 }
                             </tbody>
                         </table>
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -104,26 +100,26 @@
                                 @foreach (var item in Model.Where(m => m.Status == 2))
                                 {
                                     no2++;
-                                <tr>
-                                    <td>@no2</td>
-                                    <td><a href="@Url.Action("Details","Products", new { id = item.ProductID })">@item.Product.Name</a></td>
-                                    <td>@item.AspNetUser.UserName</td>
-                                    <td>@item.Content</td>
-                                    <td>@item.DateCreated</td>
-                                    <td>
-                                        @(item.Reply_coment!= null ? "Reply" : " ")
-                                    </td>
-                                    <td class="text-center">
-                                        <button title="Reply" class="btn btn-info" onclick="GetCmt('@item.ID', '@item.ProductID')">
-                                            <i class="feather icon-server">
-                                            </i>
-                                        </button>
-                                        <button title="từ chối" class="btn btn-danger " onclick="EditStatus_comment('@item.ID', 3)">
-                                            <i class="feather icon-trash-2">
-                                            </i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>@no2</td>
+                                        <td><a href="@Url.Action("Details","Products", new { id = item.ProductID })">@item.Product.Name</a></td>
+                                        <td>@item.AspNetUser.UserName</td>
+                                        <td>@item.Content</td>
+                                        <td>
+                                            @(item.Reply_coment!= null ? "Reply" : " ")
+                                        </td>
+                                        <td>@item.DateCreated</td>
+                                        <td class="text-center">
+                                            <button title="Reply" class="btn btn-info" onclick="GetCmt('@item.ID', '@item.ProductID')">
+                                                <i class="feather icon-server">
+                                                </i>
+                                            </button>
+                                            <button title="Decline" class="btn btn-danger " onclick="EditStatus_comment('@item.ID', 3)">
+                                                <i class="feather icon-trash-2">
+                                                </i>
+                                            </button>
+                                        </td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
@@ -152,13 +148,13 @@
                                 @foreach (var item in Model.Where(m => m.Status == 3))
                                 {
                                     no3++;
-                                <tr>
-                                    <td>@no3</td>
-                                    <td><a href="@Url.Action("Details","Products", new { id = item.ProductID })">@item.Product.Name</a></td>
-                                    <td>@item.AspNetUser.UserName</td>
-                                    <td>@item.Content</td>
-                                    <td>@item.DateCreated</td>
-                                </tr>
+                                    <tr>
+                                        <td>@no3</td>
+                                        <td><a href="@Url.Action("Details","Products", new { id = item.ProductID })">@item.Product.Name</a></td>
+                                        <td>@item.AspNetUser.UserName</td>
+                                        <td>@item.Content</td>
+                                        <td>@item.DateCreated</td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
@@ -189,7 +185,7 @@
                                 <input hidden id="edit_idProduct" />
 
                                 <div class="position-relative">
-                                    <textarea placeholder="Enter reason for order cancellation!" id="replyComment" class="form-control" name="reason" rows="4"></textarea>
+                                    <textarea placeholder="Enter comment reply" id="replyComment" class="form-control" name="reason" rows="4"></textarea>
 
                                 </div> <!---->
                             </div>
@@ -206,6 +202,5 @@
         </form>
     </div>
 </div>
-
 
 

@@ -4,14 +4,21 @@
     ViewBag.Title = "Products";
     string searchKey = Request.QueryString["searchKey"] != null ? Request.QueryString["searchKey"] : "";
 }
-
+<br />
 <!-- Begin Main Content Area -->
 <main class="main-content">
     <div class="shop-area mb-5">
         <div class="container">
             <div class="row">
-                <div class="col-xl-3 col-lg-4 order-2 order-lg-1 pt-5 pt-lg-0">
+                <div class="col-xl-3 col-lg-4 order-2 order-lg-1 pt-5 pt-lg-0" style="width: 20%;">
                     <div class="sidebar-area">
+                        <div class="product-topbar">
+                            <ul>
+                                <li class="page-count" style="padding: 10px 65px;">
+                                    <span>@Model.Count</span> Product Found of <span>@ViewData["TotalCount"]</span>
+                                </li>
+                            </ul>
+                        </div>
                         <div class="widgets-searchbox mb-4">
                             <form action="@Url.Action("Index","Products")" id="widgets-searchbox">
                                 @Html.TextBox("searchKey", searchKey, new { @type = "search", @class = "input-field", @placeholder = "Search" })
@@ -29,13 +36,6 @@
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-8 order-1 order-lg-2">
-                    <div class="product-topbar">
-                        <ul>
-                            <li class="page-count">
-                                <span>@Model.Count</span> Product Found of <span>@ViewData["TotalCount"]</span>
-                            </li>
-                        </ul>
-                    </div>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab">
                             <div class="product-grid-view row g-y-20">
@@ -43,11 +43,11 @@
                                 {
                                     foreach (var item in Model)
                                     {
-                                        <div class="col-xl-3 col-md-4 col-sm-6">
-                                            <div class="product-item">
-                                                <div class="product-img">
+                                        <div class="col-xl-3 col-md-4 col-sm-6" style="width: 20%;">
+                                            <div class="product-item" style="border: 1px solid #0d934e;border-radius: 10px;">
+                                                <div class="product-img"  style="width: 100%; height: 190px; overflow: hidden;">
                                                     <a href="@Url.Action("Details", "Products", new { id = item.ID })">
-                                                        <img class="primary-img" src="~/assets/images/@(item.ImageProducts.FirstOrDefault()?.Image)" alt="Product Images">
+                                                        <img class="primary-img" style="max-width: 100%; height: auto; object-fit: cover;" src="~/assets/images/@(item.ImageProducts.FirstOrDefault()?.Image)" alt="Product Images">
                                                     </a>
                                                     @if (!User.IsInRole("Admin") && !User.IsInRole("Staff") && item.Quantity > 0)
                                                     {

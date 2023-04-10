@@ -41,7 +41,7 @@ namespace GardenShopOnline.Models
                     ProductID = product.ID,
                     ID = ShoppingCartId,
                     Count = quantity == null ? 1 : (int)quantity,
-                    Subtotal = product.Price
+                    Subtotal = product.Price * (quantity == null ? decimal.One : (decimal)quantity)
                 };
                 db.Carts.Add(cartItem);
             }

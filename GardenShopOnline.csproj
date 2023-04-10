@@ -634,6 +634,7 @@
     <Content Include="assets\admin\assets\js\uikit.min.js" />
     <Content Include="assets\admin\assets\js\vendor-all.js" />
     <Content Include="assets\admin\assets\js\vendor-all.min.js" />
+    <Content Include="assets\Carousel.css" />
     <Content Include="assets\chat\css\app-chat.css" />
     <Content Include="assets\chat\images\img_plant.png" />
     <Content Include="assets\chat\images\img_user.png" />
@@ -647,6 +648,7 @@
     <Content Include="assets\customer\css\nice-select.css" />
     <Content Include="assets\customer\css\Pe-icon-7-stroke.css" />
     <Content Include="assets\customer\css\Pe-icon-7-stroke.min.css" />
+    <Content Include="assets\customer\css\ProductDel.css" />
     <Content Include="assets\customer\css\style.css" />
     <Content Include="assets\customer\css\style.min.css" />
     <Content Include="assets\customer\css\swiper-bundle.min.css" />
@@ -660,7 +662,12 @@
     <Content Include="assets\customer\images\error-404\bg\1-1920x886.png" />
     <Content Include="assets\customer\images\favicon.ico" />
     <Content Include="assets\customer\images\footer\bg\1-1920x465.jpg" />
-    <Content Include="assets\customer\images\logo\dark.png" />
+    <Content Include="assets\customer\images\Img\Logo.png" />
+    <Content Include="assets\customer\images\Img\IMG20180204111102.jpg" />
+    <Content Include="assets\customer\images\Img\IMG20190224085556.jpg" />
+    <Content Include="assets\customer\images\Img\IMG20211015145240.jpg" />
+    <Content Include="assets\customer\images\Img\IMG20220426171620.jpg" />
+    <Content Include="assets\customer\images\Img\IMG20220805162434.jpg" />
     <Content Include="assets\customer\images\newsletter\1-1920x400.jpg" />
     <Content Include="assets\customer\images\offcanvas\close-white.svg" />
     <Content Include="assets\customer\images\slider\bg\1-1.jpg" />
@@ -864,6 +871,7 @@
     <Content Include="Views\Home\_ProductList.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Home\_CategoryList.cshtml" />
+    <Content Include="Views\Shared\_AdminSidebar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

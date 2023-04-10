@@ -20,6 +20,11 @@
                 @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
             </div>
             <div class="single-input">
+                <label>Email *</label>
+                @Html.EditorFor(m => m.Email, new { @placeholder = "Your email" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="single-input">
                 <button class="btn btn-custom-size lg-size btn-pronia-primary" type="submit">
                     <span>SAVE CHANGES</span>
                 </button>

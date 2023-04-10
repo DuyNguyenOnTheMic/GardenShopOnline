@@ -110,7 +110,7 @@
 
                     })
             }
-           
+
         });
         $("#filter_DateEnd").change(function () {
             var date_start = $("#filter_DateStart").val();
@@ -206,7 +206,10 @@
                             confirmButtonText: "OK",
                             type: "success"
                         })
-                  
+
+                    // Refresh admin count of order
+                    $("#orderCount").parent().load('@Url.Action("GetAdminSidebar", "Home")' + " #orderCount");
+
                     $.ajax({
                         url: "@Url.Action("EmailStatus", "CustomerOrders")",
                         data: JSON.stringify(data),
