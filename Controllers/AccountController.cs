@@ -82,7 +82,7 @@ namespace GardenShopOnline.Controllers
                     var roles = await UserManager.GetRolesAsync(user.Id);
 
                     // Set user name into session
-                    Session["UserName"] = user.FullName ?? User.Identity.Name;
+                    Session["UserName"] = user.FullName ?? model.Email;
 
                     // Redirect user based on role
                     if (roles.Contains("Admin"))
