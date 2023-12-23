@@ -2,7 +2,9 @@
 
 @{
     ViewBag.Title = "Products";
-    string searchKey = Request.QueryString["searchKey"] != null ? Request.QueryString["searchKey"] : "";
+    string searchKey = Request.QueryString["searchKey"] ?? string.Empty;
+    string fromPrice = Request.QueryString["fromPrice"] ?? string.Empty;
+    string toPrice = Request.QueryString["toPrice"] ?? string.Empty;
 }
 
 <!-- Begin Main Content Area -->
@@ -11,22 +13,36 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-lg-4 order-2 order-lg-1 pt-5 pt-lg-0">
-                    <div class="sidebar-area">
-                        <div class="widgets-searchbox mb-4">
-                            <form action="@Url.Action("Index","Products")" id="widgets-searchbox">
-                                @Html.TextBox("searchKey", searchKey, new { @type = "search", @class = "input-field", @placeholder = "Search" })
-                                <button class="widgets-searchbox-btn" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="short">
-                            @Html.DropDownList("Type", null, "Sort by type", new { @class = "nice-select filter-select mb-3 w-100", @id = "typeFilter" })
-                        </div>
-                        <div class="short">
-                            @Html.DropDownList("Category", null, "Sort by category", new { @class = "nice-select filter-select w-100", @id = "categoryFilter" })
-                        </div>
-                    </div>
+					<div class="sidebar-area">
+						<form action="@Url.Action("Index", "Products")" id="widgets-searchbox">
+							<div class="widgets-searchbox mb-4">
+								@Html.TextBox("searchKey", searchKey, new { @type = "search", @class = "input-field", @placeholder = "Search" })
+								<button class="widgets-searchbox-btn" type="submit">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
+							<div class="short">
+								@Html.DropDownList("Type", null, "Sort by type", new { @class = "nice-select filter-select mb-3 w-100", @id = "typeFilter" })
+							</div>
+							<div class="short">
+								@Html.DropDownList("Category", null, "Sort by category", new { @class = "nice-select filter-select w-100", @id = "categoryFilter" })
+							</div>
+							<div class="short">
+								<label class="form-label mt-4">Price range</label>
+								<div class="row">
+									<div class="col-xl-6 mb-3 mb-xl-0">
+										@Html.TextBox("fromPrice", fromPrice, new { @type = "text", @class = "form-control input-price", @placeholder = "đ From" })
+									</div>
+									<div class="col-xl-6">
+										@Html.TextBox("toPrice", toPrice, new { @type = "text", @class = "form-control input-price", @placeholder = "đ To" })
+									</div>
+								</div>
+								<div class="d-grid gap-2">
+									<button type="submit" class="btn btn-block btn-pronia-primary mt-3">Apply</button>
+								</div>
+							</div>
+						</form>
+					</div>
                 </div>
                 <div class="col-xl-9 col-lg-8 order-1 order-lg-2">
                     <div class="product-topbar">
@@ -119,23 +135,46 @@
             getParameters();
         });
 
+        // Handle thousand seperator input for price
+		$('.input-price').on('keyup', function (e) {
+			// When user select text in the document, also abort.
+			var selection = window.getSelection().toString();
+			if (selection !== '') {
+				return;
+			}
+			// When the arrow keys are pressed, abort.
+			if ($.inArray(e.keyCode, [38, 40, 37, 39]) !== -1) {
+				return;
+			}
+			var $this = $(this);
+			// Get the value.
+			var input = $this.val();
+			input = input.replace(/[\D\s\._\-]+/g, "");
+			input = input ? parseInt(input, 10) : 0;
+			$this.val(function () {
+				return (input === 0) ? '' : input.toLocaleString('en-US');
+			});
+        });
+
         function getParameters() {
             var searchKey = $('#searchKey').val();
             var typeId = $("#typeFilter").val();
             var categoryId = $('#categoryFilter').val();
-            GetProductList(searchKey, typeId, categoryId)
+            var fromPrice = $('#fromPrice').val();
+			var toPrice = $('#toPrice').val();
+			GetProductList(searchKey, typeId, categoryId, fromPrice, toPrice)
         }
 
-        function GetProductList(searchKey, typeId, categoryId) {
-            var url = location.protocol + '//' + location.host + location.pathname;
-            url += '?searchKey=' + searchKey;
-            if (typeId) {
-                url += '&typeId=' + typeId;
-            }
-            if (categoryId) {
-                url += '&categoryId=' + categoryId;
-            }
-            location.href = url;
-        }
+		function GetProductList(searchKey, typeId, categoryId, fromPrice, toPrice) {
+			var url = new URL(location.href);
+			var params = new URLSearchParams(url.search);
+			params.set('searchKey', searchKey);
+			typeId ? params.set('typeId', typeId) : params.delete('typeId');
+			categoryId ? params.set('categoryId', categoryId) : params.delete('categoryId');
+			fromPrice ? params.set('fromPrice', fromPrice) : params.delete('fromPrice');
+			toPrice ? params.set('toPrice', toPrice) : params.delete('toPrice');
+			url.search = params.toString();
+			location.href = url.toString();
+		}
     </script>
 }

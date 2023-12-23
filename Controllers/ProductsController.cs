@@ -26,17 +26,21 @@ namespace GardenShopOnline.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(string searchKey, int? categoryId, int? typeId)
+        public ActionResult Index(string searchKey, int? categoryId, int? typeId, string fromPrice, string toPrice)
         {
-            var dbProduct = db.Products;
+			decimal? fromPriceDecimal = string.IsNullOrEmpty(fromPrice) ? (decimal?)null : decimal.Parse(fromPrice.Replace(",", "").Replace(".", ""));
+			decimal? toPriceDecimal = string.IsNullOrEmpty(toPrice) ? (decimal?)null : decimal.Parse(toPrice.Replace(",", "").Replace(".", ""));
+			var dbProduct = db.Products;
             ViewData["Category"] = new SelectList(db.Categories.ToList(), "ID", "Name", categoryId);
             ViewData["Type"] = new SelectList(db.Types.ToList(), "ID", "Name", typeId);
             ViewData["TotalCount"] = dbProduct.Where(x => x.Status == Constants.SHOW_STATUS).Count();
             var products = dbProduct.Where(x => x.Status == Constants.SHOW_STATUS && (string.IsNullOrEmpty(searchKey)
             || x.Name.ToLower().Contains(searchKey.ToLower()) || searchKey.ToLower().Contains(x.Name.ToLower()))
             && (!typeId.HasValue || x.TypeID == typeId)
-            && (!categoryId.HasValue || x.CategoryID == categoryId));
-            return View(products.ToList());
+            && (!categoryId.HasValue || x.CategoryID == categoryId)
+            && (string.IsNullOrEmpty(fromPrice) || x.Price >= fromPriceDecimal)
+            && (string.IsNullOrEmpty(toPrice) || x.Price <= toPriceDecimal));
+			return View(products.ToList());
         }
 
         public ActionResult GetRelatedProducts(int productId, int typeId, int categoryId)

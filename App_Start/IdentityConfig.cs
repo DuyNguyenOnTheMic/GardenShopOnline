@@ -24,7 +24,7 @@ namespace GardenShopOnline
         {
             var senderEmail = new MailAddress("bonsaigardenshop6@gmail.com", "Bonsai Garden");
             var receiverEmail = new MailAddress(message.Destination, "Receiver");
-            var password = "gsgusenjmphwqrcu";
+            var password = "abkxxgootsgdbjjp";
             var sub = message.Subject;
             var body = message.Body;
             var smtp = new SmtpClient
